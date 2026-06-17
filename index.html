@@ -570,51 +570,64 @@
   function renderResult(data) {
     const area = document.getElementById("result-area");
 
-    // Collect all download links from common API response shapes
-    const links = [];
-
-    // Shape 1: data.links = [{quality, url, ext}, ...]
-    if (Array.isArray(data.links)) {
-      data.links.forEach(l => {
-        links.push({ label: l.quality || l.label || "Download", ext: l.ext || "mp4", url: l.url || l.download_url });
-      });
-    }
-
-    // Shape 2: data.url (single link)
-    if (data.url && links.length === 0) {
-      links.push({ label: "Download Video", ext: "mp4", url: data.url });
-    }
-
-    // Shape 3: data.medias = [{quality, url}]
-    if (Array.isArray(data.medias)) {
-      data.medias.forEach(m => {
-        links.push({ label: m.quality || "Download", ext: m.ext || "mp4", url: m.url });
-      });
-    }
-
-    // Shape 4: data.video, data.audio
-    if (data.video) links.push({ label: "Video (HD)", ext: "mp4", url: data.video });
-    if (data.audio) links.push({ label: "Audio Only", ext: "mp3", url: data.audio });
-
-    // Shape 5: data.downloads = [{name, url}]
-    if (Array.isArray(data.downloads)) {
-      data.downloads.forEach(d => {
-        links.push({ label: d.name || d.quality || "Download", ext: d.ext || "mp4", url: d.url });
-      });
-    }
-
-    if (links.length === 0) {
-      area.innerHTML = `<div class="error-card">⚠ No downloadable links found for this URL. Try a different video.</div>`;
+    if (data.success === false) {
+      area.innerHTML = `<div class="error-card">⚠ ${escHtml(data.message || data.error || "This video could not be processed.")}</div>`;
       return;
     }
 
-    const title = data.title || data.name || "Your video is ready";
+    const info = data.mediaInfo || data.data || data;
+    const links = [];
 
-    const optionsHTML = links.map(l => `
+    // Primary documented shape: mediaInfo.qualities = [{quality, url}]
+    if (Array.isArray(info.qualities)) {
+      info.qualities.forEach(q => {
+        links.push({ label: q.quality || q.label || "Video", ext: q.ext || "mp4", url: q.url });
+      });
+    }
+
+    // mediaInfo.videoUrl (direct MP4 link)
+    if (info.videoUrl && links.length === 0) {
+      links.push({ label: "Video", ext: "mp4", url: info.videoUrl });
+    }
+
+    // mediaInfo.audioUrl (MP3, if available)
+    if (info.audioUrl) {
+      links.push({ label: "Audio Only", ext: "mp3", url: info.audioUrl });
+    }
+
+    // Fallback shapes, only used if nothing matched above
+    if (links.length === 0) {
+      if (Array.isArray(data.links)) {
+        data.links.forEach(l => links.push({ label: l.quality || l.label || "Download", ext: l.ext || "mp4", url: l.url || l.download_url }));
+      }
+      if (Array.isArray(data.medias)) {
+        data.medias.forEach(m => links.push({ label: m.quality || "Download", ext: m.ext || "mp4", url: m.url }));
+      }
+      if (Array.isArray(data.downloads)) {
+        data.downloads.forEach(d => links.push({ label: d.name || d.quality || "Download", ext: d.ext || "mp4", url: d.url }));
+      }
+      if (data.url) links.push({ label: "Download Video", ext: "mp4", url: data.url });
+      if (data.video) links.push({ label: "Video", ext: "mp4", url: data.video });
+      if (data.audio) links.push({ label: "Audio Only", ext: "mp3", url: data.audio });
+    }
+
+    // Safety: only keep links that actually have a real, usable url
+    const validLinks = links.filter(l => l && l.url && typeof l.url === "string" && l.url.trim() !== "");
+
+    if (validLinks.length === 0) {
+      area.innerHTML = `<div class="error-card">⚠ No downloadable link was returned for this video. Try a different URL or platform.</div>`;
+      return;
+    }
+
+    const title = info.title || data.title || data.name || "Your video is ready";
+    const platform = info.platform || data.platform;
+    const displayTitle = platform ? `${platform} · ${title}` : title;
+
+    const optionsHTML = validLinks.map(l => `
       <div class="download-option">
         <div class="option-info">
           <span class="option-label">${escHtml(l.label)}</span>
-          <span class="option-meta">.${l.ext.toUpperCase()} format</span>
+          <span class="option-meta">.${String(l.ext).toUpperCase()} format</span>
         </div>
         <a class="btn-get" href="${escHtml(l.url)}" target="_blank" rel="noopener noreferrer" download>
           ↓ Get
@@ -624,7 +637,7 @@
 
     area.innerHTML = `
       <div class="result-card">
-        <div class="result-title">${escHtml(title)}</div>
+        <div class="result-title">${escHtml(displayTitle)}</div>
         <div class="download-options">${optionsHTML}</div>
       </div>`;
   }

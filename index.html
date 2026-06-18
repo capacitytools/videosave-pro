@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VideoSave Pro – Download Any Video Free</title>
+  <title>ToolVerse – 12 Free AI Tools in One Place</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -34,42 +35,86 @@
     nav {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 18px 32px;
+      gap: 14px;
+      padding: 16px 24px;
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      background: rgba(10,10,15,0.85);
+      background: rgba(10,10,15,0.9);
       backdrop-filter: blur(12px);
-      z-index: 100;
+      z-index: 200;
     }
+    .menu-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+    .menu-btn:hover { border-color: var(--accent); }
     .logo {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       display: flex;
       align-items: center;
       gap: 8px;
+      cursor: pointer;
     }
     .logo-dot { color: var(--accent); }
     .logo-icon {
-      width: 32px; height: 32px;
+      width: 30px; height: 30px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
+      font-size: 15px;
+      flex-shrink: 0;
     }
-    nav .nav-links { display: flex; gap: 28px; }
-    nav .nav-links a {
-      color: var(--muted); text-decoration: none; font-size: 0.9rem;
-      transition: color 0.2s;
+
+    .menu-dropdown {
+      position: absolute;
+      top: 64px; left: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 8px;
+      width: 240px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      max-height: 75vh;
+      overflow-y: auto;
     }
-    nav .nav-links a:hover { color: var(--text); }
+    .menu-dropdown.open { display: flex; }
+    .menu-dropdown a {
+      padding: 11px 12px;
+      border-radius: 9px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.87rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .menu-dropdown a:hover { background: var(--surface); }
+    .menu-dropdown a.disabled-link { color: var(--muted); cursor: not-allowed; }
+    .menu-dropdown a.disabled-link:hover { background: none; }
+    .menu-divider { height: 1px; background: var(--border); margin: 6px 4px; }
+
+    /* ── VIEWS ── */
+    .view { display: none; }
+    .view.active { display: block; }
 
     /* ── HERO ── */
     .hero {
       text-align: center;
-      padding: 90px 20px 60px;
+      padding: 70px 20px 40px;
       position: relative;
     }
     .hero::before {
@@ -98,10 +143,10 @@
     .badge::before { content: '⚡'; }
     h1 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-size: clamp(2rem, 5vw, 3.2rem);
       font-weight: 700;
       line-height: 1.15;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       background: linear-gradient(135deg, #fff 40%, var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -109,39 +154,82 @@
     }
     .subtitle {
       color: var(--muted);
-      font-size: 1.05rem;
-      max-width: 520px;
-      margin: 0 auto 48px;
+      font-size: 1.02rem;
+      max-width: 540px;
+      margin: 0 auto 36px;
       line-height: 1.65;
     }
 
-    /* ── DOWNLOADER CARD ── */
+    /* ── TOOLS GRID (home) ── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px;
+      max-width: 1000px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+    .tool-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 20px;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .2s ease, box-shadow .2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .tool-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-color);
+      box-shadow: 0 0 28px -6px var(--accent-color);
+    }
+    .tool-card .tool-icon { font-size: 1.7rem; margin-bottom: 10px; }
+    .tool-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+    .tool-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+    .tool-card .tool-arrow {
+      position: absolute; bottom: 16px; right: 18px;
+      color: var(--accent-color); font-weight: 700; font-size: 0.9rem;
+    }
+    .tool-card.disabled { opacity: 0.5; cursor: not-allowed; }
+    .tool-card.disabled:hover { transform: none; box-shadow: none; border-color: var(--border); }
+    .badge-soon {
+      position: absolute; top: 14px; right: 14px;
+      font-size: 0.62rem;
+      background: rgba(255,255,255,0.08);
+      padding: 3px 9px;
+      border-radius: 100px;
+      color: var(--muted);
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-decoration: none;
+      cursor: pointer;
+      margin-bottom: 18px;
+    }
+    .back-link:hover { color: var(--text); }
+
+    /* ── TOOL CARD (interactive panel) ── */
     .dl-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 32px;
       max-width: 680px;
-      margin: 0 auto 32px;
+      margin: 0 auto 24px;
       position: relative;
     }
-    .dl-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(124,92,252,0.4), transparent 60%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
-    .input-row {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
+    .input-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
     .url-input {
       flex: 1;
       background: var(--surface);
@@ -156,6 +244,7 @@
     }
     .url-input:focus { border-color: var(--accent); }
     .url-input::placeholder { color: var(--muted); }
+    textarea.url-input { resize: vertical; min-height: 100px; }
     .btn-download {
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       color: #fff;
@@ -173,15 +262,8 @@
     .btn-download:active { transform: translateY(0); }
     .btn-download:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-    .supported-label {
-      color: var(--muted);
-      font-size: 0.8rem;
-      text-align: center;
-      margin-top: 4px;
-    }
-    .platform-tags {
-      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px;
-    }
+    .supported-label { color: var(--muted); font-size: 0.8rem; text-align: center; margin-top: 4px; }
+    .platform-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; }
     .tag {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -191,9 +273,7 @@
       border-radius: 100px;
     }
 
-    /* ── RESULT ── */
-    #result-area { max-width: 680px; margin: 0 auto 32px; }
-
+    .result-area { max-width: 680px; margin: 0 auto 32px; }
     .result-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -201,10 +281,7 @@
       padding: 24px;
       animation: fadeUp 0.3s ease;
     }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
     .result-title {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 600;
@@ -255,71 +332,22 @@
       font-size: 0.9rem;
       animation: fadeUp 0.3s ease;
     }
-
-    .loader {
-      display: flex; align-items: center; justify-content: center;
-      gap: 10px; padding: 28px;
-      color: var(--muted); font-size: 0.9rem;
-    }
-    .spinner {
-      width: 20px; height: 20px;
-      border: 2px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-    }
+    .loader { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 28px; color: var(--muted); font-size: 0.9rem; }
+    .spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ── HOW IT WORKS ── */
-    .how-section {
-      max-width: 860px;
-      margin: 60px auto 80px;
-      padding: 0 20px;
-    }
-    .section-label {
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--accent);
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .section-title {
-      text-align: center;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 700;
-      margin-bottom: 48px;
-    }
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-    .step {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 26px;
-    }
-    .step-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--accent);
-      opacity: 0.4;
-      margin-bottom: 12px;
-    }
+    .how-section { max-width: 860px; margin: 50px auto 60px; padding: 0 20px; }
+    .section-label { text-align: center; font-size: 0.78rem; color: var(--accent); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 700; margin-bottom: 40px; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .step { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; }
+    .step-num { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent); opacity: 0.4; margin-bottom: 12px; }
     .step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
     .step p { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
 
     /* ── EBOOK BANNER ── */
-    .ebook-section {
-      max-width: 860px;
-      margin: 0 auto 70px;
-      padding: 0 20px;
-    }
+    .ebook-section { max-width: 860px; margin: 0 auto 50px; padding: 0 20px; }
     .ebook-card {
       background: linear-gradient(135deg, #1a1a10 0%, #1e1a08 50%, #0f1a10 100%);
       border: 1px solid #4a3d00;
@@ -339,48 +367,13 @@
       background: radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%);
       pointer-events: none;
     }
-    .ebook-icon {
-      font-size: 4rem;
-      flex-shrink: 0;
-      filter: drop-shadow(0 4px 12px rgba(212,175,55,0.3));
-    }
+    .ebook-icon { font-size: 4rem; flex-shrink: 0; filter: drop-shadow(0 4px 12px rgba(212,175,55,0.3)); }
     .ebook-body { flex: 1; }
-    .ebook-eyebrow {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #d4af37;
-      margin-bottom: 8px;
-    }
-    .ebook-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
-      font-weight: 700;
-      color: #f5e6a3;
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-    .ebook-desc {
-      color: #a89060;
-      font-size: 0.85rem;
-      line-height: 1.6;
-      margin-bottom: 18px;
-    }
-    .ebook-perks {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-    .ebook-perk {
-      background: rgba(212,175,55,0.1);
-      border: 1px solid rgba(212,175,55,0.25);
-      color: #d4af37;
-      font-size: 0.73rem;
-      padding: 4px 10px;
-      border-radius: 100px;
-    }
+    .ebook-eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #d4af37; margin-bottom: 8px; }
+    .ebook-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.1rem, 2.5vw, 1.45rem); font-weight: 700; color: #f5e6a3; margin-bottom: 10px; line-height: 1.3; }
+    .ebook-desc { color: #a89060; font-size: 0.85rem; line-height: 1.6; margin-bottom: 18px; }
+    .ebook-perks { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .ebook-perk { background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.25); color: #d4af37; font-size: 0.73rem; padding: 4px 10px; border-radius: 100px; }
     .btn-ebook {
       display: inline-block;
       background: linear-gradient(135deg, #d4af37, #f5e6a3);
@@ -396,18 +389,15 @@
     .btn-ebook:hover { opacity: 0.9; transform: translateY(-1px); }
 
     /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 32px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
+    footer { border-top: 1px solid var(--border); padding: 28px 32px; text-align: center; color: var(--muted); font-size: 0.82rem; }
     footer span { color: var(--accent2); }
 
+    .panel-heading { text-align: center; margin-bottom: 28px; }
+    .panel-heading h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
+    .panel-heading p { color: var(--muted); font-size: 0.9rem; }
+
     @media (max-width: 600px) {
-      nav { padding: 14px 18px; }
-      .nav-links { display: none; }
+      nav { padding: 14px 16px; }
       .input-row { flex-direction: column; }
       .btn-download { width: 100%; }
       .dl-card { padding: 22px 18px; }
@@ -423,237 +413,105 @@
 
 <!-- NAV -->
 <nav>
-  <div class="logo">
+  <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</div>
+  <div class="logo" onclick="showView('home')">
     <div class="logo-icon">⬇</div>
-    VideoSave<span class="logo-dot">Pro</span>
-  </div>
-  <div class="nav-links">
-    <a href="#">Home</a>
-    <a href="#">Platforms</a>
-    <a href="#">FAQ</a>
+    Tool<span class="logo-dot">Verse</span>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="badge">100% Free · No Login Required</div>
-  <h1>Download Any Video<br>In Seconds</h1>
-  <p class="subtitle">Paste a link from YouTube, TikTok, Instagram, Facebook, Twitter/X, and more — get your video instantly.</p>
+<!-- DROPDOWN MENU (repeats on every screen) -->
+<div class="menu-dropdown" id="menuDropdown">
+  <a onclick="showView('home')">🏠 Home</a>
+  <div class="menu-divider"></div>
+  <a onclick="showView('downloader')">📥 Universal Downloader</a>
+  <a onclick="showView('imagegen')">🎨 Image Generation</a>
+  <a onclick="showView('tts')">🎙️ Speechster (TTS)</a>
+  <a onclick="showView('vision')">👁️ VisionChat</a>
+  <a onclick="showView('movies')">🎬 CineSearch</a>
+  <a onclick="showView('novel')">📚 NovelSter</a>
+  <a onclick="showView('medicine')">💊 MedSter</a>
+  <a onclick="showView('tempmail')">🔒 TempSter</a>
+  <a onclick="showView('screenshot')">📸 WebSnap</a>
+  <a onclick="showView('ebook')">📖 My Own Ebook</a>
+  <div class="menu-divider"></div>
+  <a class="disabled-link">📦 WebZip (Soon)</a>
+  <a class="disabled-link">🎓 CertSter (Soon)</a>
+</div>
 
-  <!-- DOWNLOADER CARD -->
-  <div class="dl-card">
-    <div class="input-row">
-      <input
-        class="url-input"
-        id="videoUrl"
-        type="url"
-        placeholder="Paste video URL here — e.g. https://www.youtube.com/watch?v=..."
-        autocomplete="off"
-      />
-      <button class="btn-download" id="dlBtn" onclick="startDownload()">Download</button>
-    </div>
-    <div class="supported-label">Supports</div>
-    <div class="platform-tags">
-      <span class="tag">YouTube</span>
-      <span class="tag">TikTok</span>
-      <span class="tag">Instagram</span>
-      <span class="tag">Facebook</span>
-      <span class="tag">Twitter/X</span>
-      <span class="tag">Snapchat</span>
-      <span class="tag">Pinterest</span>
-      <span class="tag">Vimeo</span>
-      <span class="tag">+ more</span>
-    </div>
-  </div>
+<!-- ============ HOME VIEW ============ -->
+<div class="view active" id="view-home">
+  <section class="hero">
+    <div class="badge">12 Tools · 100% Free · No Login Required</div>
+    <h1>One Platform.<br>Endless Tools.</h1>
+    <p class="subtitle">Download videos, generate AI images, convert text to speech, search medicines and movies, and more — all free, all in one place.</p>
+  </section>
 
-  <!-- RESULT AREA -->
-  <div id="result-area"></div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how-section">
-  <p class="section-label">How It Works</p>
-  <h2 class="section-title">Three steps. That's it.</h2>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <h3>Copy the video link</h3>
-      <p>Open the video on any platform and copy the URL from your browser or the share button.</p>
+  <div class="tools-grid">
+    <div class="tool-card" style="--accent-color:#22d3ee" onclick="showView('imagegen')">
+      <div class="tool-icon">🎨</div><h3>Image Generation</h3><p>Create AI images from text prompts.</p><span class="tool-arrow">→</span>
     </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <h3>Paste and click Download</h3>
-      <p>Paste the link into the box above and hit the Download button. We'll fetch all available formats.</p>
+    <div class="tool-card" style="--accent-color:#8b5cf6" onclick="showView('tts')">
+      <div class="tool-icon">🎙️</div><h3>Speechster</h3><p>Convert text into natural speech.</p><span class="tool-arrow">→</span>
     </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <h3>Pick your quality and save</h3>
-      <p>Choose from HD, SD, or audio-only options. Click Get to save directly to your device.</p>
+    <div class="tool-card" style="--accent-color:#d946ef" onclick="showView('vision')">
+      <div class="tool-icon">👁️</div><h3>VisionChat</h3><p>Ask AI questions about any image.</p><span class="tool-arrow">→</span>
     </div>
-  </div>
-</section>
-
-<!-- EBOOK PROMO -->
-<section class="ebook-section">
-  <div class="ebook-card">
-    <div class="ebook-icon">📸</div>
-    <div class="ebook-body">
-      <div class="ebook-eyebrow">🔥 Featured Ebook</div>
-      <div class="ebook-title">The AI Fashion Photography Kit</div>
-      <div class="ebook-desc">
-        Master the prompt formulas behind 8K, DSLR-quality fashion imagery — no camera, no studio, no models required. Learn the exact "prompt engineering" blueprints used to generate corporate, native, luxury, and everyday fashion shoots in minutes.
-      </div>
-      <div class="ebook-perks">
-        <span class="ebook-perk">✓ Complete Prompt Formulas</span>
-        <span class="ebook-perk">✓ Corporate & Native Styles</span>
-        <span class="ebook-perk">✓ Zero Studio Cost</span>
-        <span class="ebook-perk">✓ Fully Editable Prompts</span>
-      </div>
-      <a class="btn-ebook" href="https://selar.com/14711117ox" target="_blank" rel="noopener noreferrer">
-        📥 Get the Kit Now
-      </a>
+    <div class="tool-card" style="--accent-color:#f97316" onclick="showView('downloader')">
+      <div class="tool-icon">📥</div><h3>Universal Downloader</h3><p>Download videos from any platform.</p><span class="tool-arrow">→</span>
+    </div>
+    <div class="tool-card" style="--accent-color:#10b981" onclick="showView('movies')">
+      <div class="tool-icon">🎬</div><h3>CineSearch</h3><p>Search movies & TV show info.</p><span class="tool-arrow">→</span>
+    </div>
+    <div class="tool-card" style="--accent-color:#14b8a6" onclick="showView('novel')">
+      <div class="tool-icon">📚</div><h3>NovelSter</h3><p>Search and read novels online.</p><span class="tool-arrow">→</span>
+    </div>
+    <div class="tool-card" style="--accent-color:#84cc16" onclick="showView('medicine')">
+      <div class="tool-icon">💊</div><h3>MedSter</h3><p>Search medicine uses & dosage.</p><span class="tool-arrow">→</span>
+    </div>
+    <div class="tool-card disabled" style="--accent-color:#ef4444">
+      <span class="badge-soon">Coming Soon</span>
+      <div class="tool-icon">📦</div><h3>WebZip</h3><p>Archive a website as a ZIP.</p>
+    </div>
+    <div class="tool-card" style="--accent-color:#ec4899" onclick="showView('tempmail')">
+      <div class="tool-icon">🔒</div><h3>TempSter</h3><p>Generate a disposable email inbox.</p><span class="tool-arrow">→</span>
+    </div>
+    <div class="tool-card" style="--accent-color:#f59e0b" onclick="showView('screenshot')">
+      <div class="tool-icon">📸</div><h3>WebSnap</h3><p>Screenshot or PDF any website.</p><span class="tool-arrow">→</span>
+    </div>
+    <div class="tool-card disabled" style="--accent-color:#f43f5e">
+      <span class="badge-soon">Coming Soon</span>
+      <div class="tool-icon">🎓</div><h3>CertSter</h3><p>Generate PDF certificates.</p>
+    </div>
+    <div class="tool-card" style="--accent-color:#6366f1" onclick="showView('ebook')">
+      <div class="tool-icon">📖</div><h3>My Own Ebook</h3><p>Turn your text into a PDF ebook.</p><span class="tool-arrow">→</span>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 VideoSave<span>Pro</span> · For personal use only · Respect content creators' rights</p>
-</footer>
+<!-- ============ DOWNLOADER VIEW ============ -->
+<div class="view" id="view-downloader">
+  <a class="back-link" style="margin-left:20px;" onclick="showView('home')">← Back to all tools</a>
+  <section class="hero" style="padding-top:10px;">
+    <div class="badge">100% Free · No Login Required</div>
+    <h1>Download Any Video<br>In Seconds</h1>
+    <p class="subtitle">Paste a link from YouTube, TikTok, Instagram, Facebook, Twitter/X, and more — get your video instantly.</p>
 
-<script>
-  const FUNCTION_ENDPOINT = "/.netlify/functions/download";
-
-  async function startDownload() {
-    const input = document.getElementById("videoUrl");
-    const btn   = document.getElementById("dlBtn");
-    const area  = document.getElementById("result-area");
-    const url   = input.value.trim();
-
-    if (!url) {
-      input.focus();
-      input.style.borderColor = "#ef4444";
-      setTimeout(() => input.style.borderColor = "", 1500);
-      return;
-    }
-
-    // Loading state
-    btn.disabled = true;
-    btn.textContent = "Fetching…";
-    area.innerHTML = `
-      <div class="loader">
-        <div class="spinner"></div>
-        <span>Fetching download links…</span>
-      </div>`;
-
-    try {
-      const res = await fetch(`${FUNCTION_ENDPOINT}?url=${encodeURIComponent(url)}`);
-      const data = await res.json();
-
-      if (!res.ok || data.error) {
-        throw new Error(data.error || data.message || "Could not process this URL.");
-      }
-
-      renderResult(data);
-
-    } catch (err) {
-      area.innerHTML = `
-        <div class="error-card">
-          ⚠ ${err.message || "Something went wrong. Please check the URL and try again."}
-        </div>`;
-    } finally {
-      btn.disabled = false;
-      btn.textContent = "Download";
-    }
-  }
-
-  function renderResult(data) {
-    const area = document.getElementById("result-area");
-
-    if (data.success === false) {
-      area.innerHTML = `<div class="error-card">⚠ ${escHtml(data.message || data.error || "This video could not be processed.")}</div>`;
-      return;
-    }
-
-    const info = data.mediaInfo || data.data || data;
-    const links = [];
-
-    // Primary documented shape: mediaInfo.qualities = [{quality, url}]
-    if (Array.isArray(info.qualities)) {
-      info.qualities.forEach(q => {
-        links.push({ label: q.quality || q.label || "Video", ext: q.ext || "mp4", url: q.url });
-      });
-    }
-
-    // mediaInfo.videoUrl (direct MP4 link)
-    if (info.videoUrl && links.length === 0) {
-      links.push({ label: "Video", ext: "mp4", url: info.videoUrl });
-    }
-
-    // mediaInfo.audioUrl (MP3, if available)
-    if (info.audioUrl) {
-      links.push({ label: "Audio Only", ext: "mp3", url: info.audioUrl });
-    }
-
-    // Fallback shapes, only used if nothing matched above
-    if (links.length === 0) {
-      if (Array.isArray(data.links)) {
-        data.links.forEach(l => links.push({ label: l.quality || l.label || "Download", ext: l.ext || "mp4", url: l.url || l.download_url }));
-      }
-      if (Array.isArray(data.medias)) {
-        data.medias.forEach(m => links.push({ label: m.quality || "Download", ext: m.ext || "mp4", url: m.url }));
-      }
-      if (Array.isArray(data.downloads)) {
-        data.downloads.forEach(d => links.push({ label: d.name || d.quality || "Download", ext: d.ext || "mp4", url: d.url }));
-      }
-      if (data.url) links.push({ label: "Download Video", ext: "mp4", url: data.url });
-      if (data.video) links.push({ label: "Video", ext: "mp4", url: data.video });
-      if (data.audio) links.push({ label: "Audio Only", ext: "mp3", url: data.audio });
-    }
-
-    // Safety: only keep links that actually have a real, usable url
-    const validLinks = links.filter(l => l && l.url && typeof l.url === "string" && l.url.trim() !== "");
-
-    if (validLinks.length === 0) {
-      area.innerHTML = `<div class="error-card">⚠ No downloadable link was returned for this video. Try a different URL or platform.</div>`;
-      return;
-    }
-
-    const title = info.title || data.title || data.name || "Your video is ready";
-    const platform = info.platform || data.platform;
-    const displayTitle = platform ? `${platform} · ${title}` : title;
-
-    const optionsHTML = validLinks.map(l => `
-      <div class="download-option">
-        <div class="option-info">
-          <span class="option-label">${escHtml(l.label)}</span>
-          <span class="option-meta">.${String(l.ext).toUpperCase()} format</span>
-        </div>
-        <a class="btn-get" href="${escHtml(l.url)}" target="_blank" rel="noopener noreferrer" download>
-          ↓ Get
-        </a>
+    <div class="dl-card">
+      <div class="input-row">
+        <input class="url-input" id="videoUrl" type="url" placeholder="Paste video URL here…" autocomplete="off"/>
+        <button class="btn-download" id="dlBtn" onclick="startDownload()">Download</button>
       </div>
-    `).join("");
+      <div class="supported-label">Supports</div>
+      <div class="platform-tags">
+        <span class="tag">YouTube</span><span class="tag">TikTok</span><span class="tag">Instagram</span>
+        <span class="tag">Facebook</span><span class="tag">Twitter/X</span><span class="tag">Snapchat</span>
+        <span class="tag">Pinterest</span><span class="tag">Vimeo</span><span class="tag">+ more</span>
+      </div>
+    </div>
+    <div class="result-area" id="result-area"></div>
+  </section>
 
-    area.innerHTML = `
-      <div class="result-card">
-        <div class="result-title">${escHtml(displayTitle)}</div>
-        <div class="download-options">${optionsHTML}</div>
-      </div>`;
-  }
-
-  function escHtml(str) {
-    return String(str)
-      .replace(/&/g,"&amp;")
-      .replace(/</g,"&lt;")
-      .replace(/>/g,"&gt;")
-      .replace(/"/g,"&quot;");
-  }
-
-  // Allow Enter key to trigger download
-  document.getElementById("videoUrl").addEventListener("keydown", e => {
-    if (e.key === "Enter") startDownload();
-  });
-</script>
-</body>
-</html>
+  <section class="how-section">
+    <p class="section-label">How It Works</p>
+    

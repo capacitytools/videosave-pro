@@ -117,21 +117,7 @@
 <div class="view" id="view-downloader">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>📥 Universal Downloader</h1>
-    <p style="color:#888;margin-bottom:20px;">YouTube · TikTok · Instagram · Facebook · Twitter/X · Snapchat · Pinterest · Vimeo · and more</p>
-    <div class="card">
-      <input id="videoUrl" type="url" placeholder="Paste video URL here…"/>
-      <select id="dlFormat">
-        <option value="video">🎬 Video (Best Quality)</option>
-        <option value="audio">🎵 Audio Only (MP3)</option>
-      </select>
-      <select id="dlQuality">
-        <option value="1080">1080p HD</option>
-        <option value="720" selected>720p HD</option>
-        <option value="480">480p</option>
-        <option value="360">360p</option>
-      </select>
-      <button id="dlBtn" onclick="startDownload()">📥 Fetch Download Links</button>
-    </div>
+    <div class="card"><input id="videoUrl" type="url" placeholder="Paste video URL (YouTube, TikTok, Instagram, etc.)…"/><button id="dlBtn" onclick="startDownload()">Download</button></div>
     <div class="result-area" id="result-area"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
@@ -162,26 +148,105 @@
             <!-- Tab 1: Listen -->
       <div id="tts-tab-listen" class="tab-content active">
         <select id="ttsVoiceListen">
-          <option value="en-US">English (US - Natural)</option>
-          <option value="en-GB">English (UK - British)</option>
-          <option value="en-AU">English (Australia)</option>
-          <option value="en-IN">English (India)</option>
-          <option value="en-NG">English (Nigeria)</option>
-          <option value="es-ES">Spanish (Spain)</option>
-          <option value="es-MX">Spanish (Mexico)</option>
-          <option value="fr-FR">French (France)</option>
-          <option value="de-DE">German</option>
-          <option value="it-IT">Italian</option>
-          <option value="pt-BR">Portuguese (Brazil)</option>
-          <option value="ru-RU">Russian</option>
-          <option value="ja-JP">Japanese</option>
-          <option value="ko-KR">Korean</option>
-          <option value="zh-CN">Chinese (Mandarin)</option>
-          <option value="ar-SA">Arabic</option>
-          <option value="hi-IN">Hindi</option>
-          <option value="sw-KE">Swahili</option>
-          <option value="yo-NG">Yoruba</option>
-          <option value="ig-NG">Igbo</option>
+          <optgroup label="🇺🇸 English (US)">
+            <option value="Brian">Brian (Male) ⭐</option>
+            <option value="Justin">Justin (Male)</option>
+            <option value="Joey">Joey (Male)</option>
+            <option value="Matthew">Matthew (Male)</option>
+            <option value="Kendra">Kendra (Female)</option>
+            <option value="Kimberly">Kimberly (Female)</option>
+            <option value="Salli">Salli (Female)</option>
+            <option value="Ivy">Ivy (Child)</option>
+          </optgroup>
+          <optgroup label="🇬🇧 English (UK)">
+            <option value="Amy">Amy (Female)</option>
+            <option value="Emma">Emma (Female)</option>
+            <option value="Brian">Brian (Male)</option>
+          </optgroup>
+          <optgroup label="🇦🇺 English (Australia)">
+            <option value="Nicole">Nicole (Female)</option>
+            <option value="Russell">Russell (Male)</option>
+          </optgroup>
+          <optgroup label="🇮🇳 English (India)">
+            <option value="Aditi">Aditi (Female)</option>
+            <option value="Raveena">Raveena (Female)</option>
+          </optgroup>
+          <optgroup label="🇪🇸 Spanish">
+            <option value="Conchita">Conchita (Female, Spain)</option>
+            <option value="Enrique">Enrique (Male, Spain)</option>
+            <option value="Penelope">Penélope (Female, US)</option>
+            <option value="Miguel">Miguel (Male, US)</option>
+            <option value="Mia">Mia (Female, Mexico)</option>
+          </optgroup>
+          <optgroup label="🇫🇷 French">
+            <option value="Celine">Céline (Female)</option>
+            <option value="Lea">Léa (Female)</option>
+            <option value="Mathieu">Mathieu (Male)</option>
+            <option value="Chantal">Chantal (Female, CA)</option>
+          </optgroup>
+          <optgroup label="🇩🇪 German">
+            <option value="Hans">Hans (Male)</option>
+            <option value="Marlene">Marlene (Female)</option>
+            <option value="Vicki">Vicki (Female)</option>
+          </optgroup>
+          <optgroup label="🇮🇹 Italian">
+            <option value="Carla">Carla (Female)</option>
+            <option value="Giorgio">Giorgio (Male)</option>
+            <option value="Bianca">Bianca (Female)</option>
+          </optgroup>
+          <optgroup label="🇵🇹 Portuguese">
+            <option value="Vitoria">Vitória (Female, Brazil)</option>
+            <option value="Ricardo">Ricardo (Male, Brazil)</option>
+            <option value="Ines">Inês (Female, Portugal)</option>
+          </optgroup>
+          <optgroup label="🇷🇺 Russian">
+            <option value="Tatyana">Tatyana (Female)</option>
+            <option value="Maxim">Maxim (Male)</option>
+          </optgroup>
+          <optgroup label="🇯🇵 Japanese">
+            <option value="Mizuki">Mizuki (Female)</option>
+            <option value="Takumi">Takumi (Male)</option>
+          </optgroup>
+          <optgroup label="🇨🇳 Chinese">
+            <option value="Zhiyu">Zhiyu (Female)</option>
+          </optgroup>
+          <optgroup label="🇸🇦 Arabic">
+            <option value="Zeina">Zeina (Female)</option>
+          </optgroup>
+          <optgroup label="🇰🇷 Korean">
+            <option value="Seoyeon">Seoyeon (Female)</option>
+          </optgroup>
+          <optgroup label="🇳🇱 Dutch">
+            <option value="Lotte">Lotte (Female)</option>
+            <option value="Ruben">Ruben (Male)</option>
+          </optgroup>
+          <optgroup label="🇸🇪 Swedish">
+            <option value="Astrid">Astrid (Female)</option>
+          </optgroup>
+          <optgroup label="🇵🇱 Polish">
+            <option value="Maja">Maja (Female)</option>
+            <option value="Jan">Jan (Male)</option>
+          </optgroup>
+          <optgroup label="🇹🇷 Turkish">
+            <option value="Filiz">Filiz (Female)</option>
+          </optgroup>
+          <optgroup label="🇩🇰 Danish">
+            <option value="Naja">Naja (Female)</option>
+            <option value="Mads">Mads (Male)</option>
+          </optgroup>
+          <optgroup label="🇳🇴 Norwegian">
+            <option value="Liv">Liv (Female)</option>
+          </optgroup>
+          <optgroup label="🇮🇸 Icelandic">
+            <option value="Dora">Dóra (Female)</option>
+            <option value="Karl">Karl (Male)</option>
+          </optgroup>
+          <optgroup label="🇷🇴 Romanian">
+            <option value="Carmen">Carmen (Female)</option>
+          </optgroup>
+          <optgroup label="🏴󠁧󠁢󠁷󠁬󠁳󠁿 Welsh">
+            <option value="Gwyneth">Gwyneth (Female)</option>
+          </optgroup>
         </select>
         <button onclick="listenText()">🎧 Listen Now</button>
         <div id="listen-player" style="margin-top:15px;"></div>
@@ -190,34 +255,56 @@
       <!-- Tab 2: Download -->
       <div id="tts-tab-download" class="tab-content">
         <select id="ttsVoiceDownload">
-          <option value="en-US">English (US)</option>
-          <option value="en-GB">English (UK)</option>
-          <option value="es-ES">Spanish</option>
-          <option value="fr-FR">French</option>
-          <option value="de-DE">German</option>
-          <option value="it-IT">Italian</option>
-          <option value="pt-BR">Portuguese</option>
-          <option value="ru-RU">Russian</option>
-          <option value="ja-JP">Japanese</option>
-          <option value="zh-CN">Chinese</option>
-          <option value="ar-SA">Arabic</option>
-          <option value="hi-IN">Hindi</option>
+          <option value="Brian">Brian — English US Male ⭐</option>
+          <option value="Justin">Justin — English US Male</option>
+          <option value="Matthew">Matthew — English US Male</option>
+          <option value="Amy">Amy — English UK Female</option>
+          <option value="Emma">Emma — English UK Female</option>
+          <option value="Nicole">Nicole — English AU Female</option>
+          <option value="Russell">Russell — English AU Male</option>
+          <option value="Aditi">Aditi — English India Female</option>
+          <option value="Kendra">Kendra — English US Female</option>
+          <option value="Salli">Salli — English US Female</option>
+          <option value="Conchita">Conchita — Spanish Female</option>
+          <option value="Enrique">Enrique — Spanish Male</option>
+          <option value="Celine">Céline — French Female</option>
+          <option value="Mathieu">Mathieu — French Male</option>
+          <option value="Hans">Hans — German Male</option>
+          <option value="Marlene">Marlene — German Female</option>
+          <option value="Carla">Carla — Italian Female</option>
+          <option value="Giorgio">Giorgio — Italian Male</option>
+          <option value="Vitoria">Vitória — Portuguese Brazil</option>
+          <option value="Ricardo">Ricardo — Portuguese Brazil Male</option>
+          <option value="Tatyana">Tatyana — Russian Female</option>
+          <option value="Maxim">Maxim — Russian Male</option>
+          <option value="Mizuki">Mizuki — Japanese Female</option>
+          <option value="Takumi">Takumi — Japanese Male</option>
+          <option value="Zhiyu">Zhiyu — Chinese Female</option>
+          <option value="Zeina">Zeina — Arabic Female</option>
+          <option value="Seoyeon">Seoyeon — Korean Female</option>
         </select>
-        <button onclick="downloadText()"> Generate & Download MP3</button>
+        <button onclick="downloadText()">🎙️ Generate & Download MP3</button>
         <div id="download-links" style="margin-top:15px;"></div>
       </div>
 
       <!-- Tab 3: Clone/Styles -->
-      <div id="tts-tab-clone" class="tab-content">        <p style="color:#888;margin-bottom:12px;font-size:0.9rem;">Select a voice style to mimic:</p>
+      <div id="tts-tab-clone" class="tab-content">
+        <p style="color:#888;margin-bottom:12px;font-size:0.9rem;">Select a voice style to mimic:</p>
         <select id="ttsVoiceClone">
-          <option value="en-US">Deep Male Narrator (US)</option>
-          <option value="en-GB">Sophisticated British Male</option>
-          <option value="en-AU">Friendly Australian Female</option>
-          <option value="en-IN">Professional Indian Female</option>
-          <option value="es-MX">Warm Latin American Male</option>
-          <option value="fr-FR">Elegant French Female</option>
-          <option value="de-DE">Strong German Male</option>
-          <option value="ja-JP">Soft Japanese Female</option>
+          <option value="Matthew">Deep Male Narrator (US)</option>
+          <option value="Brian">Sophisticated British Male</option>
+          <option value="Russell">Friendly Australian Male</option>
+          <option value="Aditi">Professional Indian Female</option>
+          <option value="Miguel">Warm Latin American Male</option>
+          <option value="Celine">Elegant French Female</option>
+          <option value="Hans">Strong German Male</option>
+          <option value="Mizuki">Soft Japanese Female</option>
+          <option value="Justin">Young American Male</option>
+          <option value="Kendra">Professional American Female</option>
+          <option value="Amy">Classic British Female</option>
+          <option value="Emma">Modern British Female</option>
+          <option value="Salli">Friendly American Female</option>
+          <option value="Ivy">Cute Child Voice</option>
         </select>
         <button onclick="cloneText()">🎭 Generate with Voice Style</button>
         <div id="clone-player" style="margin-top:15px;"></div>
@@ -355,44 +442,42 @@
     return chunks;
   }
 
-  function getTtsUrl(text, lang) {
-    return `/api/speech?text=${encodeURIComponent(text)}&voice=${encodeURIComponent(lang)}`;
+  function getTtsUrl(text, voice) {
+    return `/api/speech?text=${encodeURIComponent(text.substring(0,500))}&voice=${encodeURIComponent(voice)}`;
   }
 
   function listenText() {
     const text = document.getElementById('ttsText').value.trim();
-    const lang = document.getElementById('ttsVoiceListen').value;
+    const voice = document.getElementById('ttsVoiceListen').value;
     const player = document.getElementById('listen-player');
     if (!text) { alert('Please enter text.'); return; }
     player.innerHTML = '<p style="color:#888;">⏳ Loading audio… please wait</p>';
-    const audioUrl = getTtsUrl(text.substring(0, 500), lang);
-    player.innerHTML = `<audio id="tts-audio" controls autoplay style="width:100%;margin-top:10px;" src="${audioUrl}"></audio><p style="color:#22d3a5;margin-top:10px;font-size:0.85rem;">✅ Audio ready — tap play above</p>`;
+    const audioUrl = getTtsUrl(text, voice);
+    player.innerHTML = `<audio id="tts-audio" controls style="width:100%;margin-top:10px;" src="${audioUrl}"></audio><p style="color:#22d3a5;margin-top:10px;font-size:0.85rem;">✅ Audio ready — tap the play button above</p>`;
   }
 
   function downloadText() {
     const text = document.getElementById('ttsText').value.trim();
-    const lang = document.getElementById('ttsVoiceDownload').value;
+    const voice = document.getElementById('ttsVoiceDownload').value;
     const container = document.getElementById('download-links');
     if (!text) { alert('Please enter text.'); return; }
-    const audioUrl = getTtsUrl(text.substring(0, 500), lang);
-    container.innerHTML = `<div class="result-card"><div class="result-title">⬇ Download MP3</div><audio controls style="width:100%;margin-bottom:14px;" src="${audioUrl}"></audio><a class="btn-get" href="${audioUrl}" download="speech.mp3">⬇ Save MP3</a></div>`;
+    const audioUrl = getTtsUrl(text, voice);
+    container.innerHTML = `<div class="result-card"><div class="result-title">⬇ Download MP3</div><audio controls style="width:100%;margin-bottom:14px;" src="${audioUrl}"></audio><a class="btn-get" href="${audioUrl}" download="speech.mp3">⬇ Save MP3 to Device</a></div>`;
   }
 
   function cloneText() {
     const text = document.getElementById('ttsText').value.trim();
-    const lang = document.getElementById('ttsVoiceClone').value;
+    const voice = document.getElementById('ttsVoiceClone').value;
     const player = document.getElementById('clone-player');
     if (!text) { alert('Please enter text.'); return; }
     player.innerHTML = '<p style="color:#888;">⏳ Generating with voice style…</p>';
-    const audioUrl = getTtsUrl(text.substring(0, 500), lang);
-    player.innerHTML = `<audio id="clone-audio" controls autoplay style="width:100%;margin-top:10px;" src="${audioUrl}"></audio><p style="color:#22d3a5;margin-top:10px;font-size:0.85rem;">✅ Ready — tap play</p>`;
+    const audioUrl = getTtsUrl(text, voice);
+    player.innerHTML = `<audio id="clone-audio" controls style="width:100%;margin-top:10px;" src="${audioUrl}"></audio><p style="color:#22d3a5;margin-top:10px;font-size:0.85rem;">✅ Ready — tap play</p>`;
   }
 
   // DOWNLOADER
   async function startDownload() {
     const url = document.getElementById("videoUrl").value.trim();
-    const format = document.getElementById("dlFormat").value;
-    const quality = document.getElementById("dlQuality").value;
     const btn = document.getElementById("dlBtn");
     const area = document.getElementById("result-area");
     if (!url) { alert("Please paste a video URL first."); return; }
@@ -403,22 +488,17 @@
       const data = await res.json();
       if (data.error) throw new Error(data.error);
 
-      // Parse all possible response shapes
       const info = data.mediaInfo || data.data || data;
       const links = [];
-
-      if (Array.isArray(info.qualities)) {
-        info.qualities.forEach(q => links.push({ label: q.quality || q.label || 'Video', ext: q.ext || 'mp4', url: q.url }));
-      }
+      if (Array.isArray(info.qualities)) info.qualities.forEach(q => links.push({ label: q.quality || q.label || 'Video', ext: q.ext || 'mp4', url: q.url }));
       if (info.videoUrl) links.push({ label: 'Video', ext: 'mp4', url: info.videoUrl });
       if (info.audioUrl) links.push({ label: 'Audio Only', ext: 'mp3', url: info.audioUrl });
       if (!links.length && data.url) links.push({ label: 'Download File', ext: 'mp4', url: data.url });
       if (Array.isArray(data.medias)) data.medias.forEach(m => links.push({ label: m.quality || 'Download', ext: m.ext || 'mp4', url: m.url }));
       if (Array.isArray(data.links)) data.links.forEach(l => links.push({ label: l.quality || l.label || 'Download', ext: l.ext || 'mp4', url: l.url || l.download_url }));
 
-      // Filter out blanks
       const valid = links.filter(l => l.url && l.url.trim() !== '');
-      if (!valid.length) throw new Error('No downloadable links found. Try a different URL or platform.');
+      if (!valid.length) throw new Error('No downloadable links found. Try a different URL.');
 
       const title = info.title || data.title || 'Download Ready';
       const platform = info.platform || data.platform || '';
@@ -434,11 +514,10 @@
         </div>`).join('');
 
       area.innerHTML = `<div class="result-card"><div class="result-title">✅ ${displayTitle}</div>${optionsHTML}</div>`;
-
     } catch (err) {
       area.innerHTML = `<div class="error-card">⚠ ${err.message}</div>`;
     } finally {
-      btn.disabled = false; btn.textContent = '📥 Fetch Download Links';
+      btn.disabled = false; btn.textContent = "📥 Fetch Download Links";
     }
   }
 

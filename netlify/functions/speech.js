@@ -2,15 +2,15 @@ exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
+    'Access-Control-Allow-Methods': 'GET, OPTIONS'
   };
 
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
   }
 
-  let text = event.queryStringParameters?.text || '';
-  const voice = event.queryStringParameters?.voice || 'Matthew';
+  const text = event.queryStringParameters?.text || '';
+  const voice = event.queryStringParameters?.voice || 'Brian';
 
   if (!text) {
     return {
@@ -21,24 +21,49 @@ exports.handler = async (event) => {
   }
 
   try {
-    // For long text, split into chunks and combine
-    const chunks = splitTextIntoChunks(text, 200); // 200 chars per chunk
-    const audioBuffers = [];
+    // Call the ahm7xmakki API
+    const url = `https://ahm7xmakki.com/api/tts?text=${encodeURIComponent(text)}&voice=${encodeURIComponent(voice)}`;
+    
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+      }
+    });
 
-    for (let i = 0; i < chunks.length; i++) {
-      const chunkAudio = await generateTTS(chunks[i], voice);
-      audioBuffers.push(chunkAudio);
+    if (!response.ok) {
+      throw new Error(`API returned ${response.status}`);
     }
 
-    // If only one chunk, return it directly
-    if (audioBuffers.length === 1) {
-      return createAudioResponse(audioBuffers[0], headers);
-    }
+    // Check if the API returns a JSON with a URL, or the Audio file directly
+    const contentType = response.headers.get('content-type');
+    
+    if (contentType && contentType.includes('application/json')) {
+        const data = await response.json();
+        const audioUrl = data.url || data.audioUrl || data.download_url;
+        if (audioUrl) {
+            return {
+                statusCode: 200,
+                headers: { ...headers, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ audioUrl: audioUrl })
+            };
+        }
+        throw new Error('API returned JSON but no audio URL found');
+    } else {
+        // It's audio directly
+        const audioBuffer = await response.arrayBuffer();
+        const base64 = Buffer.from(audioBuffer).toString('base64');
 
-    // For multiple chunks, we'd need to merge MP3s (complex)
-    // For now, return the first chunk as demo
-    // In production, use a library like 'lamem' to merge MP3s
-    return createAudioResponse(audioBuffers[0], headers);
+        return {
+            statusCode: 200,
+            headers: {
+                ...headers,
+                'Content-Type': 'audio/mpeg',
+                'Content-Length': audioBuffer.byteLength.toString()
+            },
+            body: base64,
+            isBase64Encoded: true
+        };
+    }
 
   } catch (err) {
     return {
@@ -47,67 +72,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({ error: err.message })
     };
   }
-};
-// Split text into chunks (by sentences)
-function splitTextIntoChunks(text, maxChars) {
-  if (text.length <= maxChars) return [text];
-  
-  const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text];
-  const chunks = [];
-  let currentChunk = '';
-
-  for (const sentence of sentences) {
-    if ((currentChunk + sentence).length <= maxChars) {
-      currentChunk += sentence;
-    } else {
-      if (currentChunk) chunks.push(currentChunk.trim());
-      currentChunk = sentence;
-    }
-  }
-  
-  if (currentChunk) chunks.push(currentChunk.trim());
-  return chunks;
-}
-
-// Try multiple TTS APIs until one works
-async function generateTTS(text, voice) {
-  const apis = [
-    () => ttsMP3(text, voice),
-    () => voiceRSS(text, voice),
-    () => myInstantiator(text, voice)
-  ];
-
-  for (const api of apis) {
-    try {
-      return await api();
-    } catch (err) {
-      console.log('API failed, trying next...');
-      continue;
-    }
-  }
-  
-  throw new Error('All TTS APIs failed');
-}
-
-// API 1: TTSMP3.com (FREE, no auth)
-async function ttsMP3(text, voice) {
-  const voiceMap = {
-    'Matthew': 'Matthew',
-    'Joey': 'Joey',
-    'Justin': 'Justin',
-    'Ivy': 'Ivy',
-    'Joanna': 'Joanna',    'Brian': 'Brian',
-    'Amy': 'Amy',
-    'Emma': 'Emma'
-  };
-  
-  const mp3Voice = voiceMap[voice] || 'Matthew';
-  const url = `https://api.ttsmp3.com/makemp3_new?voice=${mp3Voice}&text=${encodeURIComponent(text)}&source=aws_polly`;
-  
-  const response = await fetch(url, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-      'Referer': 'https://ttsmp3.com/'
+};      'Referer': 'https://ttsmp3.com/'
     }
   });
   

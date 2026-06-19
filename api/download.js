@@ -1,6 +1,5 @@
-export default async function handler(req, res) {
+module.exports = async function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   if (req.method === 'OPTIONS') { res.status(200).end(); return; }
 
   const { url } = req.query;
@@ -9,17 +8,12 @@ export default async function handler(req, res) {
   try {
     const apiUrl = `https://ahm7xmakki.com/api/alldl?url=${encodeURIComponent(url)}`;
     const response = await fetch(apiUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Accept': 'application/json',
-      }
+      headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json' }
     });
-
     const text = await response.text();
     let data;
     try { data = JSON.parse(text); }
     catch { throw new Error('Invalid response from download service.'); }
-
     res.status(200).json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });

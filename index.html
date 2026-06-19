@@ -1,164 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ToolVerse – Free AI Tools</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, sans-serif; background: #0a0a0f; color: #e8e8f0; min-height: 100vh; }
-    nav { display: flex; align-items: center; gap: 14px; padding: 16px 24px; border-bottom: 1px solid #2a2a3d; background: #13131a; }
-    .menu-btn { background: #1a1a26; border: 1px solid #2a2a3d; width: 40px; height: 40px; border-radius: 10px; cursor: pointer; color: #e8e8f0; font-size: 1.15rem; }
-    .logo { font-weight: 700; font-size: 1.2rem; cursor: pointer; }
-    .menu-dropdown { position: absolute; top: 64px; left: 16px; background: #1a1a26; border: 1px solid #2a2a3d; border-radius: 14px; padding: 8px; width: 240px; display: none; flex-direction: column; gap: 2px; z-index: 300; }
-    .menu-dropdown.open { display: flex; }
-    .menu-dropdown a { padding: 11px 12px; border-radius: 9px; color: #e8e8f0; text-decoration: none; font-size: 0.87rem; cursor: pointer; }
-    .menu-dropdown a:hover { background: #13131a; }
-    .view { display: none; } .view.active { display: block; }
-    .hero { text-align: center; padding: 60px 20px 30px; }
-    h1 { font-size: 2rem; font-weight: 700; margin-bottom: 16px; }
-    .back-link { display: inline-block; color: #7878a0; font-size: 0.85rem; cursor: pointer; margin-bottom: 18px; margin-left: 20px; }
-    .card { background: #1a1a26; border: 1px solid #2a2a3d; border-radius: 20px; padding: 28px; max-width: 680px; margin: 0 auto 24px; }
-    textarea, input, select { width: 100%; background: #13131a; border: 1.5px solid #2a2a3d; border-radius: 14px; padding: 14px 18px; color: #e8e8f0; font-size: 0.95rem; font-family: inherit; outline: none; margin-bottom: 12px; }
-    textarea { min-height: 120px; resize: vertical; }
-    button { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; border: none; border-radius: 14px; padding: 14px 26px; font-size: 0.95rem; font-weight: 600; cursor: pointer; width: 100%; margin-top: 10px; }
-    button:disabled { opacity: 0.5; cursor: not-allowed; }
-    .result-area { max-width: 680px; margin: 0 auto 32px; padding: 0 20px; }
-    .result-card { background: #1a1a26; border: 1px solid #2a2a3d; border-radius: 14px; padding: 24px; }
-    .result-title { font-weight: 600; font-size: 1rem; margin-bottom: 16px; color: #22d3a5; }
-    .error-card { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); color: #f87171; border-radius: 14px; padding: 18px 22px; }
-    audio { width: 100%; margin-bottom: 14px; }
-    .download-btn { display: inline-block; background: #7c5cfc; color: #fff; padding: 9px 20px; border-radius: 8px; text-decoration: none; font-size: 0.83rem; font-weight: 600; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToolVerse</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;padding:20px;}
+.card{background:#1a1a26;border:1px solid #2a2a3d;border-radius:10px;padding:20px;max-width:600px;margin:20px auto;}
+textarea,input,select{width:100%;background:#13131a;border:1px solid #2a2a3d;border-radius:8px;padding:10px;color:#fff;margin-bottom:10px;}
+textarea{min-height:100px;}
+button{width:100%;background:#ef4444;color:#fff;border:none;border-radius:8px;padding:12px;font-size:16px;cursor:pointer;margin-top:10px;}
+.result{max-width:600px;margin:20px auto;padding:20px;background:#1a1a26;border-radius:10px;}
+.back{color:#7878a0;cursor:pointer;display:inline-block;margin-bottom:10px;}
+</style>
 </head>
 <body>
 
-<nav>
-  <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</div>
-  <div class="logo" onclick="showView('home')">ToolVerse</div>
-</nav>
-
-<div class="menu-dropdown" id="menuDropdown">
-  <a onclick="showView('home')">🏠 Home</a>
-  <a onclick="showView('tts')">🎙️ Speechster</a>
-  <a onclick="showView('ebook')">📖 Ebook Builder</a>
+<div style="text-align:center;">
+<h1>ToolVerse</h1>
+<button onclick="showTTS()" style="width:200px;margin:5px;">🎙️ Speechster</button>
+<button onclick="showEbook()" style="width:200px;margin:5px;">📖 Ebook PDF</button>
 </div>
 
-<!-- HOME -->
-<div class="view active" id="view-home">
-  <section class="hero">    <h1>ToolVerse</h1>
-    <p style="color:#7878a0;">Free AI Tools</p>
-  </section>
+<div id="tts" style="display:none;">
+<span class="back" onclick="home()">← Back</span>
+<div class="card">
+<h2>Text to Speech</h2>
+<textarea id="text" placeholder="Type text..."></textarea>
+<select id="voice">
+<option value="Brian">Brian (UK Male)</option>
+<option value="Amy">Amy (UK Female)</option>
+<option value="Matthew">Matthew (US Male)</option>
+<option value="Joanna">Joanna (US Female)</option>
+</select>
+<button onclick="genSpeech()">Generate Audio</button>
+</div>
+<div id="ttsResult"></div>
 </div>
 
-<!-- TTS -->
-<div class="view" id="view-tts">
-  <a class="back-link" onclick="showView('home')">← Back</a>
-  <section class="hero" style="padding-top:10px;">
-    <h1>🎙️ Speechster</h1>
-    <div class="card">
-      <textarea id="ttsText" placeholder="Type text here..."></textarea>
-      <select id="ttsVoice">
-        <option value="Brian">Brian (Male - UK)</option>
-        <option value="Amy">Amy (Female - UK)</option>
-        <option value="Matthew">Matthew (Male - US)</option>
-        <option value="Joey">Joey (Male - US)</option>
-        <option value="Justin">Justin (Male - US)</option>
-        <option value="Joanna">Joanna (Female - US)</option>
-        <option value="Salli">Salli (Female - US)</option>
-      </select>
-      <button id="ttsBtn" onclick="generateSpeech()">🎙️ Generate Audio</button>
-    </div>
-    <div class="result-area" id="tts-result"></div>
-  </section>
+<div id="ebook" style="display:none;">
+<span class="back" onclick="home()">← Back</span>
+<div class="card">
+<h2>Ebook to PDF</h2>
+<input id="title" placeholder="Book Title">
+<input id="author" placeholder="Author">
+<textarea id="content" placeholder="Paste content..." style="min-height:200px;"></textarea>
+<button onclick="genPDF()">Download PDF</button>
 </div>
-
-<!-- EBOOK -->
-<div class="view" id="view-ebook">
-  <a class="back-link" onclick="showView('home')">← Back</a>
-  <section class="hero" style="padding-top:10px;">
-    <h1>📖 Ebook Builder</h1>
-    <div class="card">
-      <input id="ebookTitle" placeholder="Book Title"/>
-      <input id="ebookAuthor" placeholder="Author Name"/>
-      <textarea id="ebookContent" style="min-height:220px;" placeholder="Paste your content here..."></textarea>
-      <button onclick="generateEbookPDF()">📄 Download PDF</button>
-    </div>
-    <div class="result-area" id="ebook-result"></div>
-  </section>
+<div id="pdfResult"></div>
 </div>
 
 <script>
-  function toggleMenu() { document.getElementById('menuDropdown').classList.toggle('open'); }
-  function showView(id) {
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.getElementById('view-' + id).classList.add('active');
-    document.getElementById('menuDropdown').classList.remove('open');
-    window.scrollTo(0, 0);
-  }
-  // TTS - SIMPLE VERSION
-  async function generateSpeech() {
-    const text = document.getElementById('ttsText').value.trim();
-    const voice = document.getElementById('ttsVoice').value;
-    const btn = document.getElementById('ttsBtn');
-    const area = document.getElementById('tts-result');
-    
-    if (!text) { alert('Please type some text first.'); return; }
-    
-    btn.disabled = true; 
-    btn.textContent = 'Generating…';
-    area.innerHTML = '<p style="text-align:center;padding:20px;">Generating audio...</p>';
-    
-    try {
-      // Direct URL - no API call needed
-      const audioUrl = `https://api.ttsmp3.com/makemp3_new?voice=${voice}&text=${encodeURIComponent(text)}&source=aws_polly`;
-      
-      area.innerHTML = `
-        <div class="result-card">
-          <div class="result-title">🎧 Audio Ready</div>
-          <audio controls src="${audioUrl}"></audio>
-          <a class="download-btn" href="${audioUrl}" target="_blank" download="speech.mp3">⬇ Download MP3</a>
-        </div>`;
-    } catch (err) {
-      area.innerHTML = `<div class="error-card">⚠ ${err.message}</div>`;
-    } finally { 
-      btn.disabled = false; 
-      btn.textContent = '🎙️ Generate Audio'; 
-    }
-  }
+function home(){document.getElementById('tts').style.display='none';document.getElementById('ebook').style.display='none';}
+function showTTS(){document.getElementById('tts').style.display='block';document.getElementById('ebook').style.display='none';}
+function showEbook(){document.getElementById('ebook').style.display='block';document.getElementById('tts').style.display='none';}
 
-  // EBOOK PDF - MATCHES WORKING EXAMPLE EXACTLY
-  function generateEbookPDF() {
-    const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
-    const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
-    const content = document.getElementById('ebookContent').value.trim();
-    const area = document.getElementById('ebook-result');
-    
-    if (!content) { alert('Please paste some content.'); return; }
-    
-    try {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      
-      // Add title
-      doc.setFontSize(20);
-      doc.text(title, 105, 20, { align: 'center' });
-      
-      // Add author      doc.setFontSize(14);
-      doc.text('by ' + author, 105, 30, { align: 'center' });
-      
-      // Add content - EXACTLY LIKE THE WORKING EXAMPLE
-      doc.setFontSize(12);
-      const lines = doc.splitTextToSize(content, 180);
-      doc.text(lines, 15, 45);
-      
-      doc.save(title + ".pdf");
-      area.innerHTML = '<div class="result-card"><div class="result-title">✅ PDF Downloaded!</div></div>';
-    } catch (err) { 
-      area.innerHTML = `<div class="error-card">⚠ ${err.message}</div>`; 
-    }
-  }
+function genSpeech(){
+var text=document.getElementById('text').value;
+var voice=document.getElementById('voice').value;
+var result=document.getElementById('ttsResult');
+if(!text){alert('Type something!');return;}
+var url='https://api.ttsmp3.com/makemp3_new?voice='+voice+'&text='+encodeURIComponent(text)+'&source=aws_polly';
+result.innerHTML='<div class="result"><h3>Audio Ready</h3><audio controls src="'+url+'" style="width:100%;"></audio><br><a href="'+url+'" download="speech.mp3" style="color:#22d3a5;">⬇ Download MP3</a></div>';
+}
+
+function genPDF(){
+var title=document.getElementById('title').value||'My Book';
+var author=document.getElementById('author').value||'Unknown';
+var content=document.getElementById('content').value;
+var result=document.getElementById('pdfResult');
+if(!content){alert('Paste some content!');return;}
+try{
+var doc=new window.jspdf.jsPDF();
+doc.setFontSize(20);
+doc.text(title,105,20,{align:'center'});
+doc.setFontSize(14);
+doc.text('by '+author,105,30,{align:'center'});
+doc.setFontSize(12);
+var lines=doc.splitTextToSize(content,180);
+doc.text(lines,15,45);
+doc.save(title+'.pdf');
+result.innerHTML='<div class="result" style="color:#22d3a5;">✅ PDF Downloaded!</div>';
+}catch(err){
+result.innerHTML='<div class="result" style="color:#f87171;">⚠ '+err.message+'</div>';
+}
+}
 </script>
+
 </body>
 </html>

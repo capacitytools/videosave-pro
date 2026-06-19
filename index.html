@@ -620,47 +620,25 @@
   
   if (!text) { alert('Please type some text first.'); return; }
   
-  // Map voice names to language codes
+  // Map your dropdown voices to TTSMP3 voices
   const voiceMap = {
-    // US English
-    'Brian': 'en-US', 'Emma': 'en-US', 'Justin': 'en-US', 'Joey': 'en-US',
-    'Kendra': 'en-US', 'Kimberly': 'en-US', 'Matthew': 'en-US', 'Salli': 'en-US', 'Ivy': 'en-US',
-    // UK English
-    'Amy': 'en-GB', 'Arthur': 'en-GB', 'Geraint': 'en-GB',
-    // Australian
-    'Nicole': 'en-AU', 'Olivia': 'en-AU', 'Russell': 'en-AU',
-    // Indian
-    'Aditi': 'en-IN', 'Raveena': 'en-IN',
-    // Spanish
-    'Conchita': 'es-ES', 'Lucia': 'es-ES', 'Enrique': 'es-ES', 'Mia': 'es-MX',
-    'Penelope': 'es-US', 'Miguel': 'es-US', 'Lupe': 'es-US',
-    // French
-    'Celine': 'fr-FR', 'Lea': 'fr-FR', 'Mathieu': 'fr-FR', 'Chantal': 'fr-CA',
-    // German
-    'Hans': 'de-DE', 'Marlene': 'de-DE', 'Vicki': 'de-DE',
-    // Italian
-    'Bianca': 'it-IT', 'Carla': 'it-IT', 'Giorgio': 'it-IT',
-    // Portuguese
-    'Ines': 'pt-PT', 'Cristiano': 'pt-PT', 'Vitoria': 'pt-BR',
-    'Ricardo': 'pt-BR', 'Camila': 'pt-BR',
-    // Others
-    'Maxim': 'ru-RU', 'Tatyana': 'ru-RU',
-    'Mizuki': 'ja-JP', 'Takumi': 'ja-JP', 'Kazuha': 'ja-JP',
-    'Zhiyu': 'zh-CN',
-    'Seoyeon': 'ko-KR',
-    'Zeina': 'ar-SA',
-    'Lotte': 'nl-NL', 'Ruben': 'nl-NL', 'Laura': 'nl-NL',
-    'Astrid': 'sv-SE', 'Elin': 'sv-SE',
-    'Liv': 'no-NO', 'Ida': 'no-NO',
-    'Naja': 'da-DK', 'Mads': 'da-DK',
-    'Ewa': 'pl-PL', 'Maja': 'pl-PL', 'Jacek': 'pl-PL', 'Jan': 'pl-PL',
-    'Carmen': 'ro-RO',
-    'Gwyneth': 'cy-GB',
-    'Filiz': 'tr-TR',
-    'Dora': 'is-IS', 'Karl': 'is-IS'
+    'Brian': 'Brian', 'Emma': 'Emma', 'Justin': 'Justin', 'Joey': 'Joey',
+    'Kendra': 'Kendra', 'Kimberly': 'Kimberly', 'Matthew': 'Matthew', 
+    'Salli': 'Salli', 'Ivy': 'Ivy', 'Amy': 'Amy', 'Arthur': 'Arthur',
+    'Geraint': 'Geraint', 'Nicole': 'Nicole', 'Olivia': 'Olivia', 
+    'Russell': 'Russell', 'Aditi': 'Aditi', 'Raveena': 'Raveena',
+    'Conchita': 'Conchita', 'Lucia': 'Lucia', 'Enrique': 'Enrique',
+    'Mia': 'Mia', 'Penelope': 'Penelope', 'Miguel': 'Miguel', 'Lupe': 'Lupe',
+    'Celine': 'Celine', 'Lea': 'Lea', 'Mathieu': 'Mathieu', 'Chantal': 'Chantal',
+    'Hans': 'Hans', 'Marlene': 'Marlene', 'Vicki': 'Vicki',
+    'Bianca': 'Bianca', 'Carla': 'Carla', 'Giorgio': 'Giorgio',
+    'Ines': 'Ines', 'Cristiano': 'Cristiano', 'Vitoria': 'Vitoria',
+    'Ricardo': 'Ricardo', 'Camila': 'Camila', 'Maxim': 'Maxim', 
+    'Tatyana': 'Tatyana', 'Mizuki': 'Mizuki', 'Takumi': 'Takumi',
+    'Kazuha': 'Kazuha', 'Zhiyu': 'Zhiyu', 'Seoyeon': 'Seoyeon'
   };
   
-  const voice = voiceMap[voiceName] || 'en-US';
+  const voice = voiceMap[voiceName] || 'Matthew';
   
   btn.disabled = true; 
   btn.textContent = 'Generating…';

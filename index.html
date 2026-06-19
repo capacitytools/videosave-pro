@@ -620,95 +620,44 @@
   
   if (!text) { alert('Please type some text first.'); return; }
   
-  // Map your dropdown voices to TTSMP3 voices
+  // Map voice names
   const voiceMap = {
-    'Brian': 'Brian', 'Emma': 'Emma', 'Justin': 'Justin', 'Joey': 'Joey',
-    'Kendra': 'Kendra', 'Kimberly': 'Kimberly', 'Matthew': 'Matthew', 
-    'Salli': 'Salli', 'Ivy': 'Ivy', 'Amy': 'Amy', 'Arthur': 'Arthur',
-    'Geraint': 'Geraint', 'Nicole': 'Nicole', 'Olivia': 'Olivia', 
-    'Russell': 'Russell', 'Aditi': 'Aditi', 'Raveena': 'Raveena',
-    'Conchita': 'Conchita', 'Lucia': 'Lucia', 'Enrique': 'Enrique',
-    'Mia': 'Mia', 'Penelope': 'Penelope', 'Miguel': 'Miguel', 'Lupe': 'Lupe',
-    'Celine': 'Celine', 'Lea': 'Lea', 'Mathieu': 'Mathieu', 'Chantal': 'Chantal',
-    'Hans': 'Hans', 'Marlene': 'Marlene', 'Vicki': 'Vicki',
-    'Bianca': 'Bianca', 'Carla': 'Carla', 'Giorgio': 'Giorgio',
-    'Ines': 'Ines', 'Cristiano': 'Cristiano', 'Vitoria': 'Vitoria',
-    'Ricardo': 'Ricardo', 'Camila': 'Camila', 'Maxim': 'Maxim', 
-    'Tatyana': 'Tatyana', 'Mizuki': 'Mizuki', 'Takumi': 'Takumi',
-    'Kazuha': 'Kazuha', 'Zhiyu': 'Zhiyu', 'Seoyeon': 'Seoyeon'
+    'Matthew': 'Matthew', 'Joey': 'Joey', 'Justin': 'Justin',
+    'Brian': 'Brian', 'Amy': 'Amy', 'Emma': 'Emma',
+    'Salli': 'Salli', 'Joanna': 'Joanna', 'Ivy': 'Ivy',
+    'Kendra': 'Kendra', 'Kimberly': 'Kimberly',
+    'Arthur': 'Arthur', 'Nicole': 'Nicole', 'Russell': 'Russell',
+    'Olivia': 'Olivia', 'Aditi': 'Aditi', 'Raveena': 'Raveena',
+    'Conchita': 'Conchita', 'Enrique': 'Enrique',
+    'Celine': 'Celine', 'Mathieu': 'Mathieu',
+    'Hans': 'Hans', 'Marlene': 'Marlene',
+    'Carla': 'Carla', 'Giorgio': 'Giorgio',
+    'Vitoria': 'Vitoria', 'Ricardo': 'Ricardo',
+    'Mizuki': 'Mizuki', 'Seoyeon': 'Seoyeon',
+    'Zhiyu': 'Zhiyu'
   };
   
   const voice = voiceMap[voiceName] || 'Matthew';
   
   btn.disabled = true; 
   btn.textContent = 'Generating…';
-  area.innerHTML = `<div class="loader"><div class="spinner"></div><span>Generating audio…</span></div>`;
   
-  try {
-    const res = await fetch(`/.netlify/functions/speech?text=${encodeURIComponent(text)}&voice=${encodeURIComponent(voice)}`);
-    
-    if (!res.ok) throw new Error('Could not generate audio. Try again.');
-    
-    const blob = await res.blob();
-    const audioUrl = URL.createObjectURL(blob);
-    
+  // Direct TTSMP3 URL - works instantly!
+  const ttsUrl = `https://api.ttsmp3.com/makemp3_new?voice=${voice}&text=${encodeURIComponent(text)}&source=aws_polly`;
+  
+  setTimeout(() => {
     area.innerHTML = `
       <div class="result-card">
-        <div class="result-title">Audio ready — Voice: ${escHtml(voiceName)}</div>
-        <audio controls style="width:100%;margin-bottom:14px;" src="${audioUrl}"></audio>
-        <a class="btn-get" href="${audioUrl}" download="speech.mp3">↓ Download MP3</a>
-      </div>`;
-  } catch(err) {
-    area.innerHTML = `<div class="error-card">⚠ ${err.message}</div>`;
-  } finally { 
-    btn.disabled = false; 
-    btn.textContent = 'Generate Audio'; 
-  }
+        <div class="result-title">🎧 Audio Ready - ${escHtml(voiceName)}</div>
+        <audio controls style="width:100%;margin-bottom:14px;" src="${ttsUrl}"></audio>
+        <a class="btn-get" href="${ttsUrl}" target="_blank" download="speech.mp3">↓ Download MP3</a>
+      </div>
+    `;
+    btn.disabled = false;
+    btn.textContent = 'Generate Audio';
+  }, 800);
   }
   
-  /* ── VISION CHAT ── */
-  async function analyzeImage() {
-    const fileInput = document.getElementById('visionFile');
-    const prompt = document.getElementById('visionPrompt').value.trim();
-    const btn = document.getElementById('visionBtn');
-    const area = document.getElementById('vision-result');
-    if (!fileInput.files[0]) { alert('Please choose an image first.'); return; }
-    if (!prompt) { alert('Please type a question about the image.'); return; }
-    btn.disabled=true; btn.textContent='Analyzing…';
-    area.innerHTML=`<div class="loader"><div class="spinner"></div><span>Analyzing image…</span></div>`;
-    try {
-      const fd = new FormData();
-      fd.append('image', fileInput.files[0]);
-      fd.append('prompt', prompt);
-      const res = await fetch('/.netlify/functions/vision', { method:'POST', body:fd });
-      const data = await res.json();
-      if (!res.ok||data.success===false) throw new Error(data.message||data.error||'Could not analyze this image.');
-      const answer = data.answer||data.result||data.text||data.response||JSON.stringify(data);
-      area.innerHTML=`<div class="result-card"><div class="result-title">Analysis Result</div><p style="line-height:1.7;">${escHtml(answer)}</p></div>`;
-    } catch(err) {
-      area.innerHTML=`<div class="error-card">⚠ ${err.message}</div>`;
-    } finally { btn.disabled=false; btn.textContent='🔍 Analyze Image'; }
-  }
-
-  /* ── CINESEARCH ── */
-  async function searchMovies() {
-    const q = document.getElementById('movieQuery').value.trim();
-    const btn = document.getElementById('movieBtn');
-    const area = document.getElementById('movie-result');
-    if (!q) return;
-    btn.disabled=true; btn.textContent='Searching…';
-    area.innerHTML=`<div class="loader"><div class="spinner"></div><span>Searching…</span></div>`;
-    try {
-      const res = await fetch(`/api/movies-search?q=${encodeURIComponent(q)}`);
-      const data = await res.json();
-      const results = data.results||data.data||[];
-      if (!results.length) throw new Error('No results found for that search.');
-      area.innerHTML=`<div class="result-card"><div class="result-title">Results for "${escHtml(q)}"</div><div class="download-options">${results.map(r=>`<div class="download-option"><div class="option-info"><span class="option-label">${escHtml(r.name||r.title)}</span><span class="option-meta">${escHtml(r.year||r.type||'')}</span></div></div>`).join('')}</div></div>`;
-    } catch(err) {
-      area.innerHTML=`<div class="error-card">⚠ ${err.message}</div>`;
-    } finally { btn.disabled=false; btn.textContent='Search'; }
-  }
-
   /* ── NOVELSTER ── */
   async function searchNovel() {
     const q = document.getElementById('novelQuery').value.trim();

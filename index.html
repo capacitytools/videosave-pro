@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ToolVerse – 12 Free AI Tools in One Place</title>
+  <title>ToolVerse – Free AI Tools</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -13,189 +13,118 @@
       --bg: #0a0a0f; --surface: #13131a; --card: #1a1a26; --border: #2a2a3d;
       --accent: #7c5cfc; --accent2: #c084fc; --green: #22d3a5; --text: #e8e8f0; --muted: #7878a0; --radius: 14px;
     }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
-    nav { display: flex; align-items: center; gap: 14px; padding: 16px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(10,10,15,0.9); backdrop-filter: blur(12px); z-index: 200; }
-    .menu-btn { background: var(--card); border: 1px solid var(--border); width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text); font-size: 1.15rem; flex-shrink: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    nav { display: flex; align-items: center; gap: 14px; padding: 16px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(10,10,15,0.95); backdrop-filter: blur(12px); z-index: 200; }
+    .menu-btn { background: var(--card); border: 1px solid var(--border); width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text); font-size: 1.15rem; }
     .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; cursor: pointer; }
     .logo-dot { color: var(--accent); }
-    .logo-icon { width: 30px; height: 30px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+    .logo-icon { width: 30px; height: 30px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; }
     .menu-dropdown { position: absolute; top: 64px; left: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 8px; width: 240px; box-shadow: 0 16px 40px rgba(0,0,0,0.5); display: none; flex-direction: column; gap: 2px; max-height: 75vh; overflow-y: auto; z-index: 300; }
     .menu-dropdown.open { display: flex; }
-    .menu-dropdown a { padding: 11px 12px; border-radius: 9px; color: var(--text); text-decoration: none; font-size: 0.87rem; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .menu-dropdown a { padding: 11px 12px; border-radius: 9px; color: var(--text); text-decoration: none; font-size: 0.87rem; cursor: pointer; }
     .menu-dropdown a:hover { background: var(--surface); }
-    .menu-divider { height: 1px; background: var(--border); margin: 6px 4px; }
     .view { display: none; } .view.active { display: block; }
-    .hero { text-align: center; padding: 70px 20px 40px; position: relative; }
-    .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(124,92,252,0.12); border: 1px solid rgba(124,92,252,0.3); color: var(--accent2); font-size: 0.78rem; font-weight: 500; padding: 5px 14px; border-radius: 100px; margin-bottom: 24px; }
-    h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.15; margin-bottom: 16px; background: linear-gradient(135deg, #fff 40%, var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .subtitle { color: var(--muted); font-size: 1.02rem; max-width: 540px; margin: 0 auto 36px; line-height: 1.65; }
-    .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; max-width: 1000px; margin: 0 auto 60px; padding: 0 20px; }
-    .tool-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 20px; cursor: pointer; transition: transform .15s ease, border-color .2s ease; position: relative; overflow: hidden; }
-    .tool-card:hover { transform: translateY(-4px); border-color: var(--accent-color); }
-    .tool-card .tool-icon { font-size: 1.7rem; margin-bottom: 10px; }
-    .tool-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 0.98rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
-    .tool-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 0.85rem; text-decoration: none; cursor: pointer; margin-bottom: 18px; margin-left: 20px; }
-    .dl-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; max-width: 680px; margin: 0 auto 24px; }
+    .hero { text-align: center; padding: 60px 20px 30px; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; margin-bottom: 16px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 0.85rem; cursor: pointer; margin-bottom: 18px; margin-left: 20px; }
+    .dl-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; max-width: 680px; margin: 0 auto 24px; }
     .input-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
-    .url-input { flex: 1; background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 14px 18px; color: var(--text); font-size: 0.95rem; font-family: 'Inter', sans-serif; outline: none; }
+    .url-input { flex: 1; background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 14px 18px; color: var(--text); font-size: 0.95rem; font-family: inherit; outline: none; min-height: 48px; }
     .url-input:focus { border-color: var(--accent); }
-    textarea.url-input { resize: vertical; min-height: 100px; width: 100%; }
-    .btn-download { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; border-radius: var(--radius); padding: 14px 26px; font-size: 0.95rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    textarea.url-input { resize: vertical; min-height: 120px; width: 100%; }
+    .btn-download { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; border: none; border-radius: var(--radius); padding: 14px 26px; font-size: 0.95rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
     .btn-download:disabled { opacity: 0.5; cursor: not-allowed; }
     .result-area { max-width: 680px; margin: 0 auto 32px; padding: 0 20px; }
-    .result-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; animation: fadeUp 0.3s ease; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .result-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
     .result-title { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1rem; margin-bottom: 16px; color: var(--green); }
-    .download-option { display: flex; align-items: center; justify-content: space-between; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; gap: 12px; margin-bottom: 10px; }    .btn-get { background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 9px 20px; font-size: 0.83rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; }
-    .error-card { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); color: #f87171; border-radius: var(--radius); padding: 18px 22px; font-size: 0.9rem; }
+    .error-card { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); color: #f87171; border-radius: var(--radius); padding: 18px 22px; }
     .loader { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 28px; color: var(--muted); }
     .spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    footer { border-top: 1px solid var(--border); padding: 28px 32px; text-align: center; color: var(--muted); font-size: 0.82rem; margin-top: 40px; }
-    @media (max-width: 600px) { .input-row { flex-direction: column; } .btn-download { width: 100%; } }
+    footer { border-top: 1px solid var(--border); padding: 28px; text-align: center; color: var(--muted); font-size: 0.82rem; margin-top: 40px; }
   </style>
 </head>
 <body>
 
 <nav>
-  <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</div>
-  <div class="logo" onclick="showView('home')">
-    <div class="logo-icon">⬇</div> Tool<span class="logo-dot">Verse</span>
-  </div>
+  <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</div>  <div class="logo" onclick="showView('home')"><div class="logo-icon">⬇</div> Tool<span class="logo-dot">Verse</span></div>
 </nav>
 
 <div class="menu-dropdown" id="menuDropdown">
   <a onclick="showView('home')">🏠 Home</a>
-  <div class="menu-divider"></div>
-  <a onclick="showView('downloader')">📥 Universal Downloader</a>
-  <a onclick="showView('imagegen')">🎨 Image Generation</a>
-  <a onclick="showView('tts')">️ Speechster (TTS)</a>
-  <a onclick="showView('vision')">👁️ VisionChat</a>
-  <a onclick="showView('ebook')">📖 My Own Ebook</a>
+  <a onclick="showView('downloader')">📥 Downloader</a>
+  <a onclick="showView('imagegen')">🎨 Image Gen</a>
+  <a onclick="showView('tts')">🎙️ Speechster</a>
+  <a onclick="showView('ebook')">📖 Ebook Builder</a>
 </div>
 
-<!-- HOME VIEW -->
+<!-- HOME -->
 <div class="view active" id="view-home">
   <section class="hero">
-    <div class="badge">100% Free · No Login Required</div>
-    <h1>One Platform.<br>Endless Tools.</h1>
-    <p class="subtitle">Download videos, generate AI images, convert text to speech, and more — all free, all in one place.</p>
-  </section>
-  <div class="tools-grid">
-    <div class="tool-card" style="--accent-color:#22d3ee" onclick="showView('imagegen')"><div class="tool-icon"></div><h3>Image Generation</h3><p>Create AI images from text.</p></div>
-    <div class="tool-card" style="--accent-color:#8b5cf6" onclick="showView('tts')"><div class="tool-icon">🎙️</div><h3>Speechster</h3><p>Convert text into natural speech.</p></div>
-    <div class="tool-card" style="--accent-color:#f97316" onclick="showView('downloader')"><div class="tool-icon"></div><h3>Universal Downloader</h3><p>Download videos from any platform.</p></div>
-    <div class="tool-card" style="--accent-color:#d946ef" onclick="showView('vision')"><div class="tool-icon">👁️</div><h3>VisionChat</h3><p>Ask AI questions about any image.</p></div>
-    <div class="tool-card" style="--accent-color:#6366f1" onclick="showView('ebook')"><div class="tool-icon">📖</div><h3>My Own Ebook</h3><p>Turn your text into a PDF ebook.</p></div>
-  </div>
-</div>
-
-<!-- DOWNLOADER VIEW -->
-<div class="view" id="view-downloader">
-  <a class="back-link" onclick="showView('home')">← Back</a>
-  <section class="hero" style="padding-top:10px;">
-    <h1>Download Any Video</h1>
-    <div class="dl-card">      <div class="input-row">
-        <input class="url-input" id="videoUrl" type="url" placeholder="Paste video URL here…"/>
-        <button class="btn-download" id="dlBtn" onclick="startDownload()">Download</button>
-      </div>
-    </div>
-    <div class="result-area" id="result-area"></div>
+    <h1>ToolVerse</h1>
+    <p style="color:var(--muted);margin-bottom:30px;">Free AI Tools - No Login Required</p>
   </section>
 </div>
 
-<!-- IMAGE GEN VIEW -->
-<div class="view" id="view-imagegen">
-  <a class="back-link" onclick="showView('home')">← Back</a>
-  <section class="hero" style="padding-top:10px;">
-    <h1> AI Image Generation</h1>
-    <div class="dl-card">
-      <textarea id="imgPrompt" class="url-input" placeholder="Describe the image..."></textarea>
-      <button class="btn-download" id="imgBtn" onclick="generateImage()" style="width:100%;margin-top:12px;">Generate Image</button>
-    </div>
-    <div class="result-area" id="img-result"></div>
-  </section>
-</div>
-
-<!-- TTS VIEW -->
+<!-- TTS -->
 <div class="view" id="view-tts">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;">
-    <h1>🎙️ Speechster — Text to Speech</h1>
+    <h1>🎙️ Speechster</h1>
     <div class="dl-card">
-      <textarea id="ttsText" class="url-input" placeholder="Type the text you want converted to speech…"></textarea>
-      <div class="input-row" style="margin-top:12px;">
-        <select id="ttsVoice" class="url-input" style="flex:0 0 100%;">
-          <optgroup label="🇺🇸 English (US)">
-            <option value="Matthew">Matthew (Male)</option>
-            <option value="Joey">Joey (Male)</option>
-            <option value="Justin">Justin (Male)</option>
-            <option value="Joanna">Joanna (Female)</option>
-            <option value="Salli">Salli (Female)</option>
-            <option value="Kimberly">Kimberly (Female)</option>
-            <option value="Ivy">Ivy (Female)</option>
-          </optgroup>
-          <optgroup label="🇬🇧 English (UK)">
-            <option value="Brian">Brian (Male)</option>
-            <option value="Amy">Amy (Female)</option>
-            <option value="Emma">Emma (Female)</option>
-          </optgroup>
-          <optgroup label="🇦🇺 English (Australia)">
-            <option value="Russell">Russell (Male)</option>
-            <option value="Nicole">Nicole (Female)</option>
-          </optgroup>
-          <optgroup label="🌍 Other Languages">            <option value="Celine">French (Female)</option>
-            <option value="Mathieu">French (Male)</option>
-            <option value="Marlene">German (Female)</option>
-            <option value="Hans">German (Male)</option>
-            <option value="Conchita">Spanish (Female)</option>
-            <option value="Enrique">Spanish (Male)</option>
-            <option value="Carla">Italian (Female)</option>
-            <option value="Giorgio">Italian (Male)</option>
-            <option value="Vitoria">Portuguese (Female)</option>
-            <option value="Ricardo">Portuguese (Male)</option>
-            <option value="Mizuki">Japanese (Female)</option>
-            <option value="Seoyeon">Korean (Female)</option>
-            <option value="Aditi">Hindi (Female)</option>
-          </optgroup>
-        </select>
-      </div>
-      <button class="btn-download" id="ttsBtn" onclick="generateSpeech()" style="width:100%;margin-top:12px;">️ Generate Audio</button>
+      <textarea id="ttsText" class="url-input" placeholder="Type text here..."></textarea>
+      <select id="ttsVoice" class="url-input" style="margin-top:12px;">
+        <option value="Brian">Brian (Male - UK)</option>
+        <option value="Amy">Amy (Female - UK)</option>
+        <option value="Emma">Emma (Female - UK)</option>
+        <option value="Matthew">Matthew (Male - US)</option>
+        <option value="Joey">Joey (Male - US)</option>
+        <option value="Justin">Justin (Male - US)</option>
+        <option value="Joanna">Joanna (Female - US)</option>
+        <option value="Salli">Salli (Female - US)</option>
+        <option value="Kimberly">Kimberly (Female - US)</option>
+        <option value="Ivy">Ivy (Female - US)</option>
+        <option value="Russell">Russell (Male - AU)</option>
+        <option value="Nicole">Nicole (Female - AU)</option>
+        <option value="Aditi">Aditi (Female - India)</option>
+        <option value="Raveena">Raveena (Female - India)</option>
+        <option value="Celine">Celine (Female - French)</option>
+        <option value="Mathieu">Mathieu (Male - French)</option>
+        <option value="Marlene">Marlene (Female - German)</option>
+        <option value="Hans">Hans (Male - German)</option>
+        <option value="Conchita">Conchita (Female - Spanish)</option>
+        <option value="Enrique">Enrique (Male - Spanish)</option>
+        <option value="Carla">Carla (Female - Italian)</option>
+        <option value="Giorgio">Giorgio (Male - Italian)</option>
+        <option value="Vitoria">Vitoria (Female - Portuguese)</option>        <option value="Ricardo">Ricardo (Male - Portuguese)</option>
+        <option value="Mizuki">Mizuki (Female - Japanese)</option>
+        <option value="Seoyeon">Seoyeon (Female - Korean)</option>
+        <option value="Zhiyu">Zhiyu (Female - Chinese)</option>
+      </select>
+      <button class="btn-download" id="ttsBtn" onclick="generateSpeech()" style="width:100%;margin-top:12px;">🎙️ Generate Audio</button>
     </div>
     <div class="result-area" id="tts-result"></div>
   </section>
 </div>
 
-<!-- VISION VIEW -->
-<div class="view" id="view-vision">
-  <a class="back-link" onclick="showView('home')">← Back</a>
-  <section class="hero" style="padding-top:10px;">
-    <h1>👁️ VisionChat</h1>
-    <div class="dl-card">
-      <input type="file" id="visionFile" accept="image/*" class="url-input" style="margin-bottom:12px;"/>
-      <input type="text" id="visionPrompt" class="url-input" placeholder="Ask something about the image..." style="margin-bottom:12px;"/>
-      <button class="btn-download" id="visionBtn" onclick="analyzeImage()" style="width:100%;">Analyze Image</button>
-    </div>
-    <div class="result-area" id="vision-result"></div>
-  </section>
-</div>
-
-<!-- EBOOK VIEW -->
+<!-- EBOOK -->
 <div class="view" id="view-ebook">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;">
-    <h1>📖 My Own Ebook</h1>
+    <h1>📖 Ebook Builder</h1>
     <div class="dl-card">
       <input id="ebookTitle" class="url-input" placeholder="Book Title" style="margin-bottom:10px;"/>
       <input id="ebookAuthor" class="url-input" placeholder="Author Name" style="margin-bottom:10px;"/>
-      <textarea id="ebookContent" class="url-input" style="min-height:220px;" placeholder="Paste your full book content here…"></textarea>
-      <button class="btn-download" style="width:100%;margin-top:14px;" onclick="generateEbookPDF()">📖 Generate & Download PDF</button>
+      <textarea id="ebookContent" class="url-input" style="min-height:220px;" placeholder="Paste your content here..."></textarea>
+      <button class="btn-download" style="width:100%;margin-top:14px;" onclick="generateEbookPDF()">📄 Download PDF</button>
+      <button class="btn-download" style="width:100%;margin-top:10px;background:linear-gradient(135deg,#3b82f6,#2563eb);" onclick="generateEbookDOCX()">📝 Download DOCX</button>
+      <button class="btn-download" style="width:100%;margin-top:10px;background:linear-gradient(135deg,#10b981,#059669);" onclick="generateEbookTXT()">📋 Download TXT</button>
     </div>
     <div class="result-area" id="ebook-result"></div>
   </section>
 </div>
-<footer><p>© 2026 ToolVerse · 12 Free Tools in One Place</p></footer>
+
+<footer><p>© 2026 ToolVerse</p></footer>
 
 <script>
   function toggleMenu() { document.getElementById('menuDropdown').classList.toggle('open'); }
@@ -205,58 +134,9 @@
     document.getElementById('menuDropdown').classList.remove('open');
     window.scrollTo(0, 0);
   }
-  document.addEventListener('click', function (e) {
-    const dropdown = document.getElementById('menuDropdown');
-    const btn = document.getElementById('menuBtn');
-    if (dropdown.classList.contains('open') && !dropdown.contains(e.target) && e.target !== btn) {
-      dropdown.classList.remove('open');
-    }
-  });
   function escHtml(str) { return String(str).replace(/&/g,"&").replace(/</g,"<").replace(/>/g,">").replace(/"/g,"""); }
 
-  /* DOWNLOADER */
-  async function startDownload() {
-    const input = document.getElementById("videoUrl");
-    const btn = document.getElementById("dlBtn");
-    const area = document.getElementById("result-area");
-    const url = input.value.trim();
-    if (!url) { alert("Please enter a URL"); return; }
-    btn.disabled = true; btn.textContent = "Fetching…";
-    area.innerHTML = `<div class="loader"><div class="spinner"></div><span>Fetching...</span></div>`;
-    try {
-      const res = await fetch(`https://ahm7xmakki.com/api/alldl?url=${encodeURIComponent(url)}`);
-      const data = await res.json();
-      if (data.success === false || data.error) throw new Error(data.message || data.error || "Could not process.");
-      
-      const links = [];
-      if (Array.isArray(data.links)) data.links.forEach(l => links.push({ label: l.quality || "Download", url: l.url }));
-      if (data.url) links.push({ label: "Main Video", url: data.url });
-      
-      if (links.length === 0) throw new Error("No download links found.");
-      
-      area.innerHTML = `<div class="result-card"><div class="result-title">Download Ready</div>` + 
-        links.map(l => `<div class="download-option"><span>${escHtml(l.label)}</span><a class="btn-get" href="${escHtml(l.url)}" target="_blank" download>↓ Get</a></div>`).join('') + `</div>`;
-    } catch (err) {
-      area.innerHTML = `<div class="error-card">⚠ ${err.message}</div>`;
-    } finally { btn.disabled = false; btn.textContent = "Download"; }
-  }
-
-  /* IMAGE GEN */
-  async function generateImage() {
-    const prompt = document.getElementById('imgPrompt').value.trim();    const btn = document.getElementById('imgBtn');
-    const area = document.getElementById('img-result');
-    if (!prompt) { alert('Please describe an image.'); return; }
-    btn.disabled = true; btn.textContent = 'Generating…';
-    area.innerHTML = `<div class="loader"><div class="spinner"></div><span>Generating...</span></div>`;
-    try {
-      const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&nologo=true&model=flux`;
-      area.innerHTML = `<div class="result-card"><div class="result-title">Image Ready</div><img src="${imgUrl}" style="width:100%;border-radius:12px;margin-bottom:14px;"/><a class="btn-get" href="${imgUrl}" target="_blank" download>↓ Download Image</a></div>`;
-    } catch (err) {
-      area.innerHTML = `<div class="error-card"> ${err.message}</div>`;
-    } finally { btn.disabled = false; btn.textContent = 'Generate Image'; }
-  }
-
-  /* TTS - DIRECT BROWSER METHOD */
+  // TTS - FIXED VERSION
   async function generateSpeech() {
     const text = document.getElementById('ttsText').value.trim();
     const voiceName = document.getElementById('ttsVoice').value;
@@ -265,13 +145,12 @@
     
     if (!text) { alert('Please type some text first.'); return; }
     
-    btn.disabled = true; 
-    btn.textContent = 'Generating…';
-    area.innerHTML = `<div class="loader"><div class="spinner"></div><span>Generating audio...</span></div>`;
+    btn.disabled = true;     btn.textContent = 'Generating…';
+    area.innerHTML = '<div class="loader"><div class="spinner"></div><span>Generating audio...</span></div>';
     
     try {
-      // This API returns a JSON with a URL to the MP3
-      const res = await fetch(`https://api.ttsmp3.com/makemp3_new?voice=${voiceName}&text=${encodeURIComponent(text)}&source=aws_polly`);
+      const ttsUrl = `https://api.ttsmp3.com/makemp3_new?voice=${voiceName}&text=${encodeURIComponent(text)}&source=aws_polly`;
+      const res = await fetch(ttsUrl);
       const data = await res.json();
       
       if (data.status === 'success' && data.URL) {
@@ -279,10 +158,10 @@
           <div class="result-card">
             <div class="result-title">🎧 Audio Ready - ${escHtml(voiceName)}</div>
             <audio controls style="width:100%;margin-bottom:14px;" src="${data.URL}"></audio>
-            <a class="btn-get" href="${data.URL}" target="_blank" download="speech.mp3">↓ Download MP3</a>
+            <a class="btn-download" href="${data.URL}" target="_blank" download="speech.mp3" style="display:inline-block;text-decoration:none;">⬇ Download MP3</a>
           </div>`;
       } else {
-        throw new Error('Could not generate audio link.');
+        throw new Error('Could not generate audio. Try again.');
       }
     } catch (err) {
       area.innerHTML = `<div class="error-card">⚠ ${err.message}</div>`;
@@ -292,22 +171,7 @@
     }
   }
 
-  /* VISION */
-  async function analyzeImage() {
-    const file = document.getElementById('visionFile').files[0];
-    const prompt = document.getElementById('visionPrompt').value.trim();
-    const btn = document.getElementById('visionBtn');
-    const area = document.getElementById('vision-result');
-    if (!file || !prompt) { alert('Please upload an image and ask a question.'); return; }
-    btn.disabled = true; btn.textContent = 'Analyzing…';
-    area.innerHTML = `<div class="loader"><div class="spinner"></div><span>Analyzing...</span></div>`;
-    // Placeholder for Vision API - waiting for Gemini key
-    setTimeout(() => {
-      area.innerHTML = `<div class="result-card"><div class="result-title">Analysis Result</div><p>Vision analysis requires a backend API key. Please configure the Gemini API in the backend to enable this feature.</p></div>`;
-      btn.disabled = false; btn.textContent = 'Analyze Image';    }, 1000);
-  }
-
-  /* EBOOK */
+  // EBOOK PDF - FIXED VERSION
   function generateEbookPDF() {
     const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
     const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
@@ -320,10 +184,8 @@
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
       
-      // --- THIS WAS THE MISSING PART ---
       const pageWidth = doc.internal.pageSize.getWidth();
-      const maxWidth = pageWidth - 20; 
-      // ---------------------------------
+      const maxWidth = pageWidth - 30;
       
       doc.setFontSize(22); 
       doc.text(title, pageWidth / 2, 20, { align: 'center' });
@@ -332,15 +194,53 @@
       doc.text('by ' + author, pageWidth / 2, 30, { align: 'center' });
       
       doc.setFontSize(12);
-      const splitText = doc.splitTextToSize(content, maxWidth);
-      doc.text(splitText, 10, 45);
+      const splitText = doc.splitTextToSize(content, maxWidth);      doc.text(splitText, 15, 45);
       
       doc.save(`${title.replace(/[^a-z0-9]+/gi, '_')}.pdf`);
-      area.innerHTML = `<div class="result-card"><div class="result-title">✅ PDF Downloaded!</div></div>`;
+      area.innerHTML = '<div class="result-card"><div class="result-title">✅ PDF Downloaded!</div></div>';
     } catch (err) { 
       area.innerHTML = `<div class="error-card">⚠ ${err.message}</div>`; 
     }
   }
+
+  // EBOOK DOCX
+  function generateEbookDOCX() {
+    const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
+    const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
+    const content = document.getElementById('ebookContent').value.trim();
+    const area = document.getElementById('ebook-result');
+    
+    if (!content) { alert('Please paste some content.'); return; }
+    
+    const docxContent = `${title}\n\nby ${author}\n\n${content}`;
+    const blob = new Blob([docxContent], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${title.replace(/[^a-z0-9]+/gi, '_')}.docx`;
+    a.click();
+    URL.revokeObjectURL(url);
+    area.innerHTML = '<div class="result-card"><div class="result-title">✅ DOCX Downloaded!</div></div>';
+  }
+
+  // EBOOK TXT
+  function generateEbookTXT() {
+    const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
+    const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
+    const content = document.getElementById('ebookContent').value.trim();
+    const area = document.getElementById('ebook-result');
+    
+    if (!content) { alert('Please paste some content.'); return; }
+    
+    const txtContent = `${title}\n\nby ${author}\n\n${content}`;
+    const blob = new Blob([txtContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${title.replace(/[^a-z0-9]+/gi, '_')}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+    area.innerHTML = '<div class="result-card"><div class="result-title">✅ TXT Downloaded!</div></div>';
+  }
 </script>
-</body>
-</html>
+</body></html>

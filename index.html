@@ -262,22 +262,34 @@
     const voiceName = document.getElementById('ttsVoice').value;
     const btn = document.getElementById('ttsBtn');
     const area = document.getElementById('tts-result');
+    
     if (!text) { alert('Please type some text first.'); return; }
     
-    btn.disabled = true; btn.textContent = 'Generating…';
-    area.innerHTML = `<div class="loader"><div class="spinner"></div><span>Preparing audio...</span></div>`;
+    btn.disabled = true; 
+    btn.textContent = 'Generating…';
+    area.innerHTML = `<div class="loader"><div class="spinner"></div><span>Generating audio...</span></div>`;
     
-    const ttsUrl = `https://api.ttsmp3.com/makemp3_new?voice=${voiceName}&text=${encodeURIComponent(text)}&source=aws_polly`;
-    
-    setTimeout(() => {
-      area.innerHTML = `
-        <div class="result-card">
-          <div class="result-title"> Audio Ready - ${escHtml(voiceName)}</div>
-          <audio controls style="width:100%;margin-bottom:14px;" src="${ttsUrl}"></audio>
-          <a class="btn-get" href="${ttsUrl}" target="_blank" download="speech.mp3">↓ Download MP3</a>
-        </div>`;
-      btn.disabled = false; btn.textContent = '🎙️ Generate Audio';
-    }, 800);
+    try {
+      // This API returns a JSON with a URL to the MP3
+      const res = await fetch(`https://api.ttsmp3.com/makemp3_new?voice=${voiceName}&text=${encodeURIComponent(text)}&source=aws_polly`);
+      const data = await res.json();
+      
+      if (data.status === 'success' && data.URL) {
+        area.innerHTML = `
+          <div class="result-card">
+            <div class="result-title">🎧 Audio Ready - ${escHtml(voiceName)}</div>
+            <audio controls style="width:100%;margin-bottom:14px;" src="${data.URL}"></audio>
+            <a class="btn-get" href="${data.URL}" target="_blank" download="speech.mp3">↓ Download MP3</a>
+          </div>`;
+      } else {
+        throw new Error('Could not generate audio link.');
+      }
+    } catch (err) {
+      area.innerHTML = `<div class="error-card">⚠ ${err.message}</div>`;
+    } finally { 
+      btn.disabled = false; 
+      btn.textContent = '🎙️ Generate Audio'; 
+    }
   }
 
   /* VISION */
@@ -301,18 +313,33 @@
     const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
     const content = document.getElementById('ebookContent').value.trim();
     const area = document.getElementById('ebook-result');
+    
     if (!content) { alert('Please paste some content.'); return; }
+    
     try {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
-      doc.setFontSize(22); doc.text(title, 105, 20, { align: 'center' });
-      doc.setFontSize(14); doc.text('by ' + author, 105, 30, { align: 'center' });
+      
+      // --- THIS WAS THE MISSING PART ---
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const maxWidth = pageWidth - 20; 
+      // ---------------------------------
+      
+      doc.setFontSize(22); 
+      doc.text(title, pageWidth / 2, 20, { align: 'center' });
+      
+      doc.setFontSize(14); 
+      doc.text('by ' + author, pageWidth / 2, 30, { align: 'center' });
+      
       doc.setFontSize(12);
-      const splitText = doc.splitTextToSize(content, 180);
-      doc.text(splitText, 15, 45);
+      const splitText = doc.splitTextToSize(content, maxWidth);
+      doc.text(splitText, 10, 45);
+      
       doc.save(`${title.replace(/[^a-z0-9]+/gi, '_')}.pdf`);
-      area.innerHTML = `<div class="result-card"><div class="result-title">PDF Downloaded!</div></div>`;
-    } catch (err) { area.innerHTML = `<div class="error-card">⚠ Error generating PDF.</div>`; }
+      area.innerHTML = `<div class="result-card"><div class="result-title">✅ PDF Downloaded!</div></div>`;
+    } catch (err) { 
+      area.innerHTML = `<div class="error-card">⚠ ${err.message}</div>`; 
+    }
   }
 </script>
 </body>

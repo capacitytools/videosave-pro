@@ -1,233 +1,589 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolVerse – Ultimate AI Tools</title>
-    <style>
-        /* Base Reset & Typography */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: #f4f7f6; color: #333; line-height: 1.6; }
-        a { text-decoration: none; color: inherit; }
-        
-        /* Header & Navigation */
-        header { background: #1a1a2e; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .logo { font-size: 1.5rem; font-weight: bold; }
-        nav a { margin-left: 20px; color: #ddd; transition: color 0.3s; }
-        nav a:hover { color: #00d2ff; }
-
-        /* Hero Section */
-        .hero { text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
-
-        /* Featured Ebook Banner */
-        .featured-ebook { background: #fff3cd; border: 2px solid #ffc107; padding: 1.5rem; text-align: center; margin: 2rem auto; max-width: 1200px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .featured-ebook h3 { margin: 0 0 10px 0; color: #856404; }
-        .featured-ebook p { margin: 0 0 15px 0; color: #664d03; }
-        .btn-ebook { display: inline-block; padding: 10px 20px; background: #d32f2f; color: white; border-radius: 5px; font-weight: bold; transition: background 0.3s; }
-        .btn-ebook:hover { background: #b71c1c; }
-        .whatsapp-link { margin-left: 15px; color: #25D366; font-weight: bold; }
-
-        /* Tools Grid */
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .tool-card { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; text-align: center; }
-        .tool-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .tool-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
-        .tool-card h3 { margin: 0 0 10px 0; color: #2c3e50; }
-        .tool-card p { color: #666; font-size: 0.95rem; margin-bottom: 1.5rem; }
-        .btn { display: inline-block; padding: 10px 20px; background: #3498db; color: white; border-radius: 5px; font-weight: bold; transition: background 0.3s; border: none; cursor: pointer; }
-        .btn:hover { background: #2980b9; }
-
-        /* Tool Specific Sections (Hidden by default, shown via JS or anchors in a real app) */
-        .tool-section { display: none; background: white; padding: 2rem; border-radius: 10px; margin-top: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .tool-section:target { display: block; }
-        .back-btn { display: inline-block; margin-bottom: 1.5rem; color: #3498db; font-weight: bold; }
-        
-        /* Forms & Inputs */
-        select, input[type="text"], textarea { padding: 10px; border: 1px solid #ddd; border-radius: 5px; width: 100%; max-width: 300px; margin-bottom: 15px; font-size: 1rem; }
-        .radio-group label { margin-right: 15px; display: inline-block; margin-bottom: 10px; }
-        /* Footer */
-        footer { text-align: center; padding: 2rem; background: #1a1a2e; color: #aaa; margin-top: 4rem; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ToolVerse – Ultimate AI Tools</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', Arial, sans-serif; background: #000; color: #fff; min-height: 100vh; }
+    nav { display: flex; align-items: center; gap: 14px; padding: 16px 24px; border-bottom: 1px solid #1a1a1a; background: #0a0a0a; position: sticky; top: 0; z-index: 200; }
+    .menu-btn { background: #111; border: 1px solid #1a1a1a; width: 42px; height: 42px; border-radius: 12px; cursor: pointer; color: #fff; font-size: 1.2rem; }
+    .logo { font-weight: 700; font-size: 1.3rem; cursor: pointer; background: linear-gradient(135deg, #7c5cfc, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .menu-dropdown { position: absolute; top: 72px; left: 16px; background: #111; border: 1px solid #1a1a1a; border-radius: 16px; padding: 10px; width: 260px; display: none; flex-direction: column; gap: 4px; z-index: 300; max-height: 75vh; overflow-y: auto; }
+    .menu-dropdown.open { display: flex; }
+    .menu-dropdown a { padding: 12px 14px; border-radius: 10px; color: #fff; text-decoration: none; font-size: 0.9rem; cursor: pointer; }
+    .menu-dropdown a:hover { background: #0a0a0a; color: #ffd700; }
+    .view { display: none; } .view.active { display: block; }
+    .hero { text-align: center; padding: 60px 20px 30px; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 16px; background: linear-gradient(135deg, #fff, #ffd700, #7c5cfc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .back-link { display: inline-block; color: #888; font-size: 0.88rem; cursor: pointer; margin-bottom: 22px; margin-left: 20px; }
+    .card { background: #111; border: 1px solid #1a1a1a; border-radius: 20px; padding: 32px; max-width: 680px; margin: 0 auto 24px; }
+    textarea, input, select { width: 100%; background: #0a0a0a; border: 2px solid #1a1a1a; border-radius: 14px; padding: 14px 18px; color: #fff; font-size: 0.95rem; margin-bottom: 12px; outline: none; font-family: inherit; }
+    textarea { min-height: 120px; resize: vertical; }
+    textarea:focus, input:focus, select:focus { border-color: #7c5cfc; }
+    button { background: linear-gradient(135deg, #7c5cfc, #22d3a5); color: #fff; border: none; border-radius: 14px; padding: 15px 28px; font-size: 0.98rem; font-weight: 600; cursor: pointer; width: 100%; margin-top: 10px; transition: all 0.3s; }
+    button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(124,92,252,0.4); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .result-area { max-width: 680px; margin: 0 auto 32px; padding: 0 20px; }
+    .result-card { background: #111; border: 1px solid #1a1a1a; border-radius: 14px; padding: 24px; border-left: 4px solid #ffd700; }
+    .result-title { font-weight: 600; font-size: 1.05rem; margin-bottom: 16px; color: #22d3a5; }
+    .error-card { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.4); color: #f87171; border-radius: 14px; padding: 20px; border-left: 4px solid #ef4444; }
+    audio { width: 100%; margin-bottom: 14px; }
+    .btn-get { display: inline-block; background: linear-gradient(135deg, #7c5cfc, #22d3a5); color: #fff; padding: 10px 22px; border-radius: 10px; text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-right: 8px; margin-bottom: 8px; }
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; max-width: 1050px; margin: 0 auto 40px; padding: 0 20px; }
+    .tool-card { background: #111; border: 1px solid #1a1a1a; border-radius: 18px; padding: 26px 20px; cursor: pointer; transition: all 0.3s; }
+    .tool-card:hover { transform: translateY(-6px); border-color: #7c5cfc; box-shadow: 0 12px 40px rgba(124,92,252,0.2); }
+    .tool-icon { font-size: 2rem; margin-bottom: 12px; }
+    .tool-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .tool-card p { font-size: 0.82rem; color: #888; }
+    .featured-ebook { background: linear-gradient(135deg, #1a0a0a, #0a0a0a); border: 2px solid #ef4444; border-radius: 24px; padding: 40px 24px; max-width: 700px; margin: 40px auto; text-align: center; box-shadow: 0 0 50px rgba(239,68,68,0.2); }
+    .featured-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(239,68,68,0.2); color: #ef4444; padding: 6px 16px; border-radius: 100px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; }
+    .ebook-icon { font-size: 4rem; margin-bottom: 16px; }
+    .featured-ebook h2 { font-size: 1.8rem; margin-bottom: 16px; color: #fff; }
+    .featured-ebook p { color: #888; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+    .cta-button { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; padding: 16px 32px; border-radius: 14px; font-size: 1.1rem; font-weight: 700; text-decoration: none; display: inline-block; margin-top: 20px; box-shadow: 0 4px 20px rgba(239,68,68,0.4); }
+    .script-output { background: #0a0a0a; border: 1px solid #1a1a1a; border-radius: 12px; padding: 20px; margin: 16px 0; white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 0.95rem; line-height: 1.8; max-height: 500px; overflow-y: auto; }
+    .tab-container { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab-btn { flex: 1; background: #0a0a0a; border: 2px solid #1a1a1a; color: #888; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: 600; min-width: 100px; }    .tab-btn.active { border-color: #7c5cfc; color: #fff; background: rgba(124,92,252,0.1); }
+    .tab-content { display: none; } .tab-content.active { display: block; }
+    footer { border-top: 1px solid #1a1a1a; padding: 32px; text-align: center; color: #888; font-size: 0.85rem; margin-top: 50px; }
+  </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">☰ ToolVerse</div>
-        <nav>
-            <a href="#home">🏠 Home</a>
-            <a href="#tools">Tools</a>
-        </nav>
-    </header>
+<nav>
+  <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</div>
+  <div class="logo" onclick="showView('home')">Tool<span style="color:#ffd700">Verse</span></div>
+</nav>
 
-    <main id="home">
-        <section class="hero">
-            <h1>One Platform. 10 Powerful AI Tools.</h1>
-            <p>Download videos, generate AI images, create scripts, build resumes, and more — all free.</p>
-        </section>
+<div class="menu-dropdown" id="menuDropdown">
+  <a onclick="showView('home')">🏠 Home</a>
+  <a onclick="showView('prof')">🎓 Prof. Update (AskMeAnything)</a>
+  <a onclick="showView('downloader')">📥 Universal Downloader</a>
+  <a onclick="showView('imagegen')">🎨 Image Generation</a>
+  <a onclick="showView('tts')">🎙️ Speechster</a>
+  <a onclick="showView('vision')">👁️ VisionChat</a>
+  <a onclick="showView('ebook')">📖 Ebook Builder</a>
+  <a onclick="showView('script')">🎬 Video Script Generator</a>
+  <a onclick="showView('resume')">📝 Resume Builder</a>
+  <a onclick="showView('meme')">😂 Meme Generator</a>
+  <a onclick="showView('study')">📚 Study Summarizer</a>
+</div>
 
-        <div class="featured-ebook">
-            <h3>🔥 FEATURED EBOOK 📷</h3>
-            <p><strong>The AI Fashion Photography Kit</strong><br>
-            Master the prompt formulas behind 8K, DSLR-quality fashion imagery — no camera, no studio, no models required.</p>
-            <a href="https://selar.com/14711117ox" target="_blank" class="btn-ebook">📥 Get the Kit Now</a>
-            <a href="https://wa.link/tzxsay" target="_blank" class="whatsapp-link">WhatsApp: Click Here</a>
-        </div>
+<!-- HOME -->
+<div class="view active" id="view-home">
+  <section class="hero">
+    <h1>One Platform.<br>10 Powerful AI Tools.</h1>
+    <p style="color:#888;margin-bottom:40px;">Download videos, generate AI images, create scripts, build resumes, and more — all free.</p>
+  </section>
+  <div class="tools-grid">
+    <div class="tool-card" onclick="showView('prof')"><div class="tool-icon">🎓</div><h3>Prof. Update</h3><p>AI with 20 years experience.</p></div>
+    <div class="tool-card" onclick="showView('script')"><div class="tool-icon">🎬</div><h3>Video Script Gen</h3><p>AI scripts for YouTube, TikTok.</p></div>
+    <div class="tool-card" onclick="showView('resume')"><div class="tool-icon">📝</div><h3>Resume Builder</h3><p>Professional CVs in minutes.</p></div>
+    <div class="tool-card" onclick="showView('meme')"><div class="tool-icon">😂</div><h3>Meme Generator</h3><p>Create viral memes with AI.</p></div>
+    <div class="tool-card" onclick="showView('study')"><div class="tool-icon">📚</div><h3>Study Summarizer</h3><p>Upload PDFs & get notes.</p></div>
+    <div class="tool-card" onclick="showView('imagegen')"><div class="tool-icon">🎨</div><h3>Image Generation</h3><p>Ultra HD AI images.</p></div>
+    <div class="tool-card" onclick="showView('tts')"><div class="tool-icon">🎙️</div><h3>Speechster</h3><p>Listen, Download MP3, Clone.</p></div>
+    <div class="tool-card" onclick="showView('downloader')"><div class="tool-icon">📥</div><h3>Universal Downloader</h3><p>Download from any platform.</p></div>
+    <div class="tool-card" onclick="showView('vision')"><div class="tool-icon">👁️</div><h3>VisionChat</h3><p>Ask AI about any image.</p></div>
+    <div class="tool-card" onclick="showView('ebook')"><div class="tool-icon">📖</div><h3>Ebook Builder</h3><p>PDF, DOCX, Amazon KDP.</p></div>
+  </div>
+  <div class="featured-ebook">
+    <div class="featured-badge">🔥 FEATURED EBOOK</div>
+    <div class="ebook-icon">📷</div>
+    <h2>The AI Fashion Photography Kit</h2>
+    <p>Master the prompt formulas behind 8K, DSLR-quality fashion imagery — no camera, no studio, no models required.</p>
+    <a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a>    <p style="margin-top:16px;font-size:0.8rem;color:#888;">WhatsApp: <a href="https://wa.link/tzxsay" style="color:#22d3a5;">Click Here</a></p>
+  </div>
+</div>
 
-        <section id="tools" class="container">
-            <h2 style="text-align:center; margin-bottom: 2rem;">Explore Our Tools</h2>
-            <div class="tools-grid">
-                
-                <div class="tool-card">
-                    <div class="icon">🎓</div>
-                    <h3>Prof. Update</h3>
-                    <p>AI with 20 years experience. AskMeAnything.</p>
-                    <a href="#prof-update" class="btn">Ask Prof. Update</a>
-                </div>
+<!-- PROF. UPDATE -->
+<div class="view" id="view-prof">
+  <a class="back-link" onclick="showView('home')">← Back</a>
+  <section class="hero" style="padding-top:10px;"><h1>🎓 Prof. Update (AskMeAnything)</h1>
+    <div class="card">
+      <textarea id="profQuestion" style="min-height:150px;" placeholder="Ask Prof. Update anything..."></textarea>
+      <button id="profBtn" onclick="askProf()">🎓 Ask Prof. Update</button>
+    </div>
+    <div class="result-area" id="prof-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
+</div>
 
-                <div class="tool-card">
-                    <div class="icon">📥</div>
-                    <h3>Universal Downloader</h3>
-                    <p>Download from any platform.</p>
-                    <a href="#downloader" class="btn">Download</a>
-                </div>
+<!-- DOWNLOADER -->
+<div class="view" id="view-downloader">
+  <a class="back-link" onclick="showView('home')">← Back</a>
+  <section class="hero" style="padding-top:10px;"><h1>📥 Universal Downloader</h1>
+    <div class="card"><input id="videoUrl" type="url" placeholder="Paste video URL here…"/><button id="dlBtn" onclick="startDownload()">Download</button></div>
+    <div class="result-area" id="result-area"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
+</div>
 
-                <div class="tool-card">
-                    <div class="icon">🎨</div>
-                    <h3>Image Generation</h3>
-                    <p>Ultra HD AI images.</p>                    <a href="#image-gen" class="btn">Generate Image</a>
-                </div>
+<!-- IMAGE GEN -->
+<div class="view" id="view-imagegen">
+  <a class="back-link" onclick="showView('home')">← Back</a>
+  <section class="hero" style="padding-top:10px;"><h1>🎨 AI Image Generation (Ultra HD)</h1>
+    <div class="card"><textarea id="imgPrompt" placeholder="Describe the image..."></textarea><button id="imgBtn" onclick="generateImage()">Generate Image</button></div>
+    <div class="result-area" id="img-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
+</div>
 
-                <div class="tool-card">
-                    <div class="icon">🎙️</div>
-                    <h3>Speechster</h3>
-                    <p>Listen, Download MP3, Clone voices.</p>
-                    <a href="#speechster" class="btn">Listen Now</a>
-                </div>
+<!-- SPEECHSTER -->
+<div class="view" id="view-tts">
+  <a class="back-link" onclick="showView('home')">← Back</a>
+  <section class="hero" style="padding-top:10px;"><h1>🎙️ Speechster</h1>
+    <div class="card">
+      <div class="tab-container">
+        <div class="tab-btn active" onclick="switchTtsTab('listen', this)">1. Listen</div>
+        <div class="tab-btn" onclick="switchTtsTab('download', this)">2. Download MP3</div>
+        <div class="tab-btn" onclick="switchTtsTab('clone', this)">3. Voice Styles</div>
+      </div>
+      <textarea id="ttsText" placeholder="Type or paste your text here..." style="min-height:150px;"></textarea>
+      <div id="tts-tab-listen" class="tab-content active">
+        <select id="ttsVoiceListen">          <option value="en-US">English (US)</option><option value="en-GB">English (UK)</option>
+          <option value="en-AU">English (Australia)</option><option value="en-IN">English (India)</option>
+          <option value="es-ES">Spanish</option><option value="fr-FR">French</option>
+          <option value="de-DE">German</option><option value="it-IT">Italian</option>
+          <option value="pt-BR">Portuguese</option><option value="ru-RU">Russian</option>
+          <option value="ja-JP">Japanese</option><option value="ko-KR">Korean</option>
+          <option value="zh-CN">Chinese</option><option value="ar-SA">Arabic</option>
+          <option value="hi-IN">Hindi</option>
+        </select>
+        <button onclick="listenText()">🎧 Listen Now</button>
+        <div id="listen-player" style="margin-top:15px;"></div>
+      </div>
+      <div id="tts-tab-download" class="tab-content">
+        <select id="ttsVoiceDownload">
+          <option value="en-US">English (US)</option><option value="en-GB">English (UK)</option>
+          <option value="es-ES">Spanish</option><option value="fr-FR">French</option>
+          <option value="de-DE">German</option><option value="ja-JP">Japanese</option>
+        </select>
+        <button onclick="downloadText()">🎙️ Generate & Download MP3</button>
+        <div id="download-links" style="margin-top:15px;"></div>
+      </div>
+      <div id="tts-tab-clone" class="tab-content">
+        <select id="ttsVoiceClone">
+          <option value="en-US">Deep Male Narrator (US)</option>
+          <option value="en-GB">Sophisticated British Male</option>
+          <option value="en-AU">Friendly Australian Female</option>
+          <option value="en-IN">Professional Indian Female</option>
+          <option value="fr-FR">Elegant French Female</option>
+          <option value="de-DE">Strong German Male</option>
+          <option value="ja-JP">Soft Japanese Female</option>
+        </select>
+        <button onclick="cloneText()">🎭 Generate with Voice Style</button>
+        <div id="clone-player" style="margin-top:15px;"></div>
+      </div>
+    </div>
+    <div class="result-area" id="tts-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
+</div>
 
-                <div class="tool-card">
-                    <div class="icon">👁️</div>
-                    <h3>VisionChat</h3>
-                    <p>Ask AI about any image.</p>
-                    <a href="#visionchat" class="btn">Analyze Image</a>
-                </div>
+<!-- VISION -->
+<div class="view" id="view-vision">
+  <a class="back-link" onclick="showView('home')">← Back</a>
+  <section class="hero" style="padding-top:10px;"><h1>👁️ VisionChat</h1>
+    <div class="card"><input type="file" id="visionFile" accept="image/*"/><input type="text" id="visionPrompt" placeholder="Ask something about the image..."/><button id="visionBtn" onclick="analyzeImage()">Analyze Image</button></div>
+    <div class="result-area" id="vision-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
+</div>
+<!-- EBOOK -->
+<div class="view" id="view-ebook">
+  <a class="back-link" onclick="showView('home')">← Back</a>
+  <section class="hero" style="padding-top:10px;"><h1>📖 Ebook Builder</h1>
+    <div class="card">
+      <input id="ebookTitle" placeholder="Book Title"/>
+      <input id="ebookAuthor" placeholder="Author Name"/>
+      <textarea id="ebookContent" style="min-height:220px;" placeholder="Paste your content here..."></textarea>
+      <button onclick="generateEbookPDF()">📄 Download PDF</button>
+      <button onclick="generateEbookKDP()" style="background:linear-gradient(135deg,#f59e0b,#d97706);">📚 Amazon KDP Format</button>
+    </div>
+    <div class="result-area" id="ebook-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
+</div>
 
-                <div class="tool-card">
-                    <div class="icon">📖</div>
-                    <h3>Ebook Builder</h3>
-                    <p>PDF, DOCX, Amazon KDP formats.</p>
-                    <a href="#ebook" class="btn">Build Ebook</a>
-                </div>
+<!-- SCRIPT -->
+<div class="view" id="view-script">
+  <a class="back-link" onclick="showView('home')">← Back</a>
+  <section class="hero" style="padding-top:10px;"><h1>🎬 AI Video Script Generator</h1>
+    <div class="card">
+      <input id="scriptTopic" placeholder="Enter your video topic"/>
+      <select id="scriptPlatform"><option value="YouTube">YouTube (5-10 min)</option><option value="TikTok">TikTok (30-60 sec)</option><option value="Instagram Reels">Instagram Reels</option><option value="YouTube Shorts">YouTube Shorts</option></select>
+      <select id="scriptTone"><option value="Professional and engaging">Professional</option><option value="Casual and fun">Casual & Fun</option><option value="Educational and informative">Educational</option><option value="Motivational and inspiring">Motivational</option></select>
+      <button id="scriptBtn" onclick="generateScript()">🎬 Generate Script</button>
+    </div>
+    <div class="result-area" id="script-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
+</div>
 
-                <div class="tool-card">
-                    <div class="icon">🎬</div>
-                    <h3>Video Script Generator</h3>
-                    <p>AI scripts for YouTube, TikTok, Reels.</p>
-                    <a href="#script" class="btn">Generate Script</a>
-                </div>
+<!-- RESUME -->
+<div class="view" id="view-resume">
+  <a class="back-link" onclick="showView('home')">← Back</a>
+  <section class="hero" style="padding-top:10px;"><h1>📝 AI Resume Builder</h1>
+    <div class="card">
+      <input id="resumeName" placeholder="Full Name"/><input id="resumeJob" placeholder="Job Title"/><input id="resumeEmail" placeholder="Email"/><input id="resumePhone" placeholder="Phone"/>
+      <textarea id="resumeSummary" placeholder="Professional Summary"></textarea>
+      <textarea id="resumeExperience" placeholder="Work Experience"></textarea>
+      <textarea id="resumeEducation" placeholder="Education"></textarea>
+      <input id="resumeSkills" placeholder="Skills (comma-separated)"/>
+      <button onclick="generateResume()">📝 Generate Resume PDF</button>
+    </div>
+    <div class="result-area" id="resume-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
+</div>
 
-                <div class="tool-card">
-                    <div class="icon">📝</div>
-                    <h3>Resume Builder</h3>
-                    <p>Professional CVs in minutes.</p>
-                    <a href="#resume" class="btn">Generate Resume</a>
-                </div>
+<!-- MEME -->
+<div class="view" id="view-meme">  <a class="back-link" onclick="showView('home')">← Back</a>
+  <section class="hero" style="padding-top:10px;"><h1>😂 AI Meme Generator</h1>
+    <div class="card">
+      <input type="file" id="memeImage" accept="image/*" onchange="loadMemeImage(event)"/>
+      <canvas id="memeCanvas" width="600" height="600"></canvas>
+      <input id="memeTop" placeholder="Top Text" oninput="updateMeme()"/>
+      <input id="memeBottom" placeholder="Bottom Text" oninput="updateMeme()"/>
+      <button onclick="aiSuggestMeme()">🤖 AI Suggest Caption</button>
+      <button onclick="downloadMeme()">⬇ Download Meme</button>
+    </div>
+    <div class="result-area" id="meme-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
+</div>
 
-                <div class="tool-card">
-                    <div class="icon">😂</div>
-                    <h3>Meme Generator</h3>
-                    <p>Create viral memes with AI.</p>
-                    <a href="#meme" class="btn">Create Meme</a>
-                </div>
+<!-- STUDY -->
+<div class="view" id="view-study">
+  <a class="back-link" onclick="showView('home')">← Back</a>
+  <section class="hero" style="padding-top:10px;"><h1>📚 AI Study Notes Summarizer</h1>
+    <div class="card">
+      <input type="file" id="studyFile" accept=".pdf,.txt,.doc,.docx" onchange="handleStudyFile(event)"/>
+      <textarea id="studyText" style="min-height:200px;" placeholder="Paste text here OR upload a PDF/DOC file above..."></textarea>
+      <select id="studyFormat"><option value="summary">Quick Summary</option><option value="bullets">Key Points</option><option value="flashcards">Flashcards</option><option value="quiz">Quiz Questions</option></select>
+      <button id="studyBtn" onclick="summarizeStudy()">📚 Generate Notes</button>
+    </div>
+    <div class="result-area" id="study-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
+</div>
 
-                <div class="tool-card">
-                    <div class="icon">📚</div>
-                    <h3>Study Summarizer</h3>
-                    <p>Upload PDFs & get notes.</p>
-                    <a href="#study" class="btn">Generate Notes</a>                </div>
+<footer><p>© 2026 ToolVerse · 10 Free Tools · Powered by CapacityTools</p></footer>
 
-            </div>
-        </section>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-        <!-- Tool Specific Interactive Sections -->
-        <section class="container">
-            
-            <div id="speechster" class="tool-section">
-                <a href="#tools" class="back-btn">← Back to Tools</a>
-                <h2>🎙️ Speechster</h2>
-                <p>1. Listen (Screen-Off) 2. Download MP3 3. Voice Styles</p>
-                <label>Select a voice style to mimic:</label><br>
-                <select>
-                    <option>Deep Male Narrator (US)</option>
-                    <option>Sophisticated British Male</option>
-                    <option>Friendly Australian Male</option>
-                    <option>Professional Indian Female</option>
-                    <option>Warm Latin American Male</option>
-                    <option>Elegant French Female</option>
-                    <option>Strong German Male</option>
-                    <option>Soft Japanese Female</option>
-                    <option>Young American Male</option>
-                    <option>Professional American Female</option>
-                    <option>Classic British Female</option>
-                    <option>Modern British Female</option>
-                    <option>Friendly American Female</option>
-                    <option>Cute Child Voice</option>
-                </select>
-                <br><br>
-                <button class="btn">🎧 Listen Now</button>
-                <button class="btn">🎭 Generate & Download MP3</button>
-            </div>
+  function toggleMenu() { document.getElementById('menuDropdown').classList.toggle('open'); }
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + id).classList.add('active');
+    document.getElementById('menuDropdown').classList.remove('open');
+    window.scrollTo(0, 0);
+  }
+  document.addEventListener('click', function (e) {
+    const dropdown = document.getElementById('menuDropdown');
+    const btn = document.getElementById('menuBtn');
+    if (dropdown.classList.contains('open') && !dropdown.contains(e.target) && e.target !== btn) { dropdown.classList.remove('open'); }
+  });
 
-            <div id="script" class="tool-section">
-                <a href="#tools" class="back-btn">← Back to Tools</a>
-                <h2>🎬 AI Video Script Generator</h2>
-                <label>Platform:</label><br>
-                <select>
-                    <option>YouTube (5-10 min)</option>
-                    <option>TikTok (30-60 sec)</option>
-                    <option>Instagram Reels</option>
-                    <option>YouTube Shorts</option>
-                </select>
-                <br>
-                <label>Tone:</label><br>
-                <select>
-                    <option>Professional</option>
-                    <option>Casual & Fun</option>
-                    <option>Educational</option>                    <option>Motivational</option>
-                </select>
-                <br><br>
-                <button class="btn">Generate Script</button>
-            </div>
+  function switchTtsTab(tab, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tts-tab-' + tab).classList.add('active');
+  }
 
-            <div id="study" class="tool-section">
-                <a href="#tools" class="back-btn">← Back to Tools</a>
-                <h2>📚 AI Study Notes Summarizer</h2>
-                <div class="radio-group">
-                    <label><input type="radio" name="study-type" checked> Quick Summary</label>
-                    <label><input type="radio" name="study-type"> Key Points</label>
-                    <label><input type="radio" name="study-type"> Flashcards</label>
-                    <label><input type="radio" name="study-type"> Quiz Questions</label>
-                </div>
-                <br>
-                <button class="btn">📚 Generate Notes</button>
-            </div>
+  function chunkText(text, maxLen = 200) {
+    const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text];
+    const chunks = []; let current = '';
+    for (const s of sentences) {
+      if ((current + s).length <= maxLen) current += s;
+      else { if (current) chunks.push(current.trim()); current = s; }
+    }
+    if (current) chunks.push(current.trim());
+    return chunks;
+  }
 
-            <div id="ebook" class="tool-section">
-                <a href="#tools" class="back-btn">← Back to Tools</a>
-                <h2>📖 Ebook Builder</h2>
-                <p>Export your content in multiple formats:</p>
-                <button class="btn">📄 Download PDF</button>
-                <button class="btn">📝 Download DOCX</button>
-                <button class="btn">📚 Amazon KDP Format</button>
-            </div>
+  function getTtsUrl(text, lang) {
+    return `https://corsproxy.io/?${encodeURIComponent(`https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${text}`)}`;
+  }
 
-        </section>
-    </main>
+  function listenText() {
+    const text = document.getElementById('ttsText').value.trim();
+    const lang = document.getElementById('ttsVoiceListen').value;
+    const player = document.getElementById('listen-player');
+    if (!text) { alert('Please enter text.'); return; }
+    const chunks = chunkText(text);
+    player.innerHTML = '<p style="color:#888;">Loading audio...</p>';
+    player.innerHTML = '<audio id="tts-audio" controls autoplay style="width:100%;"></audio>';
+    const audio = document.getElementById('tts-audio');
+    let chunkIndex = 0;
+    function playNext() {
+      if (chunkIndex < chunks.length) {
+        audio.src = getTtsUrl(chunks[chunkIndex], lang);
+        audio.onended = () => { chunkIndex++; playNext(); };
+        audio.onerror = () => { chunkIndex++; playNext(); };
+        audio.play().catch(e => console.log('Autoplay blocked'));
+      } else { player.innerHTML += '<p style="color:#22d3a5;margin-top:10px;">✅ Finished!</p>'; }
+    }
+    playNext();
+  }
 
-    <footer>
-        <p>© 2026 ToolVerse · 10 Free Tools · Powered by CapacityTools</p>
-    </footer>
+  function downloadText() {
+    const text = document.getElementById('ttsText').value.trim();
+    const lang = document.getElementById('ttsVoiceDownload').value;
+    const container = document.getElementById('download-links');
+    if (!text) { alert('Please enter text.'); return; }
+    const chunks = chunkText(text);
+    container.innerHTML = '<p style="color:#888;">Generating download links...</p>';
+    let html = '<div class="result-card"><div class="result-title">⬇ Download MP3</div>';
+    chunks.forEach((chunk, i) => { html += `<a class="btn-get" href="${getTtsUrl(chunk, lang)}" target="_blank" download="speech_part_${i+1}.mp3">⬇ Part ${i+1}</a>`; });    html += '</div>';
+    container.innerHTML = html;
+  }
 
-</body>
-</html>
+  function cloneText() {
+    const text = document.getElementById('ttsText').value.trim();
+    const lang = document.getElementById('ttsVoiceClone').value;
+    const player = document.getElementById('clone-player');
+    if (!text) { alert('Please enter text.'); return; }
+    const chunks = chunkText(text);
+    player.innerHTML = '<p style="color:#888;">Generating with voice style...</p>';
+    player.innerHTML = '<audio id="clone-audio" controls autoplay style="width:100%;"></audio>';
+    const audio = document.getElementById('clone-audio');
+    let chunkIndex = 0;
+    function playNext() {
+      if (chunkIndex < chunks.length) {
+        audio.src = getTtsUrl(chunks[chunkIndex], lang);
+        audio.onended = () => { chunkIndex++; playNext(); };
+        audio.play().catch(e => console.log('Autoplay blocked'));
+      } else { player.innerHTML += '<p style="color:#22d3a5;margin-top:10px;">✅ Finished!</p>'; }
+    }
+    playNext();
+  }
+
+  async function startDownload() {
+    const url = document.getElementById("videoUrl").value.trim();
+    const btn = document.getElementById("dlBtn");
+    const area = document.getElementById("result-area");
+    if (!url) { alert("Please enter a URL"); return; }
+    btn.disabled = true; btn.textContent = "Fetching…";
+    area.innerHTML = '<div class="result-card">⏳ Fetching...</div>';
+    try {
+      const res = await fetch('https://api.cobalt.tools/api/json', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: url, vCodec: 'h264', vQuality: '720', aFormat: 'mp3', isAudioOnly: false })
+      });
+      const data = await res.json();
+      if (data.status === 'error' || data.status === 'rate-limit') throw new Error(data.text || "Could not process.");
+      if (data.url) { area.innerHTML = `<div class="result-card"><div class="result-title">✅ Download Ready</div><a class="btn-get" href="${data.url}" target="_blank">⬇ Download File</a></div>`; }
+      else { throw new Error("No download link found."); }
+    } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
+    finally { btn.disabled = false; btn.textContent = "Download"; }
+  }
+
+  function generateImage() {
+    const prompt = document.getElementById('imgPrompt').value.trim();
+    const btn = document.getElementById('imgBtn');
+    const area = document.getElementById('img-result');
+    if (!prompt) { alert('Please describe an image.'); return; }    btn.disabled = true; btn.textContent = 'Generating…';
+    area.innerHTML = '<div class="result-card">⏳ Generating Ultra HD image...</div>';
+    const imgUrl = 'https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt + ', 8k resolution, highly detailed, professional photography, masterpiece')+'?width=1024&height=1024&model=flux&nologo=true&seed='+Math.floor(Math.random()*10000);
+    setTimeout(() => {
+      area.innerHTML = '<div class="result-card"><div class="result-title">🎨 Image Ready</div><img src="'+imgUrl+'" style="width:100%;border-radius:12px;margin-bottom:14px;"/><a class="btn-get" href="'+imgUrl+'" target="_blank">⬇ Download Image</a></div>';
+      btn.disabled = false; btn.textContent = 'Generate Image';
+    }, 1500);
+  }
+
+  async function askProf() {
+    const q = document.getElementById('profQuestion').value.trim();
+    const btn = document.getElementById('profBtn');
+    const area = document.getElementById('prof-result');
+    if (!q) { alert('Please ask a question.'); return; }
+    btn.disabled = true; btn.textContent = 'Thinking…';
+    area.innerHTML = '<div class="result-card">⏳ Prof. Update is reasoning...</div>';
+    const prompt = `You are Prof. Update, an AI with 20 years of real-world experience. You speak with deep human emotion and strong hooks. Answer this: "${q}"`;
+    try {
+      const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent(prompt));
+      const answer = await res.text();
+      area.innerHTML = `<div class="result-card"><div class="result-title">🎓 Prof. Update Says:</div><div class="script-output">${answer}</div></div>`;
+    } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
+    finally { btn.disabled = false; btn.textContent = '🎓 Ask Prof. Update'; }
+  }
+
+  async function handleStudyFile(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const textarea = document.getElementById('studyText');
+    textarea.value = 'Reading file...';
+    if (file.type === 'application/pdf') {
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+        let fullText = '';
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const textContent = await page.getTextContent();
+          fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
+        }
+        textarea.value = fullText;
+      } catch (err) { textarea.value = 'Error reading PDF: ' + err.message; }
+    } else {
+      const reader = new FileReader();
+      reader.onload = e => textarea.value = e.target.result;
+      reader.readAsText(file);
+    }
+  }
+
+  async function summarizeStudy() {    const text = document.getElementById('studyText').value.trim();
+    const format = document.getElementById('studyFormat').value;
+    const btn = document.getElementById('studyBtn');
+    const area = document.getElementById('study-result');
+    if (!text) { alert('Please paste text or upload a file.'); return; }
+    btn.disabled = true; btn.textContent = 'Summarizing…';
+    area.innerHTML = '<div class="result-card">⏳ AI is analyzing...</div>';
+    let prompt = '';
+    if (format === 'summary') prompt = `Summarize this concisely:\n\n${text}`;
+    else if (format === 'bullets') prompt = `Extract KEY POINTS as bullets:\n\n${text}`;
+    else if (format === 'flashcards') prompt = `Create 10 flashcards (Q: / A: format):\n\n${text}`;
+    else if (format === 'quiz') prompt = `Create 10 MCQs:\n\n${text}`;
+    try {
+      const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent(prompt));
+      const summary = await res.text();
+      area.innerHTML = `<div class="result-card"><div class="result-title">📚 Study Notes</div><div class="script-output">${summary}</div></div>`;
+    } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
+    finally { btn.disabled = false; btn.textContent = '📚 Generate Notes'; }
+  }
+
+  async function analyzeImage() {
+    const file = document.getElementById('visionFile').files[0];
+    const prompt = document.getElementById('visionPrompt').value.trim();
+    const btn = document.getElementById('visionBtn');
+    const area = document.getElementById('vision-result');
+    if (!file || !prompt) { alert('Please upload an image and ask a question.'); return; }
+    btn.disabled = true; btn.textContent = 'Analyzing…';
+    area.innerHTML = '<div class="result-card">⏳ Analyzing...</div>';
+    setTimeout(() => {
+      area.innerHTML = '<div class="result-card"><div class="result-title">👁️ Analysis</div><p>For detailed AI vision, integrate Gemini API.</p></div>';
+      btn.disabled = false; btn.textContent = 'Analyze Image';
+    }, 1500);
+  }
+
+  function generateEbookPDF() {
+    const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
+    const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
+    const content = document.getElementById('ebookContent').value.trim();
+    const area = document.getElementById('ebook-result');
+    if (!content) { alert('Please paste content.'); return; }
+    try {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.setFontSize(20); doc.text(title, 105, 20, { align: 'center' });
+      doc.setFontSize(14); doc.text('by ' + author, 105, 30, { align: 'center' });
+      doc.setFontSize(12);
+      const lines = doc.splitTextToSize(content, 180);
+      doc.text(lines, 15, 45);
+      doc.save(title + ".pdf");
+      area.innerHTML = '<div class="result-card"><div class="result-title">✅ PDF Downloaded!</div></div>';    } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
+  }
+
+  function generateEbookKDP() {
+    const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
+    const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
+    const content = document.getElementById('ebookContent').value.trim();
+    if (!content) { alert('Please paste content.'); return; }
+    const kdp = `${title}\n\nBy ${author}\n\n${content}\n\n---\nCopyright © ${new Date().getFullYear()} ${author}`;
+    const blob = new Blob([kdp], { type: 'text/plain' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = title+'_KDP.txt'; a.click();
+  }
+
+  async function generateScript() {
+    const topic = document.getElementById('scriptTopic').value.trim();
+    const platform = document.getElementById('scriptPlatform').value;
+    const tone = document.getElementById('scriptTone').value;
+    const btn = document.getElementById('scriptBtn');
+    const area = document.getElementById('script-result');
+    if (!topic) { alert('Please enter a topic.'); return; }
+    btn.disabled = true; btn.textContent = 'Generating…';
+    area.innerHTML = '<div class="result-card">⏳ Writing...</div>';
+    const prompt = `You are an expert creator with 10 years experience. Write a ${tone} ${platform} script about "${topic}". Structure: HOOK, INTRODUCTION, MAIN CONTENT (3-5 points), CALL TO ACTION, HASHTAGS. Write in plain text, no markdown, sound human.`;
+    try {
+      const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent(prompt));
+      const script = await res.text();
+      area.innerHTML = `<div class="result-card"><div class="result-title">🎬 Script</div><div class="script-output">${script}</div></div>`;
+    } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
+    finally { btn.disabled = false; btn.textContent = '🎬 Generate Script'; }
+  }
+
+  function generateResume() {
+    const name = document.getElementById('resumeName').value.trim() || 'Name';
+    const job = document.getElementById('resumeJob').value.trim() || 'Job';
+    const email = document.getElementById('resumeEmail').value.trim();
+    const phone = document.getElementById('resumePhone').value.trim();
+    const summary = document.getElementById('resumeSummary').value.trim();
+    const exp = document.getElementById('resumeExperience').value.trim();
+    const edu = document.getElementById('resumeEducation').value.trim();
+    const skills = document.getElementById('resumeSkills').value.trim();
+    const area = document.getElementById('resume-result');
+    try {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.setFillColor(124, 92, 252); doc.rect(0, 0, 210, 40, 'F');
+      doc.setTextColor(255,255,255); doc.setFontSize(24); doc.text(name, 105, 20, {align:'center'});
+      doc.setFontSize(14); doc.text(job, 105, 30, {align:'center'});
+      doc.setTextColor(0,0,0); let y = 50;
+      if (email) { doc.setFontSize(10); doc.text(`${email} | ${phone}`, 105, y, {align:'center'}); y+=15; }
+      const addSection = (title, text) => {        if (!text) return;
+        doc.setFontSize(14); doc.setTextColor(124,92,252); doc.text(title, 15, y); y+=8;
+        doc.setFontSize(11); doc.setTextColor(0,0,0);
+        const lines = doc.splitTextToSize(text, 180); doc.text(lines, 15, y); y += lines.length*6+10;
+      };
+      addSection('SUMMARY', summary); addSection('EXPERIENCE', exp); addSection('EDUCATION', edu); addSection('SKILLS', skills);
+      doc.save(name.replace(/\s+/g,'_')+'_Resume.pdf');
+      area.innerHTML = '<div class="result-card"><div class="result-title">✅ Resume Downloaded!</div></div>';
+    } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
+  }
+
+  let memeImg = null;
+  function loadMemeImage(event) {
+    const file = event.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() { memeImg = img; updateMeme(); };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+  function updateMeme() {
+    if (!memeImg) return;
+    const canvas = document.getElementById('memeCanvas'); const ctx = canvas.getContext('2d');
+    ctx.drawImage(memeImg, 0, 0, 600, 600);
+    ctx.font = 'bold 40px Impact'; ctx.fillStyle = 'white'; ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.textAlign = 'center';
+    const top = document.getElementById('memeTop').value.toUpperCase();
+    const bot = document.getElementById('memeBottom').value.toUpperCase();
+    if (top) { ctx.strokeText(top, 300, 60); ctx.fillText(top, 300, 60); }
+    if (bot) { ctx.strokeText(bot, 300, 560); ctx.fillText(bot, 300, 560); }
+  }
+  async function aiSuggestMeme() {
+    const area = document.getElementById('meme-result');
+    area.innerHTML = '<div class="result-card">🤖 Thinking...</div>';
+    try {
+      const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent('Give ONE funny meme caption. Format: TOP: [text] BOTTOM: [text]'));
+      const s = await res.text();
+      const t = s.match(/TOP:\s*(.+)/i); const b = s.match(/BOTTOM:\s*(.+)/i);
+      if (t) document.getElementById('memeTop').value = t[1].trim();
+      if (b) document.getElementById('memeBottom').value = b[1].trim();
+      updateMeme();
+      area.innerHTML = '<div class="result-card"><div class="result-title">😂 Applied!</div></div>';
+    } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
+  }
+  function downloadMeme() {
+    const a = document.createElement('a'); a.download = 'meme.png'; a.href = document.getElementById('memeCanvas').toDataURL(); a.click();
+  }
+</script>
+</body></html>

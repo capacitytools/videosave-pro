@@ -614,7 +614,7 @@
   /* ── TEXT TO SPEECH ── */
   async function generateSpeech() {
   const text = document.getElementById('ttsText').value.trim();
-  const voice = document.getElementById('ttsVoice').value;
+  const voiceName = document.getElementById('ttsVoice').value;
   const btn = document.getElementById('ttsBtn');
   const area = document.getElementById('tts-result');
   
@@ -623,49 +623,47 @@
     return; 
   }
   
-  if (text.length > 500) {
-    alert('Text is too long. Please keep it under 500 characters for free API.');
-    return;
-  }
-  
   btn.disabled = true; 
   btn.textContent = 'Generating…';
-  area.innerHTML = `<div class="loader"><div class="spinner"></div><span>Generating audio…</span></div>`;
+  area.innerHTML = `<div class="loader"><div class="spinner"></div><span>Preparing audio…</span></div>`;
   
   try {
-    const apiUrl = `/api/speech?text=${encodeURIComponent(text)}&voice=${encodeURIComponent(voice)}`;
-    console.log('Calling:', apiUrl);
+    // Use Web Speech API (built into browser)
+    const utterance = new SpeechSynthesisUtterance(text);
     
-    const response = await fetch(apiUrl);
-    console.log('Response status:', response.status);
+    // Get available voices
+    const voices = speechSynthesis.getVoices();
+    const selectedVoice = voices.find(v => v.name.includes(voiceName) || v.lang.startsWith(voiceName.split(' ')[0]));
     
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.details || errorData.error || `Server error: ${response.status}`);
+    if (selectedVoice) {
+      utterance.voice = selectedVoice;
     }
     
-    const blob = await response.blob();
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
     
-    if (blob.size === 0) {
-      throw new Error('Received empty audio file. Try shorter text.');
-    }
+    // Speak the text
+    speechSynthesis.speak(utterance);
     
-    const audioUrl = URL.createObjectURL(blob);
-    
+    // Show success message
     area.innerHTML = `
       <div class="result-card">
-        <div class="result-title">Audio ready</div>
-        <audio controls style="width:100%;margin-bottom:14px;" src="${audioUrl}"></audio>
-        <a class="btn-get" href="${audioUrl}" download="speech.mp3">↓ Download MP3</a>
+        <div class="result-title">✅ Audio playing now!</div>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:14px;">
+          The audio is playing through your device speakers.
+        </p>
+        <p style="color:var(--muted);font-size:0.78rem;">
+          <strong>Note:</strong> Browser-based TTS plays directly. 
+          For downloadable MP3, use our premium service.
+        </p>
       </div>
     `;
     
   } catch (err) {
-    console.error('Speech error:', err);
     area.innerHTML = `<div class="error-card">⚠ ${err.message}</div>`;
   } finally {
     btn.disabled = false; 
-    btn.textContent = 'Generate Audio';
+    btn.textContent = '🎙️ Generate Audio';
   }
 }
 

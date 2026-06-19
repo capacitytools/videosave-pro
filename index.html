@@ -117,7 +117,21 @@
 <div class="view" id="view-downloader">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>📥 Universal Downloader</h1>
-    <div class="card"><input id="videoUrl" type="url" placeholder="Paste video URL (YouTube, TikTok, Instagram, etc.)…"/><button id="dlBtn" onclick="startDownload()">Download</button></div>
+    <p style="color:#888;margin-bottom:20px;">YouTube · TikTok · Instagram · Facebook · Twitter/X · Snapchat · Pinterest · Vimeo · and more</p>
+    <div class="card">
+      <input id="videoUrl" type="url" placeholder="Paste video URL here…"/>
+      <select id="dlFormat">
+        <option value="video">🎬 Video (Best Quality)</option>
+        <option value="audio">🎵 Audio Only (MP3)</option>
+      </select>
+      <select id="dlQuality">
+        <option value="1080">1080p HD</option>
+        <option value="720" selected>720p HD</option>
+        <option value="480">480p</option>
+        <option value="360">360p</option>
+      </select>
+      <button id="dlBtn" onclick="startDownload()">📥 Fetch Download Links</button>
+    </div>
     <div class="result-area" id="result-area"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
@@ -341,7 +355,8 @@
     return chunks;
   }
 
-  function getTtsUrl(text, lang) {    return `https://corsproxy.io/?${encodeURIComponent(`https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${text}`)}`;
+  function getTtsUrl(text, lang) {
+    return `/api/speech?text=${encodeURIComponent(text)}&voice=${encodeURIComponent(lang)}`;
   }
 
   function listenText() {
@@ -349,27 +364,9 @@
     const lang = document.getElementById('ttsVoiceListen').value;
     const player = document.getElementById('listen-player');
     if (!text) { alert('Please enter text.'); return; }
-    
-    const chunks = chunkText(text);
-    player.innerHTML = '<p style="color:#888;">Loading audio...</p>';
-    
-    let html = '<audio id="tts-audio" controls autoplay style="width:100%;"></audio>';
-    player.innerHTML = html;
-    
-    const audio = document.getElementById('tts-audio');
-    let chunkIndex = 0;
-    
-    function playNext() {
-      if (chunkIndex < chunks.length) {
-        audio.src = getTtsUrl(chunks[chunkIndex], lang);
-        audio.onended = () => { chunkIndex++; playNext(); };
-        audio.onerror = () => { chunkIndex++; playNext(); }; // Skip errors
-        audio.play().catch(e => console.log('Autoplay blocked'));
-      } else {
-        player.innerHTML += '<p style="color:#22d3a5;margin-top:10px;">✅ Finished playing!</p>';
-      }
-    }
-    playNext();
+    player.innerHTML = '<p style="color:#888;">⏳ Loading audio… please wait</p>';
+    const audioUrl = getTtsUrl(text.substring(0, 500), lang);
+    player.innerHTML = `<audio id="tts-audio" controls autoplay style="width:100%;margin-top:10px;" src="${audioUrl}"></audio><p style="color:#22d3a5;margin-top:10px;font-size:0.85rem;">✅ Audio ready — tap play above</p>`;
   }
 
   function downloadText() {
@@ -377,65 +374,72 @@
     const lang = document.getElementById('ttsVoiceDownload').value;
     const container = document.getElementById('download-links');
     if (!text) { alert('Please enter text.'); return; }
-    
-    const chunks = chunkText(text);
-    container.innerHTML = '<p style="color:#888;">Generating download links...</p>';
-    
-    let html = '<div class="result-card"><div class="result-title">⬇ Download MP3 Chunks</div>';
-    chunks.forEach((chunk, i) => {
-      html += `<a class="btn-get" href="${getTtsUrl(chunk, lang)}" target="_blank" download="speech_part_${i+1}.mp3"> Part ${i+1}</a>`;
-    });
-    html += '</div>';
-    container.innerHTML = html;
+    const audioUrl = getTtsUrl(text.substring(0, 500), lang);
+    container.innerHTML = `<div class="result-card"><div class="result-title">⬇ Download MP3</div><audio controls style="width:100%;margin-bottom:14px;" src="${audioUrl}"></audio><a class="btn-get" href="${audioUrl}" download="speech.mp3">⬇ Save MP3</a></div>`;
   }
 
   function cloneText() {
-    const text = document.getElementById('ttsText').value.trim();    const lang = document.getElementById('ttsVoiceClone').value;
+    const text = document.getElementById('ttsText').value.trim();
+    const lang = document.getElementById('ttsVoiceClone').value;
     const player = document.getElementById('clone-player');
     if (!text) { alert('Please enter text.'); return; }
-    
-    const chunks = chunkText(text);
-    player.innerHTML = '<p style="color:#888;">Generating with voice style...</p>';
-    
-    let html = '<audio id="clone-audio" controls autoplay style="width:100%;"></audio>';
-    player.innerHTML = html;
-    
-    const audio = document.getElementById('clone-audio');
-    let chunkIndex = 0;
-    
-    function playNext() {
-      if (chunkIndex < chunks.length) {
-        audio.src = getTtsUrl(chunks[chunkIndex], lang);
-        audio.onended = () => { chunkIndex++; playNext(); };
-        audio.play().catch(e => console.log('Autoplay blocked'));
-      } else {
-        player.innerHTML += '<p style="color:#22d3a5;margin-top:10px;">✅ Finished!</p>';
-      }
-    }
-    playNext();
+    player.innerHTML = '<p style="color:#888;">⏳ Generating with voice style…</p>';
+    const audioUrl = getTtsUrl(text.substring(0, 500), lang);
+    player.innerHTML = `<audio id="clone-audio" controls autoplay style="width:100%;margin-top:10px;" src="${audioUrl}"></audio><p style="color:#22d3a5;margin-top:10px;font-size:0.85rem;">✅ Ready — tap play</p>`;
   }
 
-  // DOWNLOADER (Cobalt API)
+  // DOWNLOADER
   async function startDownload() {
     const url = document.getElementById("videoUrl").value.trim();
+    const format = document.getElementById("dlFormat").value;
+    const quality = document.getElementById("dlQuality").value;
     const btn = document.getElementById("dlBtn");
     const area = document.getElementById("result-area");
-    if (!url) { alert("Please enter a URL"); return; }
+    if (!url) { alert("Please paste a video URL first."); return; }
     btn.disabled = true; btn.textContent = "Fetching…";
-    area.innerHTML = '<div class="result-card">⏳ Fetching via Cobalt API...</div>';
+    area.innerHTML = '<div class="result-card">⏳ Fetching download links…</div>';
     try {
-      const res = await fetch('https://api.cobalt.tools/api/json', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: url, vCodec: 'h264', vQuality: '720', aFormat: 'mp3', isAudioOnly: false })
-      });
+      const res = await fetch(`/api/download?url=${encodeURIComponent(url)}`);
       const data = await res.json();
-      if (data.status === 'error' || data.status === 'rate-limit') throw new Error(data.text || "Could not process. Try another link.");
-      if (data.url) {
-        area.innerHTML = `<div class="result-card"><div class="result-title">✅ Download Ready</div><a class="btn-get" href="${data.url}" target="_blank">⬇ Download File</a></div>`;
-      } else { throw new Error("No download link found."); }
-    } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
-    finally { btn.disabled = false; btn.textContent = "Download"; }
+      if (data.error) throw new Error(data.error);
+
+      // Parse all possible response shapes
+      const info = data.mediaInfo || data.data || data;
+      const links = [];
+
+      if (Array.isArray(info.qualities)) {
+        info.qualities.forEach(q => links.push({ label: q.quality || q.label || 'Video', ext: q.ext || 'mp4', url: q.url }));
+      }
+      if (info.videoUrl) links.push({ label: 'Video', ext: 'mp4', url: info.videoUrl });
+      if (info.audioUrl) links.push({ label: 'Audio Only', ext: 'mp3', url: info.audioUrl });
+      if (!links.length && data.url) links.push({ label: 'Download File', ext: 'mp4', url: data.url });
+      if (Array.isArray(data.medias)) data.medias.forEach(m => links.push({ label: m.quality || 'Download', ext: m.ext || 'mp4', url: m.url }));
+      if (Array.isArray(data.links)) data.links.forEach(l => links.push({ label: l.quality || l.label || 'Download', ext: l.ext || 'mp4', url: l.url || l.download_url }));
+
+      // Filter out blanks
+      const valid = links.filter(l => l.url && l.url.trim() !== '');
+      if (!valid.length) throw new Error('No downloadable links found. Try a different URL or platform.');
+
+      const title = info.title || data.title || 'Download Ready';
+      const platform = info.platform || data.platform || '';
+      const displayTitle = platform ? `${platform} · ${title}` : title;
+
+      const optionsHTML = valid.map(l => `
+        <div style="display:flex;align-items:center;justify-content:space-between;background:#0a0a0a;border:1px solid #1a1a1a;border-radius:12px;padding:14px 18px;margin-bottom:10px;gap:12px;">
+          <div>
+            <div style="font-weight:600;font-size:0.9rem;">${l.label}</div>
+            <div style="color:#888;font-size:0.75rem;">.${String(l.ext).toUpperCase()} format</div>
+          </div>
+          <a class="btn-get" href="${l.url}" target="_blank" rel="noopener noreferrer" download style="width:auto;margin:0;">↓ Get</a>
+        </div>`).join('');
+
+      area.innerHTML = `<div class="result-card"><div class="result-title">✅ ${displayTitle}</div>${optionsHTML}</div>`;
+
+    } catch (err) {
+      area.innerHTML = `<div class="error-card">⚠ ${err.message}</div>`;
+    } finally {
+      btn.disabled = false; btn.textContent = '📥 Fetch Download Links';
+    }
   }
 
   // IMAGE GEN (Flux Model)

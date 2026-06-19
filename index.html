@@ -614,54 +614,80 @@
   /* ── TEXT TO SPEECH ── */
   async function generateSpeech() {
   const text = document.getElementById('ttsText').value.trim();
-  const voice = document.getElementById('ttsVoice').value;
+  const voiceName = document.getElementById('ttsVoice').value;
   const btn = document.getElementById('ttsBtn');
   const area = document.getElementById('tts-result');
   
   if (!text) { alert('Please type some text first.'); return; }
   
-  btn.disabled = true; btn.textContent = 'Generating…';
+  // Map voice names to language codes
+  const voiceMap = {
+    // US English
+    'Brian': 'en-US', 'Emma': 'en-US', 'Justin': 'en-US', 'Joey': 'en-US',
+    'Kendra': 'en-US', 'Kimberly': 'en-US', 'Matthew': 'en-US', 'Salli': 'en-US', 'Ivy': 'en-US',
+    // UK English
+    'Amy': 'en-GB', 'Arthur': 'en-GB', 'Geraint': 'en-GB',
+    // Australian
+    'Nicole': 'en-AU', 'Olivia': 'en-AU', 'Russell': 'en-AU',
+    // Indian
+    'Aditi': 'en-IN', 'Raveena': 'en-IN',
+    // Spanish
+    'Conchita': 'es-ES', 'Lucia': 'es-ES', 'Enrique': 'es-ES', 'Mia': 'es-MX',
+    'Penelope': 'es-US', 'Miguel': 'es-US', 'Lupe': 'es-US',
+    // French
+    'Celine': 'fr-FR', 'Lea': 'fr-FR', 'Mathieu': 'fr-FR', 'Chantal': 'fr-CA',
+    // German
+    'Hans': 'de-DE', 'Marlene': 'de-DE', 'Vicki': 'de-DE',
+    // Italian
+    'Bianca': 'it-IT', 'Carla': 'it-IT', 'Giorgio': 'it-IT',
+    // Portuguese
+    'Ines': 'pt-PT', 'Cristiano': 'pt-PT', 'Vitoria': 'pt-BR',
+    'Ricardo': 'pt-BR', 'Camila': 'pt-BR',
+    // Others
+    'Maxim': 'ru-RU', 'Tatyana': 'ru-RU',
+    'Mizuki': 'ja-JP', 'Takumi': 'ja-JP', 'Kazuha': 'ja-JP',
+    'Zhiyu': 'zh-CN',
+    'Seoyeon': 'ko-KR',
+    'Zeina': 'ar-SA',
+    'Lotte': 'nl-NL', 'Ruben': 'nl-NL', 'Laura': 'nl-NL',
+    'Astrid': 'sv-SE', 'Elin': 'sv-SE',
+    'Liv': 'no-NO', 'Ida': 'no-NO',
+    'Naja': 'da-DK', 'Mads': 'da-DK',
+    'Ewa': 'pl-PL', 'Maja': 'pl-PL', 'Jacek': 'pl-PL', 'Jan': 'pl-PL',
+    'Carmen': 'ro-RO',
+    'Gwyneth': 'cy-GB',
+    'Filiz': 'tr-TR',
+    'Dora': 'is-IS', 'Karl': 'is-IS'
+  };
+  
+  const voice = voiceMap[voiceName] || 'en-US';
+  
+  btn.disabled = true; 
+  btn.textContent = 'Generating…';
   area.innerHTML = `<div class="loader"><div class="spinner"></div><span>Generating audio…</span></div>`;
   
   try {
     const res = await fetch(`/.netlify/functions/speech?text=${encodeURIComponent(text)}&voice=${encodeURIComponent(voice)}`);
     
-    if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.error || 'Failed to generate audio');
-    }
-
-    const contentType = res.headers.get('content-type');
-
-    if (contentType && contentType.includes('application/json')) {
-        const data = await res.json();
-        const audioUrl = data.audioUrl || data.url;
-        if (!audioUrl) throw new Error('No audio URL in response');
-        
-        area.innerHTML = `
-          <div class="result-card">
-            <div class="result-title">Audio ready — Voice: ${escHtml(voice)}</div>
-            <audio controls style="width:100%;margin-bottom:14px;" src="${audioUrl}"></audio>
-            <a class="btn-get" href="${audioUrl}" target="_blank" download="speech.mp3">↓ Download MP3</a>
-          </div>`;
-    } else {
-        const blob = await res.blob();
-        const audioUrl = URL.createObjectURL(blob);
-        area.innerHTML = `
-          <div class="result-card">
-            <div class="result-title">Audio ready — Voice: ${escHtml(voice)}</div>
-            <audio controls style="width:100%;margin-bottom:14px;" src="${audioUrl}"></audio>
-            <a class="btn-get" href="${audioUrl}" download="speech.mp3">↓ Download MP3</a>
-          </div>`;
-    }
+    if (!res.ok) throw new Error('Could not generate audio. Try again.');
+    
+    const blob = await res.blob();
+    const audioUrl = URL.createObjectURL(blob);
+    
+    area.innerHTML = `
+      <div class="result-card">
+        <div class="result-title">Audio ready — Voice: ${escHtml(voiceName)}</div>
+        <audio controls style="width:100%;margin-bottom:14px;" src="${audioUrl}"></audio>
+        <a class="btn-get" href="${audioUrl}" download="speech.mp3">↓ Download MP3</a>
+      </div>`;
   } catch(err) {
     area.innerHTML = `<div class="error-card">⚠ ${err.message}</div>`;
   } finally { 
     btn.disabled = false; 
-    btn.textContent = '️ Generate Audio'; 
+    btn.textContent = 'Generate Audio'; 
   }
-}
-
+  }
+  
   /* ── VISION CHAT ── */
   async function analyzeImage() {
     const fileInput = document.getElementById('visionFile');

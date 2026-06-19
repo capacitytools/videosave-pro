@@ -1,32 +1,23 @@
 exports.handler = async (event) => {
   const text = event.queryStringParameters?.text || '';
-  const voice = event.queryStringParameters?.voice || 'en-US';
+  const voice = event.queryStringParameters?.voice || 'Matthew';
 
   if (!text) {
-    return { 
-      statusCode: 400, 
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ error: 'No text provided' }) 
-    };
+    return { statusCode: 400, body: JSON.stringify({ error: 'No text provided' }) };
   }
 
   try {
-    // Use POST request instead of GET
-    const response = await fetch('https://ahm7xmakki.com/api/tts', {
-      method: 'POST',
+    // TTSMP3.com - FREE, unlimited, no auth needed
+    const url = `https://api.ttsmp3.com/makemp3_new?voice=${voice}&text=${encodeURIComponent(text)}&source=aws_polly`;
+    
+    const response = await fetch(url, {
       headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': 'Mozilla/5.0'
-      },
-      body: JSON.stringify({
-        text: text,
-        voice: voice
-      })
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'Referer': 'https://ttsmp3.com/'
+      }
     });
 
-    if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
-    }
+    if (!response.ok) throw new Error('TTS service failed');
 
     const arrayBuffer = await response.arrayBuffer();
     const base64Audio = Buffer.from(arrayBuffer).toString('base64');
@@ -43,7 +34,6 @@ exports.handler = async (event) => {
   } catch (error) {
     return {
       statusCode: 500,
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ error: error.message })
     };
   }

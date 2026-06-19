@@ -614,45 +614,52 @@
   /* ── TEXT TO SPEECH ── */
   async function generateSpeech() {
   const text = document.getElementById('ttsText').value.trim();
+  const voice = document.getElementById('ttsVoice').value;
   const btn = document.getElementById('ttsBtn');
   const area = document.getElementById('tts-result');
   
-  if (!text) { 
-    alert('Please type some text first.'); 
-    return; 
+  if (!text) { alert('Please type some text first.'); return; }
+  
+  btn.disabled = true; btn.textContent = 'Generating…';
+  area.innerHTML = `<div class="loader"><div class="spinner"></div><span>Generating audio…</span></div>`;
+  
+  try {
+    const res = await fetch(`/.netlify/functions/speech?text=${encodeURIComponent(text)}&voice=${encodeURIComponent(voice)}`);
+    
+    if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || 'Failed to generate audio');
+    }
+
+    const contentType = res.headers.get('content-type');
+
+    if (contentType && contentType.includes('application/json')) {
+        const data = await res.json();
+        const audioUrl = data.audioUrl || data.url;
+        if (!audioUrl) throw new Error('No audio URL in response');
+        
+        area.innerHTML = `
+          <div class="result-card">
+            <div class="result-title">Audio ready — Voice: ${escHtml(voice)}</div>
+            <audio controls style="width:100%;margin-bottom:14px;" src="${audioUrl}"></audio>
+            <a class="btn-get" href="${audioUrl}" target="_blank" download="speech.mp3">↓ Download MP3</a>
+          </div>`;
+    } else {
+        const blob = await res.blob();
+        const audioUrl = URL.createObjectURL(blob);
+        area.innerHTML = `
+          <div class="result-card">
+            <div class="result-title">Audio ready — Voice: ${escHtml(voice)}</div>
+            <audio controls style="width:100%;margin-bottom:14px;" src="${audioUrl}"></audio>
+            <a class="btn-get" href="${audioUrl}" download="speech.mp3">↓ Download MP3</a>
+          </div>`;
+    }
+  } catch(err) {
+    area.innerHTML = `<div class="error-card">⚠ ${err.message}</div>`;
+  } finally { 
+    btn.disabled = false; 
+    btn.textContent = '️ Generate Audio'; 
   }
-  
-  btn.disabled = true; 
-  btn.textContent = 'Playing Audio…';
-  
-  // Cancel any currently playing audio
-  window.speechSynthesis.cancel();
-  
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.rate = 1.0;
-  utterance.pitch = 1.0;
-  
-  utterance.onstart = () => {
-    area.innerHTML = `
-      <div class="result-card">
-        <div class="result-title">🔊 Audio Playing</div>
-        <p style="color:var(--muted);margin-top:10px;">
-          Listening with voice: <strong>${document.getElementById('ttsVoice').value}</strong>
-        </p>
-        <button class="btn-download" style="margin-top:14px;width:100%;" onclick="window.speechSynthesis.cancel()">⏹ Stop Audio</button>
-      </div>
-    `;
-    btn.textContent = '🎙️ Generate Audio';
-    btn.disabled = false;
-  };
-  
-  utterance.onerror = (e) => {
-    area.innerHTML = `<div class="error-card">⚠ Error: ${e.error}</div>`;
-    btn.textContent = '🎙️ Generate Audio';
-    btn.disabled = false;
-  };
-  
-  window.speechSynthesis.speak(utterance);
 }
 
   /* ── VISION CHAT ── */

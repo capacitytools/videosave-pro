@@ -596,9 +596,16 @@
     area.innerHTML=`<div class="loader"><div class="spinner"></div><span>Generating high-quality image… this may take up to 30 seconds</span></div>`;
     try {
       const res = await fetch('/.netlify/functions/imagegen', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({prompt,ratio}) });
-      const data = await res.json();
-      if (!res.ok||!data.imageUrl) throw new Error(data.error||'Could not generate image. Try a different prompt.');
-      area.innerHTML=`<div class="result-card"><div class="result-title">Image ready — ${data.width}×${data.height}px</div><img src="${escHtml(data.imageUrl)}" style="width:100%;border-radius:12px;margin-bottom:14px;" loading="lazy"/><a class="btn-get" href="${escHtml(data.imageUrl)}" target="_blank" rel="noopener noreferrer" download>↓ Download Image</a></div>`;
+      if (!res.ok) {
+        const err = await res.json().catch(()=>({error:'Image generation failed.'}));
+        throw new Error(err.error||'Could not generate image. Try a different prompt.');
+      }
+      const blob = await res.blob();
+      const localUrl = URL.createObjectURL(blob);
+      const w = res.headers.get('X-Image-Width')||'';
+      const h = res.headers.get('X-Image-Height')||'';
+      const sizeLabel = w && h ? `${w}×${h}px` : 'High Quality';
+      area.innerHTML=`<div class="result-card"><div class="result-title">Image ready — ${escHtml(sizeLabel)}</div><img src="${localUrl}" style="width:100%;border-radius:12px;margin-bottom:14px;" loading="lazy"/><a class="btn-get" href="${localUrl}" download="ai-image.jpg">↓ Download Image</a></div>`;
     } catch(err) {
       area.innerHTML=`<div class="error-card">⚠ ${err.message}</div>`;
     } finally { btn.disabled=false; btn.textContent='✨ Generate Image'; }
@@ -776,25 +783,44 @@
   function generateEbookPDF() {
     const {title,author,content}=getEbookData();
     const area=document.getElementById('ebook-result');
-    if(!content){alert('Please paste some content first.');return;}
-    try {
-      const {jsPDF}=window.jspdf;
-      const doc=new jsPDF({unit:'pt',format:'a4'});
-      const pw=doc.internal.pageSize.getWidth();
-      const ph=doc.internal.pageSize.getHeight();
-      const m=56; const maxW=pw-m*2;
-      doc.setFont('helvetica','bold'); doc.setFontSize(26);
-      doc.text(title,pw/2,260,{align:'center',maxWidth});
-      doc.setFont('helvetica','normal'); doc.setFontSize(14);
-      doc.text('by '+author,pw/2,300,{align:'center'});
-      doc.addPage();
-      doc.setFontSize(12);
-      const lines=doc.splitTextToSize(content,maxW);
-      let y=m;
-      lines.forEach(line=>{if(y>ph-m){doc.addPage();y=m;}doc.text(line,m,y);y+=18;});
-      doc.save(`${title.replace(/[^a-z0-9]+/gi,'_')}.pdf`);
-      area.innerHTML=`<div class="result-card"><div class="result-title">PDF downloaded!</div></div>`;
-    } catch(err){area.innerHTML=`<div class="error-card">⚠ Could not generate PDF.</div>`;}
+    if(!content){alert('Please paste your book content first.');return;}
+    area.innerHTML=`<div class="loader"><div class="spinner"></div><span>Generating PDF…</span></div>`;
+    // Wait a tick so loader shows, then generate
+    setTimeout(function(){
+      try {
+        if(!window.jspdf||!window.jspdf.jsPDF) throw new Error('PDF library not loaded yet. Please wait a moment and try again.');
+        const {jsPDF}=window.jspdf;
+        const doc=new jsPDF({unit:'pt',format:'a4'});
+        const pw=doc.internal.pageSize.getWidth();
+        const ph=doc.internal.pageSize.getHeight();
+        const m=56; const maxW=pw-m*2;
+        // Cover page
+        doc.setFillColor(13,13,13);
+        doc.rect(0,0,pw,ph,'F');
+        doc.setTextColor(255,255,255);
+        doc.setFont('helvetica','bold'); doc.setFontSize(24);
+        doc.text(title,pw/2,ph/2-30,{align:'center',maxWidth});
+        doc.setFont('helvetica','normal'); doc.setFontSize(13);
+        doc.setTextColor(180,180,180);
+        doc.text('by '+author,pw/2,ph/2+10,{align:'center'});
+        // Content pages
+        doc.addPage();
+        doc.setTextColor(0,0,0);
+        doc.setFontSize(11.5);
+        const lines=doc.splitTextToSize(content,maxW);
+        let y=m;
+        lines.forEach(function(line){
+          if(y>ph-m){doc.addPage();y=m;}
+          doc.text(line,m,y);
+          y+=17;
+        });
+        const filename=title.replace(/[^a-z0-9]+/gi,'_')+'.pdf';
+        doc.save(filename);
+        area.innerHTML=`<div class="result-card"><div class="result-title">PDF downloaded successfully!</div><p style="color:var(--muted);font-size:0.82rem;margin-top:8px;">Check your Downloads folder for "${filename}"</p></div>`;
+      } catch(err){
+        area.innerHTML=`<div class="error-card">⚠ ${err.message}</div>`;
+      }
+    },100);
   }
   function generateEbookDOCX() {
     const {title,author,content}=getEbookData();

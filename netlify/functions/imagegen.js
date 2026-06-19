@@ -34,15 +34,26 @@ exports.handler = async function(event) {
     const encodedPrompt = encodeURIComponent(prompt);
     const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?model=flux&width=${width}&height=${height}&nologo=true&seed=${seed}&enhance=true`;
 
-    // Confirm the image is reachable
-    const check = await fetch(imageUrl, { method: "HEAD" });
-    if (!check.ok) throw new Error("Image generation failed. Try a different prompt.");
+    // Fetch the actual image and return it directly — avoids CORS issues
+    const imgRes = await fetch(imageUrl);
+    if (!imgRes.ok) throw new Error("Image generation failed. Try a different prompt.");
+
+    const imgBuffer = await imgRes.arrayBuffer();
+    const base64 = Buffer.from(imgBuffer).toString("base64");
+    const contentType = imgRes.headers.get("content-type") || "image/jpeg";
 
     return {
       statusCode: 200,
-      headers,
-      body: JSON.stringify({ imageUrl, seed, width, height }),
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": contentType,
+        "X-Image-Width": String(width),
+        "X-Image-Height": String(height),
+      },
+      body: base64,
+      isBase64Encoded: true,
     };
+
   } catch (err) {
     return {
       statusCode: 500,

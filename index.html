@@ -147,42 +147,36 @@
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section></div>
 
-<!-- SPEECHSTER -->
+<!-- SPEECHSTER - USING BROWSER TTS -->
 <div class="view" id="view-tts">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>🎙️ Speechster</h1>
     <div class="card">
       <textarea id="ttsText" placeholder="Type or paste your text here..." style="min-height:150px;"></textarea>
+      
       <select id="ttsVoice">
-        <option value="Brian">Brian (Male - UK)</option>
-        <option value="Amy">Amy (Female - UK)</option>
-        <option value="Emma">Emma (Female - UK)</option>
-        <option value="Matthew">Matthew (Male - US)</option>
-        <option value="Joey">Joey (Male - US)</option>
-        <option value="Justin">Justin (Male - US)</option>
-        <option value="Joanna">Joanna (Female - US)</option>
-        <option value="Salli">Salli (Female - US)</option>
-        <option value="Kimberly">Kimberly (Female - US)</option>
-        <option value="Ivy">Ivy (Female - US)</option>
-        <option value="Russell">Russell (Male - AU)</option>
-        <option value="Nicole">Nicole (Female - AU)</option>
-        <option value="Aditi">Aditi (Female - India)</option>
-        <option value="Raveena">Raveena (Female - India)</option>
-        <option value="Celine">Celine (Female - French)</option>
-        <option value="Mathieu">Mathieu (Male - French)</option>
-        <option value="Marlene">Marlene (Female - German)</option>
-        <option value="Hans">Hans (Male - German)</option>
-        <option value="Conchita">Conchita (Female - Spanish)</option>
-        <option value="Enrique">Enrique (Male - Spanish)</option>
-        <option value="Carla">Carla (Female - Italian)</option>
-        <option value="Giorgio">Giorgio (Male - Italian)</option>
-        <option value="Vitoria">Vitoria (Female - Portuguese)</option>
-        <option value="Ricardo">Ricardo (Male - Portuguese)</option>
-        <option value="Mizuki">Mizuki (Female - Japanese)</option>
-        <option value="Seoyeon">Seoyeon (Female - Korean)</option>
-        <option value="Zhiyu">Zhiyu (Female - Chinese)</option>
+        <option value="0">English (US - Default)</option>
+        <option value="1">English (UK)</option>
+        <option value="2">English (Australia)</option>
+        <option value="3">English (India)</option>
+        <option value="4">Spanish</option>
+        <option value="5">French</option>
+        <option value="6">German</option>
+        <option value="7">Italian</option>
+        <option value="8">Portuguese</option>
+        <option value="9">Russian</option>
+        <option value="10">Japanese</option>
+        <option value="11">Korean</option>
+        <option value="12">Chinese</option>
+        <option value="13">Arabic</option>
+        <option value="14">Hindi</option>
       </select>
-      <button id="ttsBtn" onclick="generateSpeech()">🎙️ Generate Audio</button>
+      
+      <input type="range" id="speechRate" min="0.5" max="2" step="0.1" value="1" style="width:100%;margin:15px 0;">
+      <label>Speed: <span id="rateValue">1.0</span>x</label>
+      
+      <button id="ttsBtn" onclick="generateSpeech()">🎙️ Generate & Play Audio</button>
+      <button onclick="stopSpeech()" style="background:linear-gradient(135deg,#ef4444,#dc2626);margin-top:10px;">⏹️ Stop</button>
     </div>
     <div class="result-area" id="tts-result"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
@@ -453,65 +447,116 @@
     }, 1500);
   }
 
-  // SPEECHSTER
-  function generateSpeech() {
-    const text = document.getElementById('ttsText').value.trim();
-    const voice = document.getElementById('ttsVoice').value;
-    const btn = document.getElementById('ttsBtn');
-    const area = document.getElementById('tts-result');
-    
-    if (!text) { alert('Please type some text first.'); return; }
-    
-    if (text.length > 3000) {
-      alert('Text is too long. Please limit to 3000 characters for free version.');
-      return;
-    }
-    
-    btn.disabled = true; 
-    btn.textContent = 'Generating…';
-    area.innerHTML = '<div class="result-card">⏳ Generating audio...</div>';
-    
-    const encodedText = encodeURIComponent(text);
-    const ttsUrl = `https://api.ttsmp3.com/makemp3_new?voice=${voice}&text=${encodedText}&source=aws_polly`;
-    
-    fetch(ttsUrl, { method: 'HEAD' })
-      .then(response => {
-        if (response.ok || response.status === 302) {
-          setTimeout(() => {
-            area.innerHTML = `
-              <div class="result-card">
-                <div class="result-title">🎧 Audio Ready</div>
-                <audio controls autoplay style="width:100%;margin-bottom:14px;">
-                  <source src="${ttsUrl}" type="audio/mpeg">
-                  Your browser does not support audio.
-                </audio>
-                <a class="btn-get" href="${ttsUrl}" target="_blank" download="speech.mp3">⬇ Download MP3</a>
-                <a class="btn-get" href="${ttsUrl}" target="_blank">🔊 Play in New Tab</a>
-                <p style="color:#888;font-size:0.85rem;margin-top:10px;">
-                  💡 Tip: If audio doesn't load, click "Play in New Tab"                </p>
-              </div>`;
-            btn.disabled = false; 
-            btn.textContent = '🎙️ Generate Audio';
-          }, 1500);
-        } else {
-          throw new Error('TTS service returned error');
-        }
-      })
-      .catch(err => {
-        area.innerHTML = `
-          <div class="result-card">
-            <div class="result-title">🎧 Audio Generated</div>
-            <p style="color:#888;margin-bottom:15px;">Click below to download or play:</p>
-            <a class="btn-get" href="${ttsUrl}" target="_blank" download="speech.mp3">⬇ Download MP3</a>
-            <a class="btn-get" href="${ttsUrl}" target="_blank">🔊 Play in New Tab</a>
-            <p style="color:#ffd700;font-size:0.85rem;margin-top:15px;">
-              ⚠️ Note: Free TTS service. If download fails, try shorter text.
-            </p>
-          </div>`;
-        btn.disabled = false; 
-        btn.textContent = '🎙️ Generate Audio';
-      });
+// SPEECHSTER - Using Browser's Built-in TTS
+let isSpeaking = false;
+
+function generateSpeech() {
+  const text = document.getElementById('ttsText').value.trim();
+  const voiceIndex = parseInt(document.getElementById('ttsVoice').value);
+  const rate = parseFloat(document.getElementById('speechRate').value);
+  const btn = document.getElementById('ttsBtn');
+  const area = document.getElementById('tts-result');
+  
+  if (!text) { 
+    alert('Please type some text first.'); 
+    return; 
   }
+  
+  if (text.length > 5000) {
+    alert('Text is too long. Please limit to 5000 characters.');
+    return;
+  }
+  
+  // Stop any current speech
+  window.speechSynthesis.cancel();
+  
+  const utterance = new SpeechSynthesisUtterance(text);
+  
+  // Get available voices
+  const voices = window.speechSynthesis.getVoices();
+  
+  // Map voice index to language codes
+  const voiceLanguages = [
+    'en-US', 'en-GB', 'en-AU', 'en-IN', 
+    'es-ES', 'fr-FR', 'de-DE', 'it-IT', 
+    'pt-BR', 'ru-RU', 'ja-JP', 'ko-KR', 
+    'zh-CN', 'ar-SA', 'hi-IN'
+  ];
+  
+  const selectedLang = voiceLanguages[voiceIndex] || 'en-US';
+  
+  // Find a voice for the selected language
+  const preferredVoice = voices.find(v => v.lang.startsWith(selectedLang.split('-')[0]));
+  if (preferredVoice) {
+    utterance.voice = preferredVoice;
+  }
+  
+  utterance.rate = rate;
+  utterance.pitch = 1.0;
+  utterance.volume = 1.0;
+  
+  utterance.onstart = function() {
+    isSpeaking = true;    btn.disabled = true;
+    btn.textContent = '🔊 Playing...';
+    area.innerHTML = `
+      <div class="result-card">
+        <div class="result-title">🎧 Now Playing</div>
+        <p style="color:#888;margin-bottom:15px;">Listening to your text...</p>
+        <div style="background:linear-gradient(135deg,#7c5cfc,#22d3a5);height:4px;border-radius:2px;margin:20px 0;animation:loading 2s infinite;"></div>
+        <p style="color:#22d3a5;font-size:0.9rem;">💡 Tip: You can turn off your screen - audio will continue playing</p>
+      </div>`;
+  };
+  
+  utterance.onend = function() {
+    isSpeaking = false;
+    btn.disabled = false;
+    btn.textContent = '🎙️ Generate & Play Audio';
+    area.innerHTML += `
+      <div style="margin-top:15px;padding:15px;background:#0a0a0a;border-radius:10px;border-left:4px solid #22d3a5;">
+        <p style="color:#22d3a5;">✅ Finished playing!</p>
+      </div>`;
+  };
+  
+  utterance.onerror = function(e) {
+    isSpeaking = false;
+    btn.disabled = false;
+    btn.textContent = '🎙️ Generate & Play Audio';
+    area.innerHTML = `
+      <div class="error-card">
+        ⚠ Error playing audio. Please try again.<br>
+        <small style="color:#888;">Error: ${e.error}</small>
+      </div>`;
+  };
+  
+  // Speak the text
+  window.speechSynthesis.speak(utterance);
+}
+
+function stopSpeech() {
+  window.speechSynthesis.cancel();
+  isSpeaking = false;
+  const btn = document.getElementById('ttsBtn');
+  btn.disabled = false;
+  btn.textContent = '🎙️ Generate & Play Audio';
+  const area = document.getElementById('tts-result');
+  area.innerHTML = '<div class="result-card"><div class="result-title">⏹️ Stopped</div></div>';
+}
+
+// Update rate display
+document.addEventListener('DOMContentLoaded', function() {
+  const rateSlider = document.getElementById('speechRate');
+  const rateValue = document.getElementById('rateValue');  
+  if (rateSlider && rateValue) {
+    rateSlider.addEventListener('input', function() {
+      rateValue.textContent = this.value;
+    });
+  }
+  
+  // Load voices when page loads
+  if (window.speechSynthesis) {
+    window.speechSynthesis.getVoices();
+  }
+});
 
   // VISION CHAT
   let visionImageBase64 = null;

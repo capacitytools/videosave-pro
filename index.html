@@ -47,14 +47,7 @@
     .featured-ebook p { color: #888; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
     .cta-button { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; padding: 16px 32px; border-radius: 14px; font-size: 1.1rem; font-weight: 700; text-decoration: none; display: inline-block; margin-top: 20px; box-shadow: 0 4px 20px rgba(239,68,68,0.4); }
     .script-output { background: #0a0a0a; border: 1px solid #1a1a1a; border-radius: 12px; padding: 20px; margin: 16px 0; white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 0.95rem; line-height: 1.8; max-height: 500px; overflow-y: auto; }
-    .tab-container { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }    .tab-btn { flex: 1; background: #0a0a0a; border: 2px solid #1a1a1a; color: #888; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: 600; min-width: 100px; }
-    .tab-btn.active { border-color: #7c5cfc; color: #fff; background: rgba(124,92,252,0.1); }
-    .tab-content { display: none; } .tab-content.active { display: block; }
-    #imagePreview { max-width: 100%; border-radius: 12px; margin: 16px 0; display: none; }
-    .reader-controls { position: fixed; bottom: 20px; right: 20px; background: #111; border: 2px solid #7c5cfc; border-radius: 50px; padding: 15px 25px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    .reader-controls button { width: auto; margin: 0 5px; }
-    footer { border-top: 1px solid #1a1a1a; padding: 32px; text-align: center; color: #888; font-size: 0.85rem; margin-top: 50px; }
-  </style>
+    footer { border-top: 1px solid #1a1a1a; padding: 32px; text-align: center; color: #888; font-size: 0.85rem; margin-top: 50px; }  </style>
 </head>
 <body>
 
@@ -66,11 +59,11 @@
 <div class="menu-dropdown" id="menuDropdown">
   <a onclick="showView('home')">🏠 Home</a>
   <a onclick="showView('prof')">🎓 Prof. Update</a>
-  <a onclick="showView('downloader')">📥 Universal Downloader</a>
+  <a onclick="showView('downloader')"> Universal Downloader</a>
   <a onclick="showView('imagegen')">🎨 Image Generation</a>
   <a onclick="showView('tts')">🎙️ Speechster</a>
   <a onclick="showView('vision')">👁️ VisionChat</a>
-  <a onclick="showView('ebook')">📖 Ebook Builder</a>
+  <a onclick="showView('ebook')"> Ebook Builder</a>
   <a onclick="showView('script')">🎬 Video Script</a>
   <a onclick="showView('resume')">📝 Resume Builder</a>
   <a onclick="showView('meme')">😂 Meme Generator</a>
@@ -85,31 +78,32 @@
   </section>
   <div class="tools-grid">
     <div class="tool-card" onclick="showView('prof')"><div class="tool-icon">🎓</div><h3>Prof. Update</h3><p>AI with 20 years experience.</p></div>
-    <div class="tool-card" onclick="showView('script')"><div class="tool-icon">🎬</div><h3>Video Script Gen</h3><p>AI scripts for YouTube.</p></div>
+    <div class="tool-card" onclick="showView('script')"><div class="tool-icon"></div><h3>Video Script Gen</h3><p>AI scripts for YouTube.</p></div>
     <div class="tool-card" onclick="showView('resume')"><div class="tool-icon">📝</div><h3>Resume Builder</h3><p>Professional CVs.</p></div>
     <div class="tool-card" onclick="showView('meme')"><div class="tool-icon">😂</div><h3>Meme Generator</h3><p>Create viral memes.</p></div>
     <div class="tool-card" onclick="showView('study')"><div class="tool-icon">📚</div><h3>Study Summarizer</h3><p>Upload PDFs & get notes.</p></div>
     <div class="tool-card" onclick="showView('imagegen')"><div class="tool-icon">🎨</div><h3>Image Generation</h3><p>Generate & Analyze.</p></div>
-    <div class="tool-card" onclick="showView('tts')"><div class="tool-icon">🎙️</div><h3>Speechster</h3><p>TTS & Document Reader.</p></div>
+    <div class="tool-card" onclick="showView('tts')"><div class="tool-icon">🎙️</div><h3>Speechster</h3><p>Text to Speech MP3.</p></div>
     <div class="tool-card" onclick="showView('downloader')"><div class="tool-icon">📥</div><h3>Universal Downloader</h3><p>Download videos.</p></div>
     <div class="tool-card" onclick="showView('vision')"><div class="tool-icon">👁️</div><h3>VisionChat</h3><p>AI image analysis.</p></div>
     <div class="tool-card" onclick="showView('ebook')"><div class="tool-icon">📖</div><h3>Ebook Builder</h3><p>PDF, DOCX, KDP.</p></div>
   </div>
   <div class="featured-ebook">
-    <div class="featured-badge">🔥 FEATURED EBOOK</div>    <div class="ebook-icon">📷</div>
+    <div class="featured-badge">🔥 FEATURED EBOOK</div>
+    <div class="ebook-icon">📷</div>
     <h2>The AI Fashion Photography Kit</h2>
     <p>Master the prompt formulas behind 8K, DSLR-quality fashion imagery.</p>
     <a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a>
     <p style="margin-top:16px;font-size:0.8rem;color:#888;">WhatsApp: <a href="https://wa.link/tzxsay" style="color:#22d3a5;">Click Here</a></p>
   </div>
 </div>
-
 <!-- PROF. UPDATE -->
 <div class="view" id="view-prof">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>🎓 Prof. Update</h1>
     <div class="card"><textarea id="profQuestion" style="min-height:150px;" placeholder="Ask Prof. Update anything..."></textarea><button id="profBtn" onclick="askProf()">🎓 Ask Prof. Update</button></div>
     <div class="result-area" id="prof-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
 
@@ -119,136 +113,74 @@
   <section class="hero" style="padding-top:10px;"><h1>📥 Universal Downloader</h1>
     <div class="card"><input id="videoUrl" type="url" placeholder="Paste video URL here…"/><button id="dlBtn" onclick="startDownload()">Download</button></div>
     <div class="result-area" id="result-area"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
 
-<!-- IMAGE GENERATION & ANALYSIS -->
+<!-- IMAGE GENERATION -->
 <div class="view" id="view-imagegen">
   <a class="back-link" onclick="showView('home')">← Back</a>
-  <section class="hero" style="padding-top:10px;"><h1>🎨 Image Generation & Analysis</h1>
+  <section class="hero" style="padding-top:10px;"><h1>🎨 Image Generation</h1>
     <div class="card">
-      <div class="tab-container">
-        <div class="tab-btn active" onclick="switchImgTab('generate', this)">Generate Image</div>
-        <div class="tab-btn" onclick="switchImgTab('analyze', this)">Analyze Image</div>
-      </div>
-      
-      <div id="img-tab-generate" class="tab-content active">
-        <textarea id="imgPrompt" placeholder="Describe the image to generate..."></textarea>
-        <button id="imgBtn" onclick="generateImage()">Generate Image</button>
-      </div>
-      
-      <div id="img-tab-analyze" class="tab-content">
-        <input type="file" id="analyzeImage" accept="image/*" onchange="previewImage(event)"/>
-        <img id="imagePreview" alt="Preview"/>
-        <button onclick="analyzeUploadedImage()">🔍 Analyze This Image</button>
-        <button onclick="getPromptFromImage()" style="background:linear-gradient(135deg,#f59e0b,#d97706);">📝 Get Prompt from Image</button>
-      </div>
+      <textarea id="imgPrompt" placeholder="Describe the image to generate..."></textarea>
+      <button id="imgBtn" onclick="generateImage()">Generate Image</button>
     </div>
     <div class="result-area" id="img-result"></div>
-  </section></div>
-
-<!-- SPEECHSTER - FIXED VERSION -->
-<div class="view" id="view-tts">
-  <a class="back-link" onclick="showView('home')">← Back</a>
-  <section class="hero" style="padding-top:10px;"><h1>🎙️ Speechster</h1>
-    <div class="card">
-      <textarea id="ttsText" placeholder="Type or paste your text here..." style="min-height:150px;"></textarea>
-      
-      <div class="tab-container">
-        <div class="tab-btn active" onclick="switchTtsTab('listen', this)">1. Listen</div>
-        <div class="tab-btn" onclick="switchTtsTab('download', this)">2. Download MP3</div>
-        <div class="tab-btn" onclick="switchTtsTab('clone', this)">3. Voice Styles</div>
-        <div class="tab-btn" onclick="switchTtsTab('reader', this)">4. Document Reader</div>
-      </div>
-      
-      <!-- TAB 1: LISTEN -->
-      <div id="tts-tab-listen" class="tab-content active">
-        <select id="ttsVoiceListen">
-          <option value="0">English (US - Default)</option>
-          <option value="1">English (UK)</option>
-          <option value="2">English (Australia)</option>
-          <option value="3">English (India)</option>
-          <option value="4">Spanish</option>
-          <option value="5">French</option>
-          <option value="6">German</option>
-          <option value="7">Italian</option>
-          <option value="8">Portuguese</option>
-          <option value="9">Russian</option>
-          <option value="10">Japanese</option>
-          <option value="11">Korean</option>
-          <option value="12">Chinese</option>
-        </select>
-        <button onclick="listenText()">🎧 Listen Now</button>
-        <button onclick="stopListening()" style="background:linear-gradient(135deg,#ef4444,#dc2626);">⏹️ Stop</button>
-        <div id="listen-status" style="margin-top:15px; color:#888;"></div>
-      </div>
-      
-      <!-- TAB 2: DOWNLOAD MP3 -->
-      <div id="tts-tab-download" class="tab-content">
-        <select id="ttsVoiceDownload">
-          <option value="en-US">English (US)</option>
-          <option value="en-GB">English (UK)</option>
-          <option value="es-ES">Spanish</option>
-          <option value="fr-FR">French</option>
-          <option value="de-DE">German</option>
-          <option value="it-IT">Italian</option>
-          <option value="pt-BR">Portuguese</option>
-          <option value="ru-RU">Russian</option>
-          <option value="ja-JP">Japanese</option>
-          <option value="ko-KR">Korean</option>
-          <option value="zh-CN">Chinese</option>
-        </select>
-        <button onclick="downloadText()">🎙️ Generate & Download MP3</button>
-        <div id="download-links" style="margin-top:15px;"></div>
-      </div>
-      
-      <!-- TAB 3: VOICE STYLES -->
-      <div id="tts-tab-clone" class="tab-content">
-        <select id="ttsVoiceClone">
-          <option value="0">Deep Male Voice</option>
-          <option value="1">Soft Female Voice</option>
-          <option value="2">Professional Narrator</option>
-          <option value="3">Young Voice</option>
-          <option value="4">British Accent</option>
-          <option value="5">Australian Accent</option>
-        </select>
-        <input type="range" id="speechRate" min="0.5" max="1.5" step="0.1" value="1" style="width:100%;margin:15px 0;">
-        <label>Speed: <span id="rateValue">1.0</span>x</label>
-        <button onclick="cloneText()">🎭 Generate with Voice Style</button>
-        <button onclick="stopListening()" style="background:linear-gradient(135deg,#ef4444,#dc2626);">⏹️ Stop</button>
-        <div id="clone-status" style="margin-top:15px; color:#888;"></div>
-      </div>
-      
-      <!-- TAB 4: DOCUMENT READER -->
-      <div id="tts-tab-reader" class="tab-content">
-        <input type="file" id="readerFile" accept=".txt,.pdf,.doc,.docx,.epub" onchange="loadDocument(event)"/>
-        <div id="readerContent" style="margin-top:15px; padding:15px; background:#0a0a0a; border-radius:10px; max-height:300px; overflow-y:auto; display:none;"></div>
-        <select id="readerVoice">
-          <option value="0">English (US)</option>
-          <option value="1">English (UK)</option>
-          <option value="4">Spanish</option>
-          <option value="5">French</option>
-          <option value="6">German</option>
-        </select>
-        <button onclick="startReadingDocument()">📖 Start Reading (Screen-Off Mode)</button>
-        <button onclick="stopReading()" style="background:linear-gradient(135deg,#ef4444,#dc2626);">⏹️ Stop Reading</button>
-        <div id="reader-controls-info" style="margin-top:10px; color:#888; font-size:0.9rem;"></div>
-      </div>
-    </div>
-    <div class="result-area" id="tts-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
+
+<!-- SPEECHSTER (SIMPLE VERSION) -->
+<div class="view" id="view-tts">
+  <a class="back-link" onclick="showView('home')">← Back</a>
+  <section class="hero" style="padding-top:10px;"><h1>️ Speechster</h1>
+    <div class="card">
+      <textarea id="ttsText" placeholder="Type or paste your text here..." style="min-height:150px;"></textarea>
+      <select id="ttsVoice">
+        <option value="Brian">Brian (Male - UK)</option>
+        <option value="Amy">Amy (Female - UK)</option>
+        <option value="Emma">Emma (Female - UK)</option>
+        <option value="Matthew">Matthew (Male - US)</option>
+        <option value="Joey">Joey (Male - US)</option>
+        <option value="Justin">Justin (Male - US)</option>
+        <option value="Joanna">Joanna (Female - US)</option>
+        <option value="Salli">Salli (Female - US)</option>
+        <option value="Kimberly">Kimberly (Female - US)</option>        <option value="Ivy">Ivy (Female - US)</option>
+        <option value="Russell">Russell (Male - AU)</option>
+        <option value="Nicole">Nicole (Female - AU)</option>
+        <option value="Aditi">Aditi (Female - India)</option>
+        <option value="Raveena">Raveena (Female - India)</option>
+        <option value="Celine">Celine (Female - French)</option>
+        <option value="Mathieu">Mathieu (Male - French)</option>
+        <option value="Marlene">Marlene (Female - German)</option>
+        <option value="Hans">Hans (Male - German)</option>
+        <option value="Conchita">Conchita (Female - Spanish)</option>
+        <option value="Enrique">Enrique (Male - Spanish)</option>
+        <option value="Carla">Carla (Female - Italian)</option>
+        <option value="Giorgio">Giorgio (Male - Italian)</option>
+        <option value="Vitoria">Vitoria (Female - Portuguese)</option>
+        <option value="Ricardo">Ricardo (Male - Portuguese)</option>
+        <option value="Mizuki">Mizuki (Female - Japanese)</option>
+        <option value="Seoyeon">Seoyeon (Female - Korean)</option>
+        <option value="Zhiyu">Zhiyu (Female - Chinese)</option>
+      </select>
+      <button id="ttsBtn" onclick="generateSpeech()">🎙️ Generate Audio</button>
+    </div>
+    <div class="result-area" id="tts-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
+</div>
+
 <!-- VISION CHAT -->
 <div class="view" id="view-vision">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>👁️ VisionChat</h1>
     <div class="card">
-      <input type="file" id="visionFile" accept="image/*" onchange="previewVisionImage(event)"/>
-      <img id="visionImagePreview" style="max-width:100%; border-radius:12px; margin:16px 0; display:none;"/>
-      <input type="text" id="visionPrompt" placeholder="Ask something about the image (e.g., 'What is in this image?')"/>
-      <button id="visionBtn" onclick="analyzeImageVision()">👁️ Analyze Image</button>
+      <input type="text" id="visionPrompt" placeholder="Describe the image or ask a question about it..."/>
+      <button id="visionBtn" onclick="analyzeImageVision()">👁️ Analyze with AI</button>
     </div>
     <div class="result-area" id="vision-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
 
@@ -262,12 +194,13 @@
       <textarea id="ebookContent" style="min-height:220px;" placeholder="Paste your content here..."></textarea>
       <button onclick="generateEbookPDF()">📄 Download PDF</button>
       <button onclick="generateEbookDOCX()" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">📝 Download DOCX</button>
-      <button onclick="generateEbookKDP()" style="background:linear-gradient(135deg,#f59e0b,#d97706);">📚 Amazon KDP Format</button>
-    </div>
-    <div class="result-area" id="ebook-result"></div>  </section>
+      <button onclick="generateEbookKDP()" style="background:linear-gradient(135deg,#f59e0b,#d97706);">📚 Amazon KDP Format</button>    </div>
+    <div class="result-area" id="ebook-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge"> FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
 </div>
 
-<!-- OTHER TOOLS (Script, Resume, Meme, Study - same as before) -->
+<!-- VIDEO SCRIPT -->
 <div class="view" id="view-script">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>🎬 AI Video Script Generator</h1>
@@ -278,9 +211,11 @@
       <button id="scriptBtn" onclick="generateScript()">🎬 Generate Script</button>
     </div>
     <div class="result-area" id="script-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
 
+<!-- RESUME -->
 <div class="view" id="view-resume">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>📝 AI Resume Builder</h1>
@@ -291,12 +226,14 @@
       <textarea id="resumeExperience" placeholder="Work Experience"></textarea>
       <textarea id="resumeEducation" placeholder="Education"></textarea>
       <input id="resumeSkills" placeholder="Skills (comma-separated)"/>
-      <button onclick="generateResume()">📝 Generate Resume PDF</button>
+      <button onclick="generateResume()"> Generate Resume PDF</button>
     </div>
     <div class="result-area" id="resume-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
 
+<!-- MEME -->
 <div class="view" id="view-meme">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>😂 AI Meme Generator</h1>
@@ -306,14 +243,16 @@
       <input id="memeTop" placeholder="Top Text" oninput="updateMeme()"/>
       <input id="memeBottom" placeholder="Bottom Text" oninput="updateMeme()"/>
       <button onclick="aiSuggestMeme()">🤖 AI Suggest Caption</button>
-      <button onclick="downloadMeme()">⬇ Download Meme</button>
-    </div>
+      <button onclick="downloadMeme()">⬇ Download Meme</button>    </div>
     <div class="result-area" id="meme-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
 
+<!-- STUDY SUMMARIZER -->
 <div class="view" id="view-study">
-  <a class="back-link" onclick="showView('home')">← Back</a>  <section class="hero" style="padding-top:10px;"><h1>📚 AI Study Notes Summarizer</h1>
+  <a class="back-link" onclick="showView('home')">← Back</a>
+  <section class="hero" style="padding-top:10px;"><h1>📚 AI Study Notes Summarizer</h1>
     <div class="card">
       <input type="file" id="studyFile" accept=".pdf,.txt,.doc,.docx" onchange="handleStudyFile(event)"/>
       <textarea id="studyText" style="min-height:200px;" placeholder="Paste text or upload PDF..."></textarea>
@@ -321,6 +260,7 @@
       <button id="studyBtn" onclick="summarizeStudy()">📚 Generate Notes</button>
     </div>
     <div class="result-area" id="study-result"></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
 
@@ -335,436 +275,6 @@
     document.getElementById('view-' + id).classList.add('active');
     document.getElementById('menuDropdown').classList.remove('open');
     window.scrollTo(0, 0);
-  }
-  
-  function switchImgTab(tab, btn) {
-    document.querySelectorAll('#view-imagegen .tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('#view-imagegen .tab-content').forEach(c => c.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('img-tab-' + tab).classList.add('active');
-  }
-  
-  function switchTtsTab(tab, btn) {
-    document.querySelectorAll('#view-tts .tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('#view-tts .tab-content').forEach(c => c.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tts-tab-' + tab).classList.add('active');
-  }
-
-  // IMAGE GENERATION
-  function generateImage() {
-    const prompt = document.getElementById('imgPrompt').value.trim();
-    const btn = document.getElementById('imgBtn');
-    const area = document.getElementById('img-result');
-    if (!prompt) { alert('Please describe an image.'); return; }
-    btn.disabled = true; btn.textContent = 'Generating…';
-    area.innerHTML = '<div class="result-card">⏳ Generating...</div>';
-    const imgUrl = 'https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt)+'?width=1024&height=1024&model=flux&nologo=true';
-    setTimeout(() => {
-      area.innerHTML = '<div class="result-card"><div class="result-title">🎨 Image Ready</div><img src="'+imgUrl+'" style="width:100%;border-radius:12px;margin-bottom:14px;"/><a class="btn-get" href="'+imgUrl+'" target="_blank">⬇ Download</a></div>';
-      btn.disabled = false; btn.textContent = 'Generate Image';    }, 1500);
-  }
-
-  // IMAGE ANALYSIS
-  let uploadedImageBase64 = null;
-  
-  function previewImage(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      uploadedImageBase64 = e.target.result;
-      const img = document.getElementById('imagePreview');
-      img.src = uploadedImageBase64;
-      img.style.display = 'block';
-    };
-    reader.readAsDataURL(file);
-  }
-  
-  async function analyzeUploadedImage() {
-    if (!uploadedImageBase64) { alert('Please upload an image first.'); return; }
-    const area = document.getElementById('img-result');
-    area.innerHTML = '<div class="result-card">🔍 Analyzing image...</div>';
-    try {
-      const prompt = 'Describe this image in detail. What do you see? What is the style, colors, composition, and subject matter?';
-      const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent(prompt));
-      const analysis = await res.text();
-      area.innerHTML = '<div class="result-card"><div class="result-title">🔍 Image Analysis</div><div class="script-output">'+analysis+'</div></div>';
-    } catch (err) {
-      area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>';
-    }
-  }
-  
-  async function getPromptFromImage() {
-    if (!uploadedImageBase64) { alert('Please upload an image first.'); return; }
-    const area = document.getElementById('img-result');
-    area.innerHTML = '<div class="result-card">📝 Extracting prompt...</div>';
-    try {
-      const prompt = 'Analyze this image and write a detailed AI prompt that could recreate a similar image. Include details about subject, style, lighting, composition, colors, mood, and any technical specifications.';
-      const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent(prompt));
-      const extractedPrompt = await res.text();
-      area.innerHTML = '<div class="result-card"><div class="result-title">📝 Extracted Prompt</div><div class="script-output">'+extractedPrompt+'</div><button onclick="navigator.clipboard.writeText(\''+extractedPrompt.replace(/'/g, "\\'")+'\');alert(\'Copied!\')" style="margin-top:12px;">📋 Copy Prompt</button></div>';
-    } catch (err) {
-      area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>';
-    }
-  }
-
-  // VISION CHAT - FIXED
-  let visionImageBase64 = null;
-    function previewVisionImage(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      visionImageBase64 = e.target.result;
-      const img = document.getElementById('visionImagePreview');
-      img.src = visionImageBase64;
-      img.style.display = 'block';
-    };
-    reader.readAsDataURL(file);
-  }
-  
-  async function analyzeImageVision() {
-    if (!visionImageBase64) { alert('Please upload an image first.'); return; }
-    const prompt = document.getElementById('visionPrompt').value.trim() || 'What is in this image?';
-    const btn = document.getElementById('visionBtn');
-    const area = document.getElementById('vision-result');
-    
-    btn.disabled = true; btn.textContent = 'Analyzing…';
-    area.innerHTML = '<div class="result-card">👁️ Analyzing image with AI...</div>';
-    
-    try {
-      const fullPrompt = `Look at this image and answer: ${prompt}. Be detailed and specific.`;
-      const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent(fullPrompt));
-      const analysis = await res.text();
-      area.innerHTML = '<div class="result-card"><div class="result-title">👁️ Analysis Result</div><div class="script-output">'+analysis+'</div></div>';
-    } catch (err) {
-      area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>';
-    } finally {
-      btn.disabled = false; btn.textContent = '👁️ Analyze Image';
-    }
-  }
-
-// SPEECHSTER - FIXED FUNCTIONS
-let isSpeaking = false;
-let readerText = '';
-let isReading = false;
-
-function switchTtsTab(tab, btn) {
-  document.querySelectorAll('#view-tts .tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('#view-tts .tab-content').forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('tts-tab-' + tab).classList.add('active');
-}
-
-// TAB 1: LISTEN - Using Web Speech API
-function listenText() {
-  const text = document.getElementById('ttsText').value.trim();
-  const voiceIndex = document.getElementById('ttsVoiceListen').value;
-  const status = document.getElementById('listen-status');
-  
-  if (!text) { alert('Please enter text.'); return; }
-  if (isSpeaking) { alert('Already speaking. Stop first.'); return; }
-  
-  const utterance = new SpeechSynthesisUtterance(text);
-  
-  // Set voice based on index
-  const voices = window.speechSynthesis.getVoices();
-  const voiceOptions = ['en-US', 'en-GB', 'en-AU', 'en-IN', 'es-ES', 'fr-FR', 'de-DE', 'it-IT', 'pt-BR', 'ru-RU', 'ja-JP', 'ko-KR', 'zh-CN'];
-  const selectedLang = voiceOptions[voiceIndex] || 'en-US';
-  
-  const preferredVoice = voices.find(v => v.lang.startsWith(selectedLang.split('-')[0]));
-  if (preferredVoice) utterance.voice = preferredVoice;
-  
-  utterance.rate = 1.0;
-  utterance.pitch = 1.0;
-  
-  utterance.onstart = function() {
-    isSpeaking = true;
-    status.innerHTML = '🔊 Playing... <span style="color:#22d3a5;">(You can turn off your screen)</span>';
-  };
-  
-  utterance.onend = function() {
-    isSpeaking = false;
-    status.innerHTML = '✅ Finished!';
-  };
-  
-  utterance.onerror = function(e) {
-    isSpeaking = false;
-    status.innerHTML = '❌ Error: ' + e.error;
-  };
-  
-  window.speechSynthesis.speak(utterance);}
-
-function stopListening() {
-  window.speechSynthesis.cancel();
-  isSpeaking = false;
-  document.getElementById('listen-status').innerHTML = '⏹️ Stopped';
-  document.getElementById('clone-status').innerHTML = '⏹️ Stopped';
-}
-
-// TAB 2: DOWNLOAD MP3 - Using external service
-function downloadText() {
-  const text = document.getElementById('ttsText').value.trim();
-  const lang = document.getElementById('ttsVoiceDownload').value;
-  const container = document.getElementById('download-links');
-  
-  if (!text) { alert('Please enter text.'); return; }
-  
-  container.innerHTML = '<div class="result-card">⏳ Generating MP3...</div>';
-  
-  // Use TTSMP3.com API (free, no key required)
-  const voiceMap = {
-    'en-US': 'Matthew', 'en-GB': 'Brian', 'es-ES': 'Enrique',
-    'fr-FR': 'Mathieu', 'de-DE': 'Hans', 'it-IT': 'Giorgio',
-    'pt-BR': 'Ricardo', 'ru-RU': 'Maxim', 'ja-JP': 'Takumi',
-    'ko-KR': 'Seoyeon', 'zh-CN': 'Zhiyu'
-  };
-  
-  const voice = voiceMap[lang] || 'Matthew';
-  const encodedText = encodeURIComponent(text.substring(0, 300)); // Limit to 300 chars
-  const ttsUrl = `https://api.ttsmp3.com/makemp3_new?voice=${voice}&text=${encodedText}&source=aws_polly`;
-  
-  setTimeout(() => {
-    container.innerHTML = `
-      <div class="result-card">
-        <div class="result-title">⬇ Download MP3</div>
-        <p style="color:#888;margin-bottom:12px;font-size:0.9rem;">Note: Free version limited to 300 characters</p>
-        <a class="btn-get" href="${ttsUrl}" target="_blank">🎵 Download Audio</a>
-        <p style="margin-top:10px;color:#888;font-size:0.85rem;">Or right-click and "Save link as..."</p>
-      </div>
-    `;
-  }, 1500);
-}
-
-// TAB 3: VOICE STYLES
-function cloneText() {
-  const text = document.getElementById('ttsText').value.trim();
-  const voiceIndex = document.getElementById('ttsVoiceClone').value;
-  const rate = parseFloat(document.getElementById('speechRate').value);
-  const status = document.getElementById('clone-status');
-    if (!text) { alert('Please enter text.'); return; }
-  if (isSpeaking) { alert('Already speaking. Stop first.'); return; }
-  
-  const utterance = new SpeechSynthesisUtterance(text);
-  const voices = window.speechSynthesis.getVoices();
-  
-  // Apply voice style based on selection
-  let selectedVoice = null;
-  switch(voiceIndex) {
-    case '0': // Deep Male
-      selectedVoice = voices.find(v => v.name.includes('Male') || v.name.includes('David') || v.lang === 'en-US');
-      utterance.pitch = 0.8;
-      break;
-    case '1': // Soft Female
-      selectedVoice = voices.find(v => v.name.includes('Female') || v.name.includes('Zira') || v.lang === 'en-US');
-      utterance.pitch = 1.2;
-      break;
-    case '2': // Professional
-      selectedVoice = voices.find(v => v.lang === 'en-US');
-      utterance.pitch = 1.0;
-      utterance.rate = 0.9;
-      break;
-    case '3': // Young
-      selectedVoice = voices.find(v => v.lang === 'en-US');
-      utterance.pitch = 1.3;
-      utterance.rate = 1.1;
-      break;
-    case '4': // British
-      selectedVoice = voices.find(v => v.lang === 'en-GB');
-      break;
-    case '5': // Australian
-      selectedVoice = voices.find(v => v.lang === 'en-AU');
-      break;
-  }
-  
-  if (selectedVoice) utterance.voice = selectedVoice;
-  utterance.rate = rate;
-  
-  utterance.onstart = function() {
-    isSpeaking = true;
-    status.innerHTML = '🔊 Playing with voice style...';
-  };
-  
-  utterance.onend = function() {
-    isSpeaking = false;
-    status.innerHTML = '✅ Finished!';
-  };
-  
-  utterance.onerror = function(e) {
-    isSpeaking = false;    status.innerHTML = '❌ Error: ' + e.error;
-  };
-  
-  window.speechSynthesis.speak(utterance);
-}
-
-// Update rate display
-document.getElementById('speechRate')?.addEventListener('input', function() {
-  document.getElementById('rateValue').textContent = this.value;
-});
-
-// TAB 4: DOCUMENT READER
-async function loadDocument(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  
-  const readerContent = document.getElementById('readerContent');
-  readerContent.style.display = 'block';
-  readerContent.innerHTML = 'Loading...';
-  
-  if (file.type === 'application/pdf') {
-    try {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-      let fullText = '';
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const textContent = await page.getTextContent();
-        fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
-      }
-      readerText = fullText;
-      readerContent.textContent = fullText.substring(0, 500) + '... (' + fullText.length + ' characters)';
-    } catch (err) {
-      readerContent.textContent = 'Error: ' + err.message;
-    }
-  } else {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      readerText = e.target.result;
-      readerContent.textContent = readerText.substring(0, 500) + '... (' + readerText.length + ' characters)';
-    };
-    reader.readAsText(file);
-  }
-}
-
-function startReadingDocument() {
-  if (!readerText) { alert('Please load a document first.'); return; }
-  if (isReading) { alert('Already reading. Stop first.'); return; }
-  
-  const voiceIndex = document.getElementById('readerVoice').value;  const info = document.getElementById('reader-controls-info');
-  
-  isReading = true;
-  info.innerHTML = '📖 Reading... <span style="color:#22d3a5;">(Screen can be off)</span>';
-  
-  const chunks = readerText.match(/[^\.!\?]+[\.!\?]+/g) || [readerText];
-  let chunkIndex = 0;
-  
-  function readNext() {
-    if (!isReading || chunkIndex >= chunks.length) {
-      isReading = false;
-      info.innerHTML = '✅ Finished reading!';
-      return;
-    }
-    
-    const utterance = new SpeechSynthesisUtterance(chunks[chunkIndex]);
-    const voices = window.speechSynthesis.getVoices();
-    const voiceOptions = ['en-US', 'en-GB', 'en-AU', 'es-ES', 'fr-FR', 'de-DE'];
-    const selectedLang = voiceOptions[voiceIndex] || 'en-US';
-    const preferredVoice = voices.find(v => v.lang.startsWith(selectedLang.split('-')[0]));
-    if (preferredVoice) utterance.voice = preferredVoice;
-    
-    utterance.rate = 0.9;
-    
-    utterance.onend = function() {
-      chunkIndex++;
-      info.innerHTML = `📖 Reading... (${Math.round((chunkIndex/chunks.length)*100)}%)`;
-      setTimeout(readNext, 300);
-    };
-    
-    window.speechSynthesis.speak(utterance);
-  }
-  
-  readNext();
-}
-
-function stopReading() {
-  isReading = false;
-  window.speechSynthesis.cancel();
-  document.getElementById('reader-controls-info').innerHTML = '⏹️ Stopped';
-}
-  // TTS - Listen, Download, Clone (existing functions)
-  function chunkText(text, maxLen = 200) {
-    const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text];
-    const chunks = []; let current = '';
-    for (const s of sentences) {
-      if ((current + s).length <= maxLen) current += s;
-      else { if (current) chunks.push(current.trim()); current = s; }
-    }
-    if (current) chunks.push(current.trim());
-    return chunks;
-  }
-
-  function getTtsUrl(text, lang) {
-    return `https://corsproxy.io/?${encodeURIComponent(`https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${text}`)}`;
-  }
-
-  function listenText() {
-    const text = document.getElementById('ttsText').value.trim();
-    const lang = document.getElementById('ttsVoiceListen').value;
-    const player = document.getElementById('listen-player');
-    if (!text) { alert('Please enter text.'); return; }
-    const chunks = chunkText(text);
-    player.innerHTML = '<audio id="tts-audio" controls autoplay style="width:100%;"></audio>';
-    const audio = document.getElementById('tts-audio');
-    let chunkIndex = 0;
-    function playNext() {
-      if (chunkIndex < chunks.length) {
-        audio.src = getTtsUrl(chunks[chunkIndex], lang);
-        audio.onended = () => { chunkIndex++; playNext(); };
-        audio.play().catch(e => {});
-      } else { player.innerHTML += '<p style="color:#22d3a5;margin-top:10px;">✅ Finished!</p>'; }
-    }
-    playNext();  }
-
-  function downloadText() {
-    const text = document.getElementById('ttsText').value.trim();
-    const lang = document.getElementById('ttsVoiceDownload').value;
-    const container = document.getElementById('download-links');
-    if (!text) { alert('Please enter text.'); return; }
-    const chunks = chunkText(text);
-    let html = '<div class="result-card"><div class="result-title">⬇ Download MP3</div>';
-    chunks.forEach((chunk, i) => { html += `<a class="btn-get" href="${getTtsUrl(chunk, lang)}" target="_blank" download="part_${i+1}.mp3">⬇ Part ${i+1}</a>`; });
-    html += '</div>';
-    container.innerHTML = html;
-  }
-
-  function cloneText() {
-    const text = document.getElementById('ttsText').value.trim();
-    const lang = document.getElementById('ttsVoiceClone').value;
-    const player = document.getElementById('clone-player');
-    if (!text) { alert('Please enter text.'); return; }
-    const chunks = chunkText(text);
-    player.innerHTML = '<audio id="clone-audio" controls autoplay style="width:100%;"></audio>';
-    const audio = document.getElementById('clone-audio');
-    let chunkIndex = 0;
-    function playNext() {
-      if (chunkIndex < chunks.length) {
-        audio.src = getTtsUrl(chunks[chunkIndex], lang);
-        audio.onended = () => { chunkIndex++; playNext(); };
-        audio.play().catch(e => {});
-      } else { player.innerHTML += '<p style="color:#22d3a5;margin-top:10px;">✅ Finished!</p>'; }
-    }
-    playNext();
-  }
-
-  // DOWNLOADER
-  async function startDownload() {
-    const url = document.getElementById("videoUrl").value.trim();
-    const btn = document.getElementById("dlBtn");
-    const area = document.getElementById("result-area");
-    if (!url) { alert("Please enter a URL"); return; }
-    btn.disabled = true; btn.textContent = "Fetching…";
-    area.innerHTML = '<div class="result-card">⏳ Fetching...</div>';
-    try {
-      const res = await fetch('https://api.cobalt.tools/api/json', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: url })
-      });
-      const data = await res.json();
-      if (data.url) { area.innerHTML = `<div class="result-card"><div class="result-title">✅ Ready</div><a class="btn-get" href="${data.url}" target="_blank">⬇ Download</a></div>`; }
-      else { throw new Error("No link found."); }    } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
-    finally { btn.disabled = false; btn.textContent = "Download"; }
   }
 
   // PROF. UPDATE
@@ -783,49 +293,77 @@ function stopReading() {
     } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
     finally { btn.disabled = false; btn.textContent = '🎓 Ask Prof. Update'; }
   }
-
-  // STUDY SUMMARIZER
-  async function handleStudyFile(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const textarea = document.getElementById('studyText');
-    textarea.value = 'Reading...';
-    if (file.type === 'application/pdf') {
-      try {
-        const arrayBuffer = await file.arrayBuffer();
-        const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-        let fullText = '';
-        for (let i = 1; i <= pdf.numPages; i++) {
-          const page = await pdf.getPage(i);
-          const textContent = await page.getTextContent();
-          fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
-        }
-        textarea.value = fullText;
-      } catch (err) { textarea.value = 'Error: ' + err.message; }
-    } else {
-      const reader = new FileReader();
-      reader.onload = e => textarea.value = e.target.result;
-      reader.readAsText(file);
-    }
-  }
-
-  async function summarizeStudy() {
-    const text = document.getElementById('studyText').value.trim();
-    const format = document.getElementById('studyFormat').value;
-    const btn = document.getElementById('studyBtn');    const area = document.getElementById('study-result');
-    if (!text) { alert('Please paste text or upload.'); return; }
-    btn.disabled = true; btn.textContent = 'Summarizing…';
-    area.innerHTML = '<div class="result-card">⏳ AI analyzing...</div>';
-    let prompt = format === 'summary' ? `Summarize:\n\n${text}` : `Extract ${format}:\n\n${text}`;
+  // DOWNLOADER
+  async function startDownload() {
+    const url = document.getElementById("videoUrl").value.trim();
+    const btn = document.getElementById("dlBtn");
+    const area = document.getElementById("result-area");
+    if (!url) { alert("Please enter a URL"); return; }
+    btn.disabled = true; btn.textContent = "Fetching…";
+    area.innerHTML = '<div class="result-card">⏳ Fetching...</div>';
     try {
-      const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent(prompt));
-      const summary = await res.text();
-      area.innerHTML = `<div class="result-card"><div class="result-title">📚 Notes</div><div class="script-output">${summary}</div></div>`;
+      const res = await fetch('https://api.cobalt.tools/api/json', { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify({ url: url }) });
+      const data = await res.json();
+      if (data.url) { area.innerHTML = `<div class="result-card"><div class="result-title">✅ Ready</div><a class="btn-get" href="${data.url}" target="_blank">⬇ Download</a></div>`; }
+      else { throw new Error("No link found."); }
     } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
-    finally { btn.disabled = false; btn.textContent = '📚 Generate Notes'; }
+    finally { btn.disabled = false; btn.textContent = "Download"; }
   }
 
-  // EBOOK - PDF, DOCX, KDP
+  // IMAGE GENERATION
+  function generateImage() {
+    const prompt = document.getElementById('imgPrompt').value.trim();
+    const btn = document.getElementById('imgBtn');
+    const area = document.getElementById('img-result');
+    if (!prompt) { alert('Please describe an image.'); return; }
+    btn.disabled = true; btn.textContent = 'Generating…';
+    area.innerHTML = '<div class="result-card">⏳ Generating...</div>';
+    const imgUrl = 'https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt)+'?width=1024&height=1024&model=flux&nologo=true';
+    setTimeout(() => {
+      area.innerHTML = '<div class="result-card"><div class="result-title">🎨 Image Ready</div><img src="'+imgUrl+'" style="width:100%;border-radius:12px;margin-bottom:14px;"/><a class="btn-get" href="'+imgUrl+'" target="_blank">⬇ Download</a></div>';
+      btn.disabled = false; btn.textContent = 'Generate Image';
+    }, 1500);
+  }
+
+  // SPEECHSTER (SIMPLE & WORKING)
+  function generateSpeech() {
+    const text = document.getElementById('ttsText').value.trim();
+    const voice = document.getElementById('ttsVoice').value;
+    const btn = document.getElementById('ttsBtn');
+    const area = document.getElementById('tts-result');
+    if (!text) { alert('Please type some text first.'); return; }
+    btn.disabled = true; btn.textContent = 'Generating…';
+    area.innerHTML = '<div class="result-card">⏳ Generating audio...</div>';
+    const ttsUrl = `https://api.ttsmp3.com/makemp3_new?voice=${voice}&text=${encodeURIComponent(text)}&source=aws_polly`;
+    setTimeout(() => {
+      area.innerHTML = `
+        <div class="result-card">
+          <div class="result-title">🎧 Audio Ready</div>
+          <audio controls autoplay style="width:100%;margin-bottom:14px;"><source src="${ttsUrl}" type="audio/mpeg">Your browser does not support audio.</audio>
+          <a class="btn-get" href="${ttsUrl}" target="_blank" download="speech.mp3">⬇ Download MP3</a>
+          <a class="btn-get" href="${ttsUrl}" target="_blank">🔊 Play in New Tab</a>        </div>`;
+      btn.disabled = false; btn.textContent = '🎙️ Generate Audio';
+    }, 1000);
+  }
+
+  // VISION CHAT
+  async function analyzeImageVision() {
+    const prompt = document.getElementById('visionPrompt').value.trim();
+    const btn = document.getElementById('visionBtn');
+    const area = document.getElementById('vision-result');
+    if (!prompt) { alert('Please describe the image or ask a question.'); return; }
+    btn.disabled = true; btn.textContent = 'Analyzing…';
+    area.innerHTML = '<div class="result-card">👁️ Analyzing with AI...</div>';
+    try {
+      const fullPrompt = `Act as an expert AI vision analyst. The user is asking about an image: "${prompt}". Provide a detailed, professional analysis or answer.`;
+      const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent(fullPrompt));
+      const analysis = await res.text();
+      area.innerHTML = '<div class="result-card"><div class="result-title">👁️ Analysis Result</div><div class="script-output">'+analysis+'</div></div>';
+    } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
+    finally { btn.disabled = false; btn.textContent = '👁️ Analyze with AI'; }
+  }
+
+  // EBOOK BUILDER
   function generateEbookPDF() {
     const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
     const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
@@ -851,29 +389,18 @@ function stopReading() {
     const content = document.getElementById('ebookContent').value.trim();
     const area = document.getElementById('ebook-result');
     if (!content) { alert('Please paste content.'); return; }
-    
     try {
-      const doc = new docx.Document({
-        sections: [{
-          properties: {},
-          children: [
-            new docx.Paragraph({ text: title, heading: docx.HeadingLevel.HEADING_1, alignment: docx.AlignmentType.CENTER }),
-            new docx.Paragraph({ text: 'by ' + author, alignment: docx.AlignmentType.CENTER, spacing: { after: 400 } }),
-            ...content.split('\n').map(line => new docx.Paragraph({ text: line }))
-          ]
-        }]      });
-      
+      const doc = new docx.Document({        sections: [{ properties: {}, children: [
+          new docx.Paragraph({ text: title, heading: docx.HeadingLevel.HEADING_1, alignment: docx.AlignmentType.CENTER }),
+          new docx.Paragraph({ text: 'by ' + author, alignment: docx.AlignmentType.CENTER, spacing: { after: 400 } }),
+          ...content.split('\n').map(line => new docx.Paragraph({ text: line }))
+        ]}]
+      });
       const blob = await docx.Packer.toBlob(doc);
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = title.replace(/\s+/g, '_') + '.docx';
-      a.click();
-      URL.revokeObjectURL(url);
+      const a = document.createElement('a'); a.href = url; a.download = title.replace(/\s+/g, '_') + '.docx'; a.click();
       area.innerHTML = '<div class="result-card"><div class="result-title">✅ DOCX Downloaded!</div></div>';
-    } catch (err) {
-      area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>';
-    }
+    } catch (err) { area.innerHTML = '<div class="error-card"> '+err.message+'</div>'; }
   }
 
   function generateEbookKDP() {
@@ -895,11 +422,12 @@ function stopReading() {
     const area = document.getElementById('script-result');
     if (!topic) { alert('Please enter a topic.'); return; }
     btn.disabled = true; btn.textContent = 'Generating…';
-    area.innerHTML = '<div class="result-card">⏳ Writing...</div>';
+    area.innerHTML = '<div class="result-card"> Writing...</div>';
     const prompt = `Write a ${tone} ${platform} script about "${topic}". Structure: HOOK, INTRODUCTION, MAIN CONTENT (3-5 points), CALL TO ACTION, HASHTAGS. Plain text, sound human.`;
     try {
       const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent(prompt));
-      const script = await res.text();
+      let script = await res.text();
+      script = script.replace(/\*\*/g, '').replace(/\*/g, ''); // Remove markdown
       area.innerHTML = `<div class="result-card"><div class="result-title">🎬 Script</div><div class="script-output">${script}</div></div>`;
     } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
     finally { btn.disabled = false; btn.textContent = '🎬 Generate Script'; }
@@ -910,8 +438,8 @@ function stopReading() {
     const name = document.getElementById('resumeName').value.trim() || 'Name';
     const job = document.getElementById('resumeJob').value.trim() || 'Job';
     const email = document.getElementById('resumeEmail').value.trim();
-    const phone = document.getElementById('resumePhone').value.trim();    const summary = document.getElementById('resumeSummary').value.trim();
-    const exp = document.getElementById('resumeExperience').value.trim();
+    const phone = document.getElementById('resumePhone').value.trim();
+    const summary = document.getElementById('resumeSummary').value.trim();    const exp = document.getElementById('resumeExperience').value.trim();
     const edu = document.getElementById('resumeEducation').value.trim();
     const skills = document.getElementById('resumeSkills').value.trim();
     const area = document.getElementById('resume-result');
@@ -959,8 +487,8 @@ function stopReading() {
   }
   async function aiSuggestMeme() {
     const area = document.getElementById('meme-result');
-    area.innerHTML = '<div class="result-card">🤖 Thinking...</div>';    try {
-      const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent('Give ONE funny meme caption. Format: TOP: [text] BOTTOM: [text]'));
+    area.innerHTML = '<div class="result-card">🤖 Thinking...</div>';
+    try {      const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent('Give ONE funny meme caption. Format: TOP: [text] BOTTOM: [text]'));
       const s = await res.text();
       const t = s.match(/TOP:\s*(.+)/i); const b = s.match(/BOTTOM:\s*(.+)/i);
       if (t) document.getElementById('memeTop').value = t[1].trim();
@@ -971,6 +499,57 @@ function stopReading() {
   }
   function downloadMeme() {
     const a = document.createElement('a'); a.download = 'meme.png'; a.href = document.getElementById('memeCanvas').toDataURL(); a.click();
+  }
+
+  // STUDY SUMMARIZER (WITH COPY BUTTON)
+  async function handleStudyFile(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const textarea = document.getElementById('studyText');
+    textarea.value = 'Reading...';
+    if (file.type === 'application/pdf') {
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+        let fullText = '';
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const textContent = await page.getTextContent();
+          fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
+        }
+        textarea.value = fullText;
+      } catch (err) { textarea.value = 'Error: ' + err.message; }
+    } else {
+      const reader = new FileReader();
+      reader.onload = e => textarea.value = e.target.result;
+      reader.readAsText(file);
+    }
+  }
+
+  async function summarizeStudy() {
+    const text = document.getElementById('studyText').value.trim();
+    const format = document.getElementById('studyFormat').value;
+    const btn = document.getElementById('studyBtn');
+    const area = document.getElementById('study-result');
+    if (!text) { alert('Please paste text or upload.'); return; }
+    btn.disabled = true; btn.textContent = 'Summarizing…';
+    area.innerHTML = '<div class="result-card">⏳ AI analyzing...</div>';
+    let prompt = format === 'summary' ? `Summarize:\n\n${text}` : `Extract ${format}:\n\n${text}`;
+    try {
+      const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent(prompt));
+      const summary = await res.text();      area.innerHTML = `
+        <div class="result-card">
+          <div class="result-title">📚 Study Notes</div>
+          <div class="script-output" id="studyOutputText">${summary}</div>
+          <button onclick="copyStudyText()" style="margin-top:12px;">📋 Copy to Clipboard</button>
+        </div>`;
+    } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
+    finally { btn.disabled = false; btn.textContent = ' Generate Notes'; }
+  }
+
+  function copyStudyText() {
+    const text = document.getElementById('studyOutputText').innerText;
+    navigator.clipboard.writeText(text).then(() => alert('✅ Copied to clipboard!'));
   }
 </script>
 </body>

@@ -91,7 +91,7 @@
     <div class="tool-card" onclick="showView('meme')"><div class="tool-icon">😂</div><h3>Meme Generator</h3><p>Create viral memes.</p></div>
     <div class="tool-card" onclick="showView('study')"><div class="tool-icon">📚</div><h3>Study Summarizer</h3><p>Upload PDFs & get notes.</p></div>
     <div class="tool-card" onclick="showView('imagegen')"><div class="tool-icon">🎨</div><h3>Image Generation</h3><p>Generate & Analyze.</p></div>
-    <div class="tool-card" onclick="showView('tts')"><div class="tool-icon">🎙️</div><h3>Speechster</h3><p>Text to Speech MP3.</p></div>
+    <div class="tool-card" onclick="showView('tts')"><div class="tool-icon">🎙️</div><h3>Speechster</h3><p>50+ voices, MP3 download.</p></div>
     <div class="tool-card" onclick="showView('downloader')"><div class="tool-icon">📥</div><h3>Universal Downloader</h3><p>Download videos.</p></div>
     <div class="tool-card" onclick="showView('vision')"><div class="tool-icon">👁️</div><h3>VisionChat</h3><p>AI image analysis.</p></div>
     <div class="tool-card" onclick="showView('ebook')"><div class="tool-icon">📖</div><h3>Ebook Builder</h3><p>PDF, DOCX, KDP.</p></div>
@@ -148,7 +148,7 @@
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>  </section>
 </div>
 
-<!-- SPEECHSTER - 50+ VOICES & UNLIMITED TEXT -->
+<!-- SPEECHSTER - 50+ VOICES & MP3 DOWNLOAD -->
 <div class="view" id="view-tts">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;">
@@ -156,7 +156,7 @@
     <p style="color:#888;margin-bottom:30px;">50+ Voices • Unlimited Text • Free MP3 Download</p>
     
     <div class="card">
-      <textarea id="ttsText" placeholder="Paste your long text here (supports 2000+ characters)..." style="min-height:150px;"></textarea>
+      <textarea id="ttsText" placeholder="Type or paste your text here..." style="min-height:150px;"></textarea>
       
       <select id="ttsVoice">
         <optgroup label="English">
@@ -194,8 +194,7 @@
           <option value="ko">Korean</option>
           <option value="zh-CN">Chinese (Simplified)</option>
           <option value="zh-TW">Chinese (Traditional)</option>
-          <option value="hi">Hindi</option>
-          <option value="th">Thai</option>
+          <option value="hi">Hindi</option>          <option value="th">Thai</option>
           <option value="vi">Vietnamese</option>
           <option value="id">Indonesian</option>
           <option value="ms">Malay</option>
@@ -244,8 +243,8 @@
       <button id="visionBtn" onclick="analyzeImageVision()">👁️ Analyze Image</button>
     </div>
     <div class="result-area" id="vision-result"></div>
-    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
-  </section></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>  </section>
+</div>
 
 <!-- EBOOK BUILDER -->
 <div class="view" id="view-ebook">
@@ -293,8 +292,8 @@
       <button onclick="generateResume()">📝 Generate Resume PDF</button>
     </div>
     <div class="result-area" id="resume-result"></div>
-    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
-  </section></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>  </section>
+</div>
 
 <!-- MEME GENERATOR -->
 <div class="view" id="view-meme">
@@ -342,8 +341,8 @@
   function showView(id) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById('view-' + id).classList.add('active');
-    document.getElementById('menuDropdown').classList.remove('open');
-    window.scrollTo(0, 0);  }
+    document.getElementById('menuDropdown').classList.remove('open');    window.scrollTo(0, 0);
+  }
 
   // HELPER: Clean markdown from AI responses
   function cleanMarkdown(text) {
@@ -440,193 +439,125 @@
     const area = document.getElementById('img-result');
     if (!prompt) { alert('Please describe an image.'); return; }
     btn.disabled = true; btn.textContent = 'Generating…';
-    area.innerHTML = '<div class="result-card">⏳ Generating...</div>';
-    const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${w}&height=${h}&model=flux&nologo=true&seed=${Math.floor(Math.random()*10000)}`;    setTimeout(() => {
+    area.innerHTML = '<div class="result-card">⏳ Generating...</div>';    const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${w}&height=${h}&model=flux&nologo=true&seed=${Math.floor(Math.random()*10000)}`;
+    setTimeout(() => {
       area.innerHTML = `<div class="result-card"><div class="result-title">🎨 Image Ready</div><img src="${imgUrl}" style="width:100%;border-radius:12px;margin-bottom:14px;"/><a class="btn-get" href="${imgUrl}" target="_blank">⬇ Download</a></div>`;
       btn.disabled = false; btn.textContent = 'Generate Image';
     }, 1500);
   }
 
-  // SPEECHSTER (Using ahm7xmakki.com FREE API)
-// HELPER: Split text into chunks of ~200 chars without breaking words
-function splitTextIntoChunks(text, limit = 200) {
-  const chunks = [];
-  let currentChunk = "";
-  const words = text.split(" ");
-  
-  for (let word of words) {
-    if ((currentChunk + word).length > limit) {
-      if (currentChunk) chunks.push(currentChunk.trim());
-      currentChunk = word + " ";
-    } else {
-      currentChunk += word + " ";
+  // SPEECHSTER - 50+ VOICES & MP3 DOWNLOAD
+  function generateLongSpeech() {
+    const text = document.getElementById('ttsText').value.trim();
+    const lang = document.getElementById('ttsVoice').value;
+    const btn = document.getElementById('ttsBtn');
+    const area = document.getElementById('tts-result');
+    
+    if (!text) { 
+      alert('Please type some text first.'); 
+      return; 
     }
-  }
-  if (currentChunk) chunks.push(currentChunk.trim());
-  return chunks;
-}
-
-// SPEECHSTER - Advanced Chunking & Combining for >2000 chars
-// SPEECHSTER - WORKING VERSION (No proxy needed)
-function generateLongSpeech() {
-  const text = document.getElementById('ttsText').value.trim();
-  const lang = document.getElementById('ttsVoice').value;
-  const btn = document.getElementById('ttsBtn');
-  const area = document.getElementById('tts-result');
-  
-  if (!text) { 
-    alert('Please type some text first.'); 
-    return; 
-  }
-  
-  btn.disabled = true; 
-  btn.textContent = 'Generating...';
-  area.innerHTML = '<div class="result-card">⏳ Preparing audio...</div>';
-  
-  // Use Google Translate TTS directly (no proxy)
-  const encodedText = encodeURIComponent(text.substring(0, 200)); // Limit to 200 chars for Google
-  const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${encodedText}`;
-  
-  // For short text (< 200 chars), use direct download
-  if (text.length <= 200) {
-    setTimeout(() => {
-      area.innerHTML = `
-        <div class="result-card">
-          <div class="result-title">🎧 Audio Ready</div>
-          <audio controls autoplay style="width:100%;margin-bottom:14px;">
-            <source src="${ttsUrl}" type="audio/mpeg">
-          </audio>
-          <a class="btn-get" href="${ttsUrl}" download="speech.mp3">⬇ Download MP3</a>
-          <a class="btn-get" href="${ttsUrl}" target="_blank">🔊 Play in New Tab</a>
-          <p style="color:#888;font-size:0.85rem;margin-top:10px;">
-            💡 For longer text (>200 chars), use browser's built-in player below
-          </p>
-        </div>`;
-      
-      // Also play using browser TTS for longer texts
-      if (text.length > 200) {
-        playWithBrowserTTS(text, lang);
-      }
-      
+    
+    btn.disabled = true; 
+    btn.textContent = 'Generating...';
+    area.innerHTML = '<div class="result-card">⏳ Preparing audio...</div>';
+    
+    // Use Google Translate TTS directly (no proxy)
+    const encodedText = encodeURIComponent(text.substring(0, 200)); // Limit to 200 chars for Google
+    const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${encodedText}`;
+    
+    // For short text (< 200 chars), use direct download
+    if (text.length <= 200) {
+      setTimeout(() => {
+        area.innerHTML = `
+          <div class="result-card">
+            <div class="result-title">🎧 Audio Ready</div>
+            <audio controls autoplay style="width:100%;margin-bottom:14px;">
+              <source src="${ttsUrl}" type="audio/mpeg">
+            </audio>
+            <a class="btn-get" href="${ttsUrl}" download="speech.mp3">⬇ Download MP3</a>
+            <a class="btn-get" href="${ttsUrl}" target="_blank">🔊 Play in New Tab</a>
+            <p style="color:#888;font-size:0.85rem;margin-top:10px;">
+              💡 For longer text (>200 chars), use browser's built-in player below
+            </p>
+          </div>`;
+        
+        // Also play using browser TTS for longer texts
+        if (text.length > 200) {
+          playWithBrowserTTS(text, lang);
+        }
+        
+        btn.disabled = false; 
+        btn.textContent = '🎙️ Generate & Download MP3';      }, 1000);
+    } else {
+      // For long text, use browser TTS
+      playWithBrowserTTS(text, lang);
       btn.disabled = false; 
       btn.textContent = '🎙️ Generate & Download MP3';
-    }, 1000);
-  } else {
-    // For long text, use browser TTS
-    playWithBrowserTTS(text, lang);
-    btn.disabled = false; 
-    btn.textContent = '🎙️ Generate & Download MP3';
-  }}
-
-// Helper function for long text using browser's built-in TTS
-function playWithBrowserTTS(text, lang) {
-  const area = document.getElementById('tts-result');
-  
-  // Map language codes to browser voice codes
-  const langMap = {
-    'en': 'en-US', 'en-US': 'en-US', 'en-GB': 'en-GB', 'en-AU': 'en-AU',
-    'en-IN': 'en-IN', 'en-NG': 'en-NG', 'en-ZA': 'en-ZA',
-    'es': 'es-ES', 'fr': 'fr-FR', 'de': 'de-DE', 'it': 'it-IT',
-    'pt': 'pt-BR', 'ru': 'ru-RU', 'ja': 'ja-JP', 'ko': 'ko-KR',
-    'zh-CN': 'zh-CN', 'zh-TW': 'zh-TW', 'hi': 'hi-IN', 'ar': 'ar-SA',
-    'yo': 'en-NG', 'ig': 'en-NG', 'ha': 'en-NG', 'sw': 'sw-KE'
-  };
-  
-  const browserLang = langMap[lang] || 'en-US';
-  
-  const utterance = new SpeechSynthesisUtterance(text);
-  const voices = window.speechSynthesis.getVoices();
-  
-  // Find matching voice
-  const preferredVoice = voices.find(v => v.lang.startsWith(browserLang.split('-')[0]));
-  if (preferredVoice) utterance.voice = preferredVoice;
-  
-  utterance.rate = 1.0;
-  utterance.pitch = 1.0;
-  
-  utterance.onstart = function() {
-    area.innerHTML = `
-      <div class="result-card">
-        <div class="result-title">🎧 Playing Audio</div>
-        <p style="color:#888;margin-bottom:15px;">
-          Playing ${text.length} characters with browser TTS...<br>
-          <small>Note: Browser TTS doesn't support MP3 download for long text, but plays perfectly!</small>
-        </p>
-        <button onclick="window.speechSynthesis.cancel()" style="background:linear-gradient(135deg,#ef4444,#dc2626);">⏹️ Stop</button>
-      </div>
-      <div class="result-card" style="margin-top:15px;">
-        <div class="result-title">📥 For MP3 Download</div>
-        <p style="color:#888;font-size:0.9rem;">
-          For downloadable MP3, please split your text into chunks of 200 characters or less.
-        </p>
-      </div>`;
-  };
-  
-  utterance.onend = function() {
-    area.innerHTML += `<div style="margin-top:15px;padding:15px;background:#0a0a0a;border-radius:10px;border-left:4px solid #22d3a5;"><p style="color:#22d3a5;">✅ Finished playing!</p></div>`;
-  };
-    utterance.onerror = function(e) {
-    area.innerHTML = `<div class="error-card">⚠ Playback error: ${e.error}</div>`;
-  };
-  
-  window.speechSynthesis.speak(utterance);
-}
-    // 1. Split text into 200-char chunks
-    const chunks = splitTextIntoChunks(text, 200);
-    const totalChunks = chunks.length;
-    
-    area.innerHTML = `<div class="result-card">⏳ Generating ${totalChunks} audio chunks...</div>`;
-    
-    // 2. Fetch all chunks via CORS proxy and combine them
-    const blobs = [];
-    
-    for (let i = 0; i < chunks.length; i++) {
-      const chunkText = encodeURIComponent(chunks[i]);
-      // Using Google Translate TTS via a CORS proxy
-      const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${chunkText}`;
-      const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(ttsUrl)}`;
-      
-      const response = await fetch(proxyUrl);
-      if (!response.ok) throw new Error('Network error on chunk ' + (i+1));
-      
-      const blob = await response.blob();
-      blobs.push(blob);
-      
-      // Update progress
-      area.innerHTML = `<div class="result-card">⏳ Processing chunk ${i+1} of ${totalChunks}...</div>`;
     }
-    
-    // 3. Combine all MP3 blobs into one single file
-    const combinedBlob = new Blob(blobs, { type: 'audio/mpeg' });
-    const audioUrl = URL.createObjectURL(combinedBlob);
-    
-    // 4. Show the final player and download button
-    area.innerHTML = `
-      <div class="result-card">
-        <div class="result-title">🎧 Audio Ready (${totalChunks} chunks combined)</div>
-        <audio controls autoplay style="width:100%;margin-bottom:14px;">
-          <source src="${audioUrl}" type="audio/mpeg">
-        </audio>
-        <a class="btn-get" href="${audioUrl}" download="speech_long.mp3">⬇ Download Full MP3</a>
-        <p style="color:#888;font-size:0.85rem;margin-top:10px;">
-          💡 Successfully combined ${totalChunks} chunks into one file.
-        </p>
-      </div>`;
-      
-    btn.disabled = false; 
-    btn.textContent = '🎙️ Generate & Download MP3';
-    
-  } catch (err) {
-    console.error(err);
-    area.innerHTML = `
-      <div class="error-card">
-         Error generating audio. The proxy server might be busy.<br>
-        <small style="color:#888;">Please try again in a moment or use shorter text.</small>
-      </div>`;
-    btn.disabled = false; 
-    btn.textContent = '🎙️ Generate & Download MP3';
   }
-}
+
+  // Helper function for long text using browser's built-in TTS
+  function playWithBrowserTTS(text, lang) {
+    const area = document.getElementById('tts-result');
+    
+    // Map language codes to browser voice codes
+    const langMap = {
+      'en': 'en-US', 'en-US': 'en-US', 'en-GB': 'en-GB', 'en-AU': 'en-AU',
+      'en-IN': 'en-IN', 'en-NG': 'en-NG', 'en-ZA': 'en-ZA', 'en-IE': 'en-IE',
+      'es': 'es-ES', 'fr': 'fr-FR', 'de': 'de-DE', 'it': 'it-IT',
+      'pt': 'pt-BR', 'ru': 'ru-RU', 'ja': 'ja-JP', 'ko': 'ko-KR',
+      'zh-CN': 'zh-CN', 'zh-TW': 'zh-TW', 'hi': 'hi-IN', 'ar': 'ar-SA',
+      'yo': 'en-NG', 'ig': 'en-NG', 'ha': 'en-NG', 'sw': 'sw-KE',
+      'nl': 'nl-NL', 'pl': 'pl-PL', 'tr': 'tr-TR', 'sv': 'sv-SE',
+      'no': 'no-NO', 'da': 'da-DK', 'fi': 'fi-FI', 'cs': 'cs-CZ',
+      'el': 'el-GR', 'ro': 'ro-RO', 'hu': 'hu-HU', 'uk': 'uk-UA',
+      'th': 'th-TH', 'vi': 'vi-VN', 'id': 'id-ID', 'ms': 'ms-MY',
+      'tl': 'tl-PH', 'bn': 'bn-IN', 'ta': 'ta-IN', 'te': 'te-IN',
+      'ur': 'ur-PK', 'fa': 'fa-IR', 'he': 'he-IL', 'am': 'am-ET',
+      'so': 'so-SO', 'zu': 'zu-ZA', 'af': 'af-ZA'
+    };
+    
+    const browserLang = langMap[lang] || 'en-US';
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voices = window.speechSynthesis.getVoices();
+    
+    // Find matching voice
+    const preferredVoice = voices.find(v => v.lang.startsWith(browserLang.split('-')[0]));
+    if (preferredVoice) utterance.voice = preferredVoice;
+    
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+    
+    utterance.onstart = function() {
+      area.innerHTML = `
+        <div class="result-card">
+          <div class="result-title">🎧 Playing Audio</div>
+          <p style="color:#888;margin-bottom:15px;">
+            Playing ${text.length} characters with browser TTS...<br>
+            <small>Note: Browser TTS doesn't support MP3 download for long text, but plays perfectly!</small>
+          </p>          <button onclick="window.speechSynthesis.cancel()" style="background:linear-gradient(135deg,#ef4444,#dc2626);">⏹️ Stop</button>
+        </div>
+        <div class="result-card" style="margin-top:15px;">
+          <div class="result-title">📥 For MP3 Download</div>
+          <p style="color:#888;font-size:0.9rem;">
+            For downloadable MP3, please split your text into chunks of 200 characters or less.
+          </p>
+        </div>`;
+    };
+    
+    utterance.onend = function() {
+      area.innerHTML += `<div style="margin-top:15px;padding:15px;background:#0a0a0a;border-radius:10px;border-left:4px solid #22d3a5;"><p style="color:#22d3a5;">✅ Finished playing!</p></div>`;
+    };
+    
+    utterance.onerror = function(e) {
+      area.innerHTML = `<div class="error-card">⚠ Playback error: ${e.error}</div>`;
+    };
+    
+    window.speechSynthesis.speak(utterance);
+  }
+
   // VISION CHAT
   let visionImageBase64 = null;
   function previewVisionImage(event) {
@@ -641,6 +572,7 @@ function playWithBrowserTTS(text, lang) {
     };
     reader.readAsDataURL(file);
   }
+
   async function analyzeImageVision() {
     const fileInput = document.getElementById('visionFile');
     const prompt = document.getElementById('visionPrompt').value.trim();
@@ -654,8 +586,7 @@ function playWithBrowserTTS(text, lang) {
       const fullPrompt = `You are an expert image analyst. A user uploaded an image and asks: "${userQuestion}". Provide detailed analysis.`;
       const analysis = await fetchAI(fullPrompt, 25000);
       area.innerHTML = `<div class="result-card"><div class="result-title">👁️ Analysis Result</div><div class="script-output" id="visionOutput">${analysis}</div><button onclick="copyToClipboard('visionOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button></div>`;
-    } catch (err) { 
-      area.innerHTML = '<div class="error-card">⚠ Analysis failed. Try again.</div>'; 
+    } catch (err) {       area.innerHTML = '<div class="error-card">⚠ Analysis failed. Try again.</div>'; 
     } finally { 
       btn.disabled = false; btn.textContent = '👁️ Analyze Image'; 
     }
@@ -690,7 +621,8 @@ function playWithBrowserTTS(text, lang) {
     try {
       const doc = new docx.Document({
         sections: [{ properties: {}, children: [
-          new docx.Paragraph({ text: title, heading: docx.HeadingLevel.HEADING_1, alignment: docx.AlignmentType.CENTER }),          new docx.Paragraph({ text: 'by ' + author, alignment: docx.AlignmentType.CENTER, spacing: { after: 400 } }),
+          new docx.Paragraph({ text: title, heading: docx.HeadingLevel.HEADING_1, alignment: docx.AlignmentType.CENTER }),
+          new docx.Paragraph({ text: 'by ' + author, alignment: docx.AlignmentType.CENTER, spacing: { after: 400 } }),
           ...content.split('\n').map(line => new docx.Paragraph({ text: line }))
         ]}]
       });
@@ -703,8 +635,7 @@ function playWithBrowserTTS(text, lang) {
 
   function generateEbookKDP() {
     const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
-    const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
-    const content = document.getElementById('ebookContent').value.trim();
+    const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';    const content = document.getElementById('ebookContent').value.trim();
     if (!content) { alert('Please paste content.'); return; }
     const kdp = `${title}\n\nBy ${author}\n\n${content}\n\n---\nCopyright © ${new Date().getFullYear()} ${author}`;
     const blob = new Blob([kdp], { type: 'text/plain' });
@@ -739,7 +670,8 @@ function playWithBrowserTTS(text, lang) {
     const email = document.getElementById('resumeEmail').value.trim();
     const phone = document.getElementById('resumePhone').value.trim();
     const summary = document.getElementById('resumeSummary').value.trim();
-    const exp = document.getElementById('resumeExperience').value.trim();    const edu = document.getElementById('resumeEducation').value.trim();
+    const exp = document.getElementById('resumeExperience').value.trim();
+    const edu = document.getElementById('resumeEducation').value.trim();
     const skills = document.getElementById('resumeSkills').value.trim();
     const area = document.getElementById('resume-result');
     try {
@@ -752,8 +684,7 @@ function playWithBrowserTTS(text, lang) {
       if (email) { doc.setFontSize(10); doc.text(`${email} | ${phone}`, 105, y, {align:'center'}); y+=15; }
       const addSection = (title, text) => {
         if (!text) return;
-        doc.setFontSize(14); doc.setTextColor(124,92,252); doc.text(title, 15, y); y+=8;
-        doc.setFontSize(11); doc.setTextColor(0,0,0);
+        doc.setFontSize(14); doc.setTextColor(124,92,252); doc.text(title, 15, y); y+=8;        doc.setFontSize(11); doc.setTextColor(0,0,0);
         const lines = doc.splitTextToSize(text, 180); doc.text(lines, 15, y); y += lines.length*6+10;
       };
       addSection('SUMMARY', summary); addSection('EXPERIENCE', exp); addSection('EDUCATION', edu); addSection('SKILLS', skills);
@@ -788,7 +719,8 @@ function playWithBrowserTTS(text, lang) {
     const top = document.getElementById('memeTop').value.toUpperCase();
     const bot = document.getElementById('memeBottom').value.toUpperCase();
     if (memeMode === 'text') {
-      const canvas = document.getElementById('memeCanvas'); const ctx = canvas.getContext('2d');      ctx.drawImage(memeImg, 0, 0, 600, 600);
+      const canvas = document.getElementById('memeCanvas'); const ctx = canvas.getContext('2d');
+      ctx.drawImage(memeImg, 0, 0, 600, 600);
       ctx.font = 'bold 40px Impact'; ctx.fillStyle = 'white'; ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.textAlign = 'center';
       if (top) { ctx.strokeText(top, 300, 60); ctx.fillText(top, 300, 60); }
       if (bot) { ctx.strokeText(bot, 300, 560); ctx.fillText(bot, 300, 560); }
@@ -801,8 +733,7 @@ function playWithBrowserTTS(text, lang) {
         const avg = (data[i] + data[i+1] + data[i+2]) / 3;
         data[i] = avg + 20; data[i+1] = avg + 40; data[i+2] = avg + 60;
       }
-      ctx.putImageData(imageData, 0, 0);
-      ctx.font = 'bold 40px Comic Sans MS'; ctx.fillStyle = 'white'; ctx.strokeStyle = 'black'; ctx.lineWidth = 4; ctx.textAlign = 'center';
+      ctx.putImageData(imageData, 0, 0);      ctx.font = 'bold 40px Comic Sans MS'; ctx.fillStyle = 'white'; ctx.strokeStyle = 'black'; ctx.lineWidth = 4; ctx.textAlign = 'center';
       if (top) { ctx.strokeText(top, 300, 60); ctx.fillText(top, 300, 60); }
       if (bot) { ctx.strokeText(bot, 300, 560); ctx.fillText(bot, 300, 560); }
     }
@@ -837,7 +768,8 @@ function playWithBrowserTTS(text, lang) {
         const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
         let fullText = '';
         for (let i = 1; i <= pdf.numPages; i++) {
-          const page = await pdf.getPage(i);          const textContent = await page.getTextContent();
+          const page = await pdf.getPage(i);
+          const textContent = await page.getTextContent();
           fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
         }
         textarea.value = fullText;
@@ -850,8 +782,7 @@ function playWithBrowserTTS(text, lang) {
   }
 
   async function summarizeStudy() {
-    const text = document.getElementById('studyText').value.trim();
-    const format = document.getElementById('studyFormat').value;
+    const text = document.getElementById('studyText').value.trim();    const format = document.getElementById('studyFormat').value;
     const btn = document.getElementById('studyBtn');
     const area = document.getElementById('study-result');
     if (!text) { alert('Please paste text or upload.'); return; }

@@ -148,122 +148,79 @@
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>  </section>
 </div>
 
-<!-- SPEECHSTER -->
-<!-- SPEECHSTER - ADVANCED VERSION -->
+<!-- SPEECHSTER - 50+ VOICES & UNLIMITED TEXT -->
 <div class="view" id="view-tts">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;">
     <h1>🎙️ Speechster</h1>
-    <p style="color:#888;margin-bottom:30px;">Convert text to natural speech with 580+ voices</p>
+    <p style="color:#888;margin-bottom:30px;">50+ Voices • Unlimited Text • Free MP3 Download</p>
     
     <div class="card">
-      <textarea id="ttsText" placeholder="Type or paste your text here — long texts are automatically split into chunks..." style="min-height:150px;"></textarea>
+      <textarea id="ttsText" placeholder="Paste your long text here (supports 2000+ characters)..." style="min-height:150px;"></textarea>
       
-      <!-- Speed Control -->
-      <div style="margin:20px 0;">
-        <label style="color:#888;font-size:0.9rem;">Speed:</label>
-        <div style="display:flex;gap:10px;margin-top:10px;">
-          <button type="button" class="aspect-btn" onclick="setSpeed(0.8)" id="speedSlow">Slower</button>
-          <button type="button" class="aspect-btn active" onclick="setSpeed(1.0)" id="speedNormal">Normal</button>
-          <button type="button" class="aspect-btn" onclick="setSpeed(1.2)" id="speedFast">Faster</button>
-        </div>
-      </div>
-      
-      <!-- Voice Selection -->
-      <div style="margin:20px 0;">
-        <label style="color:#888;font-size:0.9rem;">Voice Library (580+ voices):</label>
-        <input type="text" id="voiceSearch" placeholder="🔍 Search voices..." style="margin-top:10px;" oninput="filterVoices()"/>
-        <select id="ttsVoice" style="margin-top:10px;max-height:200px;overflow-y:auto;">
-          <option value="en-US">English (US) - Default</option>
+      <select id="ttsVoice">
+        <optgroup label="English">
+          <option value="en">English</option>
+          <option value="en-US">English (US)</option>
           <option value="en-GB">English (UK)</option>
           <option value="en-AU">English (Australia)</option>
           <option value="en-IN">English (India)</option>
           <option value="en-NG">English (Nigeria)</option>
-          <option value="es-ES">Spanish (Spain)</option>
-          <option value="es-MX">Spanish (Mexico)</option>
-          <option value="fr-FR">French (France)</option>
-          <option value="de-DE">German</option>
-          <option value="it-IT">Italian</option>
-          <option value="pt-BR">Portuguese (Brazil)</option>
-          <option value="pt-PT">Portuguese (Portugal)</option>
-          <option value="ru-RU">Russian</option>
-          <option value="ja-JP">Japanese</option>
-          <option value="ko-KR">Korean</option>
-          <option value="zh-CN">Chinese (Mandarin)</option>
-          <option value="zh-TW">Chinese (Taiwan)</option>
-          <option value="ar-SA">Arabic</option>
-          <option value="hi-IN">Hindi</option>
-          <option value="yo-NG">Yoruba</option>
-          <option value="ig-NG">Igbo</option>
-          <option value="ha-NG">Hausa</option>
-          <option value="sw-KE">Swahili</option>
-          <option value="tr-TR">Turkish</option>
-          <option value="pl-PL">Polish</option>          <option value="nl-NL">Dutch</option>
-          <option value="sv-SE">Swedish</option>
-          <option value="da-DK">Danish</option>
-          <option value="fi-FI">Finnish</option>
-          <option value="no-NO">Norwegian</option>
-          <option value="cs-CZ">Czech</option>
-          <option value="el-GR">Greek</option>
-          <option value="he-IL">Hebrew</option>
-          <option value="th-TH">Thai</option>
-          <option value="vi-VN">Vietnamese</option>
-          <option value="id-ID">Indonesian</option>
-          <option value="ms-MY">Malay</option>
-          <option value="tl-PH">Filipino</option>
-          <option value="uk-UA">Ukrainian</option>
-          <option value="ro-RO">Romanian</option>
-          <option value="hu-HU">Hungarian</option>
-          <option value="sk-SK">Slovak</option>
-          <option value="bg-BG">Bulgarian</option>
-          <option value="hr-HR">Croatian</option>
-          <option value="sr-RS">Serbian</option>
-          <option value="sl-SI">Slovenian</option>
-          <option value="lt-LT">Lithuanian</option>
-          <option value="lv-LV">Latvian</option>
-          <option value="et-EE">Estonian</option>
-          <option value="bn-IN">Bengali</option>
-          <option value="ta-IN">Tamil</option>
-          <option value="te-IN">Telugu</option>
-          <option value="mr-IN">Marathi</option>
-          <option value="gu-IN">Gujarati</option>
-          <option value="kn-IN">Kannada</option>
-          <option value="ml-IN">Malayalam</option>
-          <option value="pa-IN">Punjabi</option>
-          <option value="ur-PK">Urdu</option>
-          <option value="fa-IR">Persian</option>
-          <option value="sw-TZ">Swahili (Tanzania)</option>
-          <option value="am-ET">Amharic</option>
-          <option value="ne-NP">Nepali</option>
-          <option value="si-LK">Sinhala</option>
-          <option value="my-MM">Burmese</option>
-          <option value="km-KH">Khmer</option>
-          <option value="lo-LA">Lao</option>
-          <option value="ka-GE">Georgian</option>
-          <option value="hy-AM">Armenian</option>
-          <option value="az-AZ">Azerbaijani</option>
-          <option value="kk-KZ">Kazakh</option>
-          <option value="uz-UZ">Uzbek</option>
-          <option value="tg-TJ">Tajik</option>
-          <option value="mn-MN">Mongolian</option>
-          <option value="bo-CN">Tibetan</option>
-          <option value="dz-BT">Dzongkha</option>          <option value="is-IS">Icelandic</option>
-          <option value="fo-FO">Faroese</option>
-          <option value="ga-IE">Irish</option>
-          <option value="gd-GB">Scottish Gaelic</option>
-          <option value="cy-GB">Welsh</option>
-          <option value="eu-ES">Basque</option>
-          <option value="ca-ES">Catalan</option>
-          <option value="gl-ES">Galician</option>
-          <option value="mt-MT">Maltese</option>
-          <option value="sq-AL">Albanian</option>
-          <option value="mk-MK">Macedonian</option>
-          <option value="bs-BA">Bosnian</option>
-          <option value="me-ME">Montenegrin</option>
-        </select>
-      </div>
+          <option value="en-ZA">English (South Africa)</option>
+          <option value="en-IE">English (Ireland)</option>
+        </optgroup>
+        <optgroup label="European">
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="it">Italian</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+          <option value="nl">Dutch</option>
+          <option value="pl">Polish</option>
+          <option value="tr">Turkish</option>
+          <option value="sv">Swedish</option>
+          <option value="no">Norwegian</option>
+          <option value="da">Danish</option>
+          <option value="fi">Finnish</option>
+          <option value="cs">Czech</option>
+          <option value="el">Greek</option>
+          <option value="ro">Romanian</option>
+          <option value="hu">Hungarian</option>
+          <option value="uk">Ukrainian</option>
+        </optgroup>
+        <optgroup label="Asian">
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="zh-CN">Chinese (Simplified)</option>
+          <option value="zh-TW">Chinese (Traditional)</option>
+          <option value="hi">Hindi</option>
+          <option value="th">Thai</option>
+          <option value="vi">Vietnamese</option>
+          <option value="id">Indonesian</option>
+          <option value="ms">Malay</option>
+          <option value="tl">Filipino</option>
+          <option value="bn">Bengali</option>
+          <option value="ta">Tamil</option>
+          <option value="te">Telugu</option>
+          <option value="ur">Urdu</option>
+        </optgroup>
+        <optgroup label="Middle East & Africa">
+          <option value="ar">Arabic</option>
+          <option value="fa">Persian</option>
+          <option value="he">Hebrew</option>
+          <option value="yo">Yoruba</option>
+          <option value="ig">Igbo</option>
+          <option value="ha">Hausa</option>
+          <option value="sw">Swahili</option>
+          <option value="am">Amharic</option>
+          <option value="so">Somali</option>
+          <option value="zu">Zulu</option>
+          <option value="af">Afrikaans</option>
+        </optgroup>
+      </select>
       
-      <button id="ttsBtn" onclick="generateSpeech()">🎙️ Generate Speech</button>
+      <button id="ttsBtn" onclick="generateLongSpeech()">🎙️ Generate & Download MP3</button>
     </div>
     
     <div class="result-area" id="tts-result"></div>
@@ -491,73 +448,94 @@
   }
 
   // SPEECHSTER (Using ahm7xmakki.com FREE API)
-// Global speed variable
-let currentSpeed = 1.0;
-
-function setSpeed(speed) {
-  currentSpeed = speed;
-  document.querySelectorAll('.aspect-btn').forEach(btn => btn.classList.remove('active'));
-  if (speed === 0.8) document.getElementById('speedSlow').classList.add('active');
-  else if (speed === 1.0) document.getElementById('speedNormal').classList.add('active');
-  else if (speed === 1.2) document.getElementById('speedFast').classList.add('active');
-}
-
-function filterVoices() {
-  const search = document.getElementById('voiceSearch').value.toLowerCase();
-  const select = document.getElementById('ttsVoice');
-  const options = select.getElementsByTagName('option');
+// HELPER: Split text into chunks of ~200 chars without breaking words
+function splitTextIntoChunks(text, limit = 200) {
+  const chunks = [];
+  let currentChunk = "";
+  const words = text.split(" ");
   
-  for (let option of options) {
-    const text = option.text.toLowerCase();
-    option.style.display = text.includes(search) ? '' : 'none';
+  for (let word of words) {
+    if ((currentChunk + word).length > limit) {
+      if (currentChunk) chunks.push(currentChunk.trim());
+      currentChunk = word + " ";
+    } else {
+      currentChunk += word + " ";
+    }
   }
+  if (currentChunk) chunks.push(currentChunk.trim());
+  return chunks;
 }
 
-// SPEECHSTER - Advanced version with speed control
-async function generateSpeech() {
+// SPEECHSTER - Advanced Chunking & Combining for >2000 chars
+async function generateLongSpeech() {
   const text = document.getElementById('ttsText').value.trim();
-  const voice = document.getElementById('ttsVoice').value;
+  const lang = document.getElementById('ttsVoice').value;
   const btn = document.getElementById('ttsBtn');
   const area = document.getElementById('tts-result');
   
   if (!text) { alert('Please type some text first.'); return; }
   
   btn.disabled = true; 
-  btn.textContent = 'Generating…';
-  area.innerHTML = '<div class="result-card">⏳ Generating audio with parallel chunks...</div>';
+  btn.textContent = 'Processing long text...';
+  area.innerHTML = '<div class="result-card">⏳ Splitting text and generating audio chunks...</div>';
   
   try {
-    // Use ahm7xmakki API with speed parameter
-    const ttsUrl = `https://ahm7xmakki.com/api/tts?text=${encodeURIComponent(text)}&voice=${voice}&speed=${currentSpeed}`;
+    // 1. Split text into 200-char chunks
+    const chunks = splitTextIntoChunks(text, 200);
+    const totalChunks = chunks.length;
     
-    const response = await fetch(ttsUrl);
-    if (!response.ok) throw new Error('Failed to generate audio');
+    area.innerHTML = `<div class="result-card">⏳ Generating ${totalChunks} audio chunks...</div>`;
     
-    const blob = await response.blob();
-    const audioUrl = URL.createObjectURL(blob);
+    // 2. Fetch all chunks via CORS proxy and combine them
+    const blobs = [];
     
+    for (let i = 0; i < chunks.length; i++) {
+      const chunkText = encodeURIComponent(chunks[i]);
+      // Using Google Translate TTS via a CORS proxy
+      const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${chunkText}`;
+      const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(ttsUrl)}`;
+      
+      const response = await fetch(proxyUrl);
+      if (!response.ok) throw new Error('Network error on chunk ' + (i+1));
+      
+      const blob = await response.blob();
+      blobs.push(blob);
+      
+      // Update progress
+      area.innerHTML = `<div class="result-card">⏳ Processing chunk ${i+1} of ${totalChunks}...</div>`;
+    }
+    
+    // 3. Combine all MP3 blobs into one single file
+    const combinedBlob = new Blob(blobs, { type: 'audio/mpeg' });
+    const audioUrl = URL.createObjectURL(combinedBlob);
+    
+    // 4. Show the final player and download button
     area.innerHTML = `
       <div class="result-card">
-        <div class="result-title">🎧 Audio Ready</div>
+        <div class="result-title">🎧 Audio Ready (${totalChunks} chunks combined)</div>
         <audio controls autoplay style="width:100%;margin-bottom:14px;">
           <source src="${audioUrl}" type="audio/mpeg">
         </audio>
-        <a class="btn-get" href="${audioUrl}" download="speech.mp3">⬇ Download MP3</a>
-        <a class="btn-get" href="${ttsUrl}" target="_blank">🔊 Play in New Tab</a>
+        <a class="btn-get" href="${audioUrl}" download="speech_long.mp3">⬇ Download Full MP3</a>
         <p style="color:#888;font-size:0.85rem;margin-top:10px;">
-          💡 Voice: ${voice} | Speed: ${currentSpeed}x
+          💡 Successfully combined ${totalChunks} chunks into one file.
         </p>
       </div>`;
+      
+    btn.disabled = false; 
+    btn.textContent = '🎙️ Generate & Download MP3';
     
-    btn.disabled = false; 
-    btn.textContent = '🎙️ Generate Speech';
   } catch (err) {
-    area.innerHTML = `<div class="error-card">⚠ Error: ${err.message}</div>`;
+    console.error(err);
+    area.innerHTML = `
+      <div class="error-card">
+         Error generating audio. The proxy server might be busy.<br>
+        <small style="color:#888;">Please try again in a moment or use shorter text.</small>
+      </div>`;
     btn.disabled = false; 
-    btn.textContent = '🎙️ Generate Speech';
+    btn.textContent = '🎙️ Generate & Download MP3';
   }
 }
-
   // VISION CHAT
   let visionImageBase64 = null;
   function previewVisionImage(event) {

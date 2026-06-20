@@ -54,11 +54,7 @@
     .meme-tab.active { border-color: #7c5cfc; color: #fff; }
     #cartoonCanvas { max-width: 100%; border-radius: 12px; margin: 10px 0; display: none; }
     footer { border-top: 1px solid #1a1a1a; padding: 32px; text-align: center; color: #888; font-size: 0.85rem; margin-top: 50px; }
-  @keyframes loading {
-  0% { opacity: 0.3; }
-  50% { opacity: 1; }
-  100% { opacity: 0.3; }
-}
+    @keyframes loading { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
   </style>
 </head>
 <body>
@@ -100,8 +96,8 @@
     <div class="tool-card" onclick="showView('vision')"><div class="tool-icon">👁️</div><h3>VisionChat</h3><p>AI image analysis.</p></div>
     <div class="tool-card" onclick="showView('ebook')"><div class="tool-icon">📖</div><h3>Ebook Builder</h3><p>PDF, DOCX, KDP.</p></div>
   </div>
-  <div class="featured-ebook">
-    <div class="featured-badge">🔥 FEATURED EBOOK</div>    <div class="ebook-icon">📷</div>
+  <div class="featured-ebook">    <div class="featured-badge">🔥 FEATURED EBOOK</div>
+    <div class="ebook-icon">📷</div>
     <h2>The AI Fashion Photography Kit</h2>
     <p>Master the prompt formulas behind 8K, DSLR-quality fashion imagery.</p>
     <a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a>
@@ -149,39 +145,37 @@
       <button id="imgBtn" onclick="generateImage()">Generate Image</button>
     </div>
     <div class="result-area" id="img-result"></div>
-    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
-  </section></div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>  </section>
+</div>
 
-<!-- SPEECHSTER - USING BROWSER TTS -->
+<!-- SPEECHSTER -->
 <div class="view" id="view-tts">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>🎙️ Speechster</h1>
     <div class="card">
       <textarea id="ttsText" placeholder="Type or paste your text here..." style="min-height:150px;"></textarea>
-      
       <select id="ttsVoice">
-        <option value="0">English (US - Default)</option>
-        <option value="1">English (UK)</option>
-        <option value="2">English (Australia)</option>
-        <option value="3">English (India)</option>
-        <option value="4">Spanish</option>
-        <option value="5">French</option>
-        <option value="6">German</option>
-        <option value="7">Italian</option>
-        <option value="8">Portuguese</option>
-        <option value="9">Russian</option>
-        <option value="10">Japanese</option>
-        <option value="11">Korean</option>
-        <option value="12">Chinese</option>
-        <option value="13">Arabic</option>
-        <option value="14">Hindi</option>
+        <option value="en-US">English (US)</option>
+        <option value="en-GB">English (UK)</option>
+        <option value="en-AU">English (Australia)</option>
+        <option value="en-IN">English (India)</option>
+        <option value="en-NG">English (Nigeria)</option>
+        <option value="es-ES">Spanish</option>
+        <option value="fr-FR">French</option>
+        <option value="de-DE">German</option>
+        <option value="it-IT">Italian</option>
+        <option value="pt-BR">Portuguese</option>
+        <option value="ru-RU">Russian</option>
+        <option value="ja-JP">Japanese</option>
+        <option value="ko-KR">Korean</option>
+        <option value="zh-CN">Chinese</option>
+        <option value="ar-SA">Arabic</option>
+        <option value="hi-IN">Hindi</option>
+        <option value="yo-NG">Yoruba</option>
+        <option value="ig-NG">Igbo</option>
+        <option value="ha-NG">Hausa</option>
       </select>
-      
-      <input type="range" id="speechRate" min="0.5" max="2" step="0.1" value="1" style="width:100%;margin:15px 0;">
-      <label>Speed: <span id="rateValue">1.0</span>x</label>
-      
-      <button id="ttsBtn" onclick="generateSpeech()">🎙️ Generate & Play Audio</button>
-      <button onclick="stopSpeech()" style="background:linear-gradient(135deg,#ef4444,#dc2626);margin-top:10px;">⏹️ Stop</button>
+      <button id="ttsBtn" onclick="generateSpeech()">🎙️ Generate Audio</button>
     </div>
     <div class="result-area" id="tts-result"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
@@ -193,14 +187,14 @@
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>👁️ VisionChat</h1>
     <div class="card">
-      <input type="file" id="visionFile" accept="image/*" onchange="previewVisionImage(event)"/>      <img id="visionImagePreview" style="max-width:100%;border-radius:12px;margin:16px 0;display:none;"/>
+      <input type="file" id="visionFile" accept="image/*" onchange="previewVisionImage(event)"/>
+      <img id="visionImagePreview" style="max-width:100%;border-radius:12px;margin:16px 0;display:none;"/>
       <input type="text" id="visionPrompt" placeholder="Ask about the image (e.g., 'What is in this image?')"/>
       <button id="visionBtn" onclick="analyzeImageVision()">👁️ Analyze Image</button>
     </div>
     <div class="result-area" id="vision-result"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
-  </section>
-</div>
+  </section></div>
 
 <!-- EBOOK BUILDER -->
 <div class="view" id="view-ebook">
@@ -242,14 +236,14 @@
       <input id="resumeName" placeholder="Full Name"/><input id="resumeJob" placeholder="Job Title"/>
       <input id="resumeEmail" placeholder="Email"/><input id="resumePhone" placeholder="Phone"/>
       <textarea id="resumeSummary" placeholder="Professional Summary"></textarea>
-      <textarea id="resumeExperience" placeholder="Work Experience"></textarea>      <textarea id="resumeEducation" placeholder="Education"></textarea>
+      <textarea id="resumeExperience" placeholder="Work Experience"></textarea>
+      <textarea id="resumeEducation" placeholder="Education"></textarea>
       <input id="resumeSkills" placeholder="Skills (comma-separated)"/>
       <button onclick="generateResume()">📝 Generate Resume PDF</button>
     </div>
     <div class="result-area" id="resume-result"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
-  </section>
-</div>
+  </section></div>
 
 <!-- MEME GENERATOR -->
 <div class="view" id="view-meme">
@@ -292,34 +286,37 @@
 
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
   function toggleMenu() { document.getElementById('menuDropdown').classList.toggle('open'); }
   function showView(id) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById('view-' + id).classList.add('active');
     document.getElementById('menuDropdown').classList.remove('open');
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0);  }
+
+  // HELPER: Clean markdown from AI responses
+  function cleanMarkdown(text) {
+    return text.replace(/\*\*/g, '').replace(/\*/g, '').replace(/__/g, '').replace(/_/g, '').replace(/`/g, '');
   }
 
-  // HELPER FUNCTION FOR AI CALLS
+  // HELPER: Copy to clipboard
+  function copyToClipboard(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+      navigator.clipboard.writeText(element.innerText).then(() => alert('✅ Copied to clipboard!'));
+    }
+  }
+
+  // HELPER: Fetch AI with timeout
   async function fetchAI(prompt, timeout_ms = 20000) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeout_ms);
-    
     try {
       const url = `https://text.pollinations.ai/${encodeURIComponent(prompt)}`;
-      const res = await fetch(url, { 
-        signal: controller.signal,
-        method: 'GET',
-        headers: { 'Accept': 'text/plain' }
-      });
-      
+      const res = await fetch(url, { signal: controller.signal });
       clearTimeout(timeoutId);
-      
       if (!res.ok) throw new Error('API failed');
-      
-      let text = await res.text();
-      text = text.replace(/\*\*/g, '').replace(/\*/g, '').replace(/__/g, '').replace(/_/g, '');
-      return text;
+      return cleanMarkdown(await res.text());
     } catch (err) {
       clearTimeout(timeoutId);
       throw new Error('AI service unavailable');
@@ -331,95 +328,48 @@
     const q = document.getElementById('profQuestion').value.trim();
     const btn = document.getElementById('profBtn');
     const area = document.getElementById('prof-result');
-    
     if (!q) { alert('Please ask a question.'); return; }
-    
-    btn.disabled = true; 
-    btn.textContent = 'Thinking…';
+    btn.disabled = true; btn.textContent = 'Thinking…';
     area.innerHTML = '<div class="result-card">⏳ Prof. Update is reasoning...</div>';
-    
-    const prompt = `You are Prof. Update with 20 years experience. Answer clearly and professionally without markdown: "${q}"`;
-    
-    try {      const answer = await fetchAI(prompt);
-      area.innerHTML = `
-        <div class="result-card">
-          <div class="result-title">🎓 Prof. Update Says:</div>
-          <div class="script-output" id="profOutput">${answer}</div>
-          <button onclick="copyToClipboard('profOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button>
-        </div>`;
+    const prompt = `You are Prof. Update with 20 years experience. Answer clearly without markdown: "${q}"`;
+    try {
+      const answer = await fetchAI(prompt);
+      area.innerHTML = `<div class="result-card"><div class="result-title">🎓 Prof. Update Says:</div><div class="script-output" id="profOutput">${answer}</div><button onclick="copyToClipboard('profOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button></div>`;
     } catch (err) { 
-      area.innerHTML = '<div class="error-card">⚠ Service temporarily unavailable. Please try again in a moment.</div>'; 
+      area.innerHTML = '<div class="error-card">⚠ Service unavailable. Please try again.</div>'; 
     } finally { 
-      btn.disabled = false; 
-      btn.textContent = '🎓 Ask Prof. Update'; 
+      btn.disabled = false; btn.textContent = '🎓 Ask Prof. Update'; 
     }
   }
-
-  // DOWNLOADER
+  // DOWNLOADER (Using ahm7xmakki.com API)
   async function startDownload() {
     const url = document.getElementById("videoUrl").value.trim();
     const btn = document.getElementById("dlBtn");
     const area = document.getElementById("result-area");
-    
     if (!url) { alert("Please enter a URL"); return; }
-    if (!url.startsWith('http')) { alert("Please enter a valid URL (must start with http:// or https://)"); return; }
-    
-    btn.disabled = true; 
-    btn.textContent = "Fetching…";
+    if (!url.startsWith('http')) { alert("Please enter a valid URL"); return; }
+    btn.disabled = true; btn.textContent = "Fetching…";
     area.innerHTML = '<div class="result-card">⏳ Fetching video info...</div>';
-    
     try {
-      const apiUrl = `https://ahm7xmakki.com/api/alldl?url=${encodeURIComponent(url)}`;
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 30000);
-      
-      const res = await fetch(apiUrl, { 
-        signal: controller.signal,
-        method: 'GET',
-        headers: { 'Accept': 'application/json' }
-      });
-      
+      const res = await fetch(`https://ahm7xmakki.com/api/alldl?url=${encodeURIComponent(url)}`, { signal: controller.signal });
       clearTimeout(timeoutId);
-      
-      if (!res.ok) throw new Error(`Server responded with ${res.status}`);
-      
+      if (!res.ok) throw new Error('Server error');
       const data = await res.json();
-      
-      if (data.error || !data.links || data.links.length === 0) {
-        throw new Error(data.message || "No download links found. Try another video or platform.");
-      }
-      
-      let html = '<div class="result-card"><div class="result-title">✅ Download Ready</div>';      data.links.forEach((link, index) => {
-        const quality = link.quality || link.format || `Option ${index + 1}`;
+      if (data.error || !data.links || data.links.length === 0) throw new Error("No download links found");
+      let html = '<div class="result-card"><div class="result-title">✅ Download Ready</div>';
+      data.links.forEach(link => {
+        const quality = link.quality || 'Download';
         const downloadUrl = link.url || link.download;
-        if (downloadUrl) {
-          html += `<div style="margin-bottom:10px;padding:10px;background:#0a0a0a;border-radius:8px;">
-            <div style="color:#ffd700;margin-bottom:8px;">${quality}</div>
-            <a class="btn-get" href="${downloadUrl}" target="_blank">⬇ Download</a>
-          </div>`;
-        }
+        if (downloadUrl) html += `<div style="margin-bottom:10px;padding:10px;background:#0a0a0a;border-radius:8px;"><div style="color:#ffd700;margin-bottom:8px;">${quality}</div><a class="btn-get" href="${downloadUrl}" target="_blank">⬇ Download</a></div>`;
       });
       html += '</div>';
       area.innerHTML = html;
-      
     } catch (err) { 
-      console.error('Download error:', err);
-      area.innerHTML = `
-        <div class="error-card">
-          ⚠ Failed to fetch download links.<br><br>
-          <strong>Possible reasons:</strong><br>
-          • The video URL is invalid<br>
-          • The platform is not supported<br>
-          • The video is private or requires login<br>
-          • Server is temporarily unavailable<br><br>
-          <strong>Try:</strong><br>
-          • Checking the URL<br>
-          • Using a different video<br>
-          • Trying again in a few minutes
-        </div>`; 
+      area.innerHTML = '<div class="error-card">⚠ Failed to fetch. Try a different video or check the URL.</div>'; 
     } finally { 
-      btn.disabled = false; 
-      btn.textContent = "Download"; 
+      btn.disabled = false; btn.textContent = "Download"; 
     }
   }
 
@@ -437,135 +387,46 @@
     const h = document.getElementById('imgHeight').value;
     const btn = document.getElementById('imgBtn');
     const area = document.getElementById('img-result');
-    
-    if (!prompt) { alert('Please describe an image.'); return; }    
-    btn.disabled = true; 
-    btn.textContent = 'Generating…';
+    if (!prompt) { alert('Please describe an image.'); return; }
+    btn.disabled = true; btn.textContent = 'Generating…';
     area.innerHTML = '<div class="result-card">⏳ Generating...</div>';
-    
-    const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${w}&height=${h}&model=flux&nologo=true&seed=${Math.floor(Math.random()*10000)}`;
-    
-    setTimeout(() => {
+    const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${w}&height=${h}&model=flux&nologo=true&seed=${Math.floor(Math.random()*10000)}`;    setTimeout(() => {
       area.innerHTML = `<div class="result-card"><div class="result-title">🎨 Image Ready</div><img src="${imgUrl}" style="width:100%;border-radius:12px;margin-bottom:14px;"/><a class="btn-get" href="${imgUrl}" target="_blank">⬇ Download</a></div>`;
-      btn.disabled = false; 
-      btn.textContent = 'Generate Image';
+      btn.disabled = false; btn.textContent = 'Generate Image';
     }, 1500);
   }
 
-// SPEECHSTER - Using Browser's Built-in TTS
-let isSpeaking = false;
-
-function generateSpeech() {
-  const text = document.getElementById('ttsText').value.trim();
-  const voiceIndex = parseInt(document.getElementById('ttsVoice').value);
-  const rate = parseFloat(document.getElementById('speechRate').value);
-  const btn = document.getElementById('ttsBtn');
-  const area = document.getElementById('tts-result');
-  
-  if (!text) { 
-    alert('Please type some text first.'); 
-    return; 
+  // SPEECHSTER (Using ahm7xmakki.com FREE API)
+  async function generateSpeech() {
+    const text = document.getElementById('ttsText').value.trim();
+    const voice = document.getElementById('ttsVoice').value;
+    const btn = document.getElementById('ttsBtn');
+    const area = document.getElementById('tts-result');
+    if (!text) { alert('Please type some text first.'); return; }
+    btn.disabled = true; btn.textContent = 'Generating…';
+    area.innerHTML = '<div class="result-card">⏳ Generating audio...</div>';
+    try {
+      const ttsUrl = `https://ahm7xmakki.com/api/tts?text=${encodeURIComponent(text)}&voice=${voice}`;
+      const response = await fetch(ttsUrl);
+      if (!response.ok) throw new Error('Failed to generate audio');
+      const blob = await response.blob();
+      const audioUrl = URL.createObjectURL(blob);
+      area.innerHTML = `
+        <div class="result-card">
+          <div class="result-title">🎧 Audio Ready</div>
+          <audio controls autoplay style="width:100%;margin-bottom:14px;"><source src="${audioUrl}" type="audio/mpeg"></audio>
+          <a class="btn-get" href="${audioUrl}" download="speech.mp3">⬇ Download MP3</a>
+          <a class="btn-get" href="${ttsUrl}" target="_blank">🔊 Play in New Tab</a>
+        </div>`;
+      btn.disabled = false; btn.textContent = '🎙️ Generate Audio';
+    } catch (err) {
+      area.innerHTML = `<div class="error-card">⚠ Error: ${err.message}</div>`;
+      btn.disabled = false; btn.textContent = '🎙️ Generate Audio';
+    }
   }
-  
-  if (text.length > 5000) {
-    alert('Text is too long. Please limit to 5000 characters.');
-    return;
-  }
-  
-  // Stop any current speech
-  window.speechSynthesis.cancel();
-  
-  const utterance = new SpeechSynthesisUtterance(text);
-  
-  // Get available voices
-  const voices = window.speechSynthesis.getVoices();
-  
-  // Map voice index to language codes
-  const voiceLanguages = [
-    'en-US', 'en-GB', 'en-AU', 'en-IN', 
-    'es-ES', 'fr-FR', 'de-DE', 'it-IT', 
-    'pt-BR', 'ru-RU', 'ja-JP', 'ko-KR', 
-    'zh-CN', 'ar-SA', 'hi-IN'
-  ];
-  
-  const selectedLang = voiceLanguages[voiceIndex] || 'en-US';
-  
-  // Find a voice for the selected language
-  const preferredVoice = voices.find(v => v.lang.startsWith(selectedLang.split('-')[0]));
-  if (preferredVoice) {
-    utterance.voice = preferredVoice;
-  }
-  
-  utterance.rate = rate;
-  utterance.pitch = 1.0;
-  utterance.volume = 1.0;
-  
-  utterance.onstart = function() {
-    isSpeaking = true;    btn.disabled = true;
-    btn.textContent = '🔊 Playing...';
-    area.innerHTML = `
-      <div class="result-card">
-        <div class="result-title">🎧 Now Playing</div>
-        <p style="color:#888;margin-bottom:15px;">Listening to your text...</p>
-        <div style="background:linear-gradient(135deg,#7c5cfc,#22d3a5);height:4px;border-radius:2px;margin:20px 0;animation:loading 2s infinite;"></div>
-        <p style="color:#22d3a5;font-size:0.9rem;">💡 Tip: You can turn off your screen - audio will continue playing</p>
-      </div>`;
-  };
-  
-  utterance.onend = function() {
-    isSpeaking = false;
-    btn.disabled = false;
-    btn.textContent = '🎙️ Generate & Play Audio';
-    area.innerHTML += `
-      <div style="margin-top:15px;padding:15px;background:#0a0a0a;border-radius:10px;border-left:4px solid #22d3a5;">
-        <p style="color:#22d3a5;">✅ Finished playing!</p>
-      </div>`;
-  };
-  
-  utterance.onerror = function(e) {
-    isSpeaking = false;
-    btn.disabled = false;
-    btn.textContent = '🎙️ Generate & Play Audio';
-    area.innerHTML = `
-      <div class="error-card">
-        ⚠ Error playing audio. Please try again.<br>
-        <small style="color:#888;">Error: ${e.error}</small>
-      </div>`;
-  };
-  
-  // Speak the text
-  window.speechSynthesis.speak(utterance);
-}
-
-function stopSpeech() {
-  window.speechSynthesis.cancel();
-  isSpeaking = false;
-  const btn = document.getElementById('ttsBtn');
-  btn.disabled = false;
-  btn.textContent = '🎙️ Generate & Play Audio';
-  const area = document.getElementById('tts-result');
-  area.innerHTML = '<div class="result-card"><div class="result-title">⏹️ Stopped</div></div>';
-}
-
-// Update rate display
-document.addEventListener('DOMContentLoaded', function() {
-  const rateSlider = document.getElementById('speechRate');
-  const rateValue = document.getElementById('rateValue');  
-  if (rateSlider && rateValue) {
-    rateSlider.addEventListener('input', function() {
-      rateValue.textContent = this.value;
-    });
-  }
-  
-  // Load voices when page loads
-  if (window.speechSynthesis) {
-    window.speechSynthesis.getVoices();
-  }
-});
 
   // VISION CHAT
   let visionImageBase64 = null;
-  
   function previewVisionImage(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -578,57 +439,23 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     reader.readAsDataURL(file);
   }
-  
   async function analyzeImageVision() {
     const fileInput = document.getElementById('visionFile');
     const prompt = document.getElementById('visionPrompt').value.trim();
     const btn = document.getElementById('visionBtn');
     const area = document.getElementById('vision-result');
-    
-    if (!fileInput.files[0]) { 
-      alert('Please upload an image first.'); 
-      return;     }
-    
+    if (!fileInput.files[0]) { alert('Please upload an image first.'); return; }
     const userQuestion = prompt || 'Describe this image in detail';
-    
-    btn.disabled = true; 
-    btn.textContent = 'Analyzing…';
-    area.innerHTML = '<div class="result-card">👁️ AI is analyzing the image...</div>';
-    
+    btn.disabled = true; btn.textContent = 'Analyzing…';
+    area.innerHTML = '<div class="result-card">👁️ AI is analyzing...</div>';
     try {
-      const fullPrompt = `You are an expert image analyst. A user has uploaded an image and wants to know: "${userQuestion}". Since you cannot see the image directly, provide helpful guidance on what information would be needed to analyze it, or provide general information about the topic they're asking about.`;
-      
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 20000);
-      const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(fullPrompt)}`, { 
-        signal: controller.signal,
-        method: 'GET'
-      });
-      clearTimeout(timeoutId);
-      
-      if (!res.ok) throw new Error('API request failed');
-      
-      let analysis = await res.text();
-      analysis = analysis.replace(/\*\*/g, '').replace(/\*/g, '').replace(/__/g, '');
-      
-      area.innerHTML = `
-        <div class="result-card">
-          <div class="result-title">👁️ Analysis Result</div>
-          <div style="background:#0a0a0a;padding:15px;border-radius:10px;margin-bottom:15px;">
-            <strong style="color:#ffd700;">Note:</strong> 
-            <p style="color:#888;margin-top:8px;">For advanced AI vision (actually seeing images), you would need to integrate Google Gemini Vision API or OpenAI GPT-4 Vision. Currently providing text-based assistance.</p>
-          </div>
-          <div class="script-output" id="visionOutput">${analysis}</div>
-          <button onclick="copyToClipboard('visionOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button>
-        </div>`;
+      const fullPrompt = `You are an expert image analyst. A user uploaded an image and asks: "${userQuestion}". Provide detailed analysis.`;
+      const analysis = await fetchAI(fullPrompt, 25000);
+      area.innerHTML = `<div class="result-card"><div class="result-title">👁️ Analysis Result</div><div class="script-output" id="visionOutput">${analysis}</div><button onclick="copyToClipboard('visionOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button></div>`;
     } catch (err) { 
-      area.innerHTML = `
-        <div class="error-card">
-          ⚠ Analysis failed. Please try describing what you see in the image and I'll help you analyze it based on your description.
-        </div>`; 
+      area.innerHTML = '<div class="error-card">⚠ Analysis failed. Try again.</div>'; 
     } finally { 
-      btn.disabled = false; 
-      btn.textContent = '👁️ Analyze Image'; 
+      btn.disabled = false; btn.textContent = '👁️ Analyze Image'; 
     }
   }
 
@@ -636,10 +463,9 @@ document.addEventListener('DOMContentLoaded', function() {
   function generateEbookPDF() {
     const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
     const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
-    const content = document.getElementById('ebookContent').value.trim();    const area = document.getElementById('ebook-result');
-    
+    const content = document.getElementById('ebookContent').value.trim();
+    const area = document.getElementById('ebook-result');
     if (!content) { alert('Please paste content.'); return; }
-    
     try {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
@@ -658,14 +484,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
     const content = document.getElementById('ebookContent').value.trim();
     const area = document.getElementById('ebook-result');
-    
     if (!content) { alert('Please paste content.'); return; }
-    
     try {
       const doc = new docx.Document({
         sections: [{ properties: {}, children: [
-          new docx.Paragraph({ text: title, heading: docx.HeadingLevel.HEADING_1, alignment: docx.AlignmentType.CENTER }),
-          new docx.Paragraph({ text: 'by ' + author, alignment: docx.AlignmentType.CENTER, spacing: { after: 400 } }),
+          new docx.Paragraph({ text: title, heading: docx.HeadingLevel.HEADING_1, alignment: docx.AlignmentType.CENTER }),          new docx.Paragraph({ text: 'by ' + author, alignment: docx.AlignmentType.CENTER, spacing: { after: 400 } }),
           ...content.split('\n').map(line => new docx.Paragraph({ text: line }))
         ]}]
       });
@@ -680,12 +503,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
     const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
     const content = document.getElementById('ebookContent').value.trim();
-    
     if (!content) { alert('Please paste content.'); return; }
-    
     const kdp = `${title}\n\nBy ${author}\n\n${content}\n\n---\nCopyright © ${new Date().getFullYear()} ${author}`;
     const blob = new Blob([kdp], { type: 'text/plain' });
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = title+'_KDP.txt'; a.click();  }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = title+'_KDP.txt'; a.click();
+  }
 
   // VIDEO SCRIPT
   async function generateScript() {
@@ -694,28 +516,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const tone = document.getElementById('scriptTone').value;
     const btn = document.getElementById('scriptBtn');
     const area = document.getElementById('script-result');
-    
     if (!topic) { alert('Please enter a topic.'); return; }
-    
-    btn.disabled = true; 
-    btn.textContent = 'Generating…';
+    btn.disabled = true; btn.textContent = 'Generating…';
     area.innerHTML = '<div class="result-card">⏳ Writing script...</div>';
-    
-    const prompt = `Write a ${tone} ${platform} video script about "${topic}". Structure: HOOK, INTRODUCTION, MAIN CONTENT (3 points), CALL TO ACTION. Plain text only, no markdown.`;
-    
+    const prompt = `Write a ${tone} ${platform} video script about "${topic}". Structure: HOOK, INTRODUCTION, MAIN CONTENT (3 points), CALL TO ACTION. Plain text only.`;
     try {
       const script = await fetchAI(prompt);
-      area.innerHTML = `
-        <div class="result-card">
-          <div class="result-title">🎬 Script</div>
-          <div class="script-output" id="scriptOutput">${script}</div>
-          <button onclick="copyToClipboard('scriptOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button>
-        </div>`;
+      area.innerHTML = `<div class="result-card"><div class="result-title">🎬 Script</div><div class="script-output" id="scriptOutput">${script}</div><button onclick="copyToClipboard('scriptOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button></div>`;
     } catch (err) { 
-      area.innerHTML = '<div class="error-card">⚠ Failed to generate script. Please try again.</div>'; 
+      area.innerHTML = '<div class="error-card">⚠ Failed. Please try again.</div>'; 
     } finally { 
-      btn.disabled = false; 
-      btn.textContent = '🎬 Generate Script'; 
+      btn.disabled = false; btn.textContent = '🎬 Generate Script'; 
     }
   }
 
@@ -726,15 +537,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const email = document.getElementById('resumeEmail').value.trim();
     const phone = document.getElementById('resumePhone').value.trim();
     const summary = document.getElementById('resumeSummary').value.trim();
-    const exp = document.getElementById('resumeExperience').value.trim();
-    const edu = document.getElementById('resumeEducation').value.trim();
+    const exp = document.getElementById('resumeExperience').value.trim();    const edu = document.getElementById('resumeEducation').value.trim();
     const skills = document.getElementById('resumeSkills').value.trim();
     const area = document.getElementById('resume-result');
-    
     try {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
-      doc.setFillColor(124, 92, 252); doc.rect(0, 0, 210, 40, 'F');      doc.setTextColor(255,255,255); doc.setFontSize(24); doc.text(name, 105, 20, {align:'center'});
+      doc.setFillColor(124, 92, 252); doc.rect(0, 0, 210, 40, 'F');
+      doc.setTextColor(255,255,255); doc.setFontSize(24); doc.text(name, 105, 20, {align:'center'});
       doc.setFontSize(14); doc.text(job, 105, 30, {align:'center'});
       doc.setTextColor(0,0,0); let y = 50;
       if (email) { doc.setFontSize(10); doc.text(`${email} | ${phone}`, 105, y, {align:'center'}); y+=15; }
@@ -753,21 +563,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // MEME GENERATOR
   let memeImg = null;
   let memeMode = 'text';
-  
   function switchMemeMode(mode, tab) {
     memeMode = mode;
     document.querySelectorAll('.meme-tab').forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
-    if (mode === 'cartoon') {
-      document.getElementById('cartoonCanvas').style.display = 'block';
-      document.getElementById('memeCanvas').style.display = 'none';
-    } else {
-      document.getElementById('cartoonCanvas').style.display = 'none';
-      document.getElementById('memeCanvas').style.display = 'block';
-    }
+    document.getElementById('cartoonCanvas').style.display = mode === 'cartoon' ? 'block' : 'none';
+    document.getElementById('memeCanvas').style.display = mode === 'text' ? 'block' : 'none';
     updateMeme();
   }
-  
   function loadMemeImage(event) {
     const file = event.target.files[0]; if (!file) return;
     const reader = new FileReader();
@@ -778,21 +581,17 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     reader.readAsDataURL(file);
   }
-  
   function updateMeme() {
     if (!memeImg) return;
     const top = document.getElementById('memeTop').value.toUpperCase();
     const bot = document.getElementById('memeBottom').value.toUpperCase();
-        if (memeMode === 'text') {
-      const canvas = document.getElementById('memeCanvas'); 
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(memeImg, 0, 0, 600, 600);
+    if (memeMode === 'text') {
+      const canvas = document.getElementById('memeCanvas'); const ctx = canvas.getContext('2d');      ctx.drawImage(memeImg, 0, 0, 600, 600);
       ctx.font = 'bold 40px Impact'; ctx.fillStyle = 'white'; ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.textAlign = 'center';
       if (top) { ctx.strokeText(top, 300, 60); ctx.fillText(top, 300, 60); }
       if (bot) { ctx.strokeText(bot, 300, 560); ctx.fillText(bot, 300, 560); }
     } else {
-      const canvas = document.getElementById('cartoonCanvas'); 
-      const ctx = canvas.getContext('2d');
+      const canvas = document.getElementById('cartoonCanvas'); const ctx = canvas.getContext('2d');
       ctx.drawImage(memeImg, 0, 0, 600, 600);
       const imageData = ctx.getImageData(0, 0, 600, 600);
       const data = imageData.data;
@@ -806,7 +605,6 @@ document.addEventListener('DOMContentLoaded', function() {
       if (bot) { ctx.strokeText(bot, 300, 560); ctx.fillText(bot, 300, 560); }
     }
   }
-  
   async function aiSuggestMeme() {
     const area = document.getElementById('meme-result');
     area.innerHTML = '<div class="result-card">🤖 Thinking...</div>';
@@ -820,7 +618,6 @@ document.addEventListener('DOMContentLoaded', function() {
       area.innerHTML = '<div class="result-card"><div class="result-title">😂 Applied!</div></div>';
     } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
   }
-  
   function downloadMeme() {
     const canvas = memeMode === 'text' ? document.getElementById('memeCanvas') : document.getElementById('cartoonCanvas');
     const a = document.createElement('a'); a.download = 'meme.png'; a.href = canvas.toDataURL(); a.click();
@@ -832,14 +629,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!file) return;
     const textarea = document.getElementById('studyText');
     textarea.value = 'Reading...';
-        if (file.type === 'application/pdf') {
+    if (file.type === 'application/pdf') {
       try {
         const arrayBuffer = await file.arrayBuffer();
         const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
         let fullText = '';
         for (let i = 1; i <= pdf.numPages; i++) {
-          const page = await pdf.getPage(i);
-          const textContent = await page.getTextContent();
+          const page = await pdf.getPage(i);          const textContent = await page.getTextContent();
           fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
         }
         textarea.value = fullText;
@@ -856,47 +652,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const format = document.getElementById('studyFormat').value;
     const btn = document.getElementById('studyBtn');
     const area = document.getElementById('study-result');
-    
     if (!text) { alert('Please paste text or upload.'); return; }
-    
-    if (text.length > 5000) {
-      alert('Text is too long. Please limit to 5000 characters.');
-      return;
-    }
-    
-    btn.disabled = true; 
-    btn.textContent = 'Summarizing…';
+    if (text.length > 5000) { alert('Text is too long. Limit to 5000 characters.'); return; }
+    btn.disabled = true; btn.textContent = 'Summarizing…';
     area.innerHTML = '<div class="result-card">⏳ AI analyzing...</div>';
-    
-    const formatText = {
-      'summary': 'Provide a concise summary',
-      'bullets': 'Extract key points as bullet list',
-      'flashcards': 'Create flashcards in Q: question A: answer format',
-      'quiz': 'Create quiz questions'
-    };
-    
+    const formatText = { 'summary': 'Provide a concise summary', 'bullets': 'Extract key points as bullet list', 'flashcards': 'Create flashcards (Q: A: format)', 'quiz': 'Create quiz questions' };
     const prompt = `${formatText[format]} of this text:\n\n${text.substring(0, 4000)}`;
-    
     try {
       const summary = await fetchAI(prompt, 25000);
-      area.innerHTML = `
-        <div class="result-card">
-          <div class="result-title">📚 Study Notes</div>          <div class="script-output" id="studyOutput">${summary}</div>
-          <button onclick="copyToClipboard('studyOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button>
-        </div>`;
+      area.innerHTML = `<div class="result-card"><div class="result-title">📚 Study Notes</div><div class="script-output" id="studyOutput">${summary}</div><button onclick="copyToClipboard('studyOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button></div>`;
     } catch (err) { 
-      area.innerHTML = '<div class="error-card">⚠ Failed to summarize. Text may be too long or service unavailable.</div>'; 
+      area.innerHTML = '<div class="error-card">⚠ Failed. Try shorter text.</div>'; 
     } finally { 
-      btn.disabled = false; 
-      btn.textContent = '📚 Generate Notes'; 
-    }
-  }
-
-  // COPY TO CLIPBOARD
-  function copyToClipboard(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-      navigator.clipboard.writeText(element.innerText).then(() => alert('✅ Copied to clipboard!'));
+      btn.disabled = false; btn.textContent = '📚 Generate Notes'; 
     }
   }
 </script>

@@ -53,6 +53,9 @@
     .meme-tab { flex: 1; background: #0a0a0a; border: 2px solid #1a1a1a; color: #888; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: 600; }
     .meme-tab.active { border-color: #7c5cfc; color: #fff; }
     #cartoonCanvas { max-width: 100%; border-radius: 12px; margin: 10px 0; display: none; }
+    .ad-container { margin: 30px auto; text-align: center; min-height: 50px; }
+    .ad-container-300 { max-width: 320px; }
+    .ad-container-native { max-width: 728px; }
     footer { border-top: 1px solid #1a1a1a; padding: 32px; text-align: center; color: #888; font-size: 0.85rem; margin-top: 50px; }
   </style>
 </head>
@@ -77,7 +80,7 @@
   <a onclick="showView('study')">📚 Study Summarizer</a>
 </div>
 
-<!-- HOME -->
+<!-- ============== HOME PAGE ============== -->
 <div class="view active" id="view-home">
   <section class="hero">
     <h1>One Platform.<br>10 Powerful AI Tools.</h1>
@@ -93,38 +96,88 @@
     <div class="tool-card" onclick="showView('tts')"><div class="tool-icon">🎙️</div><h3>Speechster</h3><p>580+ voices, MP3 download.</p></div>
     <div class="tool-card" onclick="showView('downloader')"><div class="tool-icon">📥</div><h3>Universal Downloader</h3><p>Download videos.</p></div>
     <div class="tool-card" onclick="showView('vision')"><div class="tool-icon">👁️</div><h3>VisionChat</h3><p>AI image analysis.</p></div>
-    <div class="tool-card" onclick="showView('ebook')"><div class="tool-icon">📖</div><h3>Ebook Builder</h3><p>PDF, DOCX, KDP.</p></div>
+    <div class="tool-card" onclick="showView('ebook')"><div class="tool-icon">📖</div><h3>Ebook Builder</h3><p>PDF, DOCX, KDP.</p></div>  </div>
+  
+  <!-- ADSTERRA 300x250 BANNER - HOMEPAGE -->
+  <div class="ad-container ad-container-300">
+    <script>
+      atOptions = {
+        'key' : '265a3e3f0e948dc63fad891d2f0216ac',
+        'format' : 'iframe',
+        'height' : 250,
+        'width' : 300,
+        'params' : {}
+      };
+    </script>
+    <script src="https://www.highperformanceformat.com/265a3e3f0e948dc63fad891d2f0216ac/invoke.js"></script>
   </div>
+  
   <div class="featured-ebook">
-    <div class="featured-badge">🔥 FEATURED EBOOK</div>    <div class="ebook-icon">📷</div>
+    <div class="featured-badge">🔥 FEATURED EBOOK</div>
+    <div class="ebook-icon">📷</div>
     <h2>The AI Fashion Photography Kit</h2>
     <p>Master the prompt formulas behind 8K, DSLR-quality fashion imagery.</p>
     <a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a>
     <p style="margin-top:16px;font-size:0.8rem;color:#888;">WhatsApp: <a href="https://wa.link/tzxsay" style="color:#22d3a5;">Click Here</a></p>
   </div>
+  
+  <!-- ADSTERRA NATIVE BANNER - HOMEPAGE -->
+  <div class="ad-container ad-container-native">
+    <script async="async" data-cfasync="false" src="https://pl29820186.effectivecpmnetwork.com/31f16fc7913263f00e93a85356f6e7d6/invoke.js"></script>
+    <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
+  </div>
 </div>
 
-<!-- PROF. UPDATE -->
+<!-- ============== PROF. UPDATE ============== -->
 <div class="view" id="view-prof">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>🎓 Prof. Update</h1>
     <div class="card"><textarea id="profQuestion" style="min-height:150px;" placeholder="Ask Prof. Update anything..."></textarea><button id="profBtn" onclick="askProf()">🎓 Ask Prof. Update</button></div>
+    
+    <!-- ADSTERRA 320x50 BANNER - TOOL PAGE -->
+    <div class="ad-container ad-container-300">
+      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>    </div>
+    
     <div class="result-area" id="prof-result"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
 
-<!-- DOWNLOADER -->
+<!-- ============== DOWNLOADER ============== -->
 <div class="view" id="view-downloader">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>📥 Universal Downloader</h1>
     <div class="card"><input id="videoUrl" type="url" placeholder="Paste video URL here…"/><button id="dlBtn" onclick="startDownload()">Download</button></div>
+    
+    <!-- ADSTERRA 320x50 BANNER -->
+    <div class="ad-container ad-container-300">
+      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
+    </div>
+    
     <div class="result-area" id="result-area"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
 
-<!-- IMAGE GENERATION -->
+<!-- ============== IMAGE GENERATION ============== -->
 <div class="view" id="view-imagegen">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>🎨 Image Generation</h1>
@@ -141,13 +194,28 @@
       </div>
       <input type="hidden" id="imgWidth" value="1024"/>
       <input type="hidden" id="imgHeight" value="1024"/>
-      <button id="imgBtn" onclick="generateImage()">Generate Image</button>
+      <button id="imgBtn" onclick="generateImage()">Generate Image</button>    </div>
+    
+    <!-- ADSTERRA 320x50 BANNER -->
+    <div class="ad-container ad-container-300">
+      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
     </div>
+    
     <div class="result-area" id="img-result"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
-  </section></div>
+  </section>
+</div>
 
-<!-- SPEECHSTER - POPUP VERSION -->
+<!-- ============== SPEECHSTER ============== -->
 <div class="view" id="view-tts">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;">
@@ -175,8 +243,21 @@
           <li>Adjustable speed control</li>
           <li>Long text support (2000+ characters)</li>
           <li>100% Free to use</li>
-        </ul>
-      </div>
+        </ul>      </div>
+    </div>
+    
+    <!-- ADSTERRA 320x50 BANNER -->
+    <div class="ad-container ad-container-300">
+      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
     </div>
     
     <div class="featured-ebook" style="margin-top:30px;">
@@ -187,21 +268,36 @@
   </section>
 </div>
 
-<!-- VISION CHAT -->
+<!-- ============== VISION CHAT ============== -->
 <div class="view" id="view-vision">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>👁️ VisionChat</h1>
     <div class="card">
       <input type="file" id="visionFile" accept="image/*" onchange="previewVisionImage(event)"/>
       <img id="visionImagePreview" style="max-width:100%;border-radius:12px;margin:16px 0;display:none;"/>
-      <input type="text" id="visionPrompt" placeholder="Ask about the image (e.g., 'What is in this image?')"/>      <button id="visionBtn" onclick="analyzeImageVision()">👁️ Analyze Image</button>
+      <input type="text" id="visionPrompt" placeholder="Ask about the image (e.g., 'What is in this image?')"/>
+      <button id="visionBtn" onclick="analyzeImageVision()">👁️ Analyze Image</button>
     </div>
-    <div class="result-area" id="vision-result"></div>
+    
+    <!-- ADSTERRA 320x50 BANNER -->
+    <div class="ad-container ad-container-300">
+      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
+    </div>
+        <div class="result-area" id="vision-result"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
 
-<!-- EBOOK BUILDER -->
+<!-- ============== EBOOK BUILDER ============== -->
 <div class="view" id="view-ebook">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>📖 Ebook Builder</h1>
@@ -213,12 +309,27 @@
       <button onclick="generateEbookDOCX()" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">📝 Download DOCX</button>
       <button onclick="generateEbookKDP()" style="background:linear-gradient(135deg,#f59e0b,#d97706);">📚 Amazon KDP Format</button>
     </div>
+    
+    <!-- ADSTERRA 320x50 BANNER -->
+    <div class="ad-container ad-container-300">
+      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
+    </div>
+    
     <div class="result-area" id="ebook-result"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
 
-<!-- VIDEO SCRIPT -->
+<!-- ============== VIDEO SCRIPT ============== -->
 <div class="view" id="view-script">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>🎬 AI Video Script Generator</h1>
@@ -228,12 +339,26 @@
       <select id="scriptTone"><option value="Professional">Professional</option><option value="Casual">Casual & Fun</option><option value="Educational">Educational</option><option value="Motivational">Motivational</option></select>
       <button id="scriptBtn" onclick="generateScript()">🎬 Generate Script</button>
     </div>
+    
+    <!-- ADSTERRA 320x50 BANNER -->
+    <div class="ad-container ad-container-300">      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
+    </div>
+    
     <div class="result-area" id="script-result"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
 
-<!-- RESUME -->
+<!-- ============== RESUME ============== -->
 <div class="view" id="view-resume">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>📝 AI Resume Builder</h1>
@@ -243,14 +368,29 @@
       <textarea id="resumeSummary" placeholder="Professional Summary"></textarea>
       <textarea id="resumeExperience" placeholder="Work Experience"></textarea>
       <textarea id="resumeEducation" placeholder="Education"></textarea>
-      <input id="resumeSkills" placeholder="Skills (comma-separated)"/>      <button onclick="generateResume()">📝 Generate Resume PDF</button>
+      <input id="resumeSkills" placeholder="Skills (comma-separated)"/>
+      <button onclick="generateResume()">📝 Generate Resume PDF</button>
     </div>
+    
+    <!-- ADSTERRA 320x50 BANNER -->
+    <div class="ad-container ad-container-300">
+      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
+    </div>
+    
     <div class="result-area" id="resume-result"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
-
-<!-- MEME GENERATOR -->
+<!-- ============== MEME GENERATOR ============== -->
 <div class="view" id="view-meme">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>😂 Meme Generator</h1>
@@ -267,12 +407,27 @@
       <button onclick="aiSuggestMeme()">🤖 AI Suggest Caption</button>
       <button onclick="downloadMeme()">⬇ Download Meme</button>
     </div>
+    
+    <!-- ADSTERRA 320x50 BANNER -->
+    <div class="ad-container ad-container-300">
+      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
+    </div>
+    
     <div class="result-area" id="meme-result"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
 </div>
 
-<!-- STUDY SUMMARIZER -->
+<!-- ============== STUDY SUMMARIZER ============== -->
 <div class="view" id="view-study">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;"><h1>📚 AI Study Notes Summarizer</h1>
@@ -282,6 +437,20 @@
       <select id="studyFormat"><option value="summary">Quick Summary</option><option value="bullets">Key Points</option><option value="flashcards">Flashcards</option><option value="quiz">Quiz Questions</option></select>
       <button id="studyBtn" onclick="summarizeStudy()">📚 Generate Notes</button>
     </div>
+    
+    <!-- ADSTERRA 320x50 BANNER -->
+    <div class="ad-container ad-container-300">      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
+    </div>
+    
     <div class="result-area" id="study-result"></div>
     <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
   </section>
@@ -289,10 +458,16 @@
 
 <footer><p>© 2026 ToolVerse · 10 Free Tools · Powered by CapacityTools</p></footer>
 
-<!-- ADSTERRA SOCIAL BAR -->
+<!-- ============== GLOBAL ADS (All Pages) ============== -->
+
+<!-- ADSTERRA SOCIAL BAR (Already Active) -->
 <script src="https://pl29819831.effectivecpmnetwork.com/40/ec/a6/40eca62ffa3dd47c9612d8d993c2924e.js"></script>
 
-<script>  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+<!-- ADSTERRA POPUNDER (High Revenue - Triggers on Click) -->
+<script src="https://pl29820228.effectivecpmnetwork.com/7f/63/83/7f638315da085a860c6d66deecc31bcd.js"></script>
+
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
   function toggleMenu() { document.getElementById('menuDropdown').classList.toggle('open'); }
   function showView(id) {
@@ -302,12 +477,10 @@
     window.scrollTo(0, 0);
   }
 
-  // HELPER: Clean markdown from AI responses
   function cleanMarkdown(text) {
     return text.replace(/\*\*/g, '').replace(/\*/g, '').replace(/__/g, '').replace(/_/g, '').replace(/`/g, '');
   }
 
-  // HELPER: Copy to clipboard
   function copyToClipboard(elementId) {
     const element = document.getElementById(elementId);
     if (element) {
@@ -315,9 +488,7 @@
     }
   }
 
-  // HELPER: Fetch AI with timeout
-  async function fetchAI(prompt, timeout_ms = 20000) {
-    const controller = new AbortController();
+  async function fetchAI(prompt, timeout_ms = 20000) {    const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeout_ms);
     try {
       const url = `https://text.pollinations.ai/${encodeURIComponent(prompt)}`;
@@ -331,7 +502,6 @@
     }
   }
 
-  // PROF. UPDATE
   async function askProf() {
     const q = document.getElementById('profQuestion').value.trim();
     const btn = document.getElementById('profBtn');
@@ -341,7 +511,8 @@
     area.innerHTML = '<div class="result-card">⏳ Prof. Update is reasoning...</div>';
     const prompt = `You are Prof. Update with 20 years experience. Answer clearly without markdown: "${q}"`;
     try {
-      const answer = await fetchAI(prompt);      area.innerHTML = `<div class="result-card"><div class="result-title">🎓 Prof. Update Says:</div><div class="script-output" id="profOutput">${answer}</div><button onclick="copyToClipboard('profOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button></div>`;
+      const answer = await fetchAI(prompt);
+      area.innerHTML = `<div class="result-card"><div class="result-title">🎓 Prof. Update Says:</div><div class="script-output" id="profOutput">${answer}</div><button onclick="copyToClipboard('profOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button></div>`;
     } catch (err) { 
       area.innerHTML = '<div class="error-card">⚠ Service unavailable. Please try again.</div>'; 
     } finally { 
@@ -349,7 +520,6 @@
     }
   }
 
-  // DOWNLOADER (Using ahm7xmakki.com API)
   async function startDownload() {
     const url = document.getElementById("videoUrl").value.trim();
     const btn = document.getElementById("dlBtn");
@@ -367,8 +537,7 @@
       const data = await res.json();
       if (data.error || !data.links || data.links.length === 0) throw new Error("No download links found");
       let html = '<div class="result-card"><div class="result-title">✅ Download Ready</div>';
-      data.links.forEach(link => {
-        const quality = link.quality || 'Download';
+      data.links.forEach(link => {        const quality = link.quality || 'Download';
         const downloadUrl = link.url || link.download;
         if (downloadUrl) html += `<div style="margin-bottom:10px;padding:10px;background:#0a0a0a;border-radius:8px;"><div style="color:#ffd700;margin-bottom:8px;">${quality}</div><a class="btn-get" href="${downloadUrl}" target="_blank">⬇ Download</a></div>`;
       });
@@ -381,7 +550,6 @@
     }
   }
 
-  // IMAGE GENERATION
   function setAspect(w, h, btn) {
     document.getElementById('imgWidth').value = w;
     document.getElementById('imgHeight').value = h;
@@ -390,7 +558,8 @@
   }
 
   function generateImage() {
-    const prompt = document.getElementById('imgPrompt').value.trim();    const w = document.getElementById('imgWidth').value;
+    const prompt = document.getElementById('imgPrompt').value.trim();
+    const w = document.getElementById('imgWidth').value;
     const h = document.getElementById('imgHeight').value;
     const btn = document.getElementById('imgBtn');
     const area = document.getElementById('img-result');
@@ -404,7 +573,6 @@
     }, 1500);
   }
 
-  // SPEECHSTER - OPEN IN POPUP
   function openSpeechTool() {
     const width = Math.min(window.screen.width - 100, 900);
     const height = Math.min(window.screen.height - 150, 700);
@@ -418,11 +586,9 @@
     );
     
     if (!popup || popup.closed || typeof popup.closed === 'undefined') {
-      window.open('https://ahm7xmakki.com/speech', '_blank');
-    }
+      window.open('https://ahm7xmakki.com/speech', '_blank');    }
   }
 
-  // VISION CHAT
   let visionImageBase64 = null;
   function previewVisionImage(event) {
     const file = event.target.files[0];
@@ -439,7 +605,8 @@
 
   async function analyzeImageVision() {
     const fileInput = document.getElementById('visionFile');
-    const prompt = document.getElementById('visionPrompt').value.trim();    const btn = document.getElementById('visionBtn');
+    const prompt = document.getElementById('visionPrompt').value.trim();
+    const btn = document.getElementById('visionBtn');
     const area = document.getElementById('vision-result');
     if (!fileInput.files[0]) { alert('Please upload an image first.'); return; }
     const userQuestion = prompt || 'Describe this image in detail';
@@ -456,7 +623,6 @@
     }
   }
 
-  // EBOOK BUILDER
   function generateEbookPDF() {
     const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
     const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
@@ -469,8 +635,7 @@
       doc.setFontSize(20); doc.text(title, 105, 20, { align: 'center' });
       doc.setFontSize(14); doc.text('by ' + author, 105, 30, { align: 'center' });
       doc.setFontSize(12);
-      const lines = doc.splitTextToSize(content, 180);
-      doc.text(lines, 15, 45);
+      const lines = doc.splitTextToSize(content, 180);      doc.text(lines, 15, 45);
       doc.save(title + ".pdf");
       area.innerHTML = '<div class="result-card"><div class="result-title">✅ PDF Downloaded!</div></div>';
     } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
@@ -488,7 +653,8 @@
           new docx.Paragraph({ text: title, heading: docx.HeadingLevel.HEADING_1, alignment: docx.AlignmentType.CENTER }),
           new docx.Paragraph({ text: 'by ' + author, alignment: docx.AlignmentType.CENTER, spacing: { after: 400 } }),
           ...content.split('\n').map(line => new docx.Paragraph({ text: line }))
-        ]}]      });
+        ]}]
+      });
       const blob = await docx.Packer.toBlob(doc);
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a'); a.href = url; a.download = title.replace(/\s+/g, '_') + '.docx'; a.click();
@@ -506,7 +672,6 @@
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = title+'_KDP.txt'; a.click();
   }
 
-  // VIDEO SCRIPT
   async function generateScript() {
     const topic = document.getElementById('scriptTopic').value.trim();
     const platform = document.getElementById('scriptPlatform').value;
@@ -519,15 +684,13 @@
     const prompt = `Write a ${tone} ${platform} video script about "${topic}". Structure: HOOK, INTRODUCTION, MAIN CONTENT (3 points), CALL TO ACTION. Plain text only.`;
     try {
       const script = await fetchAI(prompt);
-      area.innerHTML = `<div class="result-card"><div class="result-title">🎬 Script</div><div class="script-output" id="scriptOutput">${script}</div><button onclick="copyToClipboard('scriptOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button></div>`;
-    } catch (err) { 
+      area.innerHTML = `<div class="result-card"><div class="result-title">🎬 Script</div><div class="script-output" id="scriptOutput">${script}</div><button onclick="copyToClipboard('scriptOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button></div>`;    } catch (err) { 
       area.innerHTML = '<div class="error-card">⚠ Failed. Please try again.</div>'; 
     } finally { 
       btn.disabled = false; btn.textContent = '🎬 Generate Script'; 
     }
   }
 
-  // RESUME
   function generateResume() {
     const name = document.getElementById('resumeName').value.trim() || 'Name';
     const job = document.getElementById('resumeJob').value.trim() || 'Job';
@@ -537,7 +700,8 @@
     const exp = document.getElementById('resumeExperience').value.trim();
     const edu = document.getElementById('resumeEducation').value.trim();
     const skills = document.getElementById('resumeSkills').value.trim();
-    const area = document.getElementById('resume-result');    try {
+    const area = document.getElementById('resume-result');
+    try {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
       doc.setFillColor(124, 92, 252); doc.rect(0, 0, 210, 40, 'F');
@@ -557,7 +721,6 @@
     } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
   }
 
-  // MEME GENERATOR
   let memeImg = null;
   let memeMode = 'text';
   function switchMemeMode(mode, tab) {
@@ -570,8 +733,7 @@
   }
   function loadMemeImage(event) {
     const file = event.target.files[0]; if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(e) {
+    const reader = new FileReader();    reader.onload = function(e) {
       const img = new Image();
       img.onload = function() { memeImg = img; updateMeme(); };
       img.src = e.target.result;
@@ -586,7 +748,8 @@
       const canvas = document.getElementById('memeCanvas'); const ctx = canvas.getContext('2d');
       ctx.drawImage(memeImg, 0, 0, 600, 600);
       ctx.font = 'bold 40px Impact'; ctx.fillStyle = 'white'; ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.textAlign = 'center';
-      if (top) { ctx.strokeText(top, 300, 60); ctx.fillText(top, 300, 60); }      if (bot) { ctx.strokeText(bot, 300, 560); ctx.fillText(bot, 300, 560); }
+      if (top) { ctx.strokeText(top, 300, 60); ctx.fillText(top, 300, 60); }
+      if (bot) { ctx.strokeText(bot, 300, 560); ctx.fillText(bot, 300, 560); }
     } else {
       const canvas = document.getElementById('cartoonCanvas'); const ctx = canvas.getContext('2d');
       ctx.drawImage(memeImg, 0, 0, 600, 600);
@@ -619,8 +782,6 @@
     const canvas = memeMode === 'text' ? document.getElementById('memeCanvas') : document.getElementById('cartoonCanvas');
     const a = document.createElement('a'); a.download = 'meme.png'; a.href = canvas.toDataURL(); a.click();
   }
-
-  // STUDY SUMMARIZER
   async function handleStudyFile(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -635,7 +796,8 @@
           const page = await pdf.getPage(i);
           const textContent = await page.getTextContent();
           fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
-        }        textarea.value = fullText;
+        }
+        textarea.value = fullText;
       } catch (err) { textarea.value = 'Error: ' + err.message; }
     } else {
       const reader = new FileReader();

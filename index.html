@@ -54,7 +54,6 @@
     .meme-tab.active { border-color: #7c5cfc; color: #fff; }
     #cartoonCanvas { max-width: 100%; border-radius: 12px; margin: 10px 0; display: none; }
     footer { border-top: 1px solid #1a1a1a; padding: 32px; text-align: center; color: #888; font-size: 0.85rem; margin-top: 50px; }
-    @keyframes loading { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
   </style>
 </head>
 <body>
@@ -91,13 +90,13 @@
     <div class="tool-card" onclick="showView('meme')"><div class="tool-icon">😂</div><h3>Meme Generator</h3><p>Create viral memes.</p></div>
     <div class="tool-card" onclick="showView('study')"><div class="tool-icon">📚</div><h3>Study Summarizer</h3><p>Upload PDFs & get notes.</p></div>
     <div class="tool-card" onclick="showView('imagegen')"><div class="tool-icon">🎨</div><h3>Image Generation</h3><p>Generate & Analyze.</p></div>
-    <div class="tool-card" onclick="showView('tts')"><div class="tool-icon">🎙️</div><h3>Speechster</h3><p>50+ voices, MP3 download.</p></div>
+    <div class="tool-card" onclick="showView('tts')"><div class="tool-icon">🎙️</div><h3>Speechster</h3><p>580+ voices, MP3 download.</p></div>
     <div class="tool-card" onclick="showView('downloader')"><div class="tool-icon">📥</div><h3>Universal Downloader</h3><p>Download videos.</p></div>
     <div class="tool-card" onclick="showView('vision')"><div class="tool-icon">👁️</div><h3>VisionChat</h3><p>AI image analysis.</p></div>
     <div class="tool-card" onclick="showView('ebook')"><div class="tool-icon">📖</div><h3>Ebook Builder</h3><p>PDF, DOCX, KDP.</p></div>
   </div>
-  <div class="featured-ebook">    <div class="featured-badge">🔥 FEATURED EBOOK</div>
-    <div class="ebook-icon">📷</div>
+  <div class="featured-ebook">
+    <div class="featured-badge">🔥 FEATURED EBOOK</div>    <div class="ebook-icon">📷</div>
     <h2>The AI Fashion Photography Kit</h2>
     <p>Master the prompt formulas behind 8K, DSLR-quality fashion imagery.</p>
     <a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a>
@@ -145,86 +144,42 @@
       <button id="imgBtn" onclick="generateImage()">Generate Image</button>
     </div>
     <div class="result-area" id="img-result"></div>
-    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>  </section>
-</div>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section></div>
 
-<!-- SPEECHSTER - 50+ VOICES & MP3 DOWNLOAD -->
+<!-- SPEECHSTER - POPUP VERSION -->
 <div class="view" id="view-tts">
   <a class="back-link" onclick="showView('home')">← Back</a>
   <section class="hero" style="padding-top:10px;">
     <h1>🎙️ Speechster</h1>
-    <p style="color:#888;margin-bottom:30px;">50+ Voices • Unlimited Text • Free MP3 Download</p>
+    <p style="color:#888;margin-bottom:30px;">580+ Premium AI Voices • MP3 Download • Free</p>
     
-    <div class="card">
-      <textarea id="ttsText" placeholder="Type or paste your text here..." style="min-height:150px;"></textarea>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:5rem;margin-bottom:20px;">🎙️</div>
+      <h2 style="margin-bottom:15px;">Premium Text-to-Speech Tool</h2>
+      <p style="color:#888;margin-bottom:25px;line-height:1.6;">
+        Access 580+ premium AI voices, convert any text to natural speech, 
+        and download as MP3. Powered by our advanced AI engine.
+      </p>
       
-      <select id="ttsVoice">
-        <optgroup label="English">
-          <option value="en">English</option>
-          <option value="en-US">English (US)</option>
-          <option value="en-GB">English (UK)</option>
-          <option value="en-AU">English (Australia)</option>
-          <option value="en-IN">English (India)</option>
-          <option value="en-NG">English (Nigeria)</option>
-          <option value="en-ZA">English (South Africa)</option>
-          <option value="en-IE">English (Ireland)</option>
-        </optgroup>
-        <optgroup label="European">
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <option value="de">German</option>
-          <option value="it">Italian</option>
-          <option value="pt">Portuguese</option>
-          <option value="ru">Russian</option>
-          <option value="nl">Dutch</option>
-          <option value="pl">Polish</option>
-          <option value="tr">Turkish</option>
-          <option value="sv">Swedish</option>
-          <option value="no">Norwegian</option>
-          <option value="da">Danish</option>
-          <option value="fi">Finnish</option>
-          <option value="cs">Czech</option>
-          <option value="el">Greek</option>
-          <option value="ro">Romanian</option>
-          <option value="hu">Hungarian</option>
-          <option value="uk">Ukrainian</option>
-        </optgroup>
-        <optgroup label="Asian">
-          <option value="ja">Japanese</option>
-          <option value="ko">Korean</option>
-          <option value="zh-CN">Chinese (Simplified)</option>
-          <option value="zh-TW">Chinese (Traditional)</option>
-          <option value="hi">Hindi</option>          <option value="th">Thai</option>
-          <option value="vi">Vietnamese</option>
-          <option value="id">Indonesian</option>
-          <option value="ms">Malay</option>
-          <option value="tl">Filipino</option>
-          <option value="bn">Bengali</option>
-          <option value="ta">Tamil</option>
-          <option value="te">Telugu</option>
-          <option value="ur">Urdu</option>
-        </optgroup>
-        <optgroup label="Middle East & Africa">
-          <option value="ar">Arabic</option>
-          <option value="fa">Persian</option>
-          <option value="he">Hebrew</option>
-          <option value="yo">Yoruba</option>
-          <option value="ig">Igbo</option>
-          <option value="ha">Hausa</option>
-          <option value="sw">Swahili</option>
-          <option value="am">Amharic</option>
-          <option value="so">Somali</option>
-          <option value="zu">Zulu</option>
-          <option value="af">Afrikaans</option>
-        </optgroup>
-      </select>
+      <button onclick="openSpeechTool()" style="font-size:1.1rem;padding:18px 32px;">
+        🎙️ Launch Speechster Tool
+      </button>
       
-      <button id="ttsBtn" onclick="generateLongSpeech()">🎙️ Generate & Download MP3</button>
+      <div style="margin-top:25px;padding:20px;background:#0a0a0a;border-radius:12px;text-align:left;">
+        <h3 style="color:#ffd700;margin-bottom:12px;font-size:1rem;">✨ Features:</h3>
+        <ul style="color:#888;font-size:0.9rem;line-height:1.8;padding-left:20px;">
+          <li>580+ premium AI voices</li>
+          <li>Multiple languages & accents</li>
+          <li>MP3 download support</li>
+          <li>Adjustable speed control</li>
+          <li>Long text support (2000+ characters)</li>
+          <li>100% Free to use</li>
+        </ul>
+      </div>
     </div>
     
-    <div class="result-area" id="tts-result"></div>
-    
-    <div class="featured-ebook" style="margin-top:20px;">
+    <div class="featured-ebook" style="margin-top:30px;">
       <div class="featured-badge">🔥 FEATURED EBOOK</div>
       <h2>The AI Fashion Photography Kit</h2>
       <a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a>
@@ -239,11 +194,11 @@
     <div class="card">
       <input type="file" id="visionFile" accept="image/*" onchange="previewVisionImage(event)"/>
       <img id="visionImagePreview" style="max-width:100%;border-radius:12px;margin:16px 0;display:none;"/>
-      <input type="text" id="visionPrompt" placeholder="Ask about the image (e.g., 'What is in this image?')"/>
-      <button id="visionBtn" onclick="analyzeImageVision()">👁️ Analyze Image</button>
+      <input type="text" id="visionPrompt" placeholder="Ask about the image (e.g., 'What is in this image?')"/>      <button id="visionBtn" onclick="analyzeImageVision()">👁️ Analyze Image</button>
     </div>
     <div class="result-area" id="vision-result"></div>
-    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>  </section>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
 </div>
 
 <!-- EBOOK BUILDER -->
@@ -288,11 +243,11 @@
       <textarea id="resumeSummary" placeholder="Professional Summary"></textarea>
       <textarea id="resumeExperience" placeholder="Work Experience"></textarea>
       <textarea id="resumeEducation" placeholder="Education"></textarea>
-      <input id="resumeSkills" placeholder="Skills (comma-separated)"/>
-      <button onclick="generateResume()">📝 Generate Resume PDF</button>
+      <input id="resumeSkills" placeholder="Skills (comma-separated)"/>      <button onclick="generateResume()">📝 Generate Resume PDF</button>
     </div>
     <div class="result-area" id="resume-result"></div>
-    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>  </section>
+    <div class="featured-ebook" style="margin-top:20px;"><div class="featured-badge">🔥 FEATURED EBOOK</div><h2>The AI Fashion Photography Kit</h2><a href="https://selar.com/14711117ox" target="_blank" class="cta-button">📥 Get the Kit Now</a></div>
+  </section>
 </div>
 
 <!-- MEME GENERATOR -->
@@ -337,11 +292,11 @@
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-  function toggleMenu() { document.getElementById('menuDropdown').classList.toggle('open'); }
-  function showView(id) {
+  function toggleMenu() { document.getElementById('menuDropdown').classList.toggle('open'); }  function showView(id) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById('view-' + id).classList.add('active');
-    document.getElementById('menuDropdown').classList.remove('open');    window.scrollTo(0, 0);
+    document.getElementById('menuDropdown').classList.remove('open');
+    window.scrollTo(0, 0);
   }
 
   // HELPER: Clean markdown from AI responses
@@ -386,11 +341,11 @@
       const answer = await fetchAI(prompt);
       area.innerHTML = `<div class="result-card"><div class="result-title">🎓 Prof. Update Says:</div><div class="script-output" id="profOutput">${answer}</div><button onclick="copyToClipboard('profOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button></div>`;
     } catch (err) { 
-      area.innerHTML = '<div class="error-card">⚠ Service unavailable. Please try again.</div>'; 
-    } finally { 
+      area.innerHTML = '<div class="error-card">⚠ Service unavailable. Please try again.</div>';     } finally { 
       btn.disabled = false; btn.textContent = '🎓 Ask Prof. Update'; 
     }
   }
+
   // DOWNLOADER (Using ahm7xmakki.com API)
   async function startDownload() {
     const url = document.getElementById("videoUrl").value.trim();
@@ -435,127 +390,33 @@
     const prompt = document.getElementById('imgPrompt').value.trim();
     const w = document.getElementById('imgWidth').value;
     const h = document.getElementById('imgHeight').value;
-    const btn = document.getElementById('imgBtn');
-    const area = document.getElementById('img-result');
+    const btn = document.getElementById('imgBtn');    const area = document.getElementById('img-result');
     if (!prompt) { alert('Please describe an image.'); return; }
     btn.disabled = true; btn.textContent = 'Generating…';
-    area.innerHTML = '<div class="result-card">⏳ Generating...</div>';    const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${w}&height=${h}&model=flux&nologo=true&seed=${Math.floor(Math.random()*10000)}`;
+    area.innerHTML = '<div class="result-card">⏳ Generating...</div>';
+    const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${w}&height=${h}&model=flux&nologo=true&seed=${Math.floor(Math.random()*10000)}`;
     setTimeout(() => {
       area.innerHTML = `<div class="result-card"><div class="result-title">🎨 Image Ready</div><img src="${imgUrl}" style="width:100%;border-radius:12px;margin-bottom:14px;"/><a class="btn-get" href="${imgUrl}" target="_blank">⬇ Download</a></div>`;
       btn.disabled = false; btn.textContent = 'Generate Image';
     }, 1500);
   }
 
-  // SPEECHSTER - 50+ VOICES & MP3 DOWNLOAD
-  function generateLongSpeech() {
-    const text = document.getElementById('ttsText').value.trim();
-    const lang = document.getElementById('ttsVoice').value;
-    const btn = document.getElementById('ttsBtn');
-    const area = document.getElementById('tts-result');
+  // SPEECHSTER - OPEN IN POPUP
+  function openSpeechTool() {
+    const width = Math.min(window.screen.width - 100, 900);
+    const height = Math.min(window.screen.height - 150, 700);
+    const left = (window.screen.width - width) / 2;
+    const top = (window.screen.height - height) / 2;
     
-    if (!text) { 
-      alert('Please type some text first.'); 
-      return; 
+    const popup = window.open(
+      'https://ahm7xmakki.com/speech',
+      'Speechster',
+      `width=${width},height=${height},left=${left},top=${top},scrollbars=yes,resizable=yes,toolbar=no,menubar=no,location=no,status=no`
+    );
+    
+    if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+      window.open('https://ahm7xmakki.com/speech', '_blank');
     }
-    
-    btn.disabled = true; 
-    btn.textContent = 'Generating...';
-    area.innerHTML = '<div class="result-card">⏳ Preparing audio...</div>';
-    
-    // Use Google Translate TTS directly (no proxy)
-    const encodedText = encodeURIComponent(text.substring(0, 200)); // Limit to 200 chars for Google
-    const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${encodedText}`;
-    
-    // For short text (< 200 chars), use direct download
-    if (text.length <= 200) {
-      setTimeout(() => {
-        area.innerHTML = `
-          <div class="result-card">
-            <div class="result-title">🎧 Audio Ready</div>
-            <audio controls autoplay style="width:100%;margin-bottom:14px;">
-              <source src="${ttsUrl}" type="audio/mpeg">
-            </audio>
-            <a class="btn-get" href="${ttsUrl}" download="speech.mp3">⬇ Download MP3</a>
-            <a class="btn-get" href="${ttsUrl}" target="_blank">🔊 Play in New Tab</a>
-            <p style="color:#888;font-size:0.85rem;margin-top:10px;">
-              💡 For longer text (>200 chars), use browser's built-in player below
-            </p>
-          </div>`;
-        
-        // Also play using browser TTS for longer texts
-        if (text.length > 200) {
-          playWithBrowserTTS(text, lang);
-        }
-        
-        btn.disabled = false; 
-        btn.textContent = '🎙️ Generate & Download MP3';      }, 1000);
-    } else {
-      // For long text, use browser TTS
-      playWithBrowserTTS(text, lang);
-      btn.disabled = false; 
-      btn.textContent = '🎙️ Generate & Download MP3';
-    }
-  }
-
-  // Helper function for long text using browser's built-in TTS
-  function playWithBrowserTTS(text, lang) {
-    const area = document.getElementById('tts-result');
-    
-    // Map language codes to browser voice codes
-    const langMap = {
-      'en': 'en-US', 'en-US': 'en-US', 'en-GB': 'en-GB', 'en-AU': 'en-AU',
-      'en-IN': 'en-IN', 'en-NG': 'en-NG', 'en-ZA': 'en-ZA', 'en-IE': 'en-IE',
-      'es': 'es-ES', 'fr': 'fr-FR', 'de': 'de-DE', 'it': 'it-IT',
-      'pt': 'pt-BR', 'ru': 'ru-RU', 'ja': 'ja-JP', 'ko': 'ko-KR',
-      'zh-CN': 'zh-CN', 'zh-TW': 'zh-TW', 'hi': 'hi-IN', 'ar': 'ar-SA',
-      'yo': 'en-NG', 'ig': 'en-NG', 'ha': 'en-NG', 'sw': 'sw-KE',
-      'nl': 'nl-NL', 'pl': 'pl-PL', 'tr': 'tr-TR', 'sv': 'sv-SE',
-      'no': 'no-NO', 'da': 'da-DK', 'fi': 'fi-FI', 'cs': 'cs-CZ',
-      'el': 'el-GR', 'ro': 'ro-RO', 'hu': 'hu-HU', 'uk': 'uk-UA',
-      'th': 'th-TH', 'vi': 'vi-VN', 'id': 'id-ID', 'ms': 'ms-MY',
-      'tl': 'tl-PH', 'bn': 'bn-IN', 'ta': 'ta-IN', 'te': 'te-IN',
-      'ur': 'ur-PK', 'fa': 'fa-IR', 'he': 'he-IL', 'am': 'am-ET',
-      'so': 'so-SO', 'zu': 'zu-ZA', 'af': 'af-ZA'
-    };
-    
-    const browserLang = langMap[lang] || 'en-US';
-    
-    const utterance = new SpeechSynthesisUtterance(text);
-    const voices = window.speechSynthesis.getVoices();
-    
-    // Find matching voice
-    const preferredVoice = voices.find(v => v.lang.startsWith(browserLang.split('-')[0]));
-    if (preferredVoice) utterance.voice = preferredVoice;
-    
-    utterance.rate = 1.0;
-    utterance.pitch = 1.0;
-    
-    utterance.onstart = function() {
-      area.innerHTML = `
-        <div class="result-card">
-          <div class="result-title">🎧 Playing Audio</div>
-          <p style="color:#888;margin-bottom:15px;">
-            Playing ${text.length} characters with browser TTS...<br>
-            <small>Note: Browser TTS doesn't support MP3 download for long text, but plays perfectly!</small>
-          </p>          <button onclick="window.speechSynthesis.cancel()" style="background:linear-gradient(135deg,#ef4444,#dc2626);">⏹️ Stop</button>
-        </div>
-        <div class="result-card" style="margin-top:15px;">
-          <div class="result-title">📥 For MP3 Download</div>
-          <p style="color:#888;font-size:0.9rem;">
-            For downloadable MP3, please split your text into chunks of 200 characters or less.
-          </p>
-        </div>`;
-    };
-    
-    utterance.onend = function() {
-      area.innerHTML += `<div style="margin-top:15px;padding:15px;background:#0a0a0a;border-radius:10px;border-left:4px solid #22d3a5;"><p style="color:#22d3a5;">✅ Finished playing!</p></div>`;
-    };
-    
-    utterance.onerror = function(e) {
-      area.innerHTML = `<div class="error-card">⚠ Playback error: ${e.error}</div>`;
-    };
-    
-    window.speechSynthesis.speak(utterance);
   }
 
   // VISION CHAT
@@ -578,15 +439,15 @@
     const prompt = document.getElementById('visionPrompt').value.trim();
     const btn = document.getElementById('visionBtn');
     const area = document.getElementById('vision-result');
-    if (!fileInput.files[0]) { alert('Please upload an image first.'); return; }
-    const userQuestion = prompt || 'Describe this image in detail';
+    if (!fileInput.files[0]) { alert('Please upload an image first.'); return; }    const userQuestion = prompt || 'Describe this image in detail';
     btn.disabled = true; btn.textContent = 'Analyzing…';
     area.innerHTML = '<div class="result-card">👁️ AI is analyzing...</div>';
     try {
       const fullPrompt = `You are an expert image analyst. A user uploaded an image and asks: "${userQuestion}". Provide detailed analysis.`;
       const analysis = await fetchAI(fullPrompt, 25000);
       area.innerHTML = `<div class="result-card"><div class="result-title">👁️ Analysis Result</div><div class="script-output" id="visionOutput">${analysis}</div><button onclick="copyToClipboard('visionOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button></div>`;
-    } catch (err) {       area.innerHTML = '<div class="error-card">⚠ Analysis failed. Try again.</div>'; 
+    } catch (err) { 
+      area.innerHTML = '<div class="error-card">⚠ Analysis failed. Try again.</div>'; 
     } finally { 
       btn.disabled = false; btn.textContent = '👁️ Analyze Image'; 
     }
@@ -627,15 +488,15 @@
         ]}]
       });
       const blob = await docx.Packer.toBlob(doc);
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = title.replace(/\s+/g, '_') + '.docx'; a.click();
+      const url = URL.createObjectURL(blob);      const a = document.createElement('a'); a.href = url; a.download = title.replace(/\s+/g, '_') + '.docx'; a.click();
       area.innerHTML = '<div class="result-card"><div class="result-title">✅ DOCX Downloaded!</div></div>';
     } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
   }
 
   function generateEbookKDP() {
     const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
-    const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';    const content = document.getElementById('ebookContent').value.trim();
+    const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
+    const content = document.getElementById('ebookContent').value.trim();
     if (!content) { alert('Please paste content.'); return; }
     const kdp = `${title}\n\nBy ${author}\n\n${content}\n\n---\nCopyright © ${new Date().getFullYear()} ${author}`;
     const blob = new Blob([kdp], { type: 'text/plain' });
@@ -676,15 +537,15 @@
     const area = document.getElementById('resume-result');
     try {
       const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      doc.setFillColor(124, 92, 252); doc.rect(0, 0, 210, 40, 'F');
+      const doc = new jsPDF();      doc.setFillColor(124, 92, 252); doc.rect(0, 0, 210, 40, 'F');
       doc.setTextColor(255,255,255); doc.setFontSize(24); doc.text(name, 105, 20, {align:'center'});
       doc.setFontSize(14); doc.text(job, 105, 30, {align:'center'});
       doc.setTextColor(0,0,0); let y = 50;
       if (email) { doc.setFontSize(10); doc.text(`${email} | ${phone}`, 105, y, {align:'center'}); y+=15; }
       const addSection = (title, text) => {
         if (!text) return;
-        doc.setFontSize(14); doc.setTextColor(124,92,252); doc.text(title, 15, y); y+=8;        doc.setFontSize(11); doc.setTextColor(0,0,0);
+        doc.setFontSize(14); doc.setTextColor(124,92,252); doc.text(title, 15, y); y+=8;
+        doc.setFontSize(11); doc.setTextColor(0,0,0);
         const lines = doc.splitTextToSize(text, 180); doc.text(lines, 15, y); y += lines.length*6+10;
       };
       addSection('SUMMARY', summary); addSection('EXPERIENCE', exp); addSection('EDUCATION', edu); addSection('SKILLS', skills);
@@ -725,15 +586,15 @@
       if (top) { ctx.strokeText(top, 300, 60); ctx.fillText(top, 300, 60); }
       if (bot) { ctx.strokeText(bot, 300, 560); ctx.fillText(bot, 300, 560); }
     } else {
-      const canvas = document.getElementById('cartoonCanvas'); const ctx = canvas.getContext('2d');
-      ctx.drawImage(memeImg, 0, 0, 600, 600);
+      const canvas = document.getElementById('cartoonCanvas'); const ctx = canvas.getContext('2d');      ctx.drawImage(memeImg, 0, 0, 600, 600);
       const imageData = ctx.getImageData(0, 0, 600, 600);
       const data = imageData.data;
       for (let i = 0; i < data.length; i += 4) {
         const avg = (data[i] + data[i+1] + data[i+2]) / 3;
         data[i] = avg + 20; data[i+1] = avg + 40; data[i+2] = avg + 60;
       }
-      ctx.putImageData(imageData, 0, 0);      ctx.font = 'bold 40px Comic Sans MS'; ctx.fillStyle = 'white'; ctx.strokeStyle = 'black'; ctx.lineWidth = 4; ctx.textAlign = 'center';
+      ctx.putImageData(imageData, 0, 0);
+      ctx.font = 'bold 40px Comic Sans MS'; ctx.fillStyle = 'white'; ctx.strokeStyle = 'black'; ctx.lineWidth = 4; ctx.textAlign = 'center';
       if (top) { ctx.strokeText(top, 300, 60); ctx.fillText(top, 300, 60); }
       if (bot) { ctx.strokeText(bot, 300, 560); ctx.fillText(bot, 300, 560); }
     }
@@ -774,15 +635,15 @@
         }
         textarea.value = fullText;
       } catch (err) { textarea.value = 'Error: ' + err.message; }
-    } else {
-      const reader = new FileReader();
+    } else {      const reader = new FileReader();
       reader.onload = e => textarea.value = e.target.result;
       reader.readAsText(file);
     }
   }
 
   async function summarizeStudy() {
-    const text = document.getElementById('studyText').value.trim();    const format = document.getElementById('studyFormat').value;
+    const text = document.getElementById('studyText').value.trim();
+    const format = document.getElementById('studyFormat').value;
     const btn = document.getElementById('studyBtn');
     const area = document.getElementById('study-result');
     if (!text) { alert('Please paste text or upload.'); return; }

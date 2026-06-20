@@ -289,10 +289,13 @@
 
 <footer><p>© 2026 ToolVerse · 10 Free Tools · Powered by CapacityTools</p></footer>
 
-<script>
-  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+<!-- ADSTERRA SOCIAL BAR -->
+<script src="https://pl29819831.effectivecpmnetwork.com/40/ec/a6/40eca62ffa3dd47c9612d8d993c2924e.js"></script>
 
-  function toggleMenu() { document.getElementById('menuDropdown').classList.toggle('open'); }  function showView(id) {
+<script>  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+  function toggleMenu() { document.getElementById('menuDropdown').classList.toggle('open'); }
+  function showView(id) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById('view-' + id).classList.add('active');
     document.getElementById('menuDropdown').classList.remove('open');
@@ -338,10 +341,10 @@
     area.innerHTML = '<div class="result-card">⏳ Prof. Update is reasoning...</div>';
     const prompt = `You are Prof. Update with 20 years experience. Answer clearly without markdown: "${q}"`;
     try {
-      const answer = await fetchAI(prompt);
-      area.innerHTML = `<div class="result-card"><div class="result-title">🎓 Prof. Update Says:</div><div class="script-output" id="profOutput">${answer}</div><button onclick="copyToClipboard('profOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button></div>`;
+      const answer = await fetchAI(prompt);      area.innerHTML = `<div class="result-card"><div class="result-title">🎓 Prof. Update Says:</div><div class="script-output" id="profOutput">${answer}</div><button onclick="copyToClipboard('profOutput')" style="margin-top:12px;">📋 Copy to Clipboard</button></div>`;
     } catch (err) { 
-      area.innerHTML = '<div class="error-card">⚠ Service unavailable. Please try again.</div>';     } finally { 
+      area.innerHTML = '<div class="error-card">⚠ Service unavailable. Please try again.</div>'; 
+    } finally { 
       btn.disabled = false; btn.textContent = '🎓 Ask Prof. Update'; 
     }
   }
@@ -387,10 +390,10 @@
   }
 
   function generateImage() {
-    const prompt = document.getElementById('imgPrompt').value.trim();
-    const w = document.getElementById('imgWidth').value;
+    const prompt = document.getElementById('imgPrompt').value.trim();    const w = document.getElementById('imgWidth').value;
     const h = document.getElementById('imgHeight').value;
-    const btn = document.getElementById('imgBtn');    const area = document.getElementById('img-result');
+    const btn = document.getElementById('imgBtn');
+    const area = document.getElementById('img-result');
     if (!prompt) { alert('Please describe an image.'); return; }
     btn.disabled = true; btn.textContent = 'Generating…';
     area.innerHTML = '<div class="result-card">⏳ Generating...</div>';
@@ -436,10 +439,10 @@
 
   async function analyzeImageVision() {
     const fileInput = document.getElementById('visionFile');
-    const prompt = document.getElementById('visionPrompt').value.trim();
-    const btn = document.getElementById('visionBtn');
+    const prompt = document.getElementById('visionPrompt').value.trim();    const btn = document.getElementById('visionBtn');
     const area = document.getElementById('vision-result');
-    if (!fileInput.files[0]) { alert('Please upload an image first.'); return; }    const userQuestion = prompt || 'Describe this image in detail';
+    if (!fileInput.files[0]) { alert('Please upload an image first.'); return; }
+    const userQuestion = prompt || 'Describe this image in detail';
     btn.disabled = true; btn.textContent = 'Analyzing…';
     area.innerHTML = '<div class="result-card">👁️ AI is analyzing...</div>';
     try {
@@ -485,10 +488,10 @@
           new docx.Paragraph({ text: title, heading: docx.HeadingLevel.HEADING_1, alignment: docx.AlignmentType.CENTER }),
           new docx.Paragraph({ text: 'by ' + author, alignment: docx.AlignmentType.CENTER, spacing: { after: 400 } }),
           ...content.split('\n').map(line => new docx.Paragraph({ text: line }))
-        ]}]
-      });
+        ]}]      });
       const blob = await docx.Packer.toBlob(doc);
-      const url = URL.createObjectURL(blob);      const a = document.createElement('a'); a.href = url; a.download = title.replace(/\s+/g, '_') + '.docx'; a.click();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = title.replace(/\s+/g, '_') + '.docx'; a.click();
       area.innerHTML = '<div class="result-card"><div class="result-title">✅ DOCX Downloaded!</div></div>';
     } catch (err) { area.innerHTML = '<div class="error-card">⚠ '+err.message+'</div>'; }
   }
@@ -534,10 +537,10 @@
     const exp = document.getElementById('resumeExperience').value.trim();
     const edu = document.getElementById('resumeEducation').value.trim();
     const skills = document.getElementById('resumeSkills').value.trim();
-    const area = document.getElementById('resume-result');
-    try {
+    const area = document.getElementById('resume-result');    try {
       const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();      doc.setFillColor(124, 92, 252); doc.rect(0, 0, 210, 40, 'F');
+      const doc = new jsPDF();
+      doc.setFillColor(124, 92, 252); doc.rect(0, 0, 210, 40, 'F');
       doc.setTextColor(255,255,255); doc.setFontSize(24); doc.text(name, 105, 20, {align:'center'});
       doc.setFontSize(14); doc.text(job, 105, 30, {align:'center'});
       doc.setTextColor(0,0,0); let y = 50;
@@ -583,10 +586,10 @@
       const canvas = document.getElementById('memeCanvas'); const ctx = canvas.getContext('2d');
       ctx.drawImage(memeImg, 0, 0, 600, 600);
       ctx.font = 'bold 40px Impact'; ctx.fillStyle = 'white'; ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.textAlign = 'center';
-      if (top) { ctx.strokeText(top, 300, 60); ctx.fillText(top, 300, 60); }
-      if (bot) { ctx.strokeText(bot, 300, 560); ctx.fillText(bot, 300, 560); }
+      if (top) { ctx.strokeText(top, 300, 60); ctx.fillText(top, 300, 60); }      if (bot) { ctx.strokeText(bot, 300, 560); ctx.fillText(bot, 300, 560); }
     } else {
-      const canvas = document.getElementById('cartoonCanvas'); const ctx = canvas.getContext('2d');      ctx.drawImage(memeImg, 0, 0, 600, 600);
+      const canvas = document.getElementById('cartoonCanvas'); const ctx = canvas.getContext('2d');
+      ctx.drawImage(memeImg, 0, 0, 600, 600);
       const imageData = ctx.getImageData(0, 0, 600, 600);
       const data = imageData.data;
       for (let i = 0; i < data.length; i += 4) {
@@ -632,10 +635,10 @@
           const page = await pdf.getPage(i);
           const textContent = await page.getTextContent();
           fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
-        }
-        textarea.value = fullText;
+        }        textarea.value = fullText;
       } catch (err) { textarea.value = 'Error: ' + err.message; }
-    } else {      const reader = new FileReader();
+    } else {
+      const reader = new FileReader();
       reader.onload = e => textarea.value = e.target.result;
       reader.readAsText(file);
     }

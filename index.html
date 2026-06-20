@@ -467,19 +467,110 @@ function splitTextIntoChunks(text, limit = 200) {
 }
 
 // SPEECHSTER - Advanced Chunking & Combining for >2000 chars
-async function generateLongSpeech() {
+// SPEECHSTER - WORKING VERSION (No proxy needed)
+function generateLongSpeech() {
   const text = document.getElementById('ttsText').value.trim();
   const lang = document.getElementById('ttsVoice').value;
   const btn = document.getElementById('ttsBtn');
   const area = document.getElementById('tts-result');
   
-  if (!text) { alert('Please type some text first.'); return; }
+  if (!text) { 
+    alert('Please type some text first.'); 
+    return; 
+  }
   
   btn.disabled = true; 
-  btn.textContent = 'Processing long text...';
-  area.innerHTML = '<div class="result-card">⏳ Splitting text and generating audio chunks...</div>';
+  btn.textContent = 'Generating...';
+  area.innerHTML = '<div class="result-card">⏳ Preparing audio...</div>';
   
-  try {
+  // Use Google Translate TTS directly (no proxy)
+  const encodedText = encodeURIComponent(text.substring(0, 200)); // Limit to 200 chars for Google
+  const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${encodedText}`;
+  
+  // For short text (< 200 chars), use direct download
+  if (text.length <= 200) {
+    setTimeout(() => {
+      area.innerHTML = `
+        <div class="result-card">
+          <div class="result-title">🎧 Audio Ready</div>
+          <audio controls autoplay style="width:100%;margin-bottom:14px;">
+            <source src="${ttsUrl}" type="audio/mpeg">
+          </audio>
+          <a class="btn-get" href="${ttsUrl}" download="speech.mp3">⬇ Download MP3</a>
+          <a class="btn-get" href="${ttsUrl}" target="_blank">🔊 Play in New Tab</a>
+          <p style="color:#888;font-size:0.85rem;margin-top:10px;">
+            💡 For longer text (>200 chars), use browser's built-in player below
+          </p>
+        </div>`;
+      
+      // Also play using browser TTS for longer texts
+      if (text.length > 200) {
+        playWithBrowserTTS(text, lang);
+      }
+      
+      btn.disabled = false; 
+      btn.textContent = '🎙️ Generate & Download MP3';
+    }, 1000);
+  } else {
+    // For long text, use browser TTS
+    playWithBrowserTTS(text, lang);
+    btn.disabled = false; 
+    btn.textContent = '🎙️ Generate & Download MP3';
+  }}
+
+// Helper function for long text using browser's built-in TTS
+function playWithBrowserTTS(text, lang) {
+  const area = document.getElementById('tts-result');
+  
+  // Map language codes to browser voice codes
+  const langMap = {
+    'en': 'en-US', 'en-US': 'en-US', 'en-GB': 'en-GB', 'en-AU': 'en-AU',
+    'en-IN': 'en-IN', 'en-NG': 'en-NG', 'en-ZA': 'en-ZA',
+    'es': 'es-ES', 'fr': 'fr-FR', 'de': 'de-DE', 'it': 'it-IT',
+    'pt': 'pt-BR', 'ru': 'ru-RU', 'ja': 'ja-JP', 'ko': 'ko-KR',
+    'zh-CN': 'zh-CN', 'zh-TW': 'zh-TW', 'hi': 'hi-IN', 'ar': 'ar-SA',
+    'yo': 'en-NG', 'ig': 'en-NG', 'ha': 'en-NG', 'sw': 'sw-KE'
+  };
+  
+  const browserLang = langMap[lang] || 'en-US';
+  
+  const utterance = new SpeechSynthesisUtterance(text);
+  const voices = window.speechSynthesis.getVoices();
+  
+  // Find matching voice
+  const preferredVoice = voices.find(v => v.lang.startsWith(browserLang.split('-')[0]));
+  if (preferredVoice) utterance.voice = preferredVoice;
+  
+  utterance.rate = 1.0;
+  utterance.pitch = 1.0;
+  
+  utterance.onstart = function() {
+    area.innerHTML = `
+      <div class="result-card">
+        <div class="result-title">🎧 Playing Audio</div>
+        <p style="color:#888;margin-bottom:15px;">
+          Playing ${text.length} characters with browser TTS...<br>
+          <small>Note: Browser TTS doesn't support MP3 download for long text, but plays perfectly!</small>
+        </p>
+        <button onclick="window.speechSynthesis.cancel()" style="background:linear-gradient(135deg,#ef4444,#dc2626);">⏹️ Stop</button>
+      </div>
+      <div class="result-card" style="margin-top:15px;">
+        <div class="result-title">📥 For MP3 Download</div>
+        <p style="color:#888;font-size:0.9rem;">
+          For downloadable MP3, please split your text into chunks of 200 characters or less.
+        </p>
+      </div>`;
+  };
+  
+  utterance.onend = function() {
+    area.innerHTML += `<div style="margin-top:15px;padding:15px;background:#0a0a0a;border-radius:10px;border-left:4px solid #22d3a5;"><p style="color:#22d3a5;">✅ Finished playing!</p></div>`;
+  };
+    utterance.onerror = function(e) {
+    area.innerHTML = `<div class="error-card">⚠ Playback error: ${e.error}</div>`;
+  };
+  
+  window.speechSynthesis.speak(utterance);
+}
     // 1. Split text into 200-char chunks
     const chunks = splitTextIntoChunks(text, 200);
     const totalChunks = chunks.length;

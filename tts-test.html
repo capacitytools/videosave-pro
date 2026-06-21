@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Puter.js TTS Test</title>
+  <title>Puter.js TTS Test - FIXED</title>
   <script src="https://js.puter.com/v2/"></script>
   <style>
     body {
@@ -14,10 +14,7 @@
       background: #1a1a2e;
       color: #fff;
     }
-    h1 {
-      text-align: center;
-      color: #00d4ff;
-    }
+    h1 { text-align: center; color: #00d4ff; }
     textarea {
       width: 100%;
       height: 150px;
@@ -47,12 +44,10 @@
       background: linear-gradient(135deg, #00d4ff, #7c5cfc);
       color: #fff;
       font-weight: bold;
-      transition: transform 0.2s;    }
-    button:hover {
-      transform: translateY(-2px);
+      transition: transform 0.2s;
     }
-    button:disabled {
-      opacity: 0.5;
+    button:hover { transform: translateY(-2px); }
+    button:disabled {      opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
@@ -64,10 +59,7 @@
       border-left: 4px solid #00d4ff;
       display: none;
     }
-    audio {
-      width: 100%;
-      margin: 15px 0;
-    }
+    audio { width: 100%; margin: 15px 0; }
     .download-btn {
       display: inline-block;
       padding: 12px 24px;
@@ -89,16 +81,30 @@
   </style>
 </head>
 <body>
-  <h1>🎙️ Puter.js TTS Test</h1>
+  <h1>🎙️ Puter.js TTS Test - FIXED</h1>
   
   <textarea id="textInput" placeholder="Type or paste your text here...">Hello! This is a test of the Puter.js text-to-speech system. If you can hear this, it's working perfectly!</textarea>
   
-  <select id="voiceSelect">
-    <option value="alloy">Alloy (Neutral - US)</option>
-    <option value="echo">Echo (Male - US)</option>
-    <option value="fable">Fable (British Male)</option>    <option value="onyx">Onyx (Deep Male - US)</option>
-    <option value="nova">Nova (Female - US)</option>
-    <option value="shimmer">Shimmer (Soft Female - US)</option>
+  <select id="languageSelect">
+    <option value="en-US">English (US)</option>
+    <option value="en-GB">English (UK)</option>
+    <option value="en-AU">English (Australia)</option>
+    <option value="en-IN">English (India)</option>
+    <option value="es-ES">Spanish (Spain)</option>
+    <option value="es-MX">Spanish (Mexico)</option>
+    <option value="fr-FR">French (France)</option>
+    <option value="de-DE">German</option>
+    <option value="it-IT">Italian</option>
+    <option value="pt-BR">Portuguese (Brazil)</option>
+    <option value="pt-PT">Portuguese (Portugal)</option>    <option value="ru-RU">Russian</option>
+    <option value="ja-JP">Japanese</option>
+    <option value="ko-KR">Korean</option>
+    <option value="cmn-CN">Chinese (Mandarin)</option>
+    <option value="hi-IN">Hindi</option>
+    <option value="ar-AE">Arabic</option>
+    <option value="tr-TR">Turkish</option>
+    <option value="pl-PL">Polish</option>
+    <option value="nl-NL">Dutch</option>
   </select>
   
   <button id="generateBtn" onclick="generateSpeech()">🎙️ Generate Speech</button>
@@ -108,7 +114,7 @@
   <script>
     async function generateSpeech() {
       const text = document.getElementById('textInput').value.trim();
-      const voice = document.getElementById('voiceSelect').value;
+      const languageCode = document.getElementById('languageSelect').value;
       const btn = document.getElementById('generateBtn');
       const resultDiv = document.getElementById('result');
       
@@ -130,8 +136,8 @@
       resultDiv.innerHTML = '⏳ Generating audio... Please wait...';
       
       try {
-        // Generate speech using Puter.js
-        const audioUrl = await puter.ai.txt2speech(text, voice);
+        // Generate speech using Puter.js with LANGUAGE CODE
+        const audioUrl = await puter.ai.txt2speech(text, languageCode);
         
         // Show audio player and download button
         resultDiv.className = '';
@@ -139,13 +145,13 @@
           <div style="margin-bottom: 15px;">
             <strong>✅ Audio Generated Successfully!</strong>
           </div>
-          
-          <div style="margin: 20px 0;">
+                    <div style="margin: 20px 0;">
             <audio controls autoplay>
               <source src="${audioUrl}" type="audio/mpeg">
               Your browser does not support the audio element.
             </audio>
-          </div>          
+          </div>
+          
           <div style="text-align: center;">
             <a href="${audioUrl}" download="speech.mp3" class="download-btn">⬇ Download MP3</a>
             <a href="${audioUrl}" target="_blank" class="download-btn">🔊 Play in New Tab</a>
@@ -153,7 +159,7 @@
           
           <div style="margin-top: 15px; padding: 15px; background: #1a1a2e; border-radius: 8px; font-size: 14px;">
             <strong>Info:</strong><br>
-            Voice: ${voice}<br>
+            Language: ${languageCode}<br>
             Text length: ${text.length} characters<br>
             Generated: ${new Date().toLocaleString()}
           </div>
@@ -171,11 +177,6 @@
         btn.textContent = '🎙️ Generate Speech';
       }
     }
-    
-    // Auto-load voices on page load
-    window.addEventListener('DOMContentLoaded', () => {
-      console.log('Puter.js loaded:', typeof puter !== 'undefined');
-    });
   </script>
 </body>
 </html>

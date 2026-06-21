@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puter.js TTS Test</title>
+  <script src="https://js.puter.com/v2/"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #1a1a2e;
+      color: #fff;
+    }
+    h1 {
+      text-align: center;
+      color: #00d4ff;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 15px;
+      border: 2px solid #00d4ff;
+      border-radius: 10px;
+      background: #0f0f23;
+      color: #fff;
+      font-size: 16px;
+      resize: vertical;
+    }
+    select, button {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    select {
+      background: #0f0f23;
+      color: #fff;
+      border: 2px solid #00d4ff;
+    }
+    button {
+      background: linear-gradient(135deg, #00d4ff, #7c5cfc);
+      color: #fff;
+      font-weight: bold;
+      transition: transform 0.2s;    }
+    button:hover {
+      transform: translateY(-2px);
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 20px;
+      background: #0f0f23;
+      border-radius: 10px;
+      border-left: 4px solid #00d4ff;
+      display: none;
+    }
+    audio {
+      width: 100%;
+      margin: 15px 0;
+    }
+    .download-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #22d3a5;
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin: 5px;
+    }
+    .error {
+      border-left-color: #ef4444;
+      color: #f87171;
+    }
+    .loading {
+      text-align: center;
+      color: #00d4ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎙️ Puter.js TTS Test</h1>
+  
+  <textarea id="textInput" placeholder="Type or paste your text here...">Hello! This is a test of the Puter.js text-to-speech system. If you can hear this, it's working perfectly!</textarea>
+  
+  <select id="voiceSelect">
+    <option value="alloy">Alloy (Neutral - US)</option>
+    <option value="echo">Echo (Male - US)</option>
+    <option value="fable">Fable (British Male)</option>    <option value="onyx">Onyx (Deep Male - US)</option>
+    <option value="nova">Nova (Female - US)</option>
+    <option value="shimmer">Shimmer (Soft Female - US)</option>
+  </select>
+  
+  <button id="generateBtn" onclick="generateSpeech()">🎙️ Generate Speech</button>
+  
+  <div id="result"></div>
+
+  <script>
+    async function generateSpeech() {
+      const text = document.getElementById('textInput').value.trim();
+      const voice = document.getElementById('voiceSelect').value;
+      const btn = document.getElementById('generateBtn');
+      const resultDiv = document.getElementById('result');
+      
+      if (!text) {
+        alert('Please enter some text');
+        return;
+      }
+      
+      if (text.length > 5000) {
+        alert('Text is too long. Please limit to 5000 characters.');
+        return;
+      }
+      
+      // Disable button and show loading
+      btn.disabled = true;
+      btn.textContent = 'Generating...';
+      resultDiv.style.display = 'block';
+      resultDiv.className = 'loading';
+      resultDiv.innerHTML = '⏳ Generating audio... Please wait...';
+      
+      try {
+        // Generate speech using Puter.js
+        const audioUrl = await puter.ai.txt2speech(text, voice);
+        
+        // Show audio player and download button
+        resultDiv.className = '';
+        resultDiv.innerHTML = `
+          <div style="margin-bottom: 15px;">
+            <strong>✅ Audio Generated Successfully!</strong>
+          </div>
+          
+          <div style="margin: 20px 0;">
+            <audio controls autoplay>
+              <source src="${audioUrl}" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+          </div>          
+          <div style="text-align: center;">
+            <a href="${audioUrl}" download="speech.mp3" class="download-btn">⬇ Download MP3</a>
+            <a href="${audioUrl}" target="_blank" class="download-btn">🔊 Play in New Tab</a>
+          </div>
+          
+          <div style="margin-top: 15px; padding: 15px; background: #1a1a2e; border-radius: 8px; font-size: 14px;">
+            <strong>Info:</strong><br>
+            Voice: ${voice}<br>
+            Text length: ${text.length} characters<br>
+            Generated: ${new Date().toLocaleString()}
+          </div>
+        `;
+        
+      } catch (error) {
+        console.error('TTS Error:', error);
+        resultDiv.className = 'error';
+        resultDiv.innerHTML = `
+          <strong>❌ Error:</strong> ${error.message}<br><br>
+          <small>Please try again. If the error persists, check your internet connection.</small>
+        `;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🎙️ Generate Speech';
+      }
+    }
+    
+    // Auto-load voices on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Puter.js loaded:', typeof puter !== 'undefined');
+    });
+  </script>
+</body>
+</html>

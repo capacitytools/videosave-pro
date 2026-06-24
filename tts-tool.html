@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ToolVerse - Text to Speech</title>
-  <script src="https://js.puter.com/v2/"></script>
   
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
@@ -16,23 +15,16 @@
       padding: 20px;
     }
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
+    .container { max-width: 900px; margin: 0 auto; }
 
     .header {
       text-align: center;
       margin-bottom: 30px;
       padding: 20px;
     }
-    .header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
+    .header h1 { font-size: 2.5rem; margin-bottom: 10px; }
     .header h1 span { color: #FFD700; }
 
-    /* Voice Library Section */
     .voice-library {
       background: #FFFFFF;
       border: 2px solid #4A5568;
@@ -47,26 +39,20 @@
       gap: 10px;
       font-size: 1.2rem;
       font-weight: bold;
-      margin-bottom: 20px;      color: #4A5568;
+      margin-bottom: 20px;
+      color: #4A5568;
     }
-    .section-title::before {
-      content: '🎙️';
-      font-size: 1.5rem;
-    }
+    .section-title::before { content: '🎙️'; font-size: 1.5rem; }
 
     .search-box {
       width: 100%;
       padding: 15px;
-      border: 2px solid #4A5568;
-      border-radius: 10px;
+      border: 2px solid #4A5568;      border-radius: 10px;
       font-size: 16px;
       margin-bottom: 25px;
       background: #F7FAFC;
     }
-    .search-box:focus {
-      outline: none;
-      border-color: #FFD700;
-    }
+    .search-box:focus { outline: none; border-color: #FFD700; }
 
     .category-label {
       color: #4A5568;
@@ -88,15 +74,13 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .voice-card:hover {
-      border-color: #FFD700;
-      transform: translateX(5px);
-    }
+    .voice-card:hover { border-color: #FFD700; transform: translateX(5px); }
     .voice-card.selected {
       border-color: #FFD700;
       background: rgba(255, 215, 0, 0.1);
     }
-    .voice-card.selected::after {      content: '✓';
+    .voice-card.selected::after {
+      content: '✓';
       color: #FFD700;
       font-weight: bold;
       font-size: 1.5rem;
@@ -112,8 +96,7 @@
       background: #4A5568;
       color: #FFFFFF;
       border-radius: 8px;
-      font-weight: bold;
-      margin-right: 15px;
+      font-weight: bold;      margin-right: 15px;
     }
 
     .voice-avatar {
@@ -131,26 +114,18 @@
     .avatar-male { background: #4A5568; }
     .avatar-female { background: #DC2626; }
 
-    .voice-info h3 {
-      font-size: 1.1rem;
-      margin-bottom: 5px;
-    }
-    .voice-info p {
-      color: #4A5568;
-      font-size: 0.9rem;
-    }
+    .voice-info h3 { font-size: 1.1rem; margin-bottom: 5px; }
+    .voice-info p { color: #4A5568; font-size: 0.9rem; }
 
-    /* Generate Section */
     .generate-section {
       background: #FFFFFF;
       border: 2px solid #4A5568;
       border-radius: 15px;
-      padding: 25px;      margin-bottom: 25px;
-    }
-
-    .control-group {
+      padding: 25px;
       margin-bottom: 25px;
     }
+
+    .control-group { margin-bottom: 25px; }
     .control-label {
       display: flex;
       justify-content: space-between;
@@ -158,11 +133,7 @@
       font-weight: bold;
       color: #4A5568;
     }
-    .slider-container {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
+    .slider-container { display: flex; align-items: center; gap: 15px; }
     .slider {
       flex: 1;
       height: 8px;
@@ -174,8 +145,7 @@
     .slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       width: 24px;
-      height: 24px;
-      border-radius: 50%;
+      height: 24px;      border-radius: 50%;
       background: #FFD700;
       cursor: pointer;
     }
@@ -194,12 +164,10 @@
       padding: 15px;
       margin: 20px 0;
       display: flex;
-      align-items: center;      gap: 10px;
+      align-items: center;
+      gap: 10px;
     }
-    .selected-voice-display::before {
-      content: '🎤';
-      font-size: 1.5rem;
-    }
+    .selected-voice-display::before { content: '🎤'; font-size: 1.5rem; }
 
     .generate-btn {
       width: 100%;
@@ -217,39 +185,29 @@
       justify-content: center;
       gap: 10px;
     }
-    .generate-btn:hover {
-      background: #FFD700;
-      color: #000000;
-    }
-    .generate-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
+    .generate-btn:hover { background: #FFD700; color: #000000; }
+    .generate-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-    .progress-section {
-      margin-top: 20px;
-      display: none;
-    }
+    .progress-section { margin-top: 20px; display: none; }
     .progress-bar {
       width: 100%;
       height: 8px;
       background: #4A5568;
       border-radius: 4px;
-      overflow: hidden;
-      margin: 10px 0;
+      overflow: hidden;      margin: 10px 0;
     }
     .progress-fill {
       height: 100%;
       background: linear-gradient(90deg, #FFD700, #FFA500);
       width: 0%;
       transition: width 0.3s;
-    }    .progress-text {
+    }
+    .progress-text {
       text-align: center;
       color: #4A5568;
       font-size: 0.9rem;
     }
 
-    /* Result Section */
     .result-section {
       background: #FFFFFF;
       border: 2px solid #FFD700;
@@ -257,10 +215,7 @@
       padding: 25px;
       display: none;
     }
-    audio {
-      width: 100%;
-      margin: 15px 0;
-    }
+    audio { width: 100%; margin: 15px 0; }
     .download-btn {
       display: inline-block;
       padding: 12px 25px;
@@ -279,7 +234,16 @@
       text-decoration: none;
       font-weight: bold;
     }
-  </style>
+
+    .error-msg {
+      background: rgba(220, 38, 38, 0.1);
+      border: 2px solid #DC2626;
+      color: #DC2626;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+      display: none;
+    }  </style>
 </head>
 <body>
 
@@ -291,15 +255,14 @@
       <p>580+ Premium Neural Voices • Free & Unlimited</p>
     </div>
 
-    <!-- Voice Library -->
-    <div class="voice-library">      <div class="section-title">Voice Library</div>
+    <div class="voice-library">
+      <div class="section-title">Voice Library</div>
       
       <input type="text" class="search-box" placeholder="🔍 Search voices..." id="voiceSearch" oninput="filterVoices()">
       
       <div id="voiceList">
-        <!-- Multilingual -->
         <div class="category-label">Multilingual</div>
-        <div class="voice-card selected" onclick="selectVoice(this, 'en-US', 'Andrew Multilingual', 'Male')">
+        <div class="voice-card selected" onclick="selectVoice(this, 'Andrew Multilingual')">
           <div class="voice-number">1</div>
           <div class="voice-avatar avatar-male">AM</div>
           <div class="voice-info">
@@ -307,7 +270,7 @@
             <p>Male • United States</p>
           </div>
         </div>
-        <div class="voice-card" onclick="selectVoice(this, 'en-US', 'Ava Multilingual', 'Female')">
+        <div class="voice-card" onclick="selectVoice(this, 'Ava Multilingual')">
           <div class="voice-number">2</div>
           <div class="voice-avatar avatar-female">AM</div>
           <div class="voice-info">
@@ -315,7 +278,7 @@
             <p>Female • United States</p>
           </div>
         </div>
-        <div class="voice-card" onclick="selectVoice(this, 'en-US', 'Brian Multilingual', 'Male')">
+        <div class="voice-card" onclick="selectVoice(this, 'Brian Multilingual')">
           <div class="voice-number">3</div>
           <div class="voice-avatar avatar-male">BM</div>
           <div class="voice-info">
@@ -323,15 +286,14 @@
             <p>Male • United States</p>
           </div>
         </div>
-        <div class="voice-card" onclick="selectVoice(this, 'fr-FR', 'Emma Multilingual', 'Female')">
+        <div class="voice-card" onclick="selectVoice(this, 'Emma Multilingual')">
           <div class="voice-number">4</div>
           <div class="voice-avatar avatar-female">EM</div>
           <div class="voice-info">
             <h3>Emma Multilingual</h3>
             <p>Female • United States</p>
-          </div>
-        </div>
-        <div class="voice-card" onclick="selectVoice(this, 'fr-FR', 'Remy Multilingual', 'Male')">
+          </div>        </div>
+        <div class="voice-card" onclick="selectVoice(this, 'Remy Multilingual')">
           <div class="voice-number">5</div>
           <div class="voice-avatar avatar-male">RM</div>
           <div class="voice-info">
@@ -340,8 +302,8 @@
           </div>
         </div>
 
-        <!-- English -->
-        <div class="category-label">English</div>        <div class="voice-card" onclick="selectVoice(this, 'en-US', 'Jenny', 'Female')">
+        <div class="category-label">English - United States</div>
+        <div class="voice-card" onclick="selectVoice(this, 'Jenny')">
           <div class="voice-number">21</div>
           <div class="voice-avatar avatar-female">J</div>
           <div class="voice-info">
@@ -349,7 +311,7 @@
             <p>Female • United States</p>
           </div>
         </div>
-        <div class="voice-card" onclick="selectVoice(this, 'en-US', 'Michelle', 'Female')">
+        <div class="voice-card" onclick="selectVoice(this, 'Michelle')">
           <div class="voice-number">22</div>
           <div class="voice-avatar avatar-female">M</div>
           <div class="voice-info">
@@ -357,7 +319,7 @@
             <p>Female • United States</p>
           </div>
         </div>
-        <div class="voice-card" onclick="selectVoice(this, 'en-US', 'Roger', 'Male')">
+        <div class="voice-card" onclick="selectVoice(this, 'Roger')">
           <div class="voice-number">23</div>
           <div class="voice-avatar avatar-male">R</div>
           <div class="voice-info">
@@ -365,15 +327,32 @@
             <p>Male • United States</p>
           </div>
         </div>
-        <div class="voice-card" onclick="selectVoice(this, 'en-GB', 'Libby', 'Female')">
+        <div class="voice-card" onclick="selectVoice(this, 'Steffan')">
+          <div class="voice-number">24</div>
+          <div class="voice-avatar avatar-male">S</div>
+          <div class="voice-info">
+            <h3>Steffan</h3>
+            <p>Male • United States</p>
+          </div>
+        </div>
+
+        <div class="category-label">English - United Kingdom</div>
+        <div class="voice-card" onclick="selectVoice(this, 'Libby')">
           <div class="voice-number">25</div>
           <div class="voice-avatar avatar-female">L</div>
           <div class="voice-info">
-            <h3>Libby</h3>
+            <h3>Libby</h3>            <p>Female • United Kingdom</p>
+          </div>
+        </div>
+        <div class="voice-card" onclick="selectVoice(this, 'Maisie')">
+          <div class="voice-number">26</div>
+          <div class="voice-avatar avatar-female">M</div>
+          <div class="voice-info">
+            <h3>Maisie</h3>
             <p>Female • United Kingdom</p>
           </div>
         </div>
-        <div class="voice-card" onclick="selectVoice(this, 'en-GB', 'Ryan', 'Male')">
+        <div class="voice-card" onclick="selectVoice(this, 'Ryan')">
           <div class="voice-number">27</div>
           <div class="voice-avatar avatar-male">R</div>
           <div class="voice-info">
@@ -381,27 +360,91 @@
             <p>Male • United Kingdom</p>
           </div>
         </div>
+        <div class="voice-card" onclick="selectVoice(this, 'Sonia')">
+          <div class="voice-number">28</div>
+          <div class="voice-avatar avatar-female">S</div>
+          <div class="voice-info">
+            <h3>Sonia</h3>
+            <p>Female • United Kingdom</p>
+          </div>
+        </div>
+
+        <div class="category-label">English - India</div>
+        <div class="voice-card" onclick="selectVoice(this, 'Neerja')">
+          <div class="voice-number">35</div>
+          <div class="voice-avatar avatar-female">N</div>
+          <div class="voice-info">
+            <h3>Neerja</h3>
+            <p>Female • India</p>
+          </div>
+        </div>
+        <div class="voice-card" onclick="selectVoice(this, 'Prabhat')">
+          <div class="voice-number">36</div>
+          <div class="voice-avatar avatar-male">P</div>
+          <div class="voice-info">
+            <h3>Prabhat</h3>
+            <p>Male • India</p>
+          </div>
+        </div>
+
+        <div class="category-label">Other Regions</div>
+        <div class="voice-card" onclick="selectVoice(this, 'Asilia')">
+          <div class="voice-number">41</div>
+          <div class="voice-avatar avatar-female">A</div>          <div class="voice-info">
+            <h3>Asilia</h3>
+            <p>Female • Kenya</p>
+          </div>
+        </div>
+        <div class="voice-card" onclick="selectVoice(this, 'Leah')">
+          <div class="voice-number">53</div>
+          <div class="voice-avatar avatar-female">L</div>
+          <div class="voice-info">
+            <h3>Leah</h3>
+            <p>Female • South Africa</p>
+          </div>
+        </div>
+        <div class="voice-card" onclick="selectVoice(this, 'Luke')">
+          <div class="voice-number">54</div>
+          <div class="voice-avatar avatar-male">L</div>
+          <div class="voice-info">
+            <h3>Luke</h3>
+            <p>Male • South Africa</p>
+          </div>
+        </div>
+        <div class="voice-card" onclick="selectVoice(this, 'Rosa')">
+          <div class="voice-number">48</div>
+          <div class="voice-avatar avatar-female">R</div>
+          <div class="voice-info">
+            <h3>Rosa</h3>
+            <p>Female • Philippines</p>
+          </div>
+        </div>
+        <div class="voice-card" onclick="selectVoice(this, 'Elvira')">
+          <div class="voice-number">72</div>
+          <div class="voice-avatar avatar-female">E</div>
+          <div class="voice-info">
+            <h3>Elvira</h3>
+            <p>Female • Spain</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Generate Section -->
     <div class="generate-section">
       <div class="section-title">Generate</div>
       
-      <!-- Pitch Control -->
       <div class="control-group">
-        <div class="control-label">          <span>PITCH</span>
+        <div class="control-label">
+          <span>PITCH</span>
           <span id="pitchValue">Normal</span>
         </div>
         <input type="range" class="slider" id="pitchSlider" min="-100" max="100" value="0" oninput="updatePitchLabel()">
-        <div class="slider-labels">
-          <span>Deeper</span>
+        <div class="slider-labels">          <span>Deeper</span>
           <span>Normal</span>
           <span>Higher</span>
         </div>
       </div>
 
-      <!-- Speed Control -->
       <div class="control-group">
         <div class="control-label">
           <span>⏱️ SPEED</span>
@@ -432,40 +475,33 @@
         </div>
         <div class="progress-text" id="progressText">Processing...</div>
       </div>
+
+      <div class="error-msg" id="errorMsg"></div>
     </div>
 
-    <!-- Result Section -->
     <div class="result-section" id="resultSection">
       <div class="section-title">Audio Ready</div>
       <audio id="audioPlayer" controls></audio>
       <div>
-        <a class="download-btn" id="downloadBtn" href="#" download="speech.mp3">⬇ Download MP3</a>        <a class="download-btn" href="#" onclick="document.getElementById('audioPlayer').play()">▶ Play Again</a>
+        <a class="download-btn" id="downloadBtn" href="#" download="speech.mp3">⬇ Download MP3</a>
+        <a class="download-btn" href="#" onclick="document.getElementById('audioPlayer').play()">▶ Play Again</a>
       </div>
     </div>
   </div>
-
   <script>
-    let selectedVoiceCode = 'en-US';
-    let selectedVoiceName = 'Andrew Multilingual';
-    let selectedVoiceGender = 'Male';
+    let selectedVoice = 'Andrew Multilingual';
 
-    function selectVoice(element, code, name, gender) {
-      // Remove selected class from all cards
+    function selectVoice(element, voiceName) {
       document.querySelectorAll('.voice-card').forEach(card => {
         card.classList.remove('selected');
       });
-      
-      // Add selected class to clicked card
       element.classList.add('selected');
+      selectedVoice = voiceName;
       
-      // Update selected voice info
-      selectedVoiceCode = code;
-      selectedVoiceName = name;
-      selectedVoiceGender = gender;
-      
-      // Update display
+      const number = element.querySelector('.voice-number').textContent;
+      const gender = element.querySelector('.voice-info p').textContent.split('•')[0].trim();
       document.getElementById('selectedVoiceDisplay').textContent = 
-        `# ${element.querySelector('.voice-number').textContent} • ${name} • ${gender}`;
+        `# ${number} • ${voiceName} • ${gender}`;
     }
 
     function updatePitchLabel() {
@@ -484,14 +520,16 @@
     function filterVoices() {
       const search = document.getElementById('voiceSearch').value.toLowerCase();
       const cards = document.querySelectorAll('.voice-card');
-      
       cards.forEach(card => {
         const text = card.textContent.toLowerCase();
         card.style.display = text.includes(search) ? '' : 'none';
-      });    }
+      });
+    }
 
     async function generateSpeech() {
       const text = document.getElementById('textInput').value.trim();
+      const pitch = document.getElementById('pitchSlider').value;
+      const speed = document.getElementById('speedSlider').value;
       
       if (!text) {
         alert('Please enter some text first!');
@@ -499,20 +537,19 @@
       }
 
       const btn = document.getElementById('generateBtn');
-      const progressSection = document.getElementById('progressSection');
-      const progressFill = document.getElementById('progressFill');
+      const progressSection = document.getElementById('progressSection');      const progressFill = document.getElementById('progressFill');
       const progressText = document.getElementById('progressText');
       const resultSection = document.getElementById('resultSection');
+      const errorMsg = document.getElementById('errorMsg');
       const audioPlayer = document.getElementById('audioPlayer');
       const downloadBtn = document.getElementById('downloadBtn');
 
-      // Show progress
       btn.disabled = true;
       btn.innerHTML = '<span>⏳</span><span>Processing...</span>';
       progressSection.style.display = 'block';
       resultSection.style.display = 'none';
+      errorMsg.style.display = 'none';
       
-      // Simulate progress (since Puter.js doesn't provide chunk info)
       let progress = 0;
       const progressInterval = setInterval(() => {
         progress += 10;
@@ -521,28 +558,40 @@
       }, 200);
 
       try {
-        // Generate speech using Puter.js
-        const audioUrl = await puter.ai.txt2speech(text, selectedVoiceCode);
+        // Use ahm7xmakki.com API
+        let apiUrl = `https://ahm7xmakki.com/api/tts?text=${encodeURIComponent(text)}&voice=${encodeURIComponent(selectedVoice)}`;
+        
+        // Add pitch and speed if not default
+        if (pitch !== '0') apiUrl += `&pitch=${pitch}`;
+        if (speed !== '0') apiUrl += `&speed=${speed}`;
+        
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) {
+          throw new Error(`API Error: ${response.status}`);
+        }
+        
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
         
         clearInterval(progressInterval);
         progressFill.style.width = '100%';
         progressText.textContent = '✅ Complete!';
         
-        // Show result
         setTimeout(() => {
           audioPlayer.src = audioUrl;
           downloadBtn.href = audioUrl;
           resultSection.style.display = 'block';
           audioPlayer.play();
           
-          // Reset button
           btn.disabled = false;
-          btn.innerHTML = '<span>▶</span><span>Generate Speech</span>';          progressSection.style.display = 'none';
-        }, 500);
+          btn.innerHTML = '<span>▶</span><span>Generate Speech</span>';
+          progressSection.style.display = 'none';        }, 500);
         
       } catch (error) {
         clearInterval(progressInterval);
-        alert('Error generating speech: ' + error.message);
+        errorMsg.textContent = 'Error: ' + error.message + '. The API might be blocking requests or temporarily unavailable.';
+        errorMsg.style.display = 'block';
         btn.disabled = false;
         btn.innerHTML = '<span>▶</span><span>Generate Speech</span>';
         progressSection.style.display = 'none';

@@ -1,232 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ToolVerse - Video Downloader</title>
-  <style>
-    :root {
-      --bg-main: #0a0a0a;
-      --bg-card: #111111;
-      --bg-input: #1a1a1a;
-      --primary: #8b5cf6;
-      --accent: #FFD700;
-      --text-main: #ffffff;
-      --text-muted: #888888;
-      --border: #222222;
-      --success: #10b981;
-      --error: #ef4444;
-    }
-    
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-    
-    body {
-      background: var(--bg-main);
-      color: var(--text-main);
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .container { max-width: 800px; margin: 0 auto; }
-
-    .header {
-      text-align: center;
-      margin-bottom: 30px;
-      padding: 20px;
-    }
-    
-    .header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      background: linear-gradient(135deg, #fff, var(--primary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .header p { color: var(--text-muted); font-size: 1.1rem; }
-
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);      border-radius: 20px;
-      padding: 30px;
-      margin-bottom: 30px;
-    }
-
-    .section-title {
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: var(--primary);
-    }
-
-    input {
-      width: 100%;
-      padding: 15px;
-      background: var(--bg-input);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      color: var(--text-main);
-      font-size: 16px;
-      margin-bottom: 15px;
-      outline: none;
-    }
-    
-    input:focus { border-color: var(--primary); }
-
-    .btn {
-      width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, var(--primary), #6d28d9);
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin-top: 10px;
-    }
-    
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
-    }
-    
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
-    .result-area {
-      margin-top: 20px;
-      padding: 20px;
-      background: var(--bg-input);
-      border-left: 4px solid var(--primary);
-      border-radius: 10px;
-      display: none;
-    }
-
-    .loading {
-      border: 3px solid var(--border);
-      border-top: 3px solid var(--primary);
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 20px auto;
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .back-link {
-      display: inline-block;
-      color: var(--text-muted);
-      text-decoration: none;
-      margin-bottom: 20px;
-      cursor: pointer;
-    }
-    
-    .back-link:hover { color: var(--primary); }
-
-    .video-info {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .video-title {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: var(--text-main);
-      margin: 15px 0;
-    }
-    .platform-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-weight: bold;
-      font-size: 0.9rem;
-    }
-
-    .platform-youtube { background: #FF0000; color: #fff; }
-    .platform-tiktok { background: #000000; color: #fff; border: 1px solid #fff; }
-    .platform-facebook { background: #1877F2; color: #fff; }
-    .platform-instagram { background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: #fff; }
-    .platform-generic { background: var(--primary); color: #fff; }
-
-    .download-btn {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      background: var(--primary);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-      margin: 10px 0;
-      text-align: center;
-    }
-
-    .download-btn:hover {
-      background: #6d28d9;
-    }
-
-    .download-btn.audio {
-      background: var(--success);
-    }
-
-    .quality-label {
-      color: var(--accent);
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .size-label {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-  </style>
-</head><body>
-
-  <div class="container">
-    <a class="back-link" onclick="window.history.back()">← Back</a>
-    
-    <div class="header">
-      <h1>📥 Video Downloader</h1>
-      <p>Download videos from any platform instantly</p>
-    </div>
-
-    <div class="card">
-      <div class="section-title">🔗 Paste Video URL</div>
-      <input type="url" id="videoUrl" placeholder="https://youtube.com/watch?v=...">
-      <button class="btn" id="dlBtn" onclick="downloadVideo()">📥 Fetch Download Links</button>
-      <div class="result-area" id="dlResult"></div>
-    </div>
-  </div>
-
-  <script>
-    function getPlatformInfo(url) {
-      if (url.includes('youtube.com') || url.includes('youtu.be')) {
-        return { name: 'YouTube', class: 'platform-youtube', icon: '🎬' };
-      } else if (url.includes('tiktok.com')) {
-        return { name: 'TikTok', class: 'platform-tiktok', icon: '🎵' };
-      } else if (url.includes('facebook.com') || url.includes('fb.watch')) {
-        return { name: 'Facebook', class: 'platform-facebook', icon: '👥' };
-      } else if (url.includes('instagram.com')) {
-        return { name: 'Instagram', class: 'platform-instagram', icon: '📷' };
-      }
-      return { name: 'Video', class: 'platform-generic', icon: '🎬' };
-    }
-
-    async function downloadVideo() {
+async function downloadVideo() {
       const urlInput = document.getElementById('videoUrl');
       const btn = document.getElementById('dlBtn');
       const res = document.getElementById('dlResult');
@@ -238,61 +10,74 @@
 
       const url = urlInput.value.trim();
       if (!url) return alert('Please enter a video URL');
-      if (!url.startsWith('http')) return alert('Please enter a valid URL');
 
       const platform = getPlatformInfo(url);
 
       btn.disabled = true;
-      btn.textContent = 'Fetching...';      res.style.display = 'block';
-      res.innerHTML = '<div class="loading"></div><p style="text-align:center;color:var(--text-muted);">Processing video...</p>';
+      btn.textContent = 'Fetching...';
+      res.style.display = 'block';
+      res.innerHTML = '<div class="loading"></div><p style="text-align:center;color:var(--text-muted);">Processing...</p>';
 
       try {
         const response = await fetch(`/api/download?url=${encodeURIComponent(url)}`);
-        
-        if (!response.ok) {
-          throw new Error('Server error. Please try again.');
-        }
-        
         const data = await response.json();
 
-        if (data.error) {
-          throw new Error(data.error);
+        console.log('API Response:', data); // Debug log
+
+        if (!response.ok || data.error) {
+          throw new Error(data.error || 'Server error');
         }
 
-        if (data && data.links && data.links.length > 0) {
-          let html = `
-            <div class="video-info">
-              <span class="platform-badge ${platform.class}">
-                ${platform.icon} ${platform.name}
-              </span>
-              <div class="video-title">${data.title || 'Video'}</div>
-              <div>📁 ${data.links.length} formats available</div>
+        if (!data.links || data.links.length === 0) {
+          throw new Error('No download links found');
+        }
+
+        // Show ALL data for debugging
+        let html = `
+          <div class="video-info" style="margin-bottom:20px;">
+            <span class="platform-badge ${platform.class}">${platform.icon} ${platform.name}</span>
+            <div class="video-title">${data.title || 'Video'}</div>
+            <div style="margin-top:10px;font-size:0.9rem;color:var(--text-muted);">
+              Found ${data.links.length} links
             </div>
-            <div style="margin-top:20px;">
-          `;
+          </div>
+          <div style="background:#1a1a1a;border:1px solid var(--border);border-radius:10px;padding:15px;margin-bottom:20px;max-height:200px;overflow-y:auto;">
+            <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:10px;">Raw Data (Debug):</div>
+            <pre style="color:var(--accent);font-size:0.75rem;white-space:pre-wrap;word-break:break-all;">${JSON.stringify(data.links, null, 2)}</pre>
+          </div>
+          <div style="margin-top:20px;">
+        `;
 
-          data.links.forEach((link, index) => {
-            const quality = link.quality || `Format ${index + 1}`;
-            const size = link.size || '';
-            const downloadUrl = link.url || link.download;
-            const isAudio = quality.toLowerCase().includes('mp3') || quality.toLowerCase().includes('audio');
-            
-            if (downloadUrl) {
-              html += `
-                <div style="margin-bottom:15px;">
-                  <div class="quality-label">${quality}</div>
-                  ${size ? `<div class="size-label">${size}</div>` : ''}
-                  <a href="${downloadUrl}" target="_blank" class="download-btn ${isAudio ? 'audio' : ''}">⬇ Download ${isAudio ? 'MP3' : 'Video'}</a>
-                </div>
-              `;
-            }
-          });
+        // Try to find download URLs in any property
+        data.links.forEach((link, index) => {
+          // Try multiple possible property names
+          const downloadUrl = link.url || link.download || link.src || link.href || link.link;
+          const quality = link.quality || link.format || link.label || `Format ${index + 1}`;
+          const size = link.size || link.filesize || '';
+          
+          if (downloadUrl) {
+            const isAudio = String(quality).toLowerCase().includes('mp3') || String(quality).toLowerCase().includes('audio');
+            html += `
+              <div style="margin-bottom:15px;padding:15px;background:var(--bg-input);border-radius:10px;">
+                <div style="color:var(--accent);font-weight:bold;margin-bottom:5px;">${quality}</div>
+                ${size ? `<div style="color:var(--text-muted);font-size:0.85rem;margin-bottom:10px;">${size}</div>` : ''}
+                <a href="${downloadUrl}" target="_blank" style="display:block;width:100%;padding:12px;background:${isAudio ? 'var(--success)' : 'var(--primary)'};color:#fff;text-decoration:none;border-radius:8px;font-weight:bold;text-align:center;">⬇ Download</a>
+              </div>
+            `;
+          } else {
+            // Show that we found a link but no URL
+            html += `
+              <div style="margin-bottom:15px;padding:15px;background:var(--bg-input);border-radius:10px;opacity:0.5;">
+                <div style="color:var(--text-muted);">Link ${index + 1}: ${quality}</div>
+                <div style="color:var(--error);font-size:0.85rem;margin-top:5px;">⚠️ No download URL found</div>
+              </div>
+            `;
+          }
+        });
 
-          html += `</div>`;
-          res.innerHTML = html;
-        } else {
-          res.innerHTML = `<p style="color:var(--error);">⚠️ No download links found.</p>`;
-        }
+        html += `</div>`;
+        res.innerHTML = html;
+
       } catch (error) {
         res.innerHTML = `<p style="color:var(--error);">⚠️ ${error.message}</p>`;
       } finally {
@@ -300,7 +85,3 @@
         btn.textContent = '📥 Fetch Download Links';
       }
     }
-  </script>
-
-</body>
-</html>

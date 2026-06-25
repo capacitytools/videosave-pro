@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Video Downloader</title>
+<style>
+body{background:#000;color:#fff;font-family:Arial;padding:20px}
+input{width:100%;padding:15px;margin:10px 0;background:#111;border:1px solid #333;color:#fff;border-radius:8px;box-sizing:border-box}
+button{width:100%;padding:15px;background:#8b5cf6;color:#fff;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:0.5}
+.result{margin-top:20px}
+.dl-btn{display:block;padding:12px;background:#8b5cf6;color:#fff;text-decoration:none;border-radius:6px;margin:10px 0;text-align:center}
+</style>
+</head>
+<body>
+<h1>📥 Video Downloader</h1>
+<input type="url" id="videoUrl" placeholder="Paste YouTube or Facebook URL">
+<button id="dlBtn" onclick="test()">Fetch Links</button>
+<div id="result"></div>
+<script>
+async function test(){
+var url=document.getElementById('videoUrl').value;
+var btn=document.getElementById('dlBtn');
+var res=document.getElementById('result');
+if(!url)return alert('Enter URL');
+btn.disabled=true;
+btn.textContent='Loading...';
+res.innerHTML='<p>Loading...</p>';
+try{
+var r=await fetch('/api/download?url='+encodeURIComponent(url));
+var d=await r.json();
+var title=d.mediaInfo?d.mediaInfo.title:'Video';
+var links=d.links||[];
+var h='<div class="result"><h3>'+title+'</h3><p>Found '+links.length+' links</p>';
+for(var i=0;i<links.length;i++){
+h+='<a href="'+links[i]+'" target="_blank" class="dl-btn">⬇ Download Link '+(i+1)+'</a>';}
+h+='</div>';
+res.innerHTML=h;
+}catch(e){
+res.innerHTML='<p style="color:#f44">Error: '+e.message+'</p>';}
+finally{
+btn.disabled=false;
+btn.textContent='Fetch Links';}}
+</script>
+</body>
+</html>

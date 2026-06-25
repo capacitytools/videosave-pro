@@ -27,7 +27,7 @@
       padding: 20px;
     }
 
-    .container { max-width: 800px; margin: 0 auto; }
+    .container { max-width: 900px; margin: 0 auto; }
 
     .header {
       text-align: center;
@@ -106,21 +106,6 @@
       display: none;
     }
 
-    .btn-download {
-      display: inline-block;
-      padding: 12px 25px;
-      background: var(--primary);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      margin: 5px;
-      cursor: pointer;
-      border: none;
-    }
-    
-    .btn-download:hover { background: #6d28d9; }
-
     .loading {
       border: 3px solid var(--border);
       border-top: 3px solid var(--primary);
@@ -145,28 +130,133 @@
     }
     
     .back-link:hover { color: var(--primary); }
-    .download-item {
+
+    /* Video Info Card */
+    .video-info {
       background: var(--bg-card);
       border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .video-thumbnail {
+      width: 100%;
+      max-width: 400px;
       border-radius: 10px;
-      padding: 15px;
-      margin: 10px 0;
+      margin: 0 auto 20px;
+      display: block;      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .video-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .video-meta {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      gap: 15px;
       flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .platform-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    .platform-youtube { background: #FF0000; color: #fff; }
+    .platform-tiktok { background: #000000; color: #fff; border: 1px solid #fff; }
+    .platform-facebook { background: #1877F2; color: #fff; }
+    .platform-instagram { background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: #fff; }
+    .platform-generic { background: var(--primary); color: #fff; }
+
+    .download-section {
+      margin-top: 20px;
+    }
+
+    .download-section h3 {
+      color: var(--accent);
+      margin-bottom: 15px;      font-size: 1.1rem;
+    }
+
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 10px;
     }
 
-    .download-item .quality {
+    .download-option {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s;
+    }
+
+    .download-option:hover {
+      border-color: var(--primary);
+      transform: translateX(5px);
+    }
+
+    .download-info {
+      flex: 1;
+    }
+
+    .download-quality {
       color: var(--accent);
       font-weight: bold;
       font-size: 0.95rem;
+      margin-bottom: 5px;
     }
 
-    .download-item .size {
+    .download-format {
       color: var(--text-muted);
       font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .btn-download {
+      padding: 10px 20px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.9rem;      white-space: nowrap;
+      margin-left: 10px;
+    }
+
+    .btn-download:hover {
+      background: #6d28d9;
+    }
+
+    .btn-audio {
+      background: var(--success);
+    }
+
+    .btn-audio:hover {
+      background: #059669;
     }
   </style>
 </head>
@@ -189,12 +279,26 @@
   </div>
 
   <script>
-    async function downloadVideo() {
-      const url = document.getElementById('videoUrl').value.trim();
+    function getPlatformInfo(url) {
+      if (url.includes('youtube.com') || url.includes('youtu.be')) {
+        return { name: 'YouTube', class: 'platform-youtube', icon: '🎬' };
+      } else if (url.includes('tiktok.com')) {
+        return { name: 'TikTok', class: 'platform-tiktok', icon: '🎵' };
+      } else if (url.includes('facebook.com') || url.includes('fb.watch')) {
+        return { name: 'Facebook', class: 'platform-facebook', icon: '👥' };
+      } else if (url.includes('instagram.com')) {
+        return { name: 'Instagram', class: 'platform-instagram', icon: '📷' };
+      }
+      return { name: 'Video', class: 'platform-generic', icon: '🎬' };
+    }
+
+    async function downloadVideo() {      const url = document.getElementById('videoUrl').value.trim();
       if (!url) return alert('Please enter a video URL');
       if (!url.startsWith('http')) return alert('Please enter a valid URL starting with http:// or https://');
 
-      const btn = document.getElementById('dlBtn');      const res = document.getElementById('dlResult');
+      const btn = document.getElementById('dlBtn');
+      const res = document.getElementById('dlResult');
+      const platform = getPlatformInfo(url);
 
       btn.disabled = true;
       btn.textContent = 'Fetching...';
@@ -202,8 +306,6 @@
       res.innerHTML = '<div class="loading"></div><p style="text-align:center;color:var(--text-muted);">Processing video...</p>';
 
       try {
-        // Try multiple methods to fetch from ahm7xmakki API
-        
         let data = null;
         
         // Method 1: Direct API call
@@ -226,45 +328,82 @@
               data = await response.json();
             }
           } catch (e) {
-            console.log('Proxy 1 failed, trying another...');
+            console.log('Proxy failed');
           }
         }
-        
-        // Method 3: Using allorigins proxy
-        if (!data) {
-          try {
-            const proxyUrl = 'https://api.allorigins.win/raw?url=';
-            const targetUrl = `https://ahm7xmakki.com/api/alldl?url=${encodeURIComponent(url)}`;
-            const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
-            if (response.ok) {
-              const text = await response.text();
-              data = JSON.parse(text);
-            }
-          } catch (e) {
-            console.log('Proxy 2 failed');
-          }
-        }
-        // Display results
+
         if (data && data.links && data.links.length > 0) {
-          let html = '<h3 style="color:var(--success);margin-bottom:15px;">✅ Download Ready</h3>';
-          
-          data.links.forEach(link => {
-            const quality = link.quality || 'Video';
+          // Build video info card
+          let html = `
+            <div class="video-info">
+              <div style="text-align:center;">
+                <span class="platform-badge ${platform.class}">
+                  ${platform.icon} ${platform.name}
+                </span>
+              </div>
+              <div class="video-title">${data.title || 'Video'}</div>              <div class="video-meta">
+                <div class="meta-item">📁 ${data.links.length} formats available</div>
+                ${data.duration ? `<div class="meta-item">⏱️ ${data.duration}</div>` : ''}
+                ${data.author ? `<div class="meta-item">👤 ${data.author}</div>` : ''}
+              </div>
+            </div>
+            
+            <div class="download-section">
+              <h3>📹 Video Downloads</h3>
+              <div class="download-grid">
+          `;
+
+          // Add video formats
+          const videoLinks = data.links.filter(l => !l.quality?.toLowerCase().includes('mp3') && !l.quality?.toLowerCase().includes('audio'));
+          videoLinks.forEach(link => {
+            const quality = link.quality || 'HD';
             const size = link.size || '';
             const downloadUrl = link.url || link.download;
             
             if (downloadUrl) {
               html += `
-                <div class="download-item">
-                  <div>
-                    <div class="quality">${quality}</div>
-                    ${size ? `<div class="size">${size}</div>` : ''}
+                <div class="download-option">
+                  <div class="download-info">
+                    <div class="download-quality">${quality}</div>
+                    ${size ? `<div class="download-format">${size}</div>` : ''}
                   </div>
                   <a href="${downloadUrl}" target="_blank" class="btn-download">⬇ Download</a>
-                </div>`;
+                </div>
+              `;
             }
           });
-          
+
+          html += `</div></div>`;
+
+          // Add audio formats if available
+          const audioLinks = data.links.filter(l => l.quality?.toLowerCase().includes('mp3') || l.quality?.toLowerCase().includes('audio'));
+          if (audioLinks.length > 0) {
+            html += `
+              <div class="download-section">
+                <h3>🎵 Audio Downloads (MP3)</h3>
+                <div class="download-grid">
+            `;
+
+            audioLinks.forEach(link => {
+              const quality = link.quality || 'Audio';
+              const size = link.size || '';
+              const downloadUrl = link.url || link.download;
+              
+              if (downloadUrl) {
+                html += `                  <div class="download-option">
+                    <div class="download-info">
+                      <div class="download-quality">${quality}</div>
+                      ${size ? `<div class="download-format">${size}</div>` : ''}
+                    </div>
+                    <a href="${downloadUrl}" target="_blank" class="btn-download btn-audio">⬇ Download MP3</a>
+                  </div>
+                `;
+              }
+            });
+
+            html += `</div></div>`;
+          }
+
           res.innerHTML = html;
         } else if (data && data.error) {
           res.innerHTML = `<p style="color:var(--error);">⚠️ ${data.error}</p>`;

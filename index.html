@@ -625,101 +625,103 @@
     // --- VIDEO DOWNLOADER (FIXED WITH COBALT.TOOLS API) ---
     async function downloadVideo() {
       const url = document.getElementById('videoUrl').value.trim();
-      if (!url) return alert('Enter URL');
+      if (!url) return alert('Please enter a video URL');
+      if (!url.startsWith('http')) return alert('Please enter a valid URL starting with http:// or https://');
 
       const btn = document.getElementById('dlBtn');
       const res = document.getElementById('dlResult');
+      const platform = getPlatformInfo(url);
 
       btn.disabled = true;
       btn.textContent = 'Fetching...';
       res.style.display = 'block';
-      res.innerHTML = '<div class="loading"></div>';
-
-      // Detect platform      const isYT = url.includes('youtube.com') || url.includes('youtu.be');
-      const isTT = url.includes('tiktok.com');
-      const isFB = url.includes('facebook.com') || url.includes('fb.watch');
-      const isIG = url.includes('instagram.com');
+      res.innerHTML = '<div class="loading"></div><p style="text-align:center;color:var(--text-muted);">Processing video...</p>';
 
       try {
-        let html = '';
+        // Call OUR OWN backend API (No CORS issues!)
+        const response = await fetch(`/api/download?url=${encodeURIComponent(url)}`);
+        const data = await response.json();
 
-        if (isYT) {
-          // YouTube: use cobalt.tools API (free, no key needed)
-          const r = await fetch('https://cobalt.tools/api/json', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ url, vCodec: 'h264', vQuality: '720', aFormat: 'mp3', isNoTTWatermark: true })
-          });
-          const data = await r.json();
-          if (data.url) {
-            html = `
-              <div style="margin:10px 0;padding:15px;background:var(--bg-input);border-radius:10px;">
-                <p style="color:var(--accent);margin-bottom:10px;">✅ YouTube Video (720p)</p>
-                <a href="${data.url}" target="_blank" class="btn-download">⬇ Download Video</a>
-              </div>`;
-          } else if (data.picker) {
-            html = data.picker.map(p => `
-              <div style="margin:10px 0;padding:15px;background:var(--bg-input);border-radius:10px;">
-                <p style="color:var(--accent);margin-bottom:10px;">📹 ${p.type || 'Video'}</p>
-                <a href="${p.url}" target="_blank" class="btn-download">⬇ Download</a>
-              </div>`).join('');
-          }
-
-        } else if (isTT) {
-          // TikTok: use cobalt too
-          const r = await fetch('https://cobalt.tools/api/json', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ url, isNoTTWatermark: true })
-          });
-          const data = await r.json();
-          if (data.url) {
-            html = `
-              <div style="margin:10px 0;padding:15px;background:var(--bg-input);border-radius:10px;">
-                <p style="color:var(--accent);margin-bottom:10px;">✅ TikTok (No Watermark)</p>
-                <a href="${data.url}" target="_blank" class="btn-download">⬇ Download</a>
-              </div>`;
-          }
-
-        } else if (isFB || isIG) {
-          // Facebook/Instagram: show manual instruction (these block all APIs)
-          html = `
-            <div style="padding:20px;background:#1a1a1a;border-radius:10px;border-left:4px solid var(--accent);">              <p style="color:var(--accent);font-weight:bold;margin-bottom:10px;">📋 For Facebook & Instagram:</p>
-              <p style="line-height:1.8;color:#ccc;">
-                1. Open the video on Facebook/Instagram in your browser<br>
-                2. Copy the full URL from the address bar<br>
-                3. Visit <a href="https://snapinsta.app" target="_blank" style="color:var(--primary);">snapinsta.app</a> (Instagram) or <a href="https://fdown.net" target="_blank" style="color:var(--primary);">fdown.net</a> (Facebook)<br>
-                4. Paste & download ✅
-              </p>
-            </div>`;
-
-        } else {
-          // Generic fallback via cobalt
-          const r = await fetch('https://cobalt.tools/api/json', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ url })
-          });
-          const data = await r.json();
-          if (data.url) {
-            html = `
-              <div style="margin:10px 0;padding:15px;background:var(--bg-input);border-radius:10px;">
-                <p style="color:var(--accent);margin-bottom:10px;">✅ Download Ready</p>
-                <a href="${data.url}" target="_blank" class="btn-download">⬇ Download</a>
-              </div>`;
-          } else {
-            html = `<p style="color:#ef4444;">⚠ Could not fetch. The video may be private or the platform is unsupported.</p>`;
-          }
+        if (!response.ok || data.error) {
+          throw new Error(data.error || 'Failed to fetch');
         }
 
-        res.innerHTML = html || `<p style="color:#ef4444;">No download link found. The video may be private.</p>`;
+        if (data && data.links && data.links.length > 0) {
+          let html = `
+            <div class="video-info">
+              <div style="text-align:center;">
+                <span class="platform-badge ${platform.class}">
+                  ${platform.icon} ${platform.name}
+                </span>
+              </div>
+              <div class="video-title">${data.title || 'Video'}</div>
+              <div class="video-meta">
+                <div class="meta-item">📁 ${data.links.length} formats available</div>
+                ${data.duration ? `<div class="meta-item">⏱️ ${data.duration}</div>` : ''}
+                ${data.author ? `<div class="meta-item">👤 ${data.author}</div>` : ''}
+              </div>
+            </div>
+            
+            <div class="download-section">
+              <h3>📹 Video Downloads</h3>
+              <div class="download-grid">
+          `;
 
-      } catch(e) {
-        res.innerHTML = `<p style="color:#ef4444;">⚠ Error: ${e.message}. Try copying the direct URL from your browser address bar.</p>`;
+          const videoLinks = data.links.filter(l => !l.quality?.toLowerCase().includes('mp3') && !l.quality?.toLowerCase().includes('audio'));
+          videoLinks.forEach(link => {
+            const quality = link.quality || 'HD';
+            const size = link.size || '';
+            const downloadUrl = link.url || link.download;
+            if (downloadUrl) {              html += `
+                <div class="download-option">
+                  <div class="download-info">
+                    <div class="download-quality">${quality}</div>
+                    ${size ? `<div class="download-format">${size}</div>` : ''}
+                  </div>
+                  <a href="${downloadUrl}" target="_blank" class="btn-download">⬇ Download</a>
+                </div>
+              `;
+            }
+          });
+
+          html += `</div></div>`;
+
+          const audioLinks = data.links.filter(l => l.quality?.toLowerCase().includes('mp3') || l.quality?.toLowerCase().includes('audio'));
+          if (audioLinks.length > 0) {
+            html += `
+              <div class="download-section">
+                <h3>🎵 Audio Downloads (MP3)</h3>
+                <div class="download-grid">
+            `;
+            audioLinks.forEach(link => {
+              const quality = link.quality || 'Audio';
+              const size = link.size || '';
+              const downloadUrl = link.url || link.download;
+              if (downloadUrl) {
+                html += `
+                  <div class="download-option">
+                    <div class="download-info">
+                      <div class="download-quality">${quality}</div>
+                      ${size ? `<div class="download-format">${size}</div>` : ''}
+                    </div>
+                    <a href="${downloadUrl}" target="_blank" class="btn-download btn-audio">⬇ Download MP3</a>
+                  </div>
+                `;
+              }
+            });
+            html += `</div></div>`;
+          }
+
+          res.innerHTML = html;
+        } else {
+          res.innerHTML = `<p style="color:var(--error);">⚠️ No download links found for this video.</p>`;
+        }
+
+      } catch (error) {
+        res.innerHTML = `<p style="color:var(--error);">⚠️ ${error.message}</p>`;
       } finally {
         btn.disabled = false;
-        btn.textContent = '📥 Get Download Links';
-      }
+        btn.textContent = '📥 Fetch Download Links';      }
     }
 
     // --- EBOOK & PDF ---

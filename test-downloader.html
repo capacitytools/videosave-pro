@@ -1,76 +1,42 @@
-async function downloadVideo() {
-      const url = document.getElementById('videoUrl').value.trim();
-      const btn = document.getElementById('dlBtn');
-      const res = document.getElementById('dlResult');
+async function testDownload() {
+      var url = document.getElementById('videoUrl').value;
+      var btn = document.getElementById('dlBtn');
+      var res = document.getElementById('result');
       
-      if (!url) return alert('Enter a URL');
+      if (!url) return alert('Enter URL');
       
       btn.disabled = true;
-      btn.textContent = 'Fetching...';
-      res.innerHTML = '<div class="loading">Processing...</div>';
+      btn.textContent = 'Loading...';
+      res.innerHTML = '<p>Loading...</p>';
       
       try {
-        const response = await fetch('/api/download?url=' + encodeURIComponent(url));
-        const data = await response.json();
+        var response = await fetch('/api/download?url=' + encodeURIComponent(url));
+        var data = await response.json();
         
-        console.log('Full API Response:', data);
+        console.log('API Data:', data);
         
-        if (!response.ok || data.error) {
-          throw new Error(data.error || 'Failed');
-        }
+        var title = data.mediaInfo ? data.mediaInfo.title : 'Video';
+        var links = data.links || [];
         
-        if (!data.links || data.links.length === 0) {
-          throw new Error('No links found');
-        }
+        var html = '<div class="result">';
+        html += '<h3 style="margin-bottom:15px;">' + title + '</h3>';
+        html += '<p style="color:#888;margin-bottom:20px;">Found ' + links.length + ' download links</p>';
         
-        // Show the raw data
-        let html = '<div class="result">';
-        html += '<h3>Found ' + data.links.length + ' formats:</h3>';
-        
-        // Debug: show what properties exist
-        html += '<div style="background:#1a1a1a;padding:10px;margin:10px 0;border-radius:6px;">';
-        html += '<div style="color:#888;font-size:12px;margin-bottom:10px;">Raw data (check console too):</div>';
-        html += '<pre style="color:#10b981;font-size:11px;overflow-x:auto;">' + JSON.stringify(data.links, null, 2) + '</pre>';
-        html += '</div>';
-        
-        // Try to extract URLs
-        data.links.forEach(function(link, index) {
-          // Try EVERY possible property name
-          const possibleUrls = [
-            link.url,
-            link.download, 
-            link.src,
-            link.href,
-            link.link,
-            link.file,
-            link.videoUrl,
-            link.directUrl
-          ].filter(Boolean);
+        // Display each link
+        for (var i = 0; i < links.length; i++) {
+          var linkUrl = links[i];
+          var qualityLabel = links.length > 1 ? 'Quality ' + (i + 1) : 'Download';
           
-          const quality = link.quality || link.format || link.label || 'Format ' + (index + 1);
-          const size = link.size || link.filesize || '';
-          
-          if (possibleUrls.length > 0) {
-            html += '<div style="margin:10px 0;padding:15px;background:#1a1a1a;border-radius:8px;">';
-            html += '<div style="color:#FFD700;margin-bottom:8px;"><strong>' + quality + '</strong></div>';
-            if (size) html += '<div style="color:#888;font-size:12px;margin-bottom:10px;">' + size + '</div>';
-            html += '<a href="' + possibleUrls[0] + '" target="_blank" class="download-link">⬇ Download</a>';
-            html += '</div>';
-          } else {
-            html += '<div style="margin:10px 0;padding:10px;background:#1a1a1a;border-radius:6px;opacity:0.5;">';
-            html += '<div style="color:#888;">Link ' + (index + 1) + ': ' + quality + '</div>';
-            html += '<div style="color:#ef4444;font-size:12px;margin-top:5px;">⚠️ No URL property found</div>';
-            html += '</div>';
-          }
-        });
+          html += '<a href="' + linkUrl + '" target="_blank" class="dl-btn">⬇ Download ' + qualityLabel + '</a>';
+        }
         
         html += '</div>';
         res.innerHTML = html;
         
-      } catch (error) {
-        res.innerHTML = '<div class="result" style="color: #ef4444;">Error: ' + error.message + '</div>';
+      } catch (err) {
+        res.innerHTML = '<p style="color:#f44;">Error: ' + err.message + '</p>';
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Fetch Download Links';
+        btn.textContent = 'Fetch Links';
       }
     }

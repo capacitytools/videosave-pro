@@ -1,21 +1,27 @@
-module.exports = async function(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  if (req.method === 'OPTIONS') { res.status(200).end(); return; }
-
+export default async function handler(req, res) {
   const { url } = req.query;
-  if (!url) { res.status(400).json({ error: 'Missing url parameter' }); return; }
+
+  if (!url) {
+    return res.status(400).json({ error: 'Video URL is required' });
+  }
 
   try {
-    const apiUrl = `https://ahm7xmakki.com/api/alldl?url=${encodeURIComponent(url)}`;
-    const response = await fetch(apiUrl, {
-      headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json' }
+    const response = await fetch(`https://ahm7xmakki.com/api/alldl?url=${encodeURIComponent(url)}`, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Accept': 'application/json',
+      }
     });
-    const text = await response.text();
-    let data;
-    try { data = JSON.parse(text); }
-    catch { throw new Error('Invalid response from download service.'); }
-    res.status(200).json(data);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+
+    if (!response.ok) {
+      throw new Error(`API responded with status ${response.status}`);
+    }
+
+    const data = await response.json();
+    return res.status(200).json(data);
+
+  } catch (error) {
+    console.error('Downloader Error:', error);
+    return res.status(500).json({ error: 'Failed to fetch video. It may be private or unsupported.' });
   }
 }

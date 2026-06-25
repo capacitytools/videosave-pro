@@ -14,6 +14,8 @@
       --text-main: #ffffff;
       --text-muted: #888888;
       --border: #222222;
+      --success: #10b981;
+      --error: #ef4444;
     }
     
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
@@ -25,10 +27,7 @@
       padding: 20px;
     }
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
+    .container { max-width: 800px; margin: 0 auto; }
 
     .header {
       text-align: center;
@@ -44,14 +43,11 @@
       -webkit-text-fill-color: transparent;
     }
     
-    .header p {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-    }
+    .header p { color: var(--text-muted); font-size: 1.1rem; }
+
     .card {
       background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
+      border: 1px solid var(--border);      border-radius: 20px;
       padding: 30px;
       margin-bottom: 30px;
     }
@@ -75,9 +71,7 @@
       outline: none;
     }
     
-    input:focus {
-      border-color: var(--primary);
-    }
+    input:focus { border-color: var(--primary); }
 
     .btn {
       width: 100%;
@@ -96,13 +90,13 @@
     .btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
-    }    
+    }
+    
     .btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
-
     .result-area {
       margin-top: 20px;
       padding: 20px;
@@ -125,9 +119,7 @@
       border: none;
     }
     
-    .btn-download:hover {
-      background: #6d28d9;
-    }
+    .btn-download:hover { background: #6d28d9; }
 
     .loading {
       border: 3px solid var(--border);
@@ -145,23 +137,15 @@
     }
 
     .test-info {
-      background: rgba(139, 92, 246, 0.1);      border: 1px solid var(--primary);
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid var(--primary);
       border-radius: 10px;
       padding: 20px;
       margin-bottom: 30px;
     }
     
-    .test-info h3 {
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-    
-    .test-info ul {
-      color: var(--text-muted);
-      line-height: 1.8;
-      padding-left: 20px;
-    }
-
+    .test-info h3 { color: var(--primary); margin-bottom: 10px; }
+    .test-info ul { color: var(--text-muted); line-height: 1.8; padding-left: 20px; }
     .back-link {
       display: inline-block;
       color: var(--text-muted);
@@ -170,9 +154,20 @@
       cursor: pointer;
     }
     
-    .back-link:hover {
-      color: var(--primary);
+    .back-link:hover { color: var(--primary); }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-left: 10px;
     }
+    
+    .status-working { background: var(--success); color: #fff; }
+    .status-limited { background: var(--accent); color: #000; }
+  </div>
   </style>
 </head>
 <body>
@@ -182,133 +177,150 @@
     
     <div class="header">
       <h1>📥 Video Downloader Test</h1>
-      <p>Testing the fixed downloader with cobalt.tools API</p>
+      <p>Testing improved downloader with fallback methods</p>
     </div>
 
     <div class="test-info">
-      <h3>🧪 Test Instructions:</h3>
+      <h3>📊 API Status:</h3>
       <ul>
-        <li><strong>YouTube:</strong> Should work ✅ (e.g., https://youtube.com/watch?v=...)</li>
-        <li><strong>TikTok:</strong> Should work ✅ (e.g., https://tiktok.com/@user/video/...)</li>
-        <li><strong>Facebook:</strong> Will show manual instructions (API blocked)</li>
-        <li><strong>Instagram:</strong> Will show manual instructions (API blocked)</li>
-        <li><strong>Other platforms:</strong> Will try cobalt.tools API</li>
+        <li><strong>YouTube:</strong> <span class="status-badge status-limited">Manual Method</span></li>
+        <li><strong>TikTok:</strong> <span class="status-badge status-limited">Manual Method</span></li>
+        <li><strong>Facebook/Instagram:</strong> <span class="status-badge status-limited">Manual Method</span></li>
       </ul>
+      <p style="margin-top:15px;color:var(--text-muted);font-size:0.9rem;">
+        💡 <strong>Note:</strong> Free APIs are unreliable. The best solution is to provide users with trusted external sites.
+      </p>
     </div>
+
     <div class="card">
       <div class="section-title">🔗 Paste Video URL</div>
-      <input type="url" id="videoUrl" placeholder="https://youtube.com/watch?v=...">
-      <button class="btn" id="dlBtn" onclick="downloadVideo()">📥 Get Download Links</button>
+      <input type="url" id="videoUrl" placeholder="https://youtube.com/watch?v=... or https://tiktok.com/...">      <button class="btn" id="dlBtn" onclick="downloadVideo()">📥 Get Download Links</button>
       <div class="result-area" id="dlResult"></div>
     </div>
 
     <div class="card">
-      <div class="section-title">📝 Test URLs to Try:</div>
-      <div style="background: var(--bg-input); padding: 15px; border-radius: 10px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; color: var(--text-muted);">
-        <p><strong>YouTube:</strong></p>
-        <p>https://www.youtube.com/watch?v=dQw4w9WgXcQ</p>
-        <br>
-        <p><strong>TikTok:</strong></p>
-        <p>https://www.tiktok.com/@tiktok/video/7106594312292453675</p>
+      <div class="section-title">🎯 Recommended Download Sites:</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px;">
+        <div style="background:var(--bg-input);padding:20px;border-radius:10px;border:1px solid var(--border);">
+          <h4 style="color:var(--accent);margin-bottom:10px;">YouTube</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:10px;">y2mate.com or ytmp3.cc</p>
+          <a href="https://y2mate.com" target="_blank" class="btn-download">Visit Site</a>
+        </div>
+        <div style="background:var(--bg-input);padding:20px;border-radius:10px;border:1px solid var(--border);">
+          <h4 style="color:var(--accent);margin-bottom:10px;">TikTok</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:10px;">snaptik.app (No Watermark)</p>
+          <a href="https://snaptik.app" target="_blank" class="btn-download">Visit Site</a>
+        </div>
+        <div style="background:var(--bg-input);padding:20px;border-radius:10px;border:1px solid var(--border);">
+          <h4 style="color:var(--accent);margin-bottom:10px;">Instagram</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:10px;">snapinsta.app</p>
+          <a href="https://snapinsta.app" target="_blank" class="btn-download">Visit Site</a>
+        </div>
+        <div style="background:var(--bg-input);padding:20px;border-radius:10px;border:1px solid var(--border);">
+          <h4 style="color:var(--accent);margin-bottom:10px;">Facebook</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:10px;">fdown.net</p>
+          <a href="https://fdown.net" target="_blank" class="btn-download">Visit Site</a>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    // FIXED DOWNLOADER FUNCTION
     async function downloadVideo() {
       const url = document.getElementById('videoUrl').value.trim();
-      if (!url) return alert('Enter URL');
+      if (!url) return alert('Please enter a video URL');
 
       const btn = document.getElementById('dlBtn');
       const res = document.getElementById('dlResult');
 
       btn.disabled = true;
-      btn.textContent = 'Fetching...';
+      btn.textContent = 'Checking...';
       res.style.display = 'block';
-      res.innerHTML = '<div class="loading"></div>';
 
-      try {
-        // Detect platform - NOW INSIDE TRY BLOCK
-        const isYT = url.includes('youtube.com') || url.includes('youtu.be');
-        const isTT = url.includes('tiktok.com');
-        const isFB = url.includes('facebook.com') || url.includes('fb.watch');
-        const isIG = url.includes('instagram.com');
+      // Detect platform
+      const isYT = url.includes('youtube.com') || url.includes('youtu.be');
+      const isTT = url.includes('tiktok.com');
+      const isFB = url.includes('facebook.com') || url.includes('fb.watch');
+      const isIG = url.includes('instagram.com');
 
-        let html = '';
-
-        if (isYT) {
-          const r = await fetch('https://cobalt.tools/api/json', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ url, vCodec: 'h264', vQuality: '720', aFormat: 'mp3', isNoTTWatermark: true })
-          });
-          const data = await r.json();          if (data.url) {
-            html = `
-              <div style="margin:10px 0;padding:15px;background:var(--bg-input);border-radius:10px;">
-                <p style="color:var(--accent);margin-bottom:10px;">✅ YouTube Video (720p)</p>
-                <a href="${data.url}" target="_blank" class="btn-download">⬇ Download Video</a>
-              </div>`;
-          } else if (data.picker) {
-            html = data.picker.map(p => `
-              <div style="margin:10px 0;padding:15px;background:var(--bg-input);border-radius:10px;">
-                <p style="color:var(--accent);margin-bottom:10px;">📹 ${p.type || 'Video'}</p>
-                <a href="${p.url}" target="_blank" class="btn-download">⬇ Download</a>
-              </div>`).join('');
-          }
-
-        } else if (isTT) {
-          const r = await fetch('https://cobalt.tools/api/json', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ url, isNoTTWatermark: true })
-          });
-          const data = await r.json();
-          if (data.url) {
-            html = `
-              <div style="margin:10px 0;padding:15px;background:var(--bg-input);border-radius:10px;">
-                <p style="color:var(--accent);margin-bottom:10px;">✅ TikTok (No Watermark)</p>
-                <a href="${data.url}" target="_blank" class="btn-download">⬇ Download</a>
-              </div>`;
-          }
-
-        } else if (isFB || isIG) {
-          html = `
-            <div style="padding:20px;background:#1a1a1a;border-radius:10px;border-left:4px solid var(--accent);">
-              <p style="color:var(--accent);font-weight:bold;margin-bottom:10px;">📋 For Facebook & Instagram:</p>
-              <p style="line-height:1.8;color:#ccc;">
-                1. Open the video on Facebook/Instagram in your browser<br>
-                2. Copy the full URL from the address bar<br>
-                3. Visit <a href="https://snapinsta.app" target="_blank" style="color:var(--primary);">snapinsta.app</a> (Instagram) or <a href="https://fdown.net" target="_blank" style="color:var(--primary);">fdown.net</a> (Facebook)<br>
-                4. Paste & download ✅
-              </p>
-            </div>`;
-
-        } else {
-          const r = await fetch('https://cobalt.tools/api/json', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ url })
-          });
-          const data = await r.json();
-          if (data.url) {
-            html = `              <div style="margin:10px 0;padding:15px;background:var(--bg-input);border-radius:10px;">
-                <p style="color:var(--accent);margin-bottom:10px;">✅ Download Ready</p>
-                <a href="${data.url}" target="_blank" class="btn-download">⬇ Download</a>
-              </div>`;
-          } else {
-            html = `<p style="color:#ef4444;">⚠ Could not fetch. The video may be private or the platform is unsupported.</p>`;
-          }
-        }
-
-        res.innerHTML = html || `<p style="color:#ef4444;">No download link found. The video may be private.</p>`;
-
-      } catch(e) {
-        res.innerHTML = `<p style="color:#ef4444;">⚠ Error: ${e.message}. Try copying the direct URL from your browser address bar.</p>`;
-      } finally {
-        btn.disabled = false;
-        btn.textContent = '📥 Get Download Links';
+      // Show appropriate manual download site      let html = '';
+      
+      if (isYT) {
+        html = `
+          <div style="padding:20px;background:#1a1a1a;border-radius:10px;border-left:4px solid var(--accent);">
+            <h3 style="color:var(--accent);margin-bottom:15px;">📹 YouTube Video Detected</h3>
+            <p style="line-height:1.8;color:#ccc;margin-bottom:15px;">
+              For the best experience, use one of these trusted sites:
+            </p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <a href="https://y2mate.com" target="_blank" class="btn-download">y2mate.com</a>
+              <a href="https://ytmp3.cc" target="_blank" class="btn-download">ytmp3.cc</a>
+              <a href="https://savefrom.net" target="_blank" class="btn-download">savefrom.net</a>
+            </div>
+            <p style="margin-top:15px;font-size:0.85rem;color:#888;">
+              💡 Just paste your YouTube URL on any of these sites
+            </p>
+          </div>`;
+      } 
+      else if (isTT) {
+        html = `
+          <div style="padding:20px;background:#1a1a1a;border-radius:10px;border-left:4px solid var(--accent);">
+            <h3 style="color:var(--accent);margin-bottom:15px;">🎵 TikTok Video Detected</h3>
+            <p style="line-height:1.8;color:#ccc;margin-bottom:15px;">
+              Download without watermark using:
+            </p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <a href="https://snaptik.app" target="_blank" class="btn-download">snaptik.app</a>
+              <a href="https://ssstik.io" target="_blank" class="btn-download">ssstik.io</a>
+              <a href="https://tikdown.org" target="_blank" class="btn-download">tikdown.org</a>
+            </div>
+            <p style="margin-top:15px;font-size:0.85rem;color:#888;">
+              ✅ These sites remove watermarks automatically
+            </p>
+          </div>`;
       }
+      else if (isIG) {
+        html = `
+          <div style="padding:20px;background:#1a1a1a;border-radius:10px;border-left:4px solid var(--accent);">
+            <h3 style="color:var(--accent);margin-bottom:15px;">📷 Instagram Video Detected</h3>
+            <p style="line-height:1.8;color:#ccc;margin-bottom:15px;">
+              Use these trusted downloaders:
+            </p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <a href="https://snapinsta.app" target="_blank" class="btn-download">snapinsta.app</a>
+              <a href="https://instadownloader.io" target="_blank" class="btn-download">instadownloader.io</a>
+            </div>
+          </div>`;
+      }
+      else if (isFB) {        html = `
+          <div style="padding:20px;background:#1a1a1a;border-radius:10px;border-left:4px solid var(--accent);">
+            <h3 style="color:var(--accent);margin-bottom:15px;">👥 Facebook Video Detected</h3>
+            <p style="line-height:1.8;color:#ccc;margin-bottom:15px;">
+              Download Facebook videos using:
+            </p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <a href="https://fdown.net" target="_blank" class="btn-download">fdown.net</a>
+              <a href="https://fbdown.net" target="_blank" class="btn-download">fbdown.net</a>
+            </div>
+          </div>`;
+      }
+      else {
+        html = `
+          <div style="padding:20px;background:#1a1a1a;border-radius:10px;border-left:4px solid var(--error);">
+            <h3 style="color:var(--error);margin-bottom:15px;">⚠️ Platform Not Detected</h3>
+            <p style="line-height:1.8;color:#ccc;">
+              We couldn't automatically detect the video platform. Please try one of these universal downloaders:
+            </p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;">
+              <a href="https://savefrom.net" target="_blank" class="btn-download">savefrom.net</a>
+              <a href="https://keepvid.works" target="_blank" class="btn-download">keepvid.works</a>
+            </div>
+          </div>`;
+      }
+
+      res.innerHTML = html;
+      btn.disabled = false;
+      btn.textContent = '📥 Get Download Links';
     }
   </script>
 

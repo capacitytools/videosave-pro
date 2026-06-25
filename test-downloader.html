@@ -1,30 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Downloader</title>
-  <style>
-    body { background: #0a0a0a; color: #fff; font-family: Arial, sans-serif; padding: 20px; }
-    .container { max-width: 600px; margin: 0 auto; }
-    input { width: 100%; padding: 15px; margin: 10px 0; background: #1a1a1a; border: 1px solid #333; color: #fff; border-radius: 8px; }
-    button { width: 100%; padding: 15px; background: #8b5cf6; color: #fff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
-    button:disabled { opacity: 0.5; }
-    .result { margin-top: 20px; padding: 20px; background: #1a1a1a; border-radius: 8px; }
-    .download-link { display: block; padding: 12px; background: #8b5cf6; color: #fff; text-decoration: none; border-radius: 6px; margin: 10px 0; text-align: center; }
-    .loading { text-align: center; padding: 20px; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>📥 Video Downloader</h1>
-    <input type="url" id="videoUrl" placeholder="Paste video URL here">
-    <button id="dlBtn" onclick="downloadVideo()">Fetch Download Links</button>
-    <div id="dlResult"></div>
-  </div>
-
-  <script>
-    async function downloadVideo() {
+async function downloadVideo() {
       const url = document.getElementById('videoUrl').value.trim();
       const btn = document.getElementById('dlBtn');
       const res = document.getElementById('dlResult');
@@ -39,6 +13,8 @@
         const response = await fetch('/api/download?url=' + encodeURIComponent(url));
         const data = await response.json();
         
+        console.log('Full API Response:', data);
+        
         if (!response.ok || data.error) {
           throw new Error(data.error || 'Failed');
         }
@@ -47,15 +23,44 @@
           throw new Error('No links found');
         }
         
+        // Show the raw data
         let html = '<div class="result">';
         html += '<h3>Found ' + data.links.length + ' formats:</h3>';
         
+        // Debug: show what properties exist
+        html += '<div style="background:#1a1a1a;padding:10px;margin:10px 0;border-radius:6px;">';
+        html += '<div style="color:#888;font-size:12px;margin-bottom:10px;">Raw data (check console too):</div>';
+        html += '<pre style="color:#10b981;font-size:11px;overflow-x:auto;">' + JSON.stringify(data.links, null, 2) + '</pre>';
+        html += '</div>';
+        
+        // Try to extract URLs
         data.links.forEach(function(link, index) {
-          const downloadUrl = link.url || link.download || link.src;
-          const quality = link.quality || link.format || 'Format ' + (index + 1);
+          // Try EVERY possible property name
+          const possibleUrls = [
+            link.url,
+            link.download, 
+            link.src,
+            link.href,
+            link.link,
+            link.file,
+            link.videoUrl,
+            link.directUrl
+          ].filter(Boolean);
           
-          if (downloadUrl) {
-            html += '<a href="' + downloadUrl + '" target="_blank" class="download-link">⬇ Download ' + quality + '</a>';
+          const quality = link.quality || link.format || link.label || 'Format ' + (index + 1);
+          const size = link.size || link.filesize || '';
+          
+          if (possibleUrls.length > 0) {
+            html += '<div style="margin:10px 0;padding:15px;background:#1a1a1a;border-radius:8px;">';
+            html += '<div style="color:#FFD700;margin-bottom:8px;"><strong>' + quality + '</strong></div>';
+            if (size) html += '<div style="color:#888;font-size:12px;margin-bottom:10px;">' + size + '</div>';
+            html += '<a href="' + possibleUrls[0] + '" target="_blank" class="download-link">⬇ Download</a>';
+            html += '</div>';
+          } else {
+            html += '<div style="margin:10px 0;padding:10px;background:#1a1a1a;border-radius:6px;opacity:0.5;">';
+            html += '<div style="color:#888;">Link ' + (index + 1) + ': ' + quality + '</div>';
+            html += '<div style="color:#ef4444;font-size:12px;margin-top:5px;">⚠️ No URL property found</div>';
+            html += '</div>';
           }
         });
         
@@ -69,6 +74,3 @@
         btn.textContent = 'Fetch Download Links';
       }
     }
-  </script>
-</body>
-</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Downloader</title>
+  <style>
+    body { background: #0a0a0a; color: #fff; font-family: Arial, sans-serif; padding: 20px; }
+    .container { max-width: 600px; margin: 0 auto; }
+    input { width: 100%; padding: 15px; margin: 10px 0; background: #1a1a1a; border: 1px solid #333; color: #fff; border-radius: 8px; }
+    button { width: 100%; padding: 15px; background: #8b5cf6; color: #fff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+    button:disabled { opacity: 0.5; }
+    .result { margin-top: 20px; padding: 20px; background: #1a1a1a; border-radius: 8px; }
+    .download-link { display: block; padding: 12px; background: #8b5cf6; color: #fff; text-decoration: none; border-radius: 6px; margin: 10px 0; text-align: center; }
+    .loading { text-align: center; padding: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📥 Video Downloader</h1>
+    <input type="url" id="videoUrl" placeholder="Paste video URL here">
+    <button id="dlBtn" onclick="downloadVideo()">Fetch Download Links</button>
+    <div id="dlResult"></div>
+  </div>
+
+  <script>
+    async function downloadVideo() {
+      const url = document.getElementById('videoUrl').value.trim();
+      const btn = document.getElementById('dlBtn');
+      const res = document.getElementById('dlResult');
+      
+      if (!url) return alert('Enter a URL');
+      
+      btn.disabled = true;
+      btn.textContent = 'Fetching...';
+      res.innerHTML = '<div class="loading">Processing...</div>';
+      
+      try {
+        const response = await fetch('/api/download?url=' + encodeURIComponent(url));
+        const data = await response.json();
+        
+        if (!response.ok || data.error) {
+          throw new Error(data.error || 'Failed');
+        }
+        
+        if (!data.links || data.links.length === 0) {
+          throw new Error('No links found');
+        }
+        
+        let html = '<div class="result">';
+        html += '<h3>Found ' + data.links.length + ' formats:</h3>';
+        
+        data.links.forEach(function(link, index) {
+          const downloadUrl = link.url || link.download || link.src;
+          const quality = link.quality || link.format || 'Format ' + (index + 1);
+          
+          if (downloadUrl) {
+            html += '<a href="' + downloadUrl + '" target="_blank" class="download-link">⬇ Download ' + quality + '</a>';
+          }
+        });
+        
+        html += '</div>';
+        res.innerHTML = html;
+        
+      } catch (error) {
+        res.innerHTML = '<div class="result" style="color: #ef4444;">Error: ' + error.message + '</div>';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Fetch Download Links';
+      }
+    }
+  </script>
+</body>
+</html>

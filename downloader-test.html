@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToolVerse - Video Downloader Test</title>
+  <style>
+    :root {
+      --bg-main: #0a0a0a;
+      --bg-card: #111111;
+      --bg-input: #1a1a1a;
+      --primary: #8b5cf6;
+      --accent: #FFD700;
+      --text-main: #ffffff;
+      --text-muted: #888888;
+      --border: #222222;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    
+    body {
+      background: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff, var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-main);
+      font-size: 16px;
+      margin-bottom: 15px;
+      outline: none;
+    }
+    
+    input:focus {
+      border-color: var(--primary);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--primary), #6d28d9);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+    }    
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .result-area {
+      margin-top: 20px;
+      padding: 20px;
+      background: var(--bg-input);
+      border-left: 4px solid var(--primary);
+      border-radius: 10px;
+      display: none;
+    }
+
+    .btn-download {
+      display: inline-block;
+      padding: 12px 25px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin: 5px;
+      cursor: pointer;
+      border: none;
+    }
+    
+    .btn-download:hover {
+      background: #6d28d9;
+    }
+
+    .loading {
+      border: 3px solid var(--border);
+      border-top: 3px solid var(--primary);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .test-info {
+      background: rgba(139, 92, 246, 0.1);      border: 1px solid var(--primary);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .test-info h3 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    
+    .test-info ul {
+      color: var(--text-muted);
+      line-height: 1.8;
+      padding-left: 20px;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    
+    .back-link:hover {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <a class="back-link" onclick="window.history.back()">← Back</a>
+    
+    <div class="header">
+      <h1>📥 Video Downloader Test</h1>
+      <p>Testing the fixed downloader with cobalt.tools API</p>
+    </div>
+
+    <div class="test-info">
+      <h3>🧪 Test Instructions:</h3>
+      <ul>
+        <li><strong>YouTube:</strong> Should work ✅ (e.g., https://youtube.com/watch?v=...)</li>
+        <li><strong>TikTok:</strong> Should work ✅ (e.g., https://tiktok.com/@user/video/...)</li>
+        <li><strong>Facebook:</strong> Will show manual instructions (API blocked)</li>
+        <li><strong>Instagram:</strong> Will show manual instructions (API blocked)</li>
+        <li><strong>Other platforms:</strong> Will try cobalt.tools API</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="section-title">🔗 Paste Video URL</div>
+      <input type="url" id="videoUrl" placeholder="https://youtube.com/watch?v=...">
+      <button class="btn" id="dlBtn" onclick="downloadVideo()">📥 Get Download Links</button>
+      <div class="result-area" id="dlResult"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">📝 Test URLs to Try:</div>
+      <div style="background: var(--bg-input); padding: 15px; border-radius: 10px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; color: var(--text-muted);">
+        <p><strong>YouTube:</strong></p>
+        <p>https://www.youtube.com/watch?v=dQw4w9WgXcQ</p>
+        <br>
+        <p><strong>TikTok:</strong></p>
+        <p>https://www.tiktok.com/@tiktok/video/7106594312292453675</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // FIXED DOWNLOADER FUNCTION
+    async function downloadVideo() {
+      const url = document.getElementById('videoUrl').value.trim();
+      if (!url) return alert('Enter URL');
+
+      const btn = document.getElementById('dlBtn');
+      const res = document.getElementById('dlResult');
+
+      btn.disabled = true;
+      btn.textContent = 'Fetching...';
+      res.style.display = 'block';
+      res.innerHTML = '<div class="loading"></div>';
+
+      try {
+        // Detect platform - NOW INSIDE TRY BLOCK
+        const isYT = url.includes('youtube.com') || url.includes('youtu.be');
+        const isTT = url.includes('tiktok.com');
+        const isFB = url.includes('facebook.com') || url.includes('fb.watch');
+        const isIG = url.includes('instagram.com');
+
+        let html = '';
+
+        if (isYT) {
+          const r = await fetch('https://cobalt.tools/api/json', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ url, vCodec: 'h264', vQuality: '720', aFormat: 'mp3', isNoTTWatermark: true })
+          });
+          const data = await r.json();          if (data.url) {
+            html = `
+              <div style="margin:10px 0;padding:15px;background:var(--bg-input);border-radius:10px;">
+                <p style="color:var(--accent);margin-bottom:10px;">✅ YouTube Video (720p)</p>
+                <a href="${data.url}" target="_blank" class="btn-download">⬇ Download Video</a>
+              </div>`;
+          } else if (data.picker) {
+            html = data.picker.map(p => `
+              <div style="margin:10px 0;padding:15px;background:var(--bg-input);border-radius:10px;">
+                <p style="color:var(--accent);margin-bottom:10px;">📹 ${p.type || 'Video'}</p>
+                <a href="${p.url}" target="_blank" class="btn-download">⬇ Download</a>
+              </div>`).join('');
+          }
+
+        } else if (isTT) {
+          const r = await fetch('https://cobalt.tools/api/json', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ url, isNoTTWatermark: true })
+          });
+          const data = await r.json();
+          if (data.url) {
+            html = `
+              <div style="margin:10px 0;padding:15px;background:var(--bg-input);border-radius:10px;">
+                <p style="color:var(--accent);margin-bottom:10px;">✅ TikTok (No Watermark)</p>
+                <a href="${data.url}" target="_blank" class="btn-download">⬇ Download</a>
+              </div>`;
+          }
+
+        } else if (isFB || isIG) {
+          html = `
+            <div style="padding:20px;background:#1a1a1a;border-radius:10px;border-left:4px solid var(--accent);">
+              <p style="color:var(--accent);font-weight:bold;margin-bottom:10px;">📋 For Facebook & Instagram:</p>
+              <p style="line-height:1.8;color:#ccc;">
+                1. Open the video on Facebook/Instagram in your browser<br>
+                2. Copy the full URL from the address bar<br>
+                3. Visit <a href="https://snapinsta.app" target="_blank" style="color:var(--primary);">snapinsta.app</a> (Instagram) or <a href="https://fdown.net" target="_blank" style="color:var(--primary);">fdown.net</a> (Facebook)<br>
+                4. Paste & download ✅
+              </p>
+            </div>`;
+
+        } else {
+          const r = await fetch('https://cobalt.tools/api/json', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ url })
+          });
+          const data = await r.json();
+          if (data.url) {
+            html = `              <div style="margin:10px 0;padding:15px;background:var(--bg-input);border-radius:10px;">
+                <p style="color:var(--accent);margin-bottom:10px;">✅ Download Ready</p>
+                <a href="${data.url}" target="_blank" class="btn-download">⬇ Download</a>
+              </div>`;
+          } else {
+            html = `<p style="color:#ef4444;">⚠ Could not fetch. The video may be private or the platform is unsupported.</p>`;
+          }
+        }
+
+        res.innerHTML = html || `<p style="color:#ef4444;">No download link found. The video may be private.</p>`;
+
+      } catch(e) {
+        res.innerHTML = `<p style="color:#ef4444;">⚠ Error: ${e.message}. Try copying the direct URL from your browser address bar.</p>`;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '📥 Get Download Links';
+      }
+    }
+  </script>
+
+</body>
+</html>

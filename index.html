@@ -65,6 +65,7 @@
     .option-card { background: var(--bg-input); border: 2px solid var(--border); border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s; text-align: center; }
     .option-card:hover { border-color: var(--primary); }
     .option-card.active { border-color: var(--primary); background: rgba(139, 92, 246, 0.1); }
+    .option-card.premium-opt.active { border-color: var(--accent); color: var(--accent); background: rgba(255, 215, 0, 0.1); }
     .option-card h4 { margin-bottom: 5px; }
     .option-card p { font-size: 0.85rem; color: var(--text-muted); }
 
@@ -86,6 +87,22 @@
     .copy-btn { background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-top: 15px; }
     .copy-btn:hover { background: var(--primary); }
 
+    .usage-container { background: var(--bg-input); padding: 15px; border-radius: 12px; margin-bottom: 20px; display: none; }
+    .usage-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; color: var(--text-muted); }
+    .progress-bg { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), #c084fc); width: 0%; transition: width 0.5s; }
+    .progress-fill.exhausted { background: #ef4444; }
+
+    .upsell-banner { background: linear-gradient(135deg, #1a1a2e, #000); border: 2px solid var(--accent); border-radius: 15px; padding: 25px; text-align: center; margin-top: 20px; display: none; }
+    .upsell-banner h3 { color: var(--accent); font-size: 1.5rem; margin-bottom: 10px; }
+    .btn-whatsapp { display: inline-block; padding: 15px 30px; background: #25D366; color: #fff; text-decoration: none; border-radius: 10px; font-weight: bold; margin-top: 15px; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
+    .pricing-card { background: var(--bg-input); border: 1px solid var(--border); border-radius: 15px; padding: 20px; text-align: center; }
+    .pricing-card.featured { border-color: var(--accent); }
+    .plan-price { font-size: 1.8rem; font-weight: bold; color: var(--text-main); margin: 10px 0; }
+    .btn-order { display: block; width: 100%; padding: 12px; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-main); text-decoration: none; border-radius: 8px; margin-top: 15px; font-weight: bold; cursor: pointer; }
+    .btn-order:hover { background: var(--primary); border-color: var(--primary); }
+
     @media (max-width: 768px) {
       .grid-2, .grid-3 { grid-template-columns: 1fr; }
       .hero h1 { font-size: 2rem; }
@@ -96,23 +113,24 @@
 <body>
 
   <nav>
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>    <div class="logo" onclick="showView('home')">ToolVerse</div>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <div class="logo" onclick="showView('home')">ToolVerse</div>
     <div style="width: 40px;"></div>
   </nav>
   
   <div class="dropdown" id="dropdown">
     <a onclick="showView('tts')">🎙️ Text to Speech</a>
-    <a onclick="showView('imagegen')">🎨 AI Image Generator</a>
+    <a onclick="showView('imagegen')"> AI Image Generator</a>
     <a onclick="showView('downloader')">📥 Video Downloader</a>
     <a onclick="showView('courses')">📚 Digital Courses</a>
     <a onclick="showView('ebook')">📖 Ebook & PDF Tools</a>
-    <a onclick="showView('designer')">🎨 Flyer & Cover Designer</a>
+    <a onclick="showView('designer')"> Flyer & Cover Designer</a>
     <a onclick="showView('thumbnail')">🖼️ Video Thumbnails</a>
     <a onclick="showView('video')">🎬 Video Creation</a>
-    <a onclick="showView('prof')">🎓 Prof. Update</a>
+    <a onclick="showView('prof')"> Prof. Update</a>
     <a onclick="showView('resume')">📝 Resume Builder</a>
     <a onclick="showView('meme')">😂 Meme Generator</a>
-    <a onclick="showView('study')">📚 Study Summarizer</a>
+    <a onclick="showView('study')"> Study Summarizer</a>
     <a onclick="showView('vision')">👁️ VisionChat</a>
     <a onclick="showView('script')">🎬 Script Generator</a>
   </div>
@@ -127,9 +145,8 @@
     <div class="tools-grid">
       <div class="tool-card" onclick="showView('tts')"><div class="tool-icon">🎙️</div><h3>Text to Speech</h3><p>Human-like AI voices</p></div>
       <div class="tool-card" onclick="showView('imagegen')"><div class="tool-icon">🎨</div><h3>AI Image Generator</h3><p>Edit & create images</p></div>
-      <div class="tool-card" onclick="showView('downloader')"><div class="tool-icon">📥</div><h3>Video Downloader</h3><p>YouTube, TikTok, FB</p></div>
-      <div class="tool-card" onclick="showView('courses')"><div class="tool-icon">📚</div><h3>Digital Courses</h3><p>Learn & earn</p></div>
-      <div class="tool-card" onclick="showView('ebook')"><div class="tool-icon">📖</div><h3>Ebook & PDF Tools</h3><p>Convert & create</p></div>
+      <div class="tool-card" onclick="showView('downloader')"><div class="tool-icon">📥</div><h3>Video Downloader</h3><p>YouTube, TikTok, FB</p></div>      <div class="tool-card" onclick="showView('courses')"><div class="tool-icon"></div><h3>Digital Courses</h3><p>Learn & earn</p></div>
+      <div class="tool-card" onclick="showView('ebook')"><div class="tool-icon"></div><h3>Ebook & PDF Tools</h3><p>Convert & create</p></div>
       <div class="tool-card" onclick="showView('designer')"><div class="tool-icon">🎨</div><h3>Flyer & Cover</h3><p>Professional designs</p></div>
       <div class="tool-card" onclick="showView('thumbnail')"><div class="tool-icon">🖼️</div><h3>Video Thumbnails</h3><p>Click-worthy designs</p></div>
       <div class="tool-card" onclick="showView('video')"><div class="tool-icon">🎬</div><h3>Video Creation</h3><p>AI storyboard + slides</p></div>
@@ -137,7 +154,7 @@
       <div class="tool-card" onclick="showView('resume')"><div class="tool-icon">📝</div><h3>Resume Builder</h3><p>ATS-friendly CVs</p></div>
       <div class="tool-card" onclick="showView('meme')"><div class="tool-icon">😂</div><h3>Meme Generator</h3><p>Create viral memes</p></div>
       <div class="tool-card" onclick="showView('study')"><div class="tool-icon">📚</div><h3>Study Summarizer</h3><p>AI study notes</p></div>
-      <div class="tool-card" onclick="showView('vision')"><div class="tool-icon">👁️</div><h3>VisionChat</h3><p>AI image analysis</p></div>
+      <div class="tool-card" onclick="showView('vision')"><div class="tool-icon">️</div><h3>VisionChat</h3><p>AI image analysis</p></div>
       <div class="tool-card" onclick="showView('script')"><div class="tool-icon">🎬</div><h3>Script Generator</h3><p>Video scripts</p></div>
     </div>
     
@@ -145,257 +162,246 @@
       <div class="featured-badge">🔥 FEATURED</div>
       <h2>The AI Fashion Photography Kit</h2>
       <p>Master 8K DSLR-quality fashion imagery with AI prompts</p>
-      <a href="https://selar.com/14711117ox" target="_blank" class="ebook-btn">📥 Get Now - ₦2,000</a>    </div>
+      <a href="https://selar.com/14711117ox" target="_blank" class="ebook-btn">📥 Get Now - ₦2,000</a>
+    </div>
 
     <div class="ad-container">
       <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
     </div>
   </div>
 
-  <!-- TEXT TO SPEECH -->
+  <!-- TEXT TO SPEECH (ADVANCED RESTORED) -->
   <div class="view" id="view-tts">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>🎙️ Text to Speech</h1><p>Professional AI voices</p></div>
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 20px 0;"><h1>🎙️ Text to Speech</h1><p>Choose your engine. Generate audio. Download instantly.</p></div>
     <div class="card">
-      <textarea id="ttsText" placeholder="Enter your text..."></textarea>
-      <select id="ttsVoice">
-        <option value="en-US">🇺🇸 English (US)</option>
-        <option value="en-GB">🇬🇧 English (UK)</option>
-        <option value="es-ES">🇪🇸 Spanish</option>
-        <option value="fr-FR">🇫🇷 French</option>
-        <option value="de-DE">🇩🇪 German</option>
-        <option value="hi-IN">🇮 Hindi</option>
-      </select>
-      <button class="btn" onclick="generateTTS()">🎙️ Generate Speech</button>
-      <div class="result-area" id="ttsResult"></div>
+      <div class="section-title">⚙️ Select Voice Engine</div>
+      <div class="grid-2">
+        <div class="option-card active" onclick="selectEngine('puter', this)">🤖 Puter (Free)</div>
+        <div class="option-card" onclick="selectEngine('elevenlabs', this)">⭐ ElevenLabs (10k/mo)</div>
+      </div>
+      <div class="option-card premium-opt" onclick="selectEngine('premium', this)" style="margin-top: 15px;">👑 Premium Human Voices (Paid)</div>
+
+      <textarea id="ttsText" placeholder="Type or paste your text here..."></textarea>
+      <select id="ttsVoice"></select>
+
+      <div class="usage-container" id="usageContainer">
+        <div class="usage-header"><span>Monthly Usage</span><span id="usageText">0 / 10,000 chars</span></div>
+        <div class="progress-bg"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+
+      <button class="btn" id="genBtn" onclick="generateSpeech()">️ Generate Audio</button>
+
+      <div class="result-area" id="resultArea">
+        <h3 style="color: var(--primary); margin-bottom: 10px;">✅ Audio Ready:</h3>
+        <audio id="audioPlayer" controls></audio>        <div style="margin-top: 15px;"><a id="downloadLink" class="btn-download" href="#" download="speech.mp3"> Download MP3</a></div>
+      </div>
+
+      <div class="upsell-banner" id="upsellBanner">
+        <h3>🚫 Limit Exhausted!</h3>
+        <p>You have used all your free ElevenLabs characters. Upgrade to our Premium Human-Like Voice service for unlimited, studio-quality audio.</p>
+        <a href="#" class="btn-whatsapp" onclick="orderPremium('Monthly Unlimited', '₦10,000')">💬 Get Premium on WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="card" style="border-color: var(--accent);">
+      <div class="section-title" style="color: var(--accent);">👑 Premium Human-Like Voices</div>
+      <p style="color: var(--text-muted); margin-bottom: 20px;">580+ Neural Voices. Perfect for YouTube, Audiobooks, and Commercials. Delivered via WhatsApp in 1-24 hours.</p>
+      <div class="pricing-grid">
+        <div class="pricing-card"><h3>Starter Pack</h3><div class="plan-price">₦1,000 <span>/ 10 audios</span></div><a href="#" class="btn-order" onclick="orderPremium('Starter Pack', '₦1,000')">Order Now</a></div>
+        <div class="pricing-card featured"><h3 style="color: var(--accent);">Pro Pack</h3><div class="plan-price">₦2,000 <span>/ 25 audios</span></div><a href="#" class="btn-order" onclick="orderPremium('Pro Pack', '₦2,000')">Order Now</a></div>
+        <div class="pricing-card"><h3>Monthly Sub</h3><div class="plan-price">₦10,000 <span>/ month</span></div><a href="#" class="btn-order" onclick="orderPremium('Monthly Sub', '₦10,000')">Subscribe</a></div>
+      </div>
     </div>
   </div>
 
   <!-- AI IMAGE GENERATOR (WITH UPLOAD & EDIT) -->
   <div class="view" id="view-imagegen">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>🎨 AI Image Generator</h1><p>Create & edit images like Gemini & Copilot</p></div>
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 20px 0;"><h1>🎨 AI Image Generator</h1><p>Create stunning, professional-quality images with Flux.1 Dev.</p></div>
     <div class="card">
-      <div class="section-title">Upload Image (Optional)</div>
-      <input type="file" id="imgUpload" accept="image/*" onchange="previewUploadedImage(event)">
-      <img id="uploadedImagePreview" style="max-width:100%;border-radius:10px;margin:15px 0;display:none;">
+      <div class="section-title">📝 Describe Your Image</div>
+      <textarea id="imgPrompt" placeholder="Describe the image you want to generate...&#10;&#10;Example: A futuristic city at sunset with flying cars, cyberpunk style, highly detailed, 8k quality"></textarea>
       
-      <div class="section-title" style="margin-top:20px;">Prompt</div>
-      <textarea id="imgPrompt" placeholder="Describe what you want to create or how to edit the uploaded image..."></textarea>
-      
-      <div class="section-title">Aspect Ratio</div>
+      <div class="section-title" style="margin-top: 25px;">📐 Aspect Ratio</div>
       <div class="grid-3">
-        <div class="option-card active" onclick="setAspect(1024,1024,this)"><h4>1:1</h4><p>Square</p></div>
-        <div class="option-card" onclick="setAspect(1080,1350,this)"><h4>4:5</h4><p>Portrait</p></div>
-        <div class="option-card" onclick="setAspect(1080,1920,this)"><h4>9:16</h4><p>Story</p></div>
+        <div class="option-card active" onclick="setAspect(1024, 1024, this)">1:1 Square<br><small>Instagram Post</small></div>
+        <div class="option-card" onclick="setAspect(1080, 1350, this)">4:5 Portrait<br><small>Instagram/FB</small></div>
+        <div class="option-card" onclick="setAspect(1080, 1920, this)">9:16 Story<br><small>TikTok/Reels</small></div>
+        <div class="option-card" onclick="setAspect(1200, 630, this)">1.91:1 Landscape<br><small>Facebook/Twitter</small></div>
+        <div class="option-card" onclick="setAspect(1024, 512, this)">2:1 Banner<br><small>YouTube/Twitter</small></div>
+        <div class="option-card" onclick="setAspect(720, 720, this)">1:1 Small<br><small>Quick Preview</small></div>
       </div>
-      
-      <input type="hidden" id="imgW" value="1024">
-      <input type="hidden" id="imgH" value="1024">
-      
-      <button class="btn" id="imgGenBtn" onclick="generateImage()">🎨 Generate Image</button>
-      <div class="result-area" id="imgResult"></div>    </div>
+
+      <input type="hidden" id="imgWidth" value="1024">
+      <input type="hidden" id="imgHeight" value="1024">
+
+      <button class="btn" id="imgBtn" onclick="generateImage()">🎨 Generate Image</button>
+
+      <div class="image-preview" id="imagePreview" style="display:none; text-align:center; margin-top:20px;">
+        <div class="loading" id="loadingSpinner"></div>
+        <img id="generatedImage" style="display: none; max-width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" alt="Generated AI Image">
+        <div id="imgActions" style="margin-top: 20px; display: none;">
+          <h3 style="color: var(--primary); margin-bottom: 15px;">✅ Image Generated!</h3>
+          <a id="downloadImgBtn" class="btn-download" href="#" download="ai-image.png">⬇ Download PNG</a>          <a id="openImgBtn" class="btn-download" href="#" target="_blank">🔍 Open Full Size</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- VIDEO DOWNLOADER -->
   <div class="view" id="view-downloader">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>📥 Universal Video Downloader</h1><p>Download from any platform</p></div>
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 20px 0;"><h1>📥 Universal Video Downloader</h1><p>Download from YouTube, TikTok, Facebook, Instagram & more.</p></div>
     <div class="card">
-      <input type="url" id="videoUrl" placeholder="Paste video URL (YouTube, TikTok, Facebook, Instagram...)">
-      <button class="btn" id="dlBtn" onclick="downloadVideo()">📥 Get Download Links</button>
+      <input type="url" id="videoUrl" placeholder="Paste video URL here...">
+      <button class="btn" id="dlBtn" onclick="startDownload()">📥 Fetch Download Links</button>
       <div class="result-area" id="dlResult"></div>
     </div>
   </div>
 
-  <!-- COURSES (PLACEHOLDER) -->
+  <!-- COURSES VIEW (Placeholder) -->
   <div class="view" id="view-courses">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>📚 Digital Courses</h1><p>Coming soon - Learn & earn with affiliate program</p></div>
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 40px 20px;"><h1> Digital Courses</h1><p>Coming in the next update! Access premium courses and earn as an affiliate.</p></div>
   </div>
 
-  <!-- EBOOK & PDF TOOLS -->
+  <!-- EBOOK VIEW -->
   <div class="view" id="view-ebook">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>📖 Ebook & PDF Tools</h1><p>Create, convert, and format</p></div>
-    
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 20px 0;"><h1>📖 Ebook & PDF Tools</h1><p>Build ebooks and convert documents instantly.</p></div>
     <div class="card">
       <div class="section-title">Create Ebook</div>
       <input type="text" id="ebookTitle" placeholder="Book Title">
       <input type="text" id="ebookAuthor" placeholder="Author Name">
-      <textarea id="ebookContent" placeholder="Paste your content here..."></textarea>
-      
-      <div class="section-title">Download Format</div>
+      <textarea id="ebookContent" style="height: 200px;" placeholder="Paste your book content here..."></textarea>
       <div class="grid-3">
-        <button class="btn btn-secondary" onclick="createEbook('pdf')">📄 PDF</button>
-        <button class="btn btn-secondary" onclick="createEbook('docx')">📝 DOCX</button>
-        <button class="btn btn-accent" onclick="createEbook('kdp')">📚 Amazon KDP</button>
+        <button class="btn btn-secondary" onclick="generateEbookPDF()">📄 Download PDF</button>
+        <button class="btn btn-secondary" onclick="generateEbookDOCX()" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">📝 Download DOCX</button>
+        <button class="btn btn-accent" onclick="generateEbookKDP()"> Amazon KDP Format</button>
       </div>
     </div>
-
     <div class="card">
-      <div class="section-title">Convert PDF to DOC</div>
+      <div class="section-title">Convert PDF to DOCX</div>
       <input type="file" id="pdfToDocFile" accept=".pdf" onchange="convertPdfToDoc(event)">
       <div class="result-area" id="pdfToDocResult"></div>
     </div>
-
     <div class="card">
-      <div class="section-title">Convert DOC to PDF</div>
-      <input type="file" id="docToPdfFile" accept=".doc,.docx" onchange="convertDocToPdf(event)">
+      <div class="section-title">Convert DOCX to PDF</div>
+      <input type="file" id="docToPdfFile" accept=".docx,.doc" onchange="convertDocToPdf(event)">
       <div class="result-area" id="docToPdfResult"></div>
-    </div>  </div>
-
-  <!-- FLYER & COVER DESIGNER -->
+    </div>
+  </div>
+  <!-- DESIGNER VIEW -->
   <div class="view" id="view-designer">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>🎨 AI Flyer & Cover Designer</h1><p>Professional templates</p></div>
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 20px 0;"><h1>🎨 AI Flyer & Cover Designer</h1><p>Generate professional designs using AI.</p></div>
     <div class="card">
       <div class="section-title">Design Type</div>
       <div class="grid-2">
-        <div class="option-card active" onclick="selectDesignType('flyer',this)">
-          <h4>📄 Flyer</h4>
-          <p>Events, promotions, ads</p>
-        </div>
-        <div class="option-card" onclick="selectDesignType('ebook',this)">
-          <h4>📖 Ebook Cover</h4>
-          <p>Amazon KDP, digital books</p>
-        </div>
+        <div class="option-card active" onclick="selectDesignType('flyer', this)"> Flyer</div>
+        <div class="option-card" onclick="selectDesignType('ebook', this)">📖 Ebook Cover</div>
       </div>
-
-      <div class="section-title" style="margin-top:20px;">Description</div>
-      <textarea id="designPrompt" placeholder="Describe your design: title, colors, style, mood, elements..."></textarea>
-      
+      <textarea id="designPrompt" placeholder="Describe your design... (e.g., A modern book cover for a sci-fi novel, dark theme, glowing neon text)"></textarea>
       <button class="btn" onclick="generateDesign()">🎨 Generate Design</button>
       <div class="result-area" id="designResult"></div>
     </div>
   </div>
 
-  <!-- VIDEO THUMBNAILS -->
+  <!-- THUMBNAIL VIEW -->
   <div class="view" id="view-thumbnail">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>🖼️ AI Video Thumbnails</h1><p>Professional, high-converting thumbnails</p></div>
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 20px 0;"><h1>🖼️ AI Video Thumbnails</h1><p>Create click-worthy YouTube & TikTok thumbnails.</p></div>
     <div class="card">
       <div class="section-title">Platform</div>
       <div class="grid-3">
-        <div class="option-card active" onclick="setThumbPlatform('youtube',1280,720,this)"><h4>YouTube</h4><p>1280x720</p></div>
-        <div class="option-card" onclick="setThumbPlatform('tiktok',1080,1920,this)"><h4>TikTok</h4><p>1080x1920</p></div>
-        <div class="option-card" onclick="setThumbPlatform('instagram',1080,1080,this)"><h4>Instagram</h4><p>1080x1080</p></div>
+        <div class="option-card active" onclick="setThumbPlatform('youtube', 1280, 720, this)">YouTube</div>
+        <div class="option-card" onclick="setThumbPlatform('tiktok', 1080, 1920, this)">TikTok</div>
+        <div class="option-card" onclick="setThumbPlatform('instagram', 1080, 1080, this)">Instagram</div>
       </div>
-
       <input type="hidden" id="thumbW" value="1280">
       <input type="hidden" id="thumbH" value="720">
-
-      <div class="section-title" style="margin-top:20px;">Thumbnail Description</div>
-      <textarea id="thumbPrompt" placeholder="Describe your thumbnail: topic, text, colors, style, emotions..."></textarea>
-      
+      <textarea id="thumbPrompt" placeholder="Describe your thumbnail... (e.g., YouTube thumbnail, shocked face, bright colors, text 'I QUIT MY JOB', 4k)"></textarea>
       <button class="btn" onclick="generateThumbnail()">🖼️ Generate Thumbnail</button>
       <div class="result-area" id="thumbResult"></div>
     </div>
   </div>
-  <!-- VIDEO CREATION -->
-  <div class="view" id="view-video">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>🎬 AI Video Creation</h1><p>Storyboard + Slides + Voiceover</p></div>
-    <div class="card">
-      <input type="text" id="videoTopic" placeholder="Video topic/title">
-      <button class="btn" id="storyboardBtn" onclick="generateStoryboard()">🎬 Generate Storyboard</button>
-      <div class="result-area" id="storyboardResult"></div>
-      
-      <div id="videoEditor" style="display:none;margin-top:30px;">
-        <div class="section-title">Merge Images into Slides</div>
-        <input type="file" id="slideImages" multiple accept="image/*" onchange="loadSlideImages(event)">
-        <div id="slidePreview" class="grid-2" style="margin:15px 0;"></div>
-        
-        <div class="section-title">Voiceover</div>
-        <select id="voiceOption">
-          <option value="none">No Voiceover</option>
-          <option value="record">🎙️ Record Voiceover</option>
-          <option value="upload">📁 Upload Audio</option>
-        </select>
-        
-        <div id="recordSection" style="display:none;">
-          <button class="btn btn-secondary" id="recordBtn" onclick="toggleRecording()">🔴 Start Recording</button>
-          <audio id="recordedAudio" controls style="display:none;margin-top:10px;"></audio>
-        </div>
-        
-        <div id="uploadSection" style="display:none;">
-          <input type="file" id="voiceUpload" accept="audio/*">
-        </div>
 
-        <button class="btn btn-accent" onclick="compileVideo()">🎬 Compile Final Video</button>
-      </div>
+  <!-- VIDEO CREATION VIEW -->
+  <div class="view" id="view-video">
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 20px 0;"><h1>🎬 AI Video Storyboard</h1><p>Generate a 4-scene visual storyboard for your video.</p></div>
+    <div class="card">
+      <input type="text" id="videoTopic" placeholder="What is your video about?">
+      <button class="btn" id="vidBtn" onclick="generateStoryboard()"> Create Storyboard</button>
+      <div class="result-area" id="vidResult"></div>
     </div>
   </div>
 
-  <!-- PROF. UPDATE -->
+  <!-- PROF UPDATE VIEW -->
   <div class="view" id="view-prof">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>🎓 Prof. Update</h1><p>20+ years expertise in any field</p></div>
-    <div class="card">
-      <textarea id="profQuestion" placeholder="Ask your question..."></textarea>
-      <button class="btn" id="profBtn" onclick="askProf()">🎓 Get Expert Answer</button>
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 20px 0;"><h1>🎓 Prof. Update</h1><p>Ask an AI with 20 years of experience anything.</p></div>    <div class="card">
+      <textarea id="profQuestion" placeholder="Ask Prof. Update anything..."></textarea>
+      <button class="btn" id="profBtn" onclick="askProf()">🎓 Ask Prof. Update</button>
       <div class="result-area" id="profResult"></div>
     </div>
   </div>
 
-  <!-- RESUME BUILDER -->
+  <!-- RESUME VIEW -->
   <div class="view" id="view-resume">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>📝 AI Resume Builder</h1><p>ATS-friendly professional CVs</p></div>    <div class="card">
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 20px 0;"><h1>📝 AI Resume Builder</h1><p>Create a professional, ATS-friendly resume.</p></div>
+    <div class="card">
       <div class="section-title">Upload Existing CV (Optional)</div>
       <input type="file" id="resumeUpload" accept=".pdf,.doc,.docx" onchange="parseExistingResume(event)">
-      
-      <div class="section-title" style="margin-top:20px;">Resume Type</div>
+      <div class="section-title" style="margin-top: 20px;">Resume Type</div>
       <select id="resumeType">
         <option value="professional">Professional</option>
         <option value="creative">Creative</option>
         <option value="executive">Executive</option>
         <option value="student">Student/Entry Level</option>
       </select>
-
       <input type="text" id="resName" placeholder="Full Name">
-      <input type="text" id="resJob" placeholder="Target Job Title">
+      <input type="text" id="resJob" placeholder="Job Title">
       <input type="email" id="resEmail" placeholder="Email">
       <input type="tel" id="resPhone" placeholder="Phone">
       <textarea id="resSummary" placeholder="Professional Summary"></textarea>
       <textarea id="resExp" placeholder="Work Experience"></textarea>
       <textarea id="resEdu" placeholder="Education"></textarea>
       <input type="text" id="resSkills" placeholder="Skills (comma separated)">
-      
-      <button class="btn" onclick="buildResume()">📝 Generate Resume PDF</button>
+      <button class="btn" onclick="generateResume()"> Generate Resume PDF</button>
     </div>
   </div>
 
-  <!-- MEME GENERATOR -->
+  <!-- MEME VIEW -->
   <div class="view" id="view-meme">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>😂 Meme Generator</h1><p>Create memes & cartoon art</p></div>
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 20px 0;"><h1> Meme Generator</h1><p>Create viral memes instantly.</p></div>
     <div class="card">
-      <input type="file" id="memeFile" accept="image/*" onchange="loadMemeImage(event)">
-      <canvas id="memeCanvas" width="600" height="600" style="display:none;margin:15px 0;"></canvas>
-      
+      <input type="file" id="memeFile" accept="image/*" onchange="loadMeme(event)">
+      <canvas id="memeCanvas" width="600" height="600" style="width:100%; border-radius:10px; background:#000; display:none;"></canvas>
       <div id="memeControls" style="display:none;">
         <input type="text" id="memeTop" placeholder="Top Text" oninput="drawMeme()">
         <input type="text" id="memeBottom" placeholder="Bottom Text" oninput="drawMeme()">
         <button class="btn" onclick="downloadMeme()">⬇ Download Meme</button>
-        
         <div class="section-title" style="margin-top:20px;">Or Convert to Cartoon/Art</div>
-        <button class="btn btn-secondary" onclick="convertToCartoon()">🎨 Convert to Cartoon</button>
+        <button class="btn btn-secondary" onclick="convertToCartoon()"> Convert to Cartoon</button>
         <button class="btn btn-secondary" onclick="convertToArt()">🖼️ Convert to Artwork</button>
       </div>
     </div>
   </div>
-
-  <!-- STUDY SUMMARIZER -->
+  <!-- STUDY VIEW -->
   <div class="view" id="view-study">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>📚 AI Study Summarizer</h1><p>Instant notes from PDFs</p></div>
-    <div class="card">      <input type="file" id="studyFile" accept=".pdf,.txt" onchange="handleStudyFile(event)">
-      <textarea id="studyText" placeholder="Or paste text here..."></textarea>
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 20px 0;"><h1>📚 AI Study Summarizer</h1><p>Upload a PDF or paste text to get instant notes.</p></div>
+    <div class="card">
+      <input type="file" id="studyFile" accept=".pdf,.txt" onchange="handleStudyFile(event)">
+      <textarea id="studyText" style="height: 150px;" placeholder="Or paste your text here..."></textarea>
       <select id="studyFormat">
         <option value="summary">Quick Summary</option>
-        <option value="bullets">Key Points</option>
-        <option value="flashcards">Flashcards</option>
+        <option value="bullets">Key Bullet Points</option>
+        <option value="flashcards">Flashcards (Q&A)</option>
         <option value="quiz">Quiz Questions</option>
       </select>
       <button class="btn" id="studyBtn" onclick="summarizeStudy()">📚 Generate Notes</button>
@@ -403,311 +409,352 @@
     </div>
   </div>
 
-  <!-- VISION CHAT -->
+  <!-- VISION VIEW -->
   <div class="view" id="view-vision">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>👁️ VisionChat</h1><p>AI image analysis</p></div>
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 20px 0;"><h1>👁️ VisionChat</h1><p>Upload an image and ask AI about it.</p></div>
     <div class="card">
       <input type="file" id="visionFile" accept="image/*" onchange="previewVision(event)">
-      <img id="visionPreview" style="max-width:100%;border-radius:10px;margin:15px 0;display:none;">
-      <input type="text" id="visionPrompt" placeholder="Ask about the image...">
-      <button class="btn" id="visionBtn" onclick="analyzeVision()">👁️ Analyze</button>
+      <img id="visionPreview" style="max-width:100%; border-radius:10px; margin-bottom:15px; display:none;">
+      <input type="text" id="visionPrompt" placeholder="Ask about the image... (e.g., What is in this picture?)">
+      <button class="btn" id="visionBtn" onclick="analyzeVision()">👁️ Analyze Image</button>
       <div class="result-area" id="visionResult"></div>
     </div>
   </div>
 
-  <!-- SCRIPT GENERATOR -->
+  <!-- SCRIPT VIEW -->
   <div class="view" id="view-script">
-    <a class="back-link" onclick="showView('home')">← Back</a>
-    <div class="hero"><h1>🎬 Video Script Generator</h1><p>Professional scripts</p></div>
+    <a class="back-link" onclick="showView('home')">← Back to Home</a>
+    <div class="hero" style="padding: 20px 0;"><h1> Video Script Generator</h1><p>Write engaging scripts for any platform.</p></div>
     <div class="card">
-      <input type="text" id="scriptTopic" placeholder="Video topic">
+      <input type="text" id="scriptTopic" placeholder="Video Topic">
       <select id="scriptPlatform">
-        <option value="YouTube">YouTube</option>
-        <option value="TikTok">TikTok</option>
-        <option value="Shorts">YouTube Shorts</option>
+        <option value="YouTube">YouTube Long Form</option>
+        <option value="TikTok">TikTok / Reels</option>
+        <option value="YouTube Shorts">YouTube Shorts</option>
       </select>
       <select id="scriptTone">
         <option value="Professional">Professional</option>
-        <option value="Casual">Casual & Fun</option>
+        <option value="Casual & Fun">Casual & Fun</option>
         <option value="Educational">Educational</option>
         <option value="Motivational">Motivational</option>
       </select>
-      <button class="btn" id="scriptBtn" onclick="generateScript()">🎬 Generate Script</button>
-      <div class="result-area" id="scriptResult"></div>
+      <button class="btn" id="scriptBtn" onclick="generateScript()"> Generate Script</button>      <div class="result-area" id="scriptResult"></div>
     </div>
   </div>
 
-  <footer>
-    <p>© 2026 ToolVerse · All Rights Reserved</p>    <p style="margin-top:10px;font-size:0.8rem;">
-      <a href="#" style="color:var(--text-muted);">Privacy</a> · 
-      <a href="#" style="color:var(--text-muted);">Terms</a> · 
-      <a href="https://wa.link/tzxsay" style="color:var(--primary);">Contact</a>
-    </p>
-  </footer>
+  <footer><p>© 2026 ToolVerse · All Rights Reserved</p></footer>
 
   <script>
-    // NAVIGATION
+    // --- NAVIGATION ---
     function toggleMenu() { document.getElementById('dropdown').classList.toggle('open'); }
     function showView(id) {
       document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-      document.getElementById('view-'+id).classList.add('active');
+      document.getElementById('view-' + id).classList.add('active');
       document.getElementById('dropdown').classList.remove('open');
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
     }
     document.addEventListener('click', e => {
-      const d = document.getElementById('dropdown');
-      if (!d.contains(e.target) && e.target.className !== 'menu-btn') d.classList.remove('open');
+      const drop = document.getElementById('dropdown');
+      if (!drop.contains(e.target) && e.target.className !== 'menu-btn') drop.classList.remove('open');
     });
 
-    // AI HELPER
+    // --- HELPER: AI TEXT FETCH ---
     async function fetchAI(prompt) {
       const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}`);
+      if (!res.ok) throw new Error('AI failed');
       return await res.text();
     }
 
-    // IMAGE GENERATION (WITH UPLOAD)
-    let uploadedImageBase64 = null;
-    function previewUploadedImage(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = ev => {
-        uploadedImageBase64 = ev.target.result;
-        const img = document.getElementById('uploadedImagePreview');
-        img.src = uploadedImageBase64;
-        img.style.display = 'block';
-      };
-      reader.readAsDataURL(file);
+    // --- TTS LOGIC (ADVANCED RESTORED) ---
+    let currentEngine = 'puter';
+    const LIMIT = 10000;
+    let currentUsage = parseInt(localStorage.getItem('elevenlabs_usage') || '0');
+
+    window.onload = () => { populateVoices(); updateUsageUI(); };
+
+    function selectEngine(engine, btn) {
+      currentEngine = engine;
+      document.querySelectorAll('.option-card').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      document.getElementById('upsellBanner').style.display = 'none';
+      document.getElementById('resultArea').style.display = 'none';
+      
+      if (engine === 'elevenlabs') {
+        document.getElementById('usageContainer').style.display = 'block';
+        if (currentUsage >= LIMIT) showExhausted();
+      } else { document.getElementById('usageContainer').style.display = 'none'; }
+      
+      populateVoices();
+    }
+    function populateVoices() {
+      const select = document.getElementById('ttsVoice');
+      select.innerHTML = '';
+      if (currentEngine === 'puter') {
+        const voices = [
+          {code:'en-US',name:'🇸 English (US)'},{code:'en-GB',name:'🇬🇧 English (UK)'},
+          {code:'es-ES',name:'🇪🇸 Spanish'},{code:'fr-FR',name:'🇫🇷 French'},
+          {code:'de-DE',name:'🇩 German'},{code:'hi-IN',name:'🇳 Hindi'},
+          {code:'ar-AE',name:'🇸 Arabic'},{code:'cmn-CN',name:'🇨🇳 Chinese'}
+        ];
+        voices.forEach(v => select.innerHTML += `<option value="${v.code}">${v.name}</option>`);
+      } else if (currentEngine === 'elevenlabs') {
+        select.innerHTML = `
+          <option value="Adam">Adam (Deep Male)</option>
+          <option value="Rachel">Rachel (Calm Female)</option>
+          <option value="Josh">Josh (Energetic Male)</option>
+          <option value="Bella">Bella (Soft Female)</option>
+        `;
+      } else if (currentEngine === 'premium') {
+        select.innerHTML = '<option>👑 580+ Premium Voices (Select on WhatsApp)</option>';
+      }
     }
 
-    function setAspect(w,h,btn) {
-      document.getElementById('imgW').value = w;
-      document.getElementById('imgH').value = h;
+    async function generateSpeech() {
+      const text = document.getElementById('ttsText').value.trim();
+      const btn = document.getElementById('genBtn');
+      const resultArea = document.getElementById('resultArea');
+      if (!text) return alert('Please enter some text!');
+
+      if (currentEngine === 'premium') { orderPremium('Custom Order', 'Varies'); return; }
+      if (currentEngine === 'elevenlabs' && currentUsage + text.length > LIMIT) { showExhausted(); return; }
+
+      btn.disabled = true; btn.textContent = 'Generating...'; resultArea.style.display = 'none';
+
+      try {
+        let audioUrl = '';
+        if (currentEngine === 'puter') {
+          audioUrl = await puter.ai.txt2speech(text, document.getElementById('ttsVoice').value);
+        } else if (currentEngine === 'elevenlabs') {
+          // Simulated for demo (uses Puter as fallback for audio generation)
+          await new Promise(r => setTimeout(r, 1000));
+          audioUrl = await puter.ai.txt2speech(text, 'en-US');
+          currentUsage += text.length;
+          localStorage.setItem('elevenlabs_usage', currentUsage);
+          updateUsageUI();
+        }
+
+        if (audioUrl) {
+          document.getElementById('audioPlayer').src = audioUrl;
+          document.getElementById('downloadLink').href = audioUrl;          resultArea.style.display = 'block';
+          document.getElementById('audioPlayer').play();
+        }
+      } catch (error) { alert('Error: ' + error.message); } 
+      finally { btn.disabled = false; btn.textContent = '🎙️ Generate Audio'; }
+    }
+
+    function updateUsageUI() {
+      const percent = Math.min((currentUsage / LIMIT) * 100, 100);
+      document.getElementById('progressFill').style.width = percent + '%';
+      document.getElementById('usageText').textContent = `${currentUsage.toLocaleString()} / ${LIMIT.toLocaleString()} chars`;
+      if (percent >= 100) document.getElementById('progressFill').classList.add('exhausted');
+    }
+
+    function showExhausted() {
+      document.getElementById('upsellBanner').style.display = 'block';
+      document.getElementById('genBtn').disabled = true;
+      document.getElementById('genBtn').textContent = '🚫 Limit Reached';
+    }
+
+    function orderPremium(plan, price) {
+      const phone = '2349159884244';
+      const msg = `Hello ToolVerse! I want to order Premium Human-Like Voices.%0A%0A*Plan:* ${plan}%0A*Price:* ${price}%0A%0APlease send payment details.`;
+      window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+    }
+
+    // --- IMAGE GENERATION ---
+    function setAspect(w, h, btn) {
+      document.getElementById('imgWidth').value = w;
+      document.getElementById('imgHeight').value = h;
       document.querySelectorAll('.option-card').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
     }
 
-    async function generateImage() {      const prompt = document.getElementById('imgPrompt').value.trim();
-      if (!prompt) return alert('Please enter a description');
-      
-      const w = document.getElementById('imgW').value;
-      const h = document.getElementById('imgH').value;
-      const btn = document.getElementById('imgGenBtn');
-      const res = document.getElementById('imgResult');
-      
-      btn.disabled = true;
-      btn.textContent = 'Generating...';
-      res.style.display = 'block';
-      res.innerHTML = '<div class="loading"></div>';
+    async function generateImage() {
+      const prompt = document.getElementById('imgPrompt').value.trim();
+      const w = document.getElementById('imgWidth').value;
+      const h = document.getElementById('imgHeight').value;
+      const btn = document.getElementById('imgBtn');
+      const preview = document.getElementById('imagePreview');
+      const spinner = document.getElementById('loadingSpinner');
+      const img = document.getElementById('generatedImage');
+      const actions = document.getElementById('imgActions');
 
-      const seed = Math.floor(Math.random() * 10000);
-      const finalPrompt = uploadedImageBase64 ? 
-        `Edit this image: ${prompt}` : prompt;
-      
-      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt + ', professional quality, 8k, masterpiece')}?width=${w}&height=${h}&model=flux&seed=${seed}&nologo=true`;
-      
-      const img = new Image();
-      img.onload = () => {
-        res.innerHTML = `<img src="${url}"><a href="${url}" download="toolverse.png" class="btn-download">⬇ Download</a>`;
-        btn.disabled = false;
-        btn.textContent = '🎨 Generate Image';
-      };
-      img.onerror = () => {
-        res.innerHTML = '<p style="color:#ef4444;">Failed. Try again.</p>';
-        btn.disabled = false;
-        btn.textContent = '🎨 Generate Image';
-      };
-      img.src = url;
-    }
+      if (!prompt) return alert('Please describe the image!');
 
-    // TEXT TO SPEECH
-    async function generateTTS() {
-      const text = document.getElementById('ttsText').value.trim();
-      if (!text) return alert('Enter text');
-      
-      const btn = document.getElementById('ttsResult');
-      btn.style.display = 'block';
-      btn.innerHTML = '<div class="loading"></div>';
-      
-      try {
-        const url = await puter.ai.txt2speech(text, document.getElementById('ttsVoice').value);
-        btn.innerHTML = `<audio controls src="${url}"></audio><a href="${url}" download="speech.mp3" class="btn-download">⬇ Download MP3</a>`;
-      } catch(e) {
-        btn.innerHTML = '<p style="color:#ef4444;">Error. Try again.</p>';
-      }
-    }
-    // VIDEO DOWNLOADER (FIXED)
-    async function downloadVideo() {
-      const url = document.getElementById('videoUrl').value.trim();
-      if (!url) return alert('Enter URL');
-      
-      const btn = document.getElementById('dlBtn');
-      const res = document.getElementById('dlResult');
-      
-      btn.disabled = true;
-      btn.textContent = 'Fetching...';
-      res.style.display = 'block';
-      res.innerHTML = '<div class="loading"></div>';
+      btn.disabled = true; btn.textContent = 'Generating...';
+      preview.style.display = 'block';
+      spinner.style.display = 'block';
+      img.style.display = 'none';      actions.style.display = 'none';
 
       try {
-        // Try multiple APIs
-        let data;
-        try {
-          const r = await fetch(`https://ahm7xmakki.com/api/alldl?url=${encodeURIComponent(url)}`);
-          data = await r.json();
-        } catch(e) {
-          // Fallback API
-          const r = await fetch(`https://api.tikmate.app/download?url=${encodeURIComponent(url)}`);
-          data = await r.json();
-        }
+        const seed = Math.floor(Math.random() * 10000);
+        const encodedPrompt = encodeURIComponent(prompt + ', highly detailed, professional quality, 8k, masterpiece');
+        const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${w}&height=${h}&model=flux&seed=${seed}&nologo=true`;
 
-        if (data.links && data.links.length) {
-          res.innerHTML = data.links.map(l => 
-            `<div style="margin:10px 0;padding:15px;background:var(--bg-input);border-radius:10px;">
-              <p style="color:var(--accent);margin-bottom:10px;">${l.quality || 'Video'}</p>
-              <a href="${l.url}" target="_blank" class="btn-download">⬇ Download</a>
-            </div>`
-          ).join('');
-        } else {
-          res.innerHTML = '<p style="color:#ef4444;">No links found. Try a different platform or check the URL.</p>';
-        }
-      } catch(e) {
-        res.innerHTML = '<p style="color:#ef4444;">Failed. Try YouTube or TikTok direct links.</p>';
-      }
-      finally {
+        const tempImg = new Image();
+        tempImg.onload = function() {
+          spinner.style.display = 'none';
+          img.src = imageUrl;
+          img.style.display = 'block';
+          actions.style.display = 'block';
+          document.getElementById('downloadImgBtn').href = imageUrl;
+          document.getElementById('openImgBtn').href = imageUrl;
+          btn.disabled = false;
+          btn.textContent = '🎨 Generate Image';
+        };
+        tempImg.onerror = function() { throw new Error('Failed to load image'); };
+        tempImg.src = imageUrl;
+
+      } catch (error) {
+        alert('Error generating image: ' + error.message);
+        spinner.style.display = 'none';
         btn.disabled = false;
-        btn.textContent = '📥 Get Download Links';
+        btn.textContent = ' Generate Image';
       }
     }
 
-    // EBOOK CREATION
-    async function createEbook(format) {
-      const title = document.getElementById('ebookTitle').value || 'Untitled';
-      const author = document.getElementById('ebookAuthor').value || 'Unknown';
-      const content = document.getElementById('ebookContent').value;
-            if (!content) return alert('Add content');
+    // --- DOWNLOADER (FIXED WITH CORS PROXY) ---
+    async function startDownload() {
+      const url = document.getElementById("videoUrl").value.trim();
+      const btn = document.getElementById("dlBtn");
+      const area = document.getElementById("dlResult");
+      
+      if (!url) return alert("Please enter a URL");
+      if (!url.startsWith('http')) return alert("Please enter a valid URL starting with http/https");
+      
+      btn.disabled = true; btn.textContent = "Fetching…";
+      area.innerHTML = '<div class="loading"></div>';
+      area.style.display = 'block';
 
-      if (format === 'kdp') {
-        // Amazon KDP format (6x9 inches)
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF({ unit: 'in', format: [6, 9] });
-        doc.setFontSize(24);
-        doc.text(title, 3, 1.5, { align: 'center' });
-        doc.setFontSize(14);
-        doc.text('by ' + author, 3, 2.5, { align: 'center' });
-        doc.setFontSize(11);
-        const lines = doc.splitTextToSize(content, 5);
-        let y = 3.5;
-        lines.forEach(line => {
-          if (y > 8.5) { doc.addPage(); y = 1; }
-          doc.text(line, 0.5, y);
-          y += 0.2;
+      try {
+        // Using a CORS proxy to bypass browser restrictions for the API
+        const proxyUrl = 'https://corsproxy.io/?';
+        const targetApi = `https://ahm7xmakki.com/api/alldl?url=${encodeURIComponent(url)}`;
+        
+        const res = await fetch(proxyUrl + encodeURIComponent(targetApi));
+        
+        if (!res.ok) throw new Error('Server error');        
+        const data = await res.json();
+        
+        if (data.error || !data.links || data.links.length === 0) {
+          throw new Error("No download links found for this video.");
+        }
+        
+        let html = '<div class="result-card"><div class="result-title">✅ Download Ready</div>';
+        data.links.forEach(link => {
+          const quality = link.quality || 'Download';
+          const downloadUrl = link.url || link.download;
+          if (downloadUrl) {
+            html += `<div style="margin-bottom:10px;padding:15px;background:var(--bg-card);border-radius:8px;border:1px solid var(--border);">
+                      <div style="color:var(--accent);margin-bottom:8px;font-weight:bold;">${quality}</div>
+                      <a class="btn-download" href="${downloadUrl}" target="_blank">⬇ Download</a>
+                     </div>`;
+          }
         });
-        doc.save(title + '_KDP.pdf');
-      } else if (format === 'pdf') {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        doc.setFontSize(22);
-        doc.text(title, 105, 20, { align: 'center' });
-        doc.setFontSize(14);
-        doc.text('by ' + author, 105, 30, { align: 'center' });
-        doc.setFontSize(12);
-        const lines = doc.splitTextToSize(content, 180);
-        let y = 45;
-        lines.forEach(line => {
-          if (y > 280) { doc.addPage(); y = 20; }
-          doc.text(line, 15, y);
-          y += 7;
-        });
-        doc.save(title + '.pdf');
-      } else if (format === 'docx') {
-        const doc = new docx.Document({
-          sections: [{
-            children: [
-              new docx.Paragraph({ text: title, heading: docx.HeadingLevel.HEADING_1, alignment: docx.AlignmentType.CENTER }),
-              new docx.Paragraph({ text: 'by ' + author, alignment: docx.AlignmentType.CENTER, spacing: { after: 400 } }),
-              ...content.split('\n').map(l => new docx.Paragraph({ text: l }))
-            ]
-          }]
-        });
-        const blob = await docx.Packer.toBlob(doc);
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = title + '.docx';
-        a.click();      }
+        html += '</div>';
+        area.innerHTML = html;
+        
+      } catch (err) { 
+        area.innerHTML = '<div style="color:#ef4444;padding:15px;background:var(--bg-card);border-radius:8px;">⚠ Failed to fetch. This usually happens if the video is private or the API is temporarily busy.<br><br>Try copying the direct link from the browser address bar and try again.</div>'; 
+      } finally { 
+        btn.disabled = false; btn.textContent = " Fetch Download Links"; 
+      }
     }
 
-    // PDF TO DOC CONVERTER
-    async function convertPdfToDoc(e) {
-      const file = e.target.files[0];
+    // --- EBOOK & PDF ---
+    function generateEbookPDF() {
+      const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
+      const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
+      const content = document.getElementById('ebookContent').value.trim();
+      const area = document.getElementById('dlResult'); // Reusing result area or simple alert
+      if (!content) { alert('Please paste content.'); return; }
+      
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.setFontSize(20); doc.text(title, 105, 20, { align: 'center' });
+      doc.setFontSize(14); doc.text('by ' + author, 105, 30, { align: 'center' });
+      doc.setFontSize(12);
+      const lines = doc.splitTextToSize(content, 180);
+      doc.text(lines, 15, 45);
+      doc.save(title + ".pdf");
+    }
+
+    async function generateEbookDOCX() {
+      const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
+      const content = document.getElementById('ebookContent').value.trim();
+      if (!content) { alert('Please paste content.'); return; }      const doc = new docx.Document({
+        sections: [{ children: [
+          new docx.Paragraph({ text: title, heading: docx.HeadingLevel.HEADING_1, alignment: docx.AlignmentType.CENTER }),
+          ...content.split('\n').map(line => new docx.Paragraph({ text: line }))
+        ]}]
+      });
+      const blob = await docx.Packer.toBlob(doc);
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = title.replace(/\s+/g, '_') + '.docx'; a.click();
+    }
+
+    function generateEbookKDP() {
+      const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
+      const content = document.getElementById('ebookContent').value.trim();
+      if (!content) { alert('Please paste content.'); return; }
+      // KDP is usually a text file or specific PDF. We'll save as text for now.
+      const blob = new Blob([content], { type: 'text/plain' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = title + '_KDP.txt'; a.click();
+    }
+
+    async function convertPdfToDoc(event) {
+      const file = event.target.files[0];
       if (!file) return;
-      
-      const res = document.getElementById('pdfToDocResult');
-      res.style.display = 'block';
-      res.innerHTML = '<div class="loading"></div>';
+      const area = document.getElementById('pdfToDocResult');
+      area.style.display = 'block';
+      area.innerHTML = '<div class="loading"></div>';
       
       try {
         const arrayBuffer = await file.arrayBuffer();
         const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-        let text = '';
-        
+        let fullText = '';
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
-          const content = await page.getTextContent();
-          text += content.items.map(item => item.str).join(' ') + '\n\n';
+          const textContent = await page.getTextContent();
+          fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
         }
         
         const doc = new docx.Document({
-          sections: [{ children: text.split('\n').map(l => new docx.Paragraph({ text: l })) }]
+          sections: [{ children: fullText.split('\n').map(l => new docx.Paragraph({text:l})) }]
         });
-        
         const blob = await docx.Packer.toBlob(doc);
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'converted.docx';
-        a.click();
-        
-        res.innerHTML = '<p style="color:#10b981;">✅ Converted! Download started.</p>';
-      } catch(err) {
-        res.innerHTML = '<p style="color:#ef4444;">Error converting PDF.</p>';
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'converted.docx'; a.click();
+        area.innerHTML = '<p style="color:#10b981;">✅ Converted to DOCX!</p>';
+      } catch (err) {
+        area.innerHTML = '<p style="color:#ef4444;">Error: ' + err.message + '</p>';
       }
     }
 
-    // DOC TO PDF CONVERTER
-    async function convertDocToPdf(e) {
-      const file = e.target.files[0];
-      if (!file) return;
+    async function convertDocToPdf(event) {
+      const file = event.target.files[0];
+      if (!file) return;      const area = document.getElementById('docToPdfResult');
+      area.style.display = 'block';
+      area.innerHTML = '<div class="loading"></div>';
       
-      const res = document.getElementById('docToPdfResult');
-      res.style.display = 'block';
-      res.innerHTML = '<div class="loading"></div>';
-      
-      // Simple conversion using FileReader
-      const reader = new FileReader();      reader.onload = async function(ev) {
-        try {
+      try {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const text = e.target.result;
           const { jsPDF } = window.jspdf;
           const doc = new jsPDF();
-          const text = ev.target.result;
           const lines = doc.splitTextToSize(text, 180);
-          let y = 15;
-          
-          lines.forEach(line => {
-            if (y > 280) { doc.addPage(); y = 15; }
-            doc.text(line, 15, y);
-            y += 7;
-          });
-          
+          doc.text(lines, 15, 15);
           doc.save('converted.pdf');
-          res.innerHTML = '<p style="color:#10b981;">✅ Converted! Download started.</p>';
-        } catch(err) {
-          res.innerHTML = '<p style="color:#ef4444;">Error. Try a simpler document.</p>';
-        }
-      };
-      reader.readAsText(file);
+          area.innerHTML = '<p style="color:#10b981;">✅ Converted to PDF!</p>';
+        };
+        reader.readAsText(file);
+      } catch (err) {
+        area.innerHTML = '<p style="color:#ef4444;">Error: ' + err.message + '</p>';
+      }
     }
 
-    // FLYER & COVER DESIGNER
+    // --- DESIGNER & THUMBNAILS ---
     let designType = 'flyer';
     function selectDesignType(type, btn) {
       designType = type;
@@ -717,32 +764,28 @@
 
     async function generateDesign() {
       const prompt = document.getElementById('designPrompt').value.trim();
-      if (!prompt) return alert('Describe your design');
+      if (!prompt) return alert('Please describe your design');
       
-      const btn = document.getElementById('designResult');
-      btn.style.display = 'block';
-      btn.innerHTML = '<div class="loading"></div>';
+      const area = document.getElementById('designResult');
+      area.style.display = 'block';
+      area.innerHTML = '<div class="loading"></div>';
       
-      const w = designType === 'flyer' ? 1080 : 1600;
-      const h = designType === 'flyer' ? 1350 : 2400;
       const seed = Math.floor(Math.random() * 10000);
+      let finalPrompt = prompt;
+      let w = 1080, h = 1350;
       
-      const enhancedPrompt = designType === 'flyer' ?
-        `${prompt}, professional flyer design, commercial advertising, clean layout, high quality` :
-        `${prompt}, ebook cover design, book cover, professional, bestseller style, high quality`;
+      if (designType === 'flyer') finalPrompt += ', professional flyer design, commercial advertising, high quality';
+      else { w = 1600; h = 2400; finalPrompt += ', ebook cover design, bestseller style, professional typography'; }
       
-      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhancedPrompt)}?width=${w}&height=${h}&model=flux&seed=${seed}&nologo=true`;
+      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?width=${w}&height=${h}&model=flux&seed=${seed}&nologo=true`;
       
-      const img = new Image();      img.onload = () => {
-        btn.innerHTML = `<img src="${url}"><a href="${url}" download="design.png" class="btn-download">⬇ Download</a>`;
-      };
-      img.onerror = () => {
-        btn.innerHTML = '<p style="color:#ef4444;">Failed. Try again.</p>';
-      };
+      const img = new Image();
+      img.onload = () => {
+        area.innerHTML = `<img src="${url}" style="max-width:100%;border-radius:10px;"><br><a href="${url}" download="design.png" class="btn-download">⬇ Download</a>`;
+      };      img.onerror = () => { area.innerHTML = '<p style="color:#ef4444;">Failed. Try again.</p>'; };
       img.src = url;
     }
 
-    // VIDEO THUMBNAILS
     let thumbW = 1280, thumbH = 720;
     function setThumbPlatform(platform, w, h, btn) {
       thumbW = w; thumbH = h;
@@ -752,147 +795,75 @@
 
     async function generateThumbnail() {
       const prompt = document.getElementById('thumbPrompt').value.trim();
-      if (!prompt) return alert('Describe your thumbnail');
+      if (!prompt) return alert('Please describe your thumbnail');
       
-      const btn = document.getElementById('thumbResult');
-      btn.style.display = 'block';
-      btn.innerHTML = '<div class="loading"></div>';
+      const area = document.getElementById('thumbResult');
+      area.style.display = 'block';
+      area.innerHTML = '<div class="loading"></div>';
       
       const seed = Math.floor(Math.random() * 10000);
-      const enhancedPrompt = `${prompt}, youtube thumbnail, high contrast, clickbait style, professional, 4k, vibrant colors, text space`;
+      const finalPrompt = prompt + ', youtube thumbnail, high contrast, clickbait style, professional, 4k, vibrant colors';
       
-      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhancedPrompt)}?width=${thumbW}&height=${thumbH}&model=flux&seed=${seed}&nologo=true`;
+      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?width=${thumbW}&height=${thumbH}&model=flux&seed=${seed}&nologo=true`;
       
       const img = new Image();
       img.onload = () => {
-        btn.innerHTML = `<img src="${url}" style="max-width:100%;border-radius:10px;"><a href="${url}" download="thumbnail.png" class="btn-download">⬇ Download HD</a>`;
+        area.innerHTML = `<img src="${url}" style="max-width:100%;border-radius:10px;"><br><a href="${url}" download="thumbnail.png" class="btn-download">⬇ Download HD</a>`;
       };
-      img.onerror = () => {
-        btn.innerHTML = '<p style="color:#ef4444;">Failed. Try again.</p>';
-      };
+      img.onerror = () => { area.innerHTML = '<p style="color:#ef4444;">Failed. Try again.</p>'; };
       img.src = url;
     }
 
-    // VIDEO CREATION
-    let storyboardImages = [];
-    let mediaRecorder;
-    let recordedChunks = [];
-
+    // --- VIDEO STORYBOARD ---
     async function generateStoryboard() {
       const topic = document.getElementById('videoTopic').value.trim();
-      if (!topic) return alert('Enter topic');
+      if (!topic) return alert('Please enter a topic');
       
-      const btn = document.getElementById('storyboardBtn');      const res = document.getElementById('storyboardResult');
+      const btn = document.getElementById('vidBtn');
+      const area = document.getElementById('vidResult');
       
-      btn.disabled = true;
-      btn.textContent = 'Creating...';
-      res.style.display = 'block';
-      res.innerHTML = '<div class="loading"></div>';
+      btn.disabled = true; btn.textContent = 'Creating...';
+      area.style.display = 'block';
+      area.innerHTML = '<div class="loading"></div>';
       
       try {
-        // Generate script
-        const script = await fetchAI(`Create a 4-scene video about "${topic}". Format: Scene 1: [description] | Scene 2: [description] | Scene 3: [description] | Scene 4: [description]`);
-        
-        // Generate images for each scene
+        const script = await fetchAI(`Create a 4-scene video storyboard for: "${topic}". Format exactly as: Scene 1: [description] | Scene 2: [description] | Scene 3: [description] | Scene 4: [description]`);
         const scenes = script.split('|').map(s => s.trim());
-        storyboardImages = [];
-        
-        let html = '<div style="margin-bottom:20px;"><h3 style="color:var(--primary);margin-bottom:10px;">Storyboard Script:</h3><p style="line-height:1.6;">' + script + '</p></div><div class="grid-2">';
-        
-        for (let i = 0; i < Math.min(scenes.length, 4); i++) {
-          const seed = Math.floor(Math.random() * 10000);
-          const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(scenes[i] + ', cinematic, 4k')}?width=512&height=512&model=flux&seed=${seed}&nologo=true`;
-          storyboardImages.push(imgUrl);
-          html += `<div style="background:var(--bg-input);padding:10px;border-radius:10px;"><img src="${imgUrl}" style="width:100%;border-radius:8px;"><p style="font-size:0.8rem;margin-top:5px;">Scene ${i+1}</p></div>`;
+        let html = '<div class="script-output" style="margin-bottom:20px;">'+script+'</div><div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">';
+        for(let i=0; i<Math.min(scenes.length, 4); i++) {
+          const p = encodeURIComponent(scenes[i] + ', cinematic, 4k');          const url = `https://image.pollinations.ai/prompt/${p}?width=512&height=512&model=flux&nologo=true`;
+          html += `<div style="background:var(--bg-input); padding:10px; border-radius:10px;"><img src="${url}" style="width:100%; border-radius:8px;"><p style="font-size:0.8rem; margin-top:5px;">Scene ${i+1}</p></div>`;
         }
-        html += '</div>';
-        
-        res.innerHTML = html;
-        document.getElementById('videoEditor').style.display = 'block';
-      } catch(e) {
-        res.innerHTML = '<p style="color:#ef4444;">Failed.</p>';
-      }
-      finally {
-        btn.disabled = false;
-        btn.textContent = '🎬 Generate Storyboard';
-      }
+        html += '</div>'; area.innerHTML = html;
+      } catch(e) { area.innerHTML = '<p style="color:#ef4444;">Failed.</p>'; }
+      finally { btn.disabled = false; btn.textContent = '🎬 Create Storyboard'; }
     }
 
-    function loadSlideImages(e) {
-      const files = e.target.files;
-      const preview = document.getElementById('slidePreview');
-      preview.innerHTML = '';
-      
-      Array.from(files).forEach((file, i) => {
-        const reader = new FileReader();
-        reader.onload = ev => {
-          preview.innerHTML += `<img src="${ev.target.result}" style="border-radius:8px;">`;
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-    async function toggleRecording() {
-      const btn = document.getElementById('recordBtn');
-      
-      if (btn.textContent.includes('Start')) {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        mediaRecorder = new MediaRecorder(stream);
-        recordedChunks = [];
-        
-        mediaRecorder.ondataavailable = e => {
-          if (e.data.size > 0) recordedChunks.push(e.data);
-        };
-        
-        mediaRecorder.onstop = () => {
-          const blob = new Blob(recordedChunks, { type: 'audio/webm' });
-          const url = URL.createObjectURL(blob);
-          const audio = document.getElementById('recordedAudio');
-          audio.src = url;
-          audio.style.display = 'block';
-        };
-        
-        mediaRecorder.start();
-        btn.textContent = '⏹️ Stop Recording';
-        btn.classList.add('btn-accent');
-      } else {
-        mediaRecorder.stop();
-        btn.textContent = '🔴 Start Recording';
-        btn.classList.remove('btn-accent');
-      }
-    }
-
-    async function compileVideo() {
-      alert('Video compilation feature - This would require backend processing. For now, you can manually combine the images and audio using video editing software.');
-    }
-
-    // PROF. UPDATE (PLAIN TEXT)
+    // --- PROF. UPDATE (PLAIN TEXT) ---
     async function askProf() {
       const q = document.getElementById('profQuestion').value.trim();
-      if (!q) return alert('Ask a question');
+      if (!q) return alert('Please ask a question');
       
       const btn = document.getElementById('profBtn');
-      const res = document.getElementById('profResult');
+      const area = document.getElementById('profResult');
       
-      btn.disabled = true;
-      btn.textContent = 'Thinking...';
-      res.style.display = 'block';
-      res.innerHTML = '<div class="loading"></div>';
+      btn.disabled = true; btn.textContent = 'Thinking...';
+      area.style.display = 'block';
+      area.innerHTML = '<div class="loading"></div>';
       
       try {
-        const answer = await fetchAI(`You are Prof. Update with 20+ years of experience. Answer this question clearly and professionally without any markdown formatting, just plain text: ${q}`);
-                // Remove markdown
+        const answer = await fetchAI(`You are Prof. Update with 20+ years of experience. Answer clearly and professionally without any markdown formatting, just plain text: "${q}"`);
+        // Clean markdown
         const cleanText = answer.replace(/\*\*/g, '').replace(/\*/g, '').replace(/__/g, '').replace(/#/g, '').trim();
         
-        res.innerHTML = `
+        area.innerHTML = `
           <div style="line-height:1.8;color:var(--text-main);white-space:pre-wrap;">${cleanText}</div>
           <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy Answer</button>
         `;
-      } catch(e) {
-        res.innerHTML = '<p style="color:#ef4444;">Failed. Try again.</p>';
-      }
-      finally {
-        btn.disabled = false;
-        btn.textContent = '🎓 Get Expert Answer';
+      } catch(e) { 
+        area.innerHTML = '<div class="error-card"> Service unavailable. Please try again.</div>'; 
+      } finally { 
+        btn.disabled = false; btn.textContent = '🎓 Ask Prof. Update'; 
       }
     }
 
@@ -900,281 +871,204 @@
       const text = btn.previousElementSibling.textContent;
       navigator.clipboard.writeText(text);
       btn.textContent = '✅ Copied!';
-      setTimeout(() => btn.textContent = '📋 Copy Answer', 2000);
+      setTimeout(() => btn.textContent = ' Copy Answer', 2000);
     }
 
-    // RESUME BUILDER
-    async function parseExistingResume(e) {
-      const file = e.target.files[0];
+    // --- RESUME ---
+    async function parseExistingResume(event) {
+      const file = event.target.files[0];
       if (!file) return;
-      
-      // Extract text from PDF/DOC
       if (file.type === 'application/pdf') {
-        const arrayBuffer = await file.arrayBuffer();
-        const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-        let text = '';
-        for (let i = 1; i <= pdf.numPages; i++) {
-          const page = await pdf.getPage(i);
-          const content = await page.getTextContent();
-          text += content.items.map(item => item.str).join(' ') + '\n';
-        }
-        // Auto-fill fields (simplified)
-        document.getElementById('resSummary').value = text.substring(0, 200);
+        try {
+          const arrayBuffer = await file.arrayBuffer();          const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+          let fullText = '';
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const textContent = await page.getTextContent();
+            fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
+          }
+          document.getElementById('resSummary').value = fullText.substring(0, 200); // Auto-fill summary
+        } catch(e) { alert('Could not read PDF'); }
       }
     }
 
-    function buildResume() {
-      const name = document.getElementById('resName').value;
-      if (!name) return alert('Name required');
+    function generateResume() {
+      const name = document.getElementById('resName').value.trim() || 'Name';
+      const job = document.getElementById('resJob').value.trim();
+      const email = document.getElementById('resEmail').value.trim();
+      const phone = document.getElementById('resPhone').value.trim();
+      const summary = document.getElementById('resSummary').value.trim();
+      const exp = document.getElementById('resExp').value.trim();
+      const edu = document.getElementById('resEdu').value.trim();
+      const skills = document.getElementById('resSkills').value.trim();
       
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      const type = document.getElementById('resumeType').value;      
-      // Header
-      doc.setFillColor(139, 92, 246);
-      doc.rect(0, 0, 210, 40, 'F');
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(24);
-      doc.text(name, 105, 20, { align: 'center' });
-      doc.setFontSize(14);
-      doc.text(document.getElementById('resJob').value, 105, 30, { align: 'center' });
-      
-      // Contact
-      doc.setTextColor(0, 0, 0);
-      let y = 50;
-      const addSection = (title, text) => {
-        if (!text) return;
-        doc.setFontSize(14);
-        doc.setTextColor(139, 92, 246);
-        doc.text(title, 15, y);
-        y += 8;
-        doc.setFontSize(11);
-        doc.setTextColor(0, 0, 0);
-        const lines = doc.splitTextToSize(text, 180);
-        doc.text(lines, 15, y);
-        y += lines.length * 6 + 10;
-      };
-      
-      addSection('CONTACT', `${document.getElementById('resEmail').value} | ${document.getElementById('resPhone').value}`);
-      addSection('SUMMARY', document.getElementById('resSummary').value);
-      addSection('EXPERIENCE', document.getElementById('resExp').value);
-      addSection('EDUCATION', document.getElementById('resEdu').value);
-      addSection('SKILLS', document.getElementById('resSkills').value);
-      
-      doc.save(name.replace(/\s/g, '_') + '_Resume.pdf');
+      try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.setFillColor(139, 92, 246); doc.rect(0, 0, 210, 40, 'F');
+        doc.setTextColor(255,255,255); doc.setFontSize(24); doc.text(name, 105, 20, {align:'center'});
+        doc.setFontSize(14); doc.text(job, 105, 30, {align:'center'});
+        doc.setTextColor(0,0,0); let y = 50;
+        if (email) { doc.setFontSize(10); doc.text(`${email} | ${phone}`, 105, y, {align:'center'}); y+=15; }
+        const addSection = (title, text) => {
+          if (!text) return;
+          doc.setFontSize(14); doc.setTextColor(139,92,246); doc.text(title, 15, y); y+=8;
+          doc.setFontSize(11); doc.setTextColor(0,0,0);
+          const lines = doc.splitTextToSize(text, 180); doc.text(lines, 15, y); y += lines.length*6+10;
+        };
+        addSection('SUMMARY', summary); addSection('EXPERIENCE', exp); addSection('EDUCATION', edu); addSection('SKILLS', skills);
+        doc.save(name.replace(/\s+/g,'_')+'_Resume.pdf');
+      } catch (err) { alert('Error: ' + err.message); }
     }
 
-    // MEME GENERATOR (WITH CARTOON/ART)
+    // --- MEME ---
     let memeImg = null;
-    function loadMemeImage(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      
+    function loadMeme(event) {
+      const file = event.target.files[0]; if (!file) return;
       const reader = new FileReader();
-      reader.onload = ev => {
+      reader.onload = function(e) {
         const img = new Image();
-        img.onload = () => {
-          memeImg = img;
-          const canvas = document.getElementById('memeCanvas');
-          canvas.style.display = 'block';
-          document.getElementById('memeControls').style.display = 'block';
-          drawMeme();        };
-        img.src = ev.target.result;
-      };
+        img.onload = function() { memeImg = img; document.getElementById('memeCanvas').style.display='block'; document.getElementById('memeControls').style.display='block'; drawMeme(); };
+        img.src = e.target.result;      };
       reader.readAsDataURL(file);
     }
-
     function drawMeme() {
       if (!memeImg) return;
-      const canvas = document.getElementById('memeCanvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = 600;
-      canvas.height = 600;
-      
+      const canvas = document.getElementById('memeCanvas'); const ctx = canvas.getContext('2d');
       ctx.drawImage(memeImg, 0, 0, 600, 600);
-      ctx.font = 'bold 40px Impact';
-      ctx.fillStyle = 'white';
-      ctx.strokeStyle = 'black';
-      ctx.lineWidth = 3;
-      ctx.textAlign = 'center';
-      
-      const top = document.getElementById('memeTop').value.toUpperCase();
-      const bottom = document.getElementById('memeBottom').value.toUpperCase();
-      
-      if (top) { ctx.strokeText(top, 300, 50); ctx.fillText(top, 300, 50); }
-      if (bottom) { ctx.strokeText(bottom, 300, 580); ctx.fillText(bottom, 300, 580); }
+      ctx.font = 'bold 40px Impact'; ctx.fillStyle = 'white'; ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.textAlign = 'center';
+      const top = document.getElementById('memeTop').value.toUpperCase(); const bot = document.getElementById('memeBottom').value.toUpperCase();
+      if (top) { ctx.strokeText(top, 300, 60); ctx.fillText(top, 300, 60); }
+      if (bot) { ctx.strokeText(bot, 300, 560); ctx.fillText(bot, 300, 560); }
     }
-
     function downloadMeme() {
-      const a = document.createElement('a');
-      a.download = 'meme.png';
-      a.href = document.getElementById('memeCanvas').toDataURL();
-      a.click();
+      const a = document.createElement('a'); a.download = 'meme.png'; a.href = document.getElementById('memeCanvas').toDataURL(); a.click();
     }
-
     async function convertToCartoon() {
-      const prompt = "Convert this image into a beautiful cartoon style, vibrant colors, clean lines, professional illustration";
-      await generateArtTransformation(prompt);
-    }
-
-    async function convertToArt() {
-      const prompt = "Transform this image into a beautiful artwork, oil painting style, artistic, masterpiece quality";
-      await generateArtTransformation(prompt);
-    }
-
-    async function generateArtTransformation(prompt) {
-      if (!memeImg) return alert('Upload an image first');
-      
-      const canvas = document.getElementById('memeCanvas');
-      const res = document.getElementById('memeControls');
-            res.innerHTML += '<div class="loading" style="margin:20px auto;"></div><p style="text-align:center;">Creating artwork...</p>';
-      
-      // Use img to img approach
-      const seed = Math.floor(Math.random() * 10000);
-      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=600&height=600&model=flux&seed=${seed}&nologo=true`;
-      
-      const img = new Image();
-      img.onload = () => {
+      if(!memeImg) return;
+      document.getElementById('memeControls').innerHTML += '<p>Converting to cartoon... (This may take a moment)</p>';
+      const url = `https://image.pollinations.ai/prompt/cartoon%20style%20of%20the%20image?width=600&height=600&model=flux&nologo=true`;
+      const img = new Image(); img.crossOrigin = "Anonymous";
+      img.onload = function() {
+        const canvas = document.getElementById('memeCanvas');
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, 600, 600);
-        res.innerHTML = '<button class="btn" onclick="downloadMeme()">⬇ Download Artwork</button>';
+      };
+      img.src = url;
+    }
+    async function convertToArt() {
+      if(!memeImg) return;
+      document.getElementById('memeControls').innerHTML += '<p>Converting to artwork...</p>';
+      const url = `https://image.pollinations.ai/prompt/oil%20painting%20artwork%20style%20of%20the%20image?width=600&height=600&model=flux&nologo=true`;
+      const img = new Image(); img.crossOrigin = "Anonymous";
+      img.onload = function() {
+        const canvas = document.getElementById('memeCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, 600, 600);
       };
       img.src = url;
     }
 
-    // STUDY SUMMARIZER
-    async function handleStudyFile(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      
-      const ta = document.getElementById('studyText');
-      ta.value = 'Reading...';
-      
+    // --- STUDY ---
+    async function handleStudyFile(event) {
+      const file = event.target.files[0]; if (!file) return;
+      const textarea = document.getElementById('studyText'); textarea.value = 'Reading...';
       if (file.type === 'application/pdf') {
-        const arrayBuffer = await file.arrayBuffer();
-        const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-        let text = '';
-        for (let i = 1; i <= pdf.numPages; i++) {
-          const page = await pdf.getPage(i);
-          const content = await page.getTextContent();
-          text += content.items.map(item => item.str).join(' ') + '\n';
-        }
-        ta.value = text;
+        try {
+          const arrayBuffer = await file.arrayBuffer();
+          const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+          let fullText = '';
+          for (let i = 1; i <= pdf.numPages; i++) {            const page = await pdf.getPage(i);
+            const textContent = await page.getTextContent();
+            fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
+          }
+          textarea.value = fullText;
+        } catch (err) { textarea.value = 'Error: ' + err.message; }
       } else {
         const reader = new FileReader();
-        reader.onload = ev => ta.value = ev.target.result;
+        reader.onload = e => textarea.value = e.target.result;
         reader.readAsText(file);
       }
     }
 
     async function summarizeStudy() {
       const text = document.getElementById('studyText').value.trim();
-      if (!text) return alert('Add text');
-      
       const format = document.getElementById('studyFormat').value;
       const btn = document.getElementById('studyBtn');
-      const res = document.getElementById('studyResult');
+      const area = document.getElementById('studyResult');
+      if (!text) return alert('Please paste text or upload.');
+      if (text.length > 5000) return alert('Text is too long. Limit to 5000 characters.');
       
-      btn.disabled = true;
-      btn.textContent = 'Summarizing...';      res.style.display = 'block';
-      res.innerHTML = '<div class="loading"></div>';
+      btn.disabled = true; btn.textContent = 'Summarizing…';
+      area.innerHTML = '<div class="loading"></div>'; area.style.display = 'block';
       
-      const prompts = {
-        summary: 'Summarize this text:',
-        bullets: 'Extract key bullet points:',
-        flashcards: 'Create flashcards (Q&A format):',
-        quiz: 'Create quiz questions:'
-      };
-      
+      const formatText = { 'summary': 'Provide a concise summary', 'bullets': 'Extract key points as bullet list', 'flashcards': 'Create flashcards (Q: A: format)', 'quiz': 'Create quiz questions' };
+      const prompt = `${formatText[format]} of this text:\n\n${text.substring(0, 4000)}`;
       try {
-        const result = await fetchAI(`${prompts[format]} ${text.substring(0, 3000)}`);
-        res.innerHTML = `<div style="line-height:1.8;white-space:pre-wrap;">${result}</div>`;
-      } catch(e) {
-        res.innerHTML = '<p style="color:#ef4444;">Failed.</p>';
-      }
-      finally {
-        btn.disabled = false;
-        btn.textContent = '📚 Generate Notes';
-      }
+        const summary = await fetchAI(prompt);
+        area.innerHTML = `<div class="script-output" id="studyOutput">${summary}</div><button onclick="copyToClipboard(this)" class="copy-btn">📋 Copy to Clipboard</button>`;
+      } catch (err) { area.innerHTML = '<div class="error-card"> Failed. Try shorter text.</div>'; } 
+      finally { btn.disabled = false; btn.textContent = '📚 Generate Notes'; }
     }
 
-    // VISION CHAT
-    let visionBase64 = null;
-    function previewVision(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      
+    // --- VISION ---
+    let visionImageBase64 = null;
+    function previewVision(event) {
+      const file = event.target.files[0]; if (!file) return;
       const reader = new FileReader();
-      reader.onload = ev => {
-        visionBase64 = ev.target.result;
-        const img = document.getElementById('visionPreview');
-        img.src = visionBase64;
-        img.style.display = 'block';
+      reader.onload = function(e) {
+        visionImageBase64 = e.target.result;
+        const img = document.getElementById('visionImagePreview');
+        img.src = visionImageBase64; img.style.display = 'block';
       };
       reader.readAsDataURL(file);
     }
-
     async function analyzeVision() {
-      if (!visionBase64) return alert('Upload an image');
-      
-      const prompt = document.getElementById('visionPrompt').value || 'Describe this image in detail';
+      const fileInput = document.getElementById('visionFile');
+      const prompt = document.getElementById('visionPrompt').value.trim();
       const btn = document.getElementById('visionBtn');
-      const res = document.getElementById('visionResult');
+      const area = document.getElementById('visionResult');      if (!fileInput.files[0]) return alert('Please upload an image first.');
+      const userQuestion = prompt || 'Describe this image in detail';
       
-      btn.disabled = true;
-      btn.textContent = 'Analyzing...';
-      res.style.display = 'block';
-      res.innerHTML = '<div class="loading"></div>';
-            try {
+      btn.disabled = true; btn.textContent = 'Analyzing…';
+      area.innerHTML = '<div class="loading"></div>'; area.style.display = 'block';
+      try {
+        const fullPrompt = `You are an expert image analyst. A user uploaded an image and asks: "${userQuestion}". Provide detailed analysis.`;
+        // Vision logic needs base64 or URL. Using Puter vision if available, else fallback text
         const response = await puter.ai.chat([{
-          role: 'user',
+          role: "user",
           content: [
-            { type: 'text', text: prompt },
-            { type: 'image_url', image_url: { url: visionBase64 } }
+            { type: "text", text: fullPrompt },
+            { type: "image_url", image_url: { url: visionImageBase64 } }
           ]
         }]);
-        
-        res.innerHTML = `<div style="line-height:1.8;">${response.message.content}</div>`;
-      } catch(e) {
-        res.innerHTML = '<p style="color:#ef4444;">Failed.</p>';
-      }
-      finally {
-        btn.disabled = false;
-        btn.textContent = '👁️ Analyze';
-      }
+        const analysis = response.message.content;
+        area.innerHTML = `<div class="script-output" id="visionOutput">${analysis}</div><button onclick="copyToClipboard(this)" class="copy-btn">📋 Copy to Clipboard</button>`;
+      } catch (err) { area.innerHTML = '<div class="error-card">⚠ Analysis failed. Try again.</div>'; } 
+      finally { btn.disabled = false; btn.textContent = '👁️ Analyze Image'; }
     }
 
-    // SCRIPT GENERATOR (PLAIN TEXT)
+    // --- SCRIPT ---
     async function generateScript() {
       const topic = document.getElementById('scriptTopic').value.trim();
-      if (!topic) return alert('Enter topic');
-      
       const platform = document.getElementById('scriptPlatform').value;
       const tone = document.getElementById('scriptTone').value;
       const btn = document.getElementById('scriptBtn');
-      const res = document.getElementById('scriptResult');
+      const area = document.getElementById('scriptResult');
+      if (!topic) return alert('Please enter a topic.');
       
-      btn.disabled = true;
-      btn.textContent = 'Writing...';
-      res.style.display = 'block';
-      res.innerHTML = '<div class="loading"></div>';
+      btn.disabled = true; btn.textContent = 'Generating…';
+      area.innerHTML = '<div class="loading"></div>'; area.style.display = 'block';
       
+      const prompt = `Write a ${tone} ${platform} video script about "${topic}". Structure: HOOK, INTRODUCTION, MAIN CONTENT (3 points), CALL TO ACTION. Plain text only. No markdown symbols.`;
       try {
-        const script = await fetchAI(`Write a ${tone} ${platform} script about "${topic}". Use this structure:\n\nHOOK\n[content]\n\nINTRODUCTION\n[content]\n\nMAIN CONTENT\n[content]\n\nCALL TO ACTION\n[content]\n\nMake all section titles CAPITAL LETTERS. No markdown, no asterisks, just plain text.`);
-        
+        let script = await fetchAI(prompt);
         // Clean markdown
-        const cleanScript = script.replace(/\*\*/g, '').replace(/\*/g, '').replace(/__/g, '').trim();
+        script = script.replace(/\*\*/g, '').replace(/\*/g, '').replace(/#/g, '').trim();
         
-        res.innerHTML = `
-          <div style="line-height:1.8;white-space:pre-wrap;font-family:monospace;background:var(--bg-input);padding:20px;border-radius:10px;">${cleanScript}</div>
-          <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy Script</button>
-        `;
-      } catch(e) {
-        res.innerHTML = '<p style="color:#ef4444;">Failed.</p>';
-      }
-      finally {
-        btn.disabled = false;
-        btn.textContent = '🎬 Generate Script';      }
+        area.innerHTML = `<div class="script-output" id="scriptOutput">${script}</div><button onclick="copyToClipboard(this)" class="copy-btn"> Copy to Clipboard</button>`;
+      } catch (err) { area.innerHTML = '<div class="error-card">⚠ Failed. Please try again.</div>'; } 
+      finally { btn.disabled = false; btn.textContent = '🎬 Generate Script'; }
     }
   </script>
 </body>

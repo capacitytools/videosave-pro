@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume Builder - ToolVerse</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    :root { --bg-main: #0a0a0a; --bg-card: #111111; --bg-input: #1a1a1a; --primary: #8b5cf6; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background: var(--bg-main); color: var(--text-main); min-height: 100vh; }
+    nav { background: var(--bg-card); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); }
+    .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-decoration: none; }
+    .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+    .header p { color: var(--text-muted); }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; margin-bottom: 30px; }
+    .section-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; color: var(--primary); }
+    input, textarea, select { width: 100%; padding: 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; color: var(--text-main); font-size: 16px; margin-bottom: 15px; }
+    textarea { min-height: 100px; resize: vertical; }
+    .btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), #6d28d9); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4); }
+    .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 20px; }
+    .back-link:hover { color: var(--primary); }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .card { padding: 20px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">← ToolVerse</a>
+    <div style="color: var(--primary); font-weight: bold;">Resume Builder</div>
+  </nav>
+
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    <div class="header">
+      <h1>📝 Resume Builder</h1>
+      <p>Create a professional, ATS-friendly resume</p>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Upload Existing CV (Optional)</div>
+      <input type="file" id="resumeUpload" accept=".pdf,.doc,.docx" onchange="parseExistingResume(event)">
+      
+      <div class="section-title" style="margin-top: 20px;">Resume Type</div>
+      <select id="resumeType">
+        <option value="professional">Professional</option>
+        <option value="creative">Creative</option>
+        <option value="executive">Executive</option>        <option value="student">Student/Entry Level</option>
+      </select>
+
+      <input type="text" id="resName" placeholder="Full Name">
+      <input type="text" id="resJob" placeholder="Job Title">
+      <input type="email" id="resEmail" placeholder="Email">
+      <input type="tel" id="resPhone" placeholder="Phone">
+      <textarea id="resSummary" placeholder="Professional Summary"></textarea>
+      <textarea id="resExp" placeholder="Work Experience"></textarea>
+      <textarea id="resEdu" placeholder="Education"></textarea>
+      <input type="text" id="resSkills" placeholder="Skills (comma separated)">
+
+      <button class="btn" onclick="generateResume()">📝 Generate Resume PDF</button>
+    </div>
+  </div>
+
+  <script>
+    async function parseExistingResume(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      if (file.type === 'application/pdf') {
+        try {
+          const arrayBuffer = await file.arrayBuffer();
+          const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+          let fullText = '';
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const textContent = await page.getTextContent();
+            fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
+          }
+          document.getElementById('resSummary').value = fullText.substring(0, 200);
+        } catch(e) {
+          alert('Could not read PDF');
+        }
+      }
+    }
+
+    function generateResume() {
+      const name = document.getElementById('resName').value.trim();
+      if (!name) return alert('Name is required');
+      
+      const job = document.getElementById('resJob').value.trim();
+      const email = document.getElementById('resEmail').value.trim();
+      const phone = document.getElementById('resPhone').value.trim();
+      const summary = document.getElementById('resSummary').value.trim();
+      const exp = document.getElementById('resExp').value.trim();
+      const edu = document.getElementById('resEdu').value.trim();
+      const skills = document.getElementById('resSkills').value.trim();
+      
+      try {        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        // Header
+        doc.setFillColor(139, 92, 246);
+        doc.rect(0, 0, 210, 40, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(24);
+        doc.text(name, 105, 20, { align: 'center' });
+        doc.setFontSize(14);
+        doc.text(job, 105, 30, { align: 'center' });
+        
+        // Contact
+        doc.setTextColor(0, 0, 0);
+        let y = 50;
+        if (email || phone) {
+          doc.setFontSize(10);
+          doc.text(`${email} | ${phone}`, 105, y, { align: 'center' });
+          y += 15;
+        }
+        
+        const addSection = (title, text) => {
+          if (!text) return;
+          doc.setFontSize(14);
+          doc.setTextColor(139, 92, 246);
+          doc.text(title, 15, y);
+          y += 8;
+          doc.setFontSize(11);
+          doc.setTextColor(0, 0, 0);
+          const lines = doc.splitTextToSize(text, 180);
+          doc.text(lines, 15, y);
+          y += lines.length * 6 + 10;
+        };
+        
+        addSection('SUMMARY', summary);
+        addSection('EXPERIENCE', exp);
+        addSection('EDUCATION', edu);
+        addSection('SKILLS', skills);
+        
+        doc.save(name.replace(/\s+/g, '_') + '_Resume.pdf');
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
+    }
+  </script>
+</body>
+</html>

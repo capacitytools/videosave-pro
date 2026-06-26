@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meme Generator - ToolVerse</title>
+  
+  <!-- Adsterra Scripts -->
+  <script async="async" data-cfasync="false" src="https://pl29820186.effectivecpmnetwork.com/31f16fc7913263f00e93a85356f6e7d6/invoke.js"></script>
+  <script src="https://pl29819831.effectivecpmnetwork.com/40eca62ffa3dd47c9612d8d993c2924e/invoke.js"></script>
+  
   <style>
     :root { --bg-main: #0a0a0a; --bg-card: #111111; --bg-input: #1a1a1a; --primary: #8b5cf6; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
@@ -16,13 +21,22 @@
     .header p { color: var(--text-muted); }
     .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; margin-bottom: 30px; }
     .section-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; color: var(--primary); }
+    .ad-container { margin: 30px auto; text-align: center; padding: 15px; background: var(--bg-card); border-radius: 10px; max-width: 728px; border: 1px solid var(--border); min-height: 250px; display: flex; align-items: center; justify-content: center; }
+    .ad-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
+    .ebook-sidebar { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); border: 2px solid var(--primary); border-radius: 15px; padding: 25px; margin: 30px 0; text-align: center; }
+    .ebook-sidebar h4 { color: var(--primary); margin-bottom: 10px; font-size: 1.3rem; }
+    .ebook-sidebar p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; line-height: 1.5; }
+    .ebook-sidebar a { display: inline-block; padding: 12px 30px; background: var(--primary); color: #000; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1rem; }
     input { width: 100%; padding: 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; color: var(--text-main); font-size: 16px; margin-bottom: 15px; }
     .btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), #6d28d9); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4); }
     canvas { max-width: 100%; border-radius: 10px; background: #000; margin: 15px 0; }
     .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 20px; }
     .back-link:hover { color: var(--primary); }
-    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .card { padding: 20px; } }
+    .style-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 15px 0; }
+    .style-btn { padding: 12px; background: var(--bg-input); border: 2px solid var(--border); border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.3s; }
+    .style-btn:hover, .style-btn.active { border-color: var(--primary); background: rgba(139, 92, 246, 0.1); }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .card { padding: 20px; } .style-options { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -33,9 +47,21 @@
 
   <div class="container">
     <a href="index.html" class="back-link">← Back to Home</a>
-    <div class="header">
-      <h1>😂 Meme Generator</h1>
-      <p>Create viral memes instantly</p>
+    <div class="header">      <h1>😂 Meme Generator</h1>
+      <p>Create viral memes and cartoon avatars</p>
+    </div>
+
+    <!-- AD SLOT 1: Top -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
+    </div>
+
+    <!-- PHOTOGRAPHY EBOOK PROMO -->
+    <div class="ebook-sidebar">
+      <h4>📸 Transform Your Photography with AI</h4>
+      <p>Create stunning 8K fashion images that look like they were shot by professionals. No expensive equipment needed!</p>
+      <a href="https://selar.com/14711117ox" target="_blank">🚀 Get Instant Access</a>
     </div>
 
     <div class="card">
@@ -45,22 +71,81 @@
       <canvas id="memeCanvas" width="600" height="600" style="display: none;"></canvas>
       
       <div id="memeControls" style="display: none;">
-        <input type="text" id="memeTop" placeholder="Top Text" oninput="drawMeme()">
-        <input type="text" id="memeBottom" placeholder="Bottom Text" oninput="drawMeme()">
-        <button class="btn" onclick="downloadMeme()">⬇ Download Meme</button>      </div>
+        <div class="section-title" style="margin-top: 20px;">Choose Style</div>
+        <div class="style-options">
+          <div class="style-btn active" onclick="selectStyle('meme', this)">
+            <div style="font-size: 2rem;">😂</div>
+            <div>Meme</div>
+          </div>
+          <div class="style-btn" onclick="selectStyle('cartoon', this)">
+            <div style="font-size: 2rem;">🎨</div>
+            <div>Cartoon</div>
+          </div>
+          <div class="style-btn" onclick="selectStyle('avatar', this)">
+            <div style="font-size: 2rem;">👤</div>
+            <div>Avatar</div>
+          </div>
+        </div>
+
+        <div id="memeTextOptions">
+          <input type="text" id="memeTop" placeholder="Top Text" oninput="drawMeme()">
+          <input type="text" id="memeBottom" placeholder="Bottom Text" oninput="drawMeme()">
+        </div>
+
+        <div id="cartoonOptions" style="display: none;">
+          <p style="color: var(--text-muted); margin-bottom: 15px;">AI will convert your image to cartoon style</p>
+          <button class="btn" onclick="convertToCartoon()">🎨 Convert to Cartoon</button>
+        </div>
+        <div id="avatarOptions" style="display: none;">
+          <p style="color: var(--text-muted); margin-bottom: 15px;">AI will create an avatar version of your image</p>
+          <button class="btn" onclick="convertToAvatar()">👤 Create Avatar</button>
+        </div>
+
+        <button class="btn" onclick="downloadMeme()" id="downloadBtn" style="display: none;">⬇ Download</button>
+      </div>
+    </div>
+
+    <!-- AD SLOT 2: Bottom -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
     </div>
   </div>
 
   <script>
     let memeImg = null;
+    let currentStyle = 'meme';
+
+    function selectStyle(style, btn) {
+      currentStyle = style;
+      document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      document.getElementById('memeTextOptions').style.display = style === 'meme' ? 'block' : 'none';
+      document.getElementById('cartoonOptions').style.display = style === 'cartoon' ? 'block' : 'none';
+      document.getElementById('avatarOptions').style.display = style === 'avatar' ? 'block' : 'none';
+      document.getElementById('downloadBtn').style.display = 'none';
+      
+      if (memeImg && style === 'meme') {
+        drawMeme();
+      }
+    }
 
     function loadMeme(event) {
       const file = event.target.files[0];
       if (!file) return;
       
       const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = new Image();
+      reader.onload = function(e) {        const img = new Image();
         img.onload = function() {
           memeImg = img;
           const canvas = document.getElementById('memeCanvas');
@@ -74,18 +159,16 @@
     }
 
     function drawMeme() {
-      if (!memeImg) return;
+      if (!memeImg || currentStyle !== 'meme') return;
       
       const canvas = document.getElementById('memeCanvas');
       const ctx = canvas.getContext('2d');
       
-      // Resize canvas to fit image
       canvas.width = Math.min(memeImg.width, 600);
       canvas.height = canvas.width * (memeImg.height / memeImg.width);
       
       ctx.drawImage(memeImg, 0, 0, canvas.width, canvas.height);
       
-      // Add text
       ctx.font = `bold ${canvas.width * 0.08}px Impact`;
       ctx.fillStyle = 'white';
       ctx.strokeStyle = 'black';
@@ -96,19 +179,94 @@
       const bottomText = document.getElementById('memeBottom').value.toUpperCase();
       
       if (topText) {
-        ctx.strokeText(topText, canvas.width / 2, canvas.height * 0.1);        ctx.fillText(topText, canvas.width / 2, canvas.height * 0.1);
+        ctx.strokeText(topText, canvas.width / 2, canvas.height * 0.1);
+        ctx.fillText(topText, canvas.width / 2, canvas.height * 0.1);
       }
       
       if (bottomText) {
         ctx.strokeText(bottomText, canvas.width / 2, canvas.height * 0.9);
         ctx.fillText(bottomText, canvas.width / 2, canvas.height * 0.9);
       }
+      
+      document.getElementById('downloadBtn').style.display = 'block';
+    }
+
+    async function convertToCartoon() {
+      if (!memeImg) return;
+      
+      const canvas = document.getElementById('memeCanvas');      const ctx = canvas.getContext('2d');
+      
+      canvas.width = Math.min(memeImg.width, 600);
+      canvas.height = canvas.width * (memeImg.height / memeImg.width);
+      
+      // Draw original
+      ctx.drawImage(memeImg, 0, 0, canvas.width, canvas.height);
+      
+      // Get image data
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+      
+      // Apply cartoon filter
+      for (let i = 0; i < data.length; i += 4) {
+        // Increase contrast and saturation
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+        
+        // Simple cartoon effect - increase brightness and saturation
+        data[i] = Math.min(255, r * 1.2);     // R
+        data[i + 1] = Math.min(255, g * 1.2); // G
+        data[i + 2] = Math.min(255, b * 1.2); // B
+      }
+      
+      ctx.putImageData(imageData, 0, 0);
+      
+      // Add edge detection effect (simplified)
+      ctx.globalCompositeOperation = 'multiply';
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(0, 0, canvas.width, canvas.height);
+      
+      document.getElementById('downloadBtn').style.display = 'block';
+    }
+
+    async function convertToAvatar() {
+      if (!memeImg) return;
+      
+      const canvas = document.getElementById('memeCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      canvas.width = Math.min(memeImg.width, 600);
+      canvas.height = canvas.width * (memeImg.height / memeImg.width);
+      
+      // Draw original
+      ctx.drawImage(memeImg, 0, 0, canvas.width, canvas.height);
+      
+      // Get image data
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);      const data = imageData.data;
+      
+      // Apply avatar filter - more stylized
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+        
+        // Create stylized avatar look
+        const avg = (r + g + b) / 3;
+        data[i] = avg * 1.1;     // R
+        data[i + 1] = avg * 0.9; // G
+        data[i + 2] = avg * 1.2; // B
+      }
+      
+      ctx.putImageData(imageData, 0, 0);
+      
+      document.getElementById('downloadBtn').style.display = 'block';
     }
 
     function downloadMeme() {
       const canvas = document.getElementById('memeCanvas');
       const a = document.createElement('a');
-      a.download = 'meme.png';
+      a.download = currentStyle + '.png';
       a.href = canvas.toDataURL();
       a.click();
     }

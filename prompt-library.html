@@ -43,8 +43,316 @@
 </head>
 <body>
   <nav>
-    <a href="index.html" class="logo">← ToolVerse</a>
-    <div style="color: var(--primary); font-weight: bold;">AI Prompt Library</div>
+    <!-- Complete Navigation with Back Button, Search, and Dropdown Menu -->
+<nav style="background: var(--bg-card); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 1000;">
+  
+  <!-- Left Side: Back Button + Logo -->
+  <div style="display: flex; align-items: center; gap: 15px;">
+    <!-- Back Button -->
+    <button onclick="history.back()" style="background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); width: 40px; height: 40px; border-radius: 8px; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center;" title="Go Back">
+      ←
+    </button>
+    <!-- Logo -->
+    <a href="index.html" style="font-size: 1.8rem; font-weight: bold; background: linear-gradient(135deg, var(--primary), #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none;">ToolVerse</a>
+  </div>
+  
+  <!-- Search Bar (Hidden on mobile, shown on desktop) -->
+  <div style="flex: 1; max-width: 500px; margin: 0 20px;">
+    <input type="text" id="globalSearch" placeholder="🔍 Search tools, blog posts, profiles..." 
+           style="width: 100%; padding: 10px 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 25px; color: var(--text-main); font-size: 14px; outline: none;"
+           onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'">
+  </div>
+  
+  <!-- Menu Button -->
+  <button onclick="toggleMenu()" style="background: var(--primary); border: none; color: #fff; width: 45px; height: 45px; border-radius: 10px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center;">☰</button>
+  
+  <!-- Dropdown Menu -->
+  <div id="dropdownMenu" style="display: none; position: absolute; top: 75px; right: 25px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 15px; padding: 15px; min-width: 350px; max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+    
+    <!-- Individual Tools -->
+    <div style="margin-bottom: 15px;">
+      <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Quick Access Tools</div>
+      <a href="downloader.html" style="display: flex; align-items: center; gap: 12px; padding: 10px; color: var(--text-main); text-decoration: none; border-radius: 8px; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--text-main)'">
+        <span style="font-size: 1.5rem;">📥</span>
+        <span>Universal Video Downloader</span>
+      </a>
+      <a href="tts.html" style="display: flex; align-items: center; gap: 12px; padding: 10px; color: var(--text-main); text-decoration: none; border-radius: 8px; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--text-main)'">
+        <span style="font-size: 1.5rem;">🎙️</span>
+        <span>Text to Speech</span>
+      </a>
+      <a href="image-gen.html" style="display: flex; align-items: center; gap: 12px; padding: 10px; color: var(--text-main); text-decoration: none; border-radius: 8px; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--text-main)'">
+        <span style="font-size: 1.5rem;">🎨</span>
+        <span>AI Image Generator</span>
+      </a>
+      <a href="ebook.html" style="display: flex; align-items: center; gap: 12px; padding: 10px; color: var(--text-main); text-decoration: none; border-radius: 8px; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--text-main)'">
+        <span style="font-size: 1.5rem;">📖</span>
+        <span>Ebook & PDF Tools</span>
+      </a>
+      <a href="resume.html" style="display: flex; align-items: center; gap: 12px; padding: 10px; color: var(--text-main); text-decoration: none; border-radius: 8px; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--text-main)'">
+        <span style="font-size: 1.5rem;">📝</span>
+        <span>Resume Builder</span>
+      </a>
+      <a href="meme.html" style="display: flex; align-items: center; gap: 12px; padding: 10px; color: var(--text-main); text-decoration: none; border-radius: 8px; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--text-main)'">        <span style="font-size: 1.5rem;">😂</span>
+        <span>Meme Generator</span>
+      </a>
+    </div>
+    
+    <div style="border-top: 1px solid var(--border); margin: 10px 0;"></div>
+    
+    <!-- Toolkits Folders -->
+    <div style="margin-bottom: 15px;">
+      <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Toolkits</div>
+      
+      <!-- AI Viral Content Toolkit -->
+      <div style="margin-bottom: 10px;">
+        <div onclick="toggleSubmenu('viralTools')" style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: rgba(255, 215, 0, 0.1); border: 1px solid var(--yellow); border-radius: 8px; cursor: pointer; color: var(--yellow);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.5rem;">🔥</span>
+            <span style="font-weight: bold;">AI Viral Content (21 tools)</span>
+          </div>
+          <span id="viralArrow" style="transition: transform 0.3s;">▼</span>
+        </div>
+        <div id="viralTools" style="display: none; margin-top: 10px; padding-left: 10px;">
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🎯</span> Viral Hook Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>✍️</span> Caption Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>#️⃣</span> Hashtag Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🎬</span> Video Script Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>📺</span> YouTube Title Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>💡</span> Story Idea Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>📘</span> Facebook Post Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>📢</span> CTA Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>👤</span> Bio Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🖼️</span> Thumbnail Text Generator          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>💬</span> Comment Reply Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>📊</span> Poll Question Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>💼</span> Business Name Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🔖</span> Username Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🔍</span> SEO Keyword Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🎵</span> TikTok Hook Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>📝</span> YouTube Description
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🛍️</span> Product Description
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>💭</span> Quote Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🤖</span> AI Prompt Generator
+          </a>
+          <a href="viral-content.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>😊</span> Emoji Caption Tool
+          </a>
+        </div>
+      </div>
+      
+      <!-- Social Media Image Toolkit -->
+      <div style="margin-bottom: 10px;">
+        <div onclick="toggleSubmenu('imageTools')" style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: rgba(255, 107, 0, 0.1); border: 1px solid var(--orange); border-radius: 8px; cursor: pointer; color: var(--orange);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.5rem;">🎨</span>
+            <span style="font-weight: bold;">Image Toolkit (8 tools)</span>
+          </div>
+          <span id="imageArrow" style="transition: transform 0.3s;">▼</span>
+        </div>
+        <div id="imageTools" style="display: none; margin-top: 10px; padding-left: 10px;">
+          <a href="image-toolkit.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,107,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>📐</span> Social Media Size
+          </a>          <a href="image-toolkit.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,107,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>✂️</span> Remove Background
+          </a>
+          <a href="image-toolkit.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,107,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🗜️</span> Compress Image
+          </a>
+          <a href="image-toolkit.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,107,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🌫️</span> Blur Background
+          </a>
+          <a href="image-toolkit.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,107,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>©️</span> Add Watermark
+          </a>
+          <a href="image-toolkit.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,107,0,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🌑</span> Add Shadow
+          </a>
+        </div>
+      </div>
+      
+      <!-- Video Creator Toolkit -->
+      <div style="margin-bottom: 10px;">
+        <div onclick="toggleSubmenu('videoTools')" style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: rgba(139, 92, 246, 0.1); border: 1px solid var(--purple); border-radius: 8px; cursor: pointer; color: var(--purple);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.5rem;">🎬</span>
+            <span style="font-weight: bold;">Video Creator (7 tools)</span>
+          </div>
+          <span id="videoArrow" style="transition: transform 0.3s;">▼</span>
+        </div>
+        <div id="videoTools" style="display: none; margin-top: 10px; padding-left: 10px;">
+          <a href="video-creator.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(139,92,246,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>📝</span> Subtitle Generator
+          </a>
+          <a href="video-creator.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(139,92,246,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🎙️</span> Voice-over Script
+          </a>
+          <a href="video-creator.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(139,92,246,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🎣</span> Hook Generator
+          </a>
+          <a href="video-creator.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(139,92,246,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🖼️</span> Thumbnail Text
+          </a>
+          <a href="video-creator.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(139,92,246,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>📢</span> CTA Generator
+          </a>
+          <a href="video-creator.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(139,92,246,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>📺</span> Video Title
+          </a>
+          <a href="video-creator.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(139,92,246,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>💡</span> Video Idea
+          </a>
+        </div>      </div>
+      
+      <!-- AI Prompt Library -->
+      <div style="margin-bottom: 10px;">
+        <div onclick="toggleSubmenu('promptTools')" style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: rgba(0, 255, 136, 0.1); border: 1px solid var(--green); border-radius: 8px; cursor: pointer; color: var(--green);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.5rem;">💚</span>
+            <span style="font-weight: bold;">AI Prompt Library (8)</span>
+          </div>
+          <span id="promptArrow" style="transition: transform 0.3s;">▼</span>
+        </div>
+        <div id="promptTools" style="display: none; margin-top: 10px; padding-left: 10px;">
+          <a href="prompt-library.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(0,255,136,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>💬</span> ChatGPT
+          </a>
+          <a href="prompt-library.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(0,255,136,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>✨</span> Gemini
+          </a>
+          <a href="prompt-library.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(0,255,136,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🤖</span> Claude
+          </a>
+          <a href="prompt-library.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(0,255,136,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🎨</span> Midjourney
+          </a>
+          <a href="prompt-library.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(0,255,136,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>⚡</span> Flux
+          </a>
+          <a href="prompt-library.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(0,255,136,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🎬</span> Veo
+          </a>
+          <a href="prompt-library.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(0,255,136,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🎥</span> Kling
+          </a>
+          <a href="prompt-library.html" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: var(--text-main); text-decoration: none; border-radius: 6px; font-size: 0.9rem;" onmouseover="this.style.background='rgba(0,255,136,0.2)'" onmouseout="this.style.background='transparent'">
+            <span>🎞️</span> Runway
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div style="border-top: 1px solid var(--border); margin: 10px 0;"></div>
+    
+    <!-- Other Pages -->
+    <div>
+      <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">More</div>
+      <a href="blog.html" style="display: flex; align-items: center; gap: 12px; padding: 10px; color: var(--text-main); text-decoration: none; border-radius: 8px; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--text-main)'">
+        <span style="font-size: 1.5rem;">📰</span>
+        <span>Blog for Tools</span>
+      </a>
+      <a href="profile.html" style="display: flex; align-items: center; gap: 12px; padding: 10px; color: var(--text-main); text-decoration: none; border-radius: 8px; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--text-main)'">        <span style="font-size: 1.5rem;">👤</span>
+        <span>Tech Profiles</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Toggle main menu
+  function toggleMenu() {
+    const menu = document.getElementById('dropdownMenu');
+    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+  }
+  
+  // Toggle submenus
+  function toggleSubmenu(id) {
+    const submenu = document.getElementById(id);
+    const arrow = document.getElementById(id.replace('Tools', 'Arrow'));
+    if (submenu.style.display === 'none') {
+      submenu.style.display = 'block';
+      arrow.style.transform = 'rotate(180deg)';
+    } else {
+      submenu.style.display = 'none';
+      arrow.style.transform = 'rotate(0deg)';
+    }
+  }
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const menu = document.getElementById('dropdownMenu');
+    const menuBtn = event.target.closest('button');
+    if (!menuBtn && !menu.contains(event.target)) {
+      menu.style.display = 'none';
+    }
+  });
+  
+  // Global Search Function
+  document.getElementById('globalSearch').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    if (searchTerm.length < 2) return;
+    
+    // Search through all pages
+    const searchPages = {
+      'downloader': ['video', 'download', 'youtube', 'tiktok', 'facebook'],
+      'tts': ['text', 'speech', 'audio', 'voice'],
+      'image-gen': ['image', 'generate', 'ai image'],
+      'ebook': ['ebook', 'pdf', 'doc', 'convert'],
+      'resume': ['resume', 'cv', 'job'],
+      'meme': ['meme', 'funny', 'cartoon'],
+      'viral-content': ['viral', 'hook', 'caption', 'hashtag', 'script'],      'image-toolkit': ['image', 'resize', 'background', 'watermark'],
+      'video-creator': ['video', 'subtitle', 'voiceover', 'thumbnail'],
+      'prompt-library': ['prompt', 'chatgpt', 'gemini', 'claude'],
+      'blog': ['blog', 'tutorial', 'guide'],
+      'profile': ['profile', 'tech', 'company']
+    };
+    
+    // Find matching page
+    for (const [page, keywords] of Object.entries(searchPages)) {
+      if (keywords.some(k => searchTerm.includes(k))) {
+        window.location.href = page + '.html';
+        return;
+      }
+    }
+  });
+</script>
   </nav>
 
   <div class="container">    <a href="index.html" class="back-link">← Back to Home</a>

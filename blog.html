@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog - ToolVerse</title>
+  
+  <!-- Adsterra Scripts -->
+  <script async="async" data-cfasync="false" src="https://pl29820186.effectivecpmnetwork.com/31f16fc7913263f00e93a85356f6e7d6/invoke.js"></script>
+  <script src="https://pl29819831.effectivecpmnetwork.com/40eca62ffa3dd47c9612d8d993c2924e/invoke.js"></script>
+  
   <style>
     :root { --bg-main: #0a0a0a; --bg-card: #111111; --primary: #8b5cf6; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
@@ -14,22 +19,35 @@
     .header { text-align: center; margin-bottom: 40px; }
     .header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
     .header p { color: var(--text-muted); }
+    .ad-container { margin: 30px auto; text-align: center; padding: 15px; background: var(--bg-card); border-radius: 10px; max-width: 728px; border: 1px solid var(--border); min-height: 250px; display: flex; align-items: center; justify-content: center; }
+    .ad-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
+    .ebook-sidebar { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); border: 2px solid var(--primary); border-radius: 15px; padding: 25px; margin: 30px 0; text-align: center; }
+    .ebook-sidebar h4 { color: var(--primary); margin-bottom: 10px; font-size: 1.3rem; }
+    .ebook-sidebar p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; line-height: 1.5; }
+    .ebook-sidebar a { display: inline-block; padding: 12px 30px; background: var(--primary); color: #000; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1rem; }
     .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-    .blog-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 15px; padding: 25px; transition: all 0.3s; }
+    .blog-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 15px; padding: 25px; transition: all 0.3s; cursor: pointer; }
     .blog-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2); border-color: var(--primary); }
-    .blog-card h3 { color: var(--primary); margin-bottom: 10px; }
+    .blog-card h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.3rem; }
     .blog-card p { color: var(--text-muted); line-height: 1.6; margin-bottom: 15px; }
-    .blog-card .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px; }
+    .blog-card .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+    .blog-card .category { display: inline-block; padding: 4px 12px; background: rgba(139, 92, 246, 0.2); border-radius: 20px; font-size: 0.85rem; color: var(--primary); margin-top: 10px; }
     .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 20px; }
     .back-link:hover { color: var(--primary); }
-    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; overflow-y: auto; }
+    .modal-content { background: var(--bg-card); max-width: 800px; margin: 50px auto; padding: 40px; border-radius: 15px; position: relative; }
+    .close-modal { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: var(--text-muted); cursor: pointer; }
+    .close-modal:hover { color: var(--primary); }
+    .modal-content h2 { color: var(--primary); margin-bottom: 15px; font-size: 2rem; }
+    .modal-content .date { color: var(--text-muted); margin-bottom: 20px; }
+    .modal-content .content { line-height: 1.8; color: var(--text-main); }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .modal-content { margin: 20px; padding: 20px; } }
   </style>
 </head>
 <body>
   <nav>
     <a href="index.html" class="logo">← ToolVerse</a>
-    <div style="color: var(--primary); font-weight: bold;">Blog</div>
-  </nav>
+    <div style="color: var(--primary); font-weight: bold;">Blog</div>  </nav>
 
   <div class="container">
     <a href="index.html" class="back-link">← Back to Home</a>
@@ -38,28 +56,174 @@
       <p>Learn tips, tricks, and tutorials for all our tools</p>
     </div>
 
-    <div class="blog-grid">
-      <div class="blog-card">
-        <div class="date">📅 June 26, 2026</div>
-        <h3>How to Create Viral Content with AI</h3>
-        <p>Discover the secrets to creating viral hooks, captions, and scripts using our AI Viral Content Toolkit...</p>
-        <a href="#" style="color: var(--primary);">Read More →</a>
-      </div>
-      
-      <div class="blog-card">
-        <div class="date">📅 June 25, 2026</div>
-        <h3>10 Tips for Perfect Social Media Images</h3>
-        <p>Learn how to create stunning images for Instagram, Facebook, and TikTok using AI tools...</p>
-        <a href="#" style="color: var(--primary);">Read More →</a>
-      </div>
-      
-      <div class="blog-card">
-        <div class="date">📅 June 24, 2026</div>
-        <h3>Video Creation Masterclass</h3>
-        <p>Master the art of video creation with our comprehensive guide to subtitles, hooks, and thumbnails...</p>
-        <a href="#" style="color: var(--primary);">Read More →</a>
-      </div>
+    <!-- AD SLOT 1: Top -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
+    </div>
+
+    <!-- PHOTOGRAPHY EBOOK PROMO -->
+    <div class="ebook-sidebar">
+      <h4>📸 Transform Your Photography with AI</h4>
+      <p>Create stunning 8K fashion images that look like they were shot by professionals. No expensive equipment needed!</p>
+      <a href="https://selar.com/14711117ox" target="_blank">🚀 Get Instant Access</a>
+    </div>
+
+    <div class="blog-grid" id="blogGrid">
+      <!-- Blog posts will be loaded here by JavaScript -->
+    </div>
+
+    <!-- AD SLOT 2: Bottom -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
     </div>
   </div>
+
+  <!-- Modal for full post -->
+  <div class="modal" id="postModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <div class="date" id="modalDate"></div>
+      <div class="content" id="modalContent"></div>
+    </div>  </div>
+
+  <script>
+    // ============================================
+    // HOW TO ADD NEW BLOG POSTS:
+    // Simply add a new object to this array
+    // ============================================
+    const blogPosts = [
+      {
+        id: 1,
+        title: "How to Create Viral Content with AI",
+        date: "📅 June 26, 2026",
+        category: "AI Tools",
+        excerpt: "Discover the secrets to creating viral hooks, captions, and scripts using our AI Viral Content Toolkit...",
+        content: `
+          <p>Creating viral content doesn't have to be complicated. With the right AI tools, you can generate engaging content in minutes.</p>
+          
+          <h3>Step 1: Use Viral Hook Generators</h3>
+          <p>The first 3 seconds of your content are crucial. Our AI Viral Hook Generator helps you create attention-grabbing openings that stop the scroll.</p>
+          
+          <h3>Step 2: Write Engaging Captions</h3>
+          <p>Use our Caption Generator to create captions that encourage comments and shares. Include emojis and ask questions to boost engagement.</p>
+          
+          <h3>Step 3: Optimize with Hashtags</h3>
+          <p>Our Hashtag Generator finds trending and relevant hashtags to maximize your reach across platforms.</p>
+          
+          <h3>Step 4: Create Video Scripts</h3>
+          <p>Use the Video Script Generator to create complete scripts with hooks, main content, and strong calls-to-action.</p>
+          
+          <p><strong>Pro Tip:</strong> Consistency is key. Use these tools daily to build a content library that drives results!</p>
+        `
+      },
+      {
+        id: 2,
+        title: "10 Tips for Perfect Social Media Images",
+        date: "📅 June 25, 2026",
+        category: "Design",
+        excerpt: "Learn how to create stunning images for Instagram, Facebook, and TikTok using AI tools...",
+        content: `
+          <p>Visual content is king on social media. Here are 10 tips to make your images stand out:</p>
+          
+          <h3>1. Use the Right Dimensions</h3>
+          <p>Each platform has optimal image sizes. Use our Social Media Size Generator to create perfectly sized images.</p>
+          
+          <h3>2. Remove Backgrounds</h3>
+          <p>Clean backgrounds make your subject pop. Our Remove Background tool does this instantly.</p>
+          
+          <h3>3. Compress Without Quality Loss</h3>
+          <p>Large files slow down loading. Use our Compress Image tool to reduce file size while maintaining quality.</p>
+                    <h3>4. Add Professional Watermarks</h3>
+          <p>Protect your work with our Watermark tool. Place your logo or brand name strategically.</p>
+          
+          <h3>5. Use AI Image Generation</h3>
+          <p>Can't find the perfect image? Generate it with AI using our Image Generator tool.</p>
+          
+          <p><strong>Remember:</strong> Consistency in your visual style builds brand recognition!</p>
+        `
+      },
+      {
+        id: 3,
+        title: "Video Creation Masterclass",
+        date: "📅 June 24, 2026",
+        category: "Video",
+        excerpt: "Master the art of video creation with our comprehensive guide to subtitles, hooks, and thumbnails...",
+        content: `
+          <p>Video content dominates social media. Here's how to create professional videos:</p>
+          
+          <h3>1. Start with a Strong Hook</h3>
+          <p>Use our Video Hook Generator to create openings that grab attention in the first 3 seconds.</p>
+          
+          <h3>2. Add Subtitles</h3>
+          <p>85% of videos are watched without sound. Our Subtitle Generator creates accurate captions automatically.</p>
+          
+          <h3>3. Create Click-Worthy Thumbnails</h3>
+          <p>Use our Thumbnail Text Generator to create compelling thumbnail text that increases click-through rates.</p>
+          
+          <h3>4. Write Effective CTAs</h3>
+          <p>Our CTA Generator helps you create calls-to-action that convert viewers into subscribers or customers.</p>
+          
+          <h3>5. Optimize Titles</h3>
+          <p>Use the Video Title Generator to create SEO-friendly titles that rank in search results.</p>
+          
+          <p><strong>Bonus:</strong> Use our Voice-over Script Generator to create professional narration scripts!</p>
+        `
+      }
+      // TO ADD A NEW POST: Copy one of the objects above, paste it here, and edit the content
+    ];
+
+    // Load blog posts
+    function loadBlogPosts() {
+      const grid = document.getElementById('blogGrid');
+      grid.innerHTML = blogPosts.map(post => `
+        <div class="blog-card" onclick="openPost(${post.id})">
+          <div class="date">${post.date}</div>
+          <h3>${post.title}</h3>
+          <p>${post.excerpt}</p>
+          <span class="category">${post.category}</span>
+        </div>
+      `).join('');    }
+
+    // Open post in modal
+    function openPost(id) {
+      const post = blogPosts.find(p => p.id === id);
+      if (!post) return;
+      
+      document.getElementById('modalTitle').textContent = post.title;
+      document.getElementById('modalDate').textContent = post.date;
+      document.getElementById('modalContent').innerHTML = post.content;
+      document.getElementById('postModal').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('postModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('postModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+
+    // Load posts on page load
+    loadBlogPosts();
+  </script>
 </body>
 </html>

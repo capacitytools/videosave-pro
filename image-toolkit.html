@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Image Toolkit - ToolVerse</title>
+  <script async="async" data-cfasync="false" src="//pl29819831.effectivecpmnetwork.com/40eca62ffa3dd47c9612d8d993c2924e/invoke.js"></script>
+  <style>
+    :root { --bg-main: #0a0a0a; --bg-card: #111111; --bg-input: #1a1a1a; --primary: #FF6B00; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background: var(--bg-main); color: var(--text-main); min-height: 100vh; }
+    nav { background: var(--bg-card); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); }
+    .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-decoration: none; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+    .header p { color: var(--text-muted); }
+    .ad-container { margin: 30px auto; text-align: center; padding: 10px; background: var(--bg-card); border-radius: 10px; max-width: 728px; border: 1px solid var(--border); }
+    .ad-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
+    .ebook-sidebar { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); border: 2px solid var(--primary); border-radius: 15px; padding: 20px; margin: 30px 0; text-align: center; }
+    .ebook-sidebar h4 { color: var(--primary); margin-bottom: 10px; }
+    .ebook-sidebar p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
+    .ebook-sidebar a { display: inline-block; padding: 10px 25px; background: var(--primary); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 0.9rem; }
+    .tool-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 15px; padding: 30px; margin-bottom: 25px; }
+    .tool-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+    .tool-icon { font-size: 2rem; }
+    .tool-title h3 { color: var(--primary); margin-bottom: 5px; }
+    .tool-title p { color: var(--text-muted); font-size: 0.9rem; }
+    textarea, input, select { width: 100%; padding: 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px; color: var(--text-main); font-size: 16px; margin-bottom: 15px; }
+    textarea { min-height: 100px; resize: vertical; }
+    .btn { padding: 15px 30px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(255, 107, 0, 0.4); }
+    .result-box { margin-top: 20px; padding: 20px; background: var(--bg-input); border-left: 4px solid var(--primary); border-radius: 10px; display: none; }
+    .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 20px; }
+    .back-link:hover { color: var(--primary); }
+    .size-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 15px 0; }
+    .size-option { padding: 12px; background: var(--bg-input); border: 2px solid var(--border); border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.3s; }
+    .size-option:hover, .size-option.active { border-color: var(--primary); background: rgba(255, 107, 0, 0.1); }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .tool-section { padding: 20px; } .ad-container { max-width: 100%; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">← ToolVerse</a>
+    <div style="color: var(--primary); font-weight: bold;">Image Toolkit</div>
+  </nav>
+
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    <div class="header">      <h1>🎨 Social Media Image Toolkit</h1>
+      <p>Create perfectly sized images and professional graphics</p>
+    </div>
+
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
+    </div>
+
+    <div class="ebook-sidebar">
+      <h4>📸 AI Fashion Photography Kit</h4>
+      <p>Master 8K fashion imagery with AI. Only ₦2,000!</p>
+      <a href="https://selar.com/14711117ox" target="_blank">Get Now →</a>
+    </div>
+
+    <div class="tool-section">
+      <div class="tool-header">
+        <div class="tool-icon">📐</div>
+        <div class="tool-title"><h3>Social Media Size Generator</h3><p>Generate images in perfect dimensions</p></div>
+      </div>
+      <textarea id="imagePrompt" placeholder="Describe the image you want to create..."></textarea>
+      <div class="size-grid">
+        <div class="size-option active" onclick="selectSize(1080, 1080, this)"><div style="font-weight: bold;">Instagram Post</div><div style="font-size: 0.85rem; color: var(--text-muted);">1080 x 1080</div></div>
+        <div class="size-option" onclick="selectSize(1080, 1920, this)"><div style="font-weight: bold;">Story/Reel</div><div style="font-size: 0.85rem; color: var(--text-muted);">1080 x 1920</div></div>
+        <div class="size-option" onclick="selectSize(1280, 720, this)"><div style="font-weight: bold;">YouTube Thumb</div><div style="font-size: 0.85rem; color: var(--text-muted);">1280 x 720</div></div>
+      </div>
+      <input type="hidden" id="imgWidth" value="1080">
+      <input type="hidden" id="imgHeight" value="1080">
+      <button class="btn" onclick="generateImage()">Generate Image</button>
+      <div class="result-box" id="imageResult"></div>
+    </div>
+
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <!-- Add your second ad script here -->
+    </div>
+
+    <div class="tool-section">
+      <div class="tool-header">
+        <div class="tool-icon">✂️</div>
+        <div class="tool-title"><h3>Compress Image</h3><p>Reduce file size without losing quality</p></div>
+      </div>
+      <input type="file" id="compressFile" accept="image/*">
+      <select id="compressQuality">
+        <option value="0.8">High Quality (80%)</option>
+        <option value="0.6">Medium Quality (60%)</option>
+        <option value="0.4">Low Quality (40%)</option>
+      </select>
+      <button class="btn" onclick="compressImage()">Compress</button>
+      <div class="result-box" id="compressResult"></div>    </div>
+
+    <div class="tool-section">
+      <div class="tool-header">
+        <div class="tool-icon">©️</div>
+        <div class="tool-title"><h3>Add Watermark</h3><p>Protect your images with text watermark</p></div>
+      </div>
+      <input type="file" id="watermarkFile" accept="image/*">
+      <input type="text" id="watermarkText" placeholder="Watermark text">
+      <button class="btn" onclick="addWatermark()">Add Watermark</button>
+      <div class="result-box" id="watermarkResult"></div>
+    </div>
+
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <!-- Add your third ad script here -->
+    </div>
+  </div>
+
+  <footer style="text-align: center; padding: 30px; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 50px;">
+    <p>© 2026 ToolVerse · All Rights Reserved</p>
+  </footer>
+
+  <script>
+    function selectSize(w, h, el) {
+      document.getElementById('imgWidth').value = w;
+      document.getElementById('imgHeight').value = h;
+      document.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('active'));
+      el.classList.add('active');
+    }
+    async function generateImage() {
+      const prompt = document.getElementById('imagePrompt').value;
+      const w = document.getElementById('imgWidth').value;
+      const h = document.getElementById('imgHeight').value;
+      const result = document.getElementById('imageResult');
+      if (!prompt) return alert('Enter a description');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const seed = Math.floor(Math.random() * 10000);
+        const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${w}&height=${h}&model=flux&seed=${seed}&nologo=true`;
+        result.innerHTML = `<img src="${url}" style="max-width: 100%; border-radius: 10px; margin: 15px 0;"><br><a href="${url}" download="image.png" class="btn" style="display: inline-block; text-decoration: none; margin-top: 10px;">⬇ Download Image</a>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating image</p>'; }
+    }
+    async function compressImage() {
+      const file = document.getElementById('compressFile').files[0];
+      const quality = parseFloat(document.getElementById('compressQuality').value);
+      const result = document.getElementById('compressResult');
+      if (!file) return alert('Select an image');
+      result.style.display = 'block'; result.innerHTML = '<p>Compressing...</p>';
+      const reader = new FileReader();      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width; canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          const compressed = canvas.toDataURL('image/jpeg', quality);
+          const originalSize = (file.size / 1024).toFixed(2);
+          const compressedSize = (compressed.length * 0.75 / 1024).toFixed(2);
+          result.innerHTML = `<div style="margin-bottom: 15px;"><div>Original: ${originalSize} KB</div><div>Compressed: ${compressedSize} KB</div></div><a href="${compressed}" download="compressed.jpg" class="btn" style="display: inline-block; text-decoration: none;">⬇ Download</a>`;
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+    async function addWatermark() {
+      const file = document.getElementById('watermarkFile').files[0];
+      const text = document.getElementById('watermarkText').value;
+      const result = document.getElementById('watermarkResult');
+      if (!file || !text) return alert('Select image and enter text');
+      result.style.display = 'block'; result.innerHTML = '<p>Adding watermark...</p>';
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width; canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          ctx.font = `${img.width * 0.05}px Arial`;
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+          ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+          ctx.lineWidth = 3;
+          const textWidth = ctx.measureText(text).width;
+          const x = img.width - textWidth - 20;
+          const y = img.height - 20;
+          ctx.strokeText(text, x, y);
+          ctx.fillText(text, x, y);
+          const watermarked = canvas.toDataURL('image/jpeg', 0.9);
+          result.innerHTML = `<img src="${watermarked}" style="max-width: 100%; border-radius: 10px; margin: 15px 0;"><br><a href="${watermarked}" download="watermarked.jpg" class="btn" style="display: inline-block; text-decoration: none; margin-top: 10px;">⬇ Download</a>`;
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>

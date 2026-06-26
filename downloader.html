@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universal Video Downloader - ToolVerse</title>
+  <script async="async" data-cfasync="false" src="//pl29819831.effectivecpmnetwork.com/40eca62ffa3dd47c9612d8d993c2924e/invoke.js"></script>
+  <style>
+    :root { --bg-main: #0a0a0a; --bg-card: #111111; --bg-input: #1a1a1a; --primary: #8b5cf6; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background: var(--bg-main); color: var(--text-main); min-height: 100vh; }
+    nav { background: var(--bg-card); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); }
+    .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-decoration: none; }
+    .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+    .header p { color: var(--text-muted); }
+    .ad-container { margin: 30px auto; text-align: center; padding: 10px; background: var(--bg-card); border-radius: 10px; max-width: 728px; border: 1px solid var(--border); }
+    .ad-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
+    .ebook-sidebar { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); border: 2px solid var(--primary); border-radius: 15px; padding: 20px; margin: 30px 0; text-align: center; }
+    .ebook-sidebar h4 { color: var(--primary); margin-bottom: 10px; }
+    .ebook-sidebar p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
+    .ebook-sidebar a { display: inline-block; padding: 10px 25px; background: var(--primary); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 0.9rem; }
+    .platform-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 15px; padding: 25px; margin-bottom: 20px; }
+    .platform-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+    .platform-icon { font-size: 2rem; }
+    .platform-title { font-size: 1.3rem; font-weight: bold; }
+    input { width: 100%; padding: 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px; color: var(--text-main); font-size: 16px; margin-bottom: 15px; }
+    .btn { padding: 12px 25px; background: var(--primary); color: #fff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4); }
+    .result-box { margin-top: 15px; padding: 15px; background: var(--bg-input); border-left: 4px solid var(--primary); border-radius: 10px; display: none; }
+    .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 20px; }
+    .back-link:hover { color: var(--primary); }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .ad-container { max-width: 100%; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">← ToolVerse</a>
+    <div style="color: var(--primary); font-weight: bold;">Video Downloader</div>
+  </nav>
+
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    <div class="header">
+      <h1>📥 Universal Video Downloader</h1>
+      <p>Download videos from all major platforms</p>
+    </div>
+
+    <div class="ad-container">      <div class="ad-label">Advertisement</div>
+      <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
+    </div>
+
+    <div class="ebook-sidebar">
+      <h4>📸 AI Fashion Photography Kit</h4>
+      <p>Master 8K fashion imagery with AI. Only ₦2,000!</p>
+      <a href="https://selar.com/14711117ox" target="_blank">Get Now →</a>
+    </div>
+
+    <div class="platform-section">
+      <div class="platform-header"><div class="platform-icon">🎬</div><div class="platform-title">YouTube</div></div>
+      <input type="url" id="youtubeUrl" placeholder="Paste YouTube link here...">
+      <button class="btn" onclick="downloadFromPlatform('youtube')">Get Download Link</button>
+      <div class="result-box" id="youtubeResult"></div>
+    </div>
+
+    <div class="platform-section">
+      <div class="platform-header"><div class="platform-icon">👥</div><div class="platform-title">Facebook</div></div>
+      <input type="url" id="facebookUrl" placeholder="Paste Facebook link here...">
+      <button class="btn" onclick="downloadFromPlatform('facebook')">Get Download Link</button>
+      <div class="result-box" id="facebookResult"></div>
+    </div>
+
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <!-- Add your second ad script here -->
+    </div>
+
+    <div class="platform-section">
+      <div class="platform-header"><div class="platform-icon"></div><div class="platform-title">Instagram</div></div>
+      <input type="url" id="instagramUrl" placeholder="Paste Instagram link here...">
+      <button class="btn" onclick="downloadFromPlatform('instagram')">Get Download Link</button>
+      <div class="result-box" id="instagramResult"></div>
+    </div>
+
+    <div class="platform-section">
+      <div class="platform-header"><div class="platform-icon">🎵</div><div class="platform-title">TikTok</div></div>
+      <input type="url" id="tiktokUrl" placeholder="Paste TikTok link here...">
+      <button class="btn" onclick="downloadFromPlatform('tiktok')">Get Download Link</button>
+      <div class="result-box" id="tiktokResult"></div>
+    </div>
+
+    <div class="platform-section">
+      <div class="platform-header"><div class="platform-icon">🌐</div><div class="platform-title">Other Platforms</div></div>
+      <input type="url" id="otherUrl" placeholder="Paste any other video link here...">
+      <button class="btn" onclick="downloadFromPlatform('other')">Get Download Link</button>
+      <div class="result-box" id="otherResult"></div>
+    </div>
+  </div>
+  <footer style="text-align: center; padding: 30px; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 50px;">
+    <p>© 2026 ToolVerse · All Rights Reserved</p>
+  </footer>
+
+  <script>
+    function downloadFromPlatform(platform) {
+      const url = document.getElementById(platform + 'Url').value.trim();
+      const result = document.getElementById(platform + 'Result');
+      if (!url) { alert('Please enter a URL'); return; }
+      result.style.display = 'block';
+      result.innerHTML = '<p>Processing...</p>';
+
+      const downloadSites = {
+        youtube: [{ name: 'y2mate.com', url: 'https://y2mate.com' }, { name: 'ytmp3.cc', url: 'https://ytmp3.cc' }],
+        facebook: [{ name: 'fdown.net', url: 'https://fdown.net' }, { name: 'fbdown.net', url: 'https://fbdown.net' }],
+        instagram: [{ name: 'snapinsta.app', url: 'https://snapinsta.app' }, { name: 'instadownloader.io', url: 'https://instadownloader.io' }],
+        tiktok: [{ name: 'snaptik.app', url: 'https://snaptik.app' }, { name: 'ssstik.io', url: 'https://ssstik.io' }],
+        other: [{ name: 'savefrom.net', url: 'https://savefrom.net' }, { name: 'keepvid.works', url: 'https://keepvid.works' }]
+      };
+
+      const sites = downloadSites[platform];
+      let html = '<div style="margin-bottom: 15px;"><strong>Recommended Download Sites:</strong></div><div style="display: flex; flex-direction: column; gap: 10px;">';
+      sites.forEach(site => {
+        html += `<a href="${site.url}" target="_blank" class="btn" style="text-align: center;">📥 Open ${site.name}</a>`;
+      });
+      html += '</div><div style="margin-top: 15px; padding: 15px; background: var(--bg-input); border-radius: 8px; font-size: 0.9rem;"><strong>Instructions:</strong><br>1. Click any button above to open the download site<br>2. Paste your video URL on their site<br>3. Download your video</div>';
+      result.innerHTML = html;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Profiles - ToolVerse</title>
+  <style>
+    :root { --bg-main: #0a0a0a; --bg-card: #111111; --primary: #8b5cf6; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background: var(--bg-main); color: var(--text-main); min-height: 100vh; }
+    nav { background: var(--bg-card); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); }
+    .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-decoration: none; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+    .header p { color: var(--text-muted); }
+    .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+    .profile-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 15px; padding: 25px; transition: all 0.3s; }
+    .profile-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2); border-color: var(--primary); }
+    .profile-card h3 { color: var(--primary); margin-bottom: 10px; }
+    .profile-card p { color: var(--text-muted); line-height: 1.6; margin-bottom: 15px; }
+    .profile-card .tag { display: inline-block; padding: 4px 12px; background: rgba(139, 92, 246, 0.2); border-radius: 20px; font-size: 0.85rem; color: var(--primary); margin: 5px 5px 5px 0; }
+    .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 20px; }
+    .back-link:hover { color: var(--primary); }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">← ToolVerse</a>
+    <div style="color: var(--primary); font-weight: bold;">Tech Profiles</div>
+  </nav>
+
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    <div class="header">
+      <h1>👤 Tech Company Profiles</h1>
+      <p>Discover tech companies and their ongoing projects</p>
+    </div>
+
+    <div class="profile-grid">
+      <div class="profile-card">
+        <h3>OpenAI</h3>
+        <p>Leading AI research company developing advanced language models and AI safety research.</p>
+        <div>
+          <span class="tag">ChatGPT</span>
+          <span class="tag">GPT-4</span>
+          <span class="tag">AI Safety</span>
+        </div>
+      </div>
+      
+      <div class="profile-card">
+        <h3>Google</h3>
+        <p>Tech giant developing Gemini AI, Bard, and various machine learning technologies.</p>
+        <div>
+          <span class="tag">Gemini</span>
+          <span class="tag">Bard</span>
+          <span class="tag">TensorFlow</span>
+        </div>
+      </div>
+      
+      <div class="profile-card">
+        <h3>Anthropic</h3>
+        <p>AI safety company focused on creating helpful, harmless, and honest AI assistants.</p>
+        <div>
+          <span class="tag">Claude</span>
+          <span class="tag">AI Safety</span>
+          <span class="tag">Constitutional AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -4,23 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Prompt Library - ToolVerse</title>
-  <script async="async" data-cfasync="false" src="//pl29819831.effectivecpmnetwork.com/40eca62ffa3dd47c9612d8d993c2924e/invoke.js"></script>
+  
+  <!-- Adsterra Scripts -->
+  <script async="async" data-cfasync="false" src="https://pl29820186.effectivecpmnetwork.com/31f16fc7913263f00e93a85356f6e7d6/invoke.js"></script>
+  <script src="https://pl29819831.effectivecpmnetwork.com/40eca62ffa3dd47c9612d8d993c2924e/invoke.js"></script>
+  
   <style>
     :root { --bg-main: #0a0a0a; --bg-card: #111111; --bg-input: #1a1a1a; --primary: #00FF88; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
     body { background: var(--bg-main); color: var(--text-main); min-height: 100vh; }
-    nav { background: var(--bg-card); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); }
+    nav { background: var(--bg-card); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100; }
     .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-decoration: none; }
     .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
     .header { text-align: center; margin-bottom: 40px; }
     .header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
     .header p { color: var(--text-muted); }
-    .ad-container { margin: 30px auto; text-align: center; padding: 10px; background: var(--bg-card); border-radius: 10px; max-width: 728px; border: 1px solid var(--border); }
+    .ad-container { margin: 30px auto; text-align: center; padding: 15px; background: var(--bg-card); border-radius: 10px; max-width: 728px; border: 1px solid var(--border); min-height: 250px; display: flex; align-items: center; justify-content: center; }
     .ad-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
-    .ebook-sidebar { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); border: 2px solid var(--primary); border-radius: 15px; padding: 20px; margin: 30px 0; text-align: center; }
-    .ebook-sidebar h4 { color: var(--primary); margin-bottom: 10px; }
-    .ebook-sidebar p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
-    .ebook-sidebar a { display: inline-block; padding: 10px 25px; background: var(--primary); color: #000; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 0.9rem; }
+    .ebook-sidebar { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); border: 2px solid var(--primary); border-radius: 15px; padding: 25px; margin: 30px 0; text-align: center; }
+    .ebook-sidebar h4 { color: var(--primary); margin-bottom: 10px; font-size: 1.3rem; }
+    .ebook-sidebar p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; line-height: 1.5; }
+    .ebook-sidebar a { display: inline-block; padding: 12px 30px; background: var(--primary); color: #000; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1rem; }
     .ai-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
     .ai-card { background: var(--bg-card); border: 2px solid var(--border); border-radius: 15px; padding: 25px; cursor: pointer; transition: all 0.3s; }
     .ai-card:hover { border-color: var(--primary); transform: translateY(-5px); }
@@ -33,7 +37,8 @@
     textarea { width: 100%; padding: 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px; color: var(--text-main); font-size: 16px; margin-bottom: 15px; min-height: 150px; resize: vertical; }
     .copy-btn { padding: 10px 20px; background: var(--bg-input); border: 1px solid var(--primary); color: var(--primary); border-radius: 8px; cursor: pointer; }
     .copy-btn:hover { background: var(--primary); color: #000; }
-    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .ad-container { max-width: 100%; } }
+    .search-box { width: 100%; padding: 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px; color: var(--text-main); font-size: 16px; margin-bottom: 20px; }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .ad-container { max-width: 100%; min-height: 200px; } }
   </style>
 </head>
 <body>
@@ -42,32 +47,56 @@
     <div style="color: var(--primary); font-weight: bold;">AI Prompt Library</div>
   </nav>
 
-  <div class="container">
-    <a href="index.html" class="back-link">← Back to Home</a>
+  <div class="container">    <a href="index.html" class="back-link">← Back to Home</a>
     <div class="header">
       <h1>💚 Free AI Prompt Library</h1>
       <p>Curated prompts for all major AI platforms</p>
     </div>
+
+    <!-- AD SLOT 1: Top of Page -->
     <div class="ad-container">
       <div class="ad-label">Advertisement</div>
       <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
     </div>
 
+    <!-- PHOTOGRAPHY EBOOK PROMO -->
     <div class="ebook-sidebar">
-      <h4>📸 AI Fashion Photography Kit</h4>
-      <p>Master 8K fashion imagery with AI. Only ₦2,000!</p>
-      <a href="https://selar.com/14711117ox" target="_blank">Get Now →</a>
+      <h4>📸 Transform Your Photography with AI</h4>
+      <p>Create stunning 8K fashion images that look like they were shot by professionals. No expensive equipment needed!</p>
+      <a href="https://selar.com/14711117ox" target="_blank">🚀 Get Instant Access</a>
     </div>
+
+    <!-- Search Box -->
+    <input type="text" class="search-box" id="promptSearch" placeholder="🔍 Search prompts by niche or keyword..." oninput="searchPrompts()">
 
     <div class="ai-grid">
-      <div class="ai-card" onclick="showPrompts('chatgpt')"><h3>💬 ChatGPT</h3><p>Prompts for OpenAI's ChatGPT</p></div>
-      <div class="ai-card" onclick="showPrompts('gemini')"><h3>✨ Gemini</h3><p>Prompts optimized for Google's Gemini</p></div>
-      <div class="ai-card" onclick="showPrompts('claude')"><h3> Claude</h3><p>Prompts for Anthropic's Claude</p></div>
-      <div class="ai-card" onclick="showPrompts('midjourney')"><h3>🎨 Midjourney</h3><p>Image generation prompts</p></div>
+      <div class="ai-card" onclick="showPrompts('chatgpt')"><h3>💬 ChatGPT</h3><p>Prompts for OpenAI's ChatGPT - conversations, writing, coding, and analysis</p></div>
+      <div class="ai-card" onclick="showPrompts('gemini')"><h3>✨ Gemini</h3><p>Prompts optimized for Google's Gemini AI - creative and analytical tasks</p></div>
+      <div class="ai-card" onclick="showPrompts('claude')"><h3>🤖 Claude</h3><p>Prompts for Anthropic's Claude - long-form content and analysis</p></div>
+      <div class="ai-card" onclick="showPrompts('midjourney')"><h3>🎨 Midjourney</h3><p>Image generation prompts for Midjourney - art, photography, design</p></div>
+      <div class="ai-card" onclick="showPrompts('flux')"><h3>⚡ Flux</h3><p>Prompts for Flux AI - high-quality image generation</p></div>
+      <div class="ai-card" onclick="showPrompts('veo')"><h3>🎬 Veo</h3><p>Video generation prompts for Google Veo</p></div>
+      <div class="ai-card" onclick="showPrompts('kling')"><h3>🎥 Kling</h3><p>Video generation prompts for Kling AI</p></div>
+      <div class="ai-card" onclick="showPrompts('runway')"><h3>🎞️ Runway</h3><p>Video and image editing prompts for Runway ML</p></div>
     </div>
 
-    <div id="chatgpt-prompts" class="prompt-section">
-      <h2 style="color: var(--primary); margin-bottom: 20px;">💬 ChatGPT Prompts</h2>
+    <!-- AD SLOT 2: Banner 300x250 -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <script>
+        atOptions = {
+          'key' : '265a3e3f0e948dc63fad891d2f0216ac',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/265a3e3f0e948dc63fad891d2f0216ac/invoke.js"></script>
+    </div>
+
+    <!-- ChatGPT Prompts -->
+    <div id="chatgpt-prompts" class="prompt-section">      <h2 style="color: var(--primary); margin-bottom: 20px;">💬 ChatGPT Prompts</h2>
       <div style="margin-bottom: 30px;">
         <h3 style="margin-bottom: 10px;">Content Writing</h3>
         <textarea id="chatgpt-content" readonly>Write a comprehensive blog post about [TOPIC]. Include:
@@ -78,8 +107,19 @@
 5. Include relevant statistics and data</textarea>
         <button class="copy-btn" onclick="copyToClipboard('chatgpt-content')">📋 Copy Prompt</button>
       </div>
+      
+      <div style="margin-bottom: 30px;">
+        <h3 style="margin-bottom: 10px;">Code Generation</h3>
+        <textarea id="chatgpt-code" readonly>Write a [PROGRAMMING LANGUAGE] function that [TASK]. Include:
+- Error handling
+- Comments explaining each step
+- Example usage
+- Time complexity analysis</textarea>
+        <button class="copy-btn" onclick="copyToClipboard('chatgpt-code')">📋 Copy Prompt</button>
+      </div>
     </div>
 
+    <!-- Gemini Prompts -->
     <div id="gemini-prompts" class="prompt-section">
       <h2 style="color: var(--primary); margin-bottom: 20px;">✨ Gemini Prompts</h2>
       <div style="margin-bottom: 30px;">
@@ -94,20 +134,25 @@
       </div>
     </div>
 
+    <!-- Claude Prompts -->
     <div id="claude-prompts" class="prompt-section">
       <h2 style="color: var(--primary); margin-bottom: 20px;">🤖 Claude Prompts</h2>
-      <div style="margin-bottom: 30px;">        <h3 style="margin-bottom: 10px;">Long-form Analysis</h3>
+      <div style="margin-bottom: 30px;">
+        <h3 style="margin-bottom: 10px;">Long-form Analysis</h3>
         <textarea id="claude-analysis" readonly>Analyze the following topic in extreme detail: [TOPIC]
+
 Please provide:
 1. Historical context and background
 2. Current state and trends
 3. Multiple perspectives and viewpoints
-4. Potential future implications
-5. Actionable insights and recommendations</textarea>
+4. Potential future implications5. Actionable insights and recommendations
+
+Be thorough and nuanced in your analysis.</textarea>
         <button class="copy-btn" onclick="copyToClipboard('claude-analysis')">📋 Copy Prompt</button>
       </div>
     </div>
 
+    <!-- Midjourney Prompts -->
     <div id="midjourney-prompts" class="prompt-section">
       <h2 style="color: var(--primary); margin-bottom: 20px;">🎨 Midjourney Prompts</h2>
       <div style="margin-bottom: 30px;">
@@ -115,11 +160,57 @@ Please provide:
         <textarea id="mj-portrait" readonly>/imagine prompt: Professional portrait photography of [SUBJECT], shot on 85mm lens, f/1.8, natural lighting, studio quality, highly detailed, photorealistic, 8k --ar 2:3 --v 6</textarea>
         <button class="copy-btn" onclick="copyToClipboard('mj-portrait')">📋 Copy Prompt</button>
       </div>
+      
+      <div style="margin-bottom: 30px;">
+        <h3 style="margin-bottom: 10px;">Fantasy Landscape</h3>
+        <textarea id="mj-landscape" readonly>/imagine prompt: Epic fantasy landscape with [ELEMENTS], dramatic lighting, cinematic composition, inspired by concept art, highly detailed, vibrant colors, 8k resolution --ar 16:9 --v 6</textarea>
+        <button class="copy-btn" onclick="copyToClipboard('mj-landscape')">📋 Copy Prompt</button>
+      </div>
     </div>
 
+    <!-- Flux Prompts -->
+    <div id="flux-prompts" class="prompt-section">
+      <h2 style="color: var(--primary); margin-bottom: 20px;">⚡ Flux Prompts</h2>
+      <div style="margin-bottom: 30px;">
+        <h3 style="margin-bottom: 10px;">Product Photography</h3>
+        <textarea id="flux-product" readonly>Professional product photography of [PRODUCT], studio lighting, clean white background, high detail, commercial quality, sharp focus, 4k</textarea>
+        <button class="copy-btn" onclick="copyToClipboard('flux-product')">📋 Copy Prompt</button>
+      </div>
+    </div>
+
+    <!-- Veo Prompts -->
+    <div id="veo-prompts" class="prompt-section">
+      <h2 style="color: var(--primary); margin-bottom: 20px;">🎬 Veo Prompts</h2>
+      <div style="margin-bottom: 30px;">
+        <h3 style="margin-bottom: 10px;">Cinematic Scene</h3>
+        <textarea id="veo-scene" readonly>Create a cinematic video of [SCENE DESCRIPTION], smooth camera movement, professional lighting, film quality, 4k resolution, 24fps</textarea>
+        <button class="copy-btn" onclick="copyToClipboard('veo-scene')">📋 Copy Prompt</button>
+      </div>
+    </div>
+
+    <!-- Kling Prompts -->
+    <div id="kling-prompts" class="prompt-section">
+      <h2 style="color: var(--primary); margin-bottom: 20px;">🎥 Kling Prompts</h2>
+      <div style="margin-bottom: 30px;">
+        <h3 style="margin-bottom: 10px;">Action Sequence</h3>
+        <textarea id="kling-action" readonly>Dynamic action video showing [ACTION], fast-paced, dramatic angles, slow motion moments, high energy, cinematic</textarea>
+        <button class="copy-btn" onclick="copyToClipboard('kling-action')">📋 Copy Prompt</button>      </div>
+    </div>
+
+    <!-- Runway Prompts -->
+    <div id="runway-prompts" class="prompt-section">
+      <h2 style="color: var(--primary); margin-bottom: 20px;">🎞️ Runway Prompts</h2>
+      <div style="margin-bottom: 30px;">
+        <h3 style="margin-bottom: 10px;">Video Editing</h3>
+        <textarea id="runway-edit" readonly>Transform this video to have [STYLE/EFFECT], smooth transitions, color grading, professional finish, maintain original audio</textarea>
+        <button class="copy-btn" onclick="copyToClipboard('runway-edit')">📋 Copy Prompt</button>
+      </div>
+    </div>
+
+    <!-- AD SLOT 3: Bottom -->
     <div class="ad-container">
       <div class="ad-label">Advertisement</div>
-      <!-- Add your second ad script here -->
+      <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
     </div>
   </div>
 
@@ -133,6 +224,7 @@ Please provide:
       document.getElementById(ai + '-prompts').classList.add('active');
       document.getElementById(ai + '-prompts').scrollIntoView({ behavior: 'smooth' });
     }
+
     function copyToClipboard(elementId) {
       const element = document.getElementById(elementId);
       element.select();
@@ -141,6 +233,21 @@ Please provide:
       const originalText = btn.textContent;
       btn.textContent = '✅ Copied!';
       setTimeout(() => { btn.textContent = originalText; }, 2000);
+    }
+
+    function searchPrompts() {
+      const searchTerm = document.getElementById('promptSearch').value.toLowerCase();
+      const sections = document.querySelectorAll('.prompt-section');
+      
+      sections.forEach(section => {
+        const text = section.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+          section.style.display = 'block';
+        } else if (searchTerm.length > 0) {          section.style.display = 'none';
+        } else {
+          section.style.display = 'none';
+        }
+      });
     }
   </script>
 </body>

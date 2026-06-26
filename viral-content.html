@@ -5,293 +5,281 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Viral Content Toolkit - ToolVerse</title>
   
-  <!-- Adsterra Header Script -->
-  <script async="async" data-cfasync="false" src="//pl29819831.effectivecpmnetwork.com/40eca62ffa3dd47c9612d8d993c2924e/invoke.js"></script>
+  <!-- Adsterra Scripts -->
+  <script async="async" data-cfasync="false" src="https://pl29820186.effectivecpmnetwork.com/31f16fc7913263f00e93a85356f6e7d6/invoke.js"></script>
+  <script src="https://pl29819831.effectivecpmnetwork.com/40eca62ffa3dd47c9612d8d993c2924e/invoke.js"></script>
   
   <style>
-    :root {
-      --bg-main: #0a0a0a;
-      --bg-card: #111111;
-      --bg-input: #1a1a1a;
-      --yellow: #FFD700;
-      --text-main: #ffffff;
-      --text-muted: #888888;
-      --border: #222222;
-    }
-    
+    :root { --bg-main: #0a0a0a; --bg-card: #111111; --bg-input: #1a1a1a; --primary: #FFD700; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-    
     body { background: var(--bg-main); color: var(--text-main); min-height: 100vh; }
-
-    nav {
-      background: var(--bg-card);
-      padding: 15px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid var(--yellow);
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--yellow);
-      text-decoration: none;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 40px;    }
-
-    .header h1 {
-      font-size: 2.5rem;
-      color: var(--yellow);
-      margin-bottom: 10px;
-    }
-
+    nav { background: var(--bg-card); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100; }
+    .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-decoration: none; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
     .header p { color: var(--text-muted); }
-
-    /* Ad Containers */
-    .ad-container {
-      margin: 30px auto;
-      text-align: center;
-      padding: 10px;
-      background: var(--bg-card);
-      border-radius: 10px;
-      max-width: 728px;
-      border: 1px solid var(--border);
-    }
-
-    .ad-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-
-    /* Ebook Promo - Sidebar Style */
-    .ebook-sidebar {
-      background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-      border: 2px solid var(--yellow);
-      border-radius: 15px;
-      padding: 20px;
-      margin: 30px 0;
-      text-align: center;
-    }
-
-    .ebook-sidebar h4 {
-      color: var(--yellow);
-      margin-bottom: 10px;
-    }
-
-    .ebook-sidebar p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 15px;
-    }
-
-    .ebook-sidebar a {      display: inline-block;
-      padding: 10px 25px;
-      background: var(--yellow);
-      color: #000;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 0.9rem;
-    }
-
-    .tool-section {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      padding: 30px;
-      margin-bottom: 25px;
-    }
-
-    .tool-header {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
+    .ad-container { margin: 30px auto; text-align: center; padding: 15px; background: var(--bg-card); border-radius: 10px; max-width: 728px; border: 1px solid var(--border); min-height: 250px; display: flex; align-items: center; justify-content: center; }
+    .ad-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
+    .ebook-sidebar { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); border: 2px solid var(--primary); border-radius: 15px; padding: 25px; margin: 30px 0; text-align: center; }
+    .ebook-sidebar h4 { color: var(--primary); margin-bottom: 10px; font-size: 1.3rem; }
+    .ebook-sidebar p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; line-height: 1.5; }
+    .ebook-sidebar a { display: inline-block; padding: 12px 30px; background: var(--primary); color: #000; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1rem; }
+    .tool-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 15px; padding: 25px; margin-bottom: 25px; }
+    .tool-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
     .tool-icon { font-size: 2rem; }
-    .tool-title h3 { color: var(--yellow); margin-bottom: 5px; }
+    .tool-title h3 { color: var(--primary); margin-bottom: 5px; }
     .tool-title p { color: var(--text-muted); font-size: 0.9rem; }
-
-    textarea, input, select {
-      width: 100%;
-      padding: 15px;
-      background: var(--bg-input);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: var(--text-main);
-      font-size: 16px;
-      margin-bottom: 15px;
-    }
-
-    textarea { min-height: 120px; resize: vertical; }
-
-    .btn {
-      padding: 15px 30px;
-      background: var(--yellow);
-      color: #000;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;      transition: all 0.3s;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
-    }
-
-    .result-box {
-      margin-top: 20px;
-      padding: 20px;
-      background: var(--bg-input);
-      border-left: 4px solid var(--yellow);
-      border-radius: 10px;
-      display: none;
-    }
-
-    .back-link {
-      display: inline-block;
-      color: var(--text-muted);
-      text-decoration: none;
-      margin-bottom: 20px;
-    }
-
-    .back-link:hover { color: var(--yellow); }
-
-    @media (max-width: 768px) {
-      .header h1 { font-size: 1.8rem; }
-      .tool-section { padding: 20px; }
-      .ad-container { max-width: 100%; }
-    }
+    textarea, input, select { width: 100%; padding: 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px; color: var(--text-main); font-size: 16px; margin-bottom: 15px; }
+    textarea { min-height: 100px; resize: vertical; }
+    .btn { padding: 15px 30px; background: var(--primary); color: #000; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4); }
+    .result-box { margin-top: 20px; padding: 20px; background: var(--bg-input); border-left: 4px solid var(--primary); border-radius: 10px; display: none; }
+    .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 20px; }
+    .back-link:hover { color: var(--primary); }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .tool-section { padding: 20px; } .ad-container { max-width: 100%; min-height: 200px; } }
   </style>
 </head>
 <body>
-
   <nav>
     <a href="index.html" class="logo">← ToolVerse</a>
-    <div style="color: var(--yellow); font-weight: bold;">AI Viral Content Toolkit</div>
+    <div style="color: var(--primary); font-weight: bold;">AI Viral Content Toolkit</div>
   </nav>
 
   <div class="container">
-    <a href="index.html" class="back-link">← Back to Home</a>
-    
-    <div class="header">
+    <a href="index.html" class="back-link">← Back to Home</a>    <div class="header">
       <h1>🔥 AI Viral Content Toolkit</h1>
       <p>Generate viral hooks, captions, scripts, and engaging content</p>
     </div>
 
-    <!-- AD SLOT: Top of Page -->
-    <div class="ad-container">      <div class="ad-label">Advertisement</div>
+    <!-- AD SLOT 1: Top of Page (Native Banner) -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
       <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
     </div>
 
     <!-- PHOTOGRAPHY EBOOK PROMO -->
     <div class="ebook-sidebar">
-      <h4>📸 AI Fashion Photography Kit</h4>
-      <p>Master 8K fashion imagery with AI. Only ₦2,000!</p>
-      <a href="https://selar.com/14711117ox" target="_blank">Get Now →</a>
+      <h4>📸 Transform Your Photography with AI</h4>
+      <p>Create stunning 8K fashion images that look like they were shot by professionals. No expensive equipment needed!</p>
+      <a href="https://selar.com/14711117ox" target="_blank">🚀 Get Instant Access</a>
     </div>
 
     <!-- Tool 1: Viral Hook Generator -->
     <div class="tool-section">
-      <div class="tool-header">
-        <div class="tool-icon">🎯</div>
-        <div class="tool-title">
-          <h3>Viral Hook Generator</h3>
-          <p>Create attention-grabbing hooks that stop the scroll</p>
-        </div>
-      </div>
+      <div class="tool-header"><div class="tool-icon">🎯</div><div class="tool-title"><h3>Viral Hook Generator</h3><p>Create attention-grabbing hooks that stop the scroll</p></div></div>
       <input type="text" id="hookTopic" placeholder="Enter your topic (e.g., 'fitness tips', 'making money online')">
-      <select id="hookPlatform">
-        <option value="TikTok">TikTok</option>
-        <option value="Instagram Reels">Instagram Reels</option>
-        <option value="YouTube Shorts">YouTube Shorts</option>
-        <option value="YouTube">YouTube Long Form</option>
-      </select>
+      <select id="hookPlatform"><option value="TikTok">TikTok</option><option value="Instagram Reels">Instagram Reels</option><option value="YouTube Shorts">YouTube Shorts</option><option value="YouTube">YouTube Long Form</option></select>
       <button class="btn" onclick="generateHook()">Generate Viral Hooks</button>
       <div class="result-box" id="hookResult"></div>
     </div>
 
-    <!-- AD SLOT: Between Tools -->
+    <!-- AD SLOT 2: Banner 300x250 -->
     <div class="ad-container">
       <div class="ad-label">Advertisement</div>
-      <!-- Add your second ad script here -->
+      <script>
+        atOptions = {
+          'key' : '265a3e3f0e948dc63fad891d2f0216ac',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/265a3e3f0e948dc63fad891d2f0216ac/invoke.js"></script>
     </div>
 
     <!-- Tool 2: Caption Generator -->
     <div class="tool-section">
-      <div class="tool-header">
-        <div class="tool-icon">✍️</div>
-        <div class="tool-title">
-          <h3>Caption Generator</h3>
-          <p>Write engaging captions that get comments and shares</p>
-        </div>
-      </div>
+      <div class="tool-header"><div class="tool-icon">✍️</div><div class="tool-title"><h3>Caption Generator</h3><p>Write engaging captions that get comments and shares</p></div></div>
       <input type="text" id="captionTopic" placeholder="What's your post about?">
-      <select id="captionTone">
-        <option value="Funny">Funny</option>
-        <option value="Inspirational">Inspirational</option>        <option value="Professional">Professional</option>
-        <option value="Casual">Casual</option>
-      </select>
+      <select id="captionTone"><option value="Funny">Funny</option><option value="Inspirational">Inspirational</option><option value="Professional">Professional</option><option value="Casual">Casual</option></select>
       <button class="btn" onclick="generateCaption()">Generate Caption</button>
       <div class="result-box" id="captionResult"></div>
     </div>
-
     <!-- Tool 3: Hashtag Generator -->
     <div class="tool-section">
-      <div class="tool-header">
-        <div class="tool-icon">#️⃣</div>
-        <div class="tool-title">
-          <h3>Hashtag Generator</h3>
-          <p>Generate trending hashtags for maximum reach</p>
-        </div>
-      </div>
+      <div class="tool-header"><div class="tool-icon">#️⃣</div><div class="tool-title"><h3>Hashtag Generator</h3><p>Generate trending hashtags for maximum reach</p></div></div>
       <input type="text" id="hashtagTopic" placeholder="Enter your niche or topic">
       <button class="btn" onclick="generateHashtags()">Generate Hashtags</button>
       <div class="result-box" id="hashtagResult"></div>
     </div>
 
-    <!-- AD SLOT: Before Last Tools -->
-    <div class="ad-container">
-      <div class="ad-label">Advertisement</div>
-      <!-- Add your third ad script here -->
-    </div>
-
     <!-- Tool 4: Video Script Generator -->
     <div class="tool-section">
-      <div class="tool-header">
-        <div class="tool-icon">🎬</div>
-        <div class="tool-title">
-          <h3>Video Script Generator</h3>
-          <p>Create complete video scripts with hook, body, and CTA</p>
-        </div>
-      </div>
+      <div class="tool-header"><div class="tool-icon">🎬</div><div class="tool-title"><h3>Video Script Generator</h3><p>Create complete video scripts with hook, body, and CTA</p></div></div>
       <input type="text" id="scriptTopic" placeholder="Video topic">
-      <select id="scriptLength">
-        <option value="30 seconds">30 seconds (Short)</option>
-        <option value="60 seconds">60 seconds (Medium)</option>
-        <option value="5 minutes">5 minutes (Long)</option>
-      </select>
+      <select id="scriptLength"><option value="30 seconds">30 seconds (Short)</option><option value="60 seconds">60 seconds (Medium)</option><option value="5 minutes">5 minutes (Long)</option></select>
       <button class="btn" onclick="generateScript()">Generate Script</button>
       <div class="result-box" id="scriptResult"></div>
     </div>
 
-    <!-- Add more tools following the same pattern -->
+    <!-- AD SLOT 3: Middle -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <!-- Social Bar -->
+      <script src="https://pl29819831.effectivecpmnetwork.com/40eca62ffa3dd47c9612d8d993c2924e/invoke.js"></script>
+    </div>
+
+    <!-- Tool 5: YouTube Title Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">📺</div><div class="tool-title"><h3>YouTube Title Generator</h3><p>Create click-worthy titles that boost CTR</p></div></div>
+      <input type="text" id="titleTopic" placeholder="Video topic">
+      <button class="btn" onclick="generateTitles()">Generate Titles</button>
+      <div class="result-box" id="titleResult"></div>
+    </div>
+
+    <!-- Tool 6: Story Idea Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">💡</div><div class="tool-title"><h3>Story Idea Generator</h3><p>Never run out of content ideas again</p></div></div>
+      <input type="text" id="storyNiche" placeholder="Your niche (e.g., fitness, business, cooking)">
+      <button class="btn" onclick="generateStories()">Generate Story Ideas</button>
+      <div class="result-box" id="storyResult"></div>
+    </div>
+
+    <!-- Tool 7: Facebook Post Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">📘</div><div class="tool-title"><h3>Facebook Post Generator</h3><p>Create engaging Facebook posts that get shares</p></div></div>
+      <input type="text" id="fbTopic" placeholder="What's your post about?">
+      <button class="btn" onclick="generateFacebookPost()">Generate Post</button>
+      <div class="result-box" id="fbResult"></div>
+    </div>
+
+    <!-- AD SLOT 4: Before Last Tools -->    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <!-- Banner 320x50 -->
+      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
+    </div>
+
+    <!-- Tool 8: CTA Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">📢</div><div class="tool-title"><h3>CTA Generator</h3><p>Effective calls-to-action that convert</p></div></div>
+      <input type="text" id="ctaGoal" placeholder="What do you want people to do?">
+      <button class="btn" onclick="generateCTA()">Generate CTAs</button>
+      <div class="result-box" id="ctaResult"></div>
+    </div>
+
+    <!-- Tool 9: Bio Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">👤</div><div class="tool-title"><h3>Bio Generator</h3><p>Create compelling social media bios</p></div></div>
+      <input type="text" id="bioName" placeholder="Your name/business">
+      <input type="text" id="bioProfession" placeholder="Your profession/niche">
+      <button class="btn" onclick="generateBio()">Generate Bio</button>
+      <div class="result-box" id="bioResult"></div>
+    </div>
+
+    <!-- Tool 10: Thumbnail Text Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">🖼️</div><div class="tool-title"><h3>Thumbnail Text Generator</h3><p>Create clickable thumbnail text ideas</p></div></div>
+      <input type="text" id="thumbTopic" placeholder="Video topic">
+      <button class="btn" onclick="generateThumbnailText()">Generate Ideas</button>
+      <div class="result-box" id="thumbResult"></div>
+    </div>
+
+    <!-- AD SLOT 5: Bottom -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
+    </div>
+
+    <!-- Tool 11: Comment Reply Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">💬</div><div class="tool-title"><h3>Comment Reply Generator</h3><p>Engage with your audience effectively</p></div></div>
+      <input type="text" id="commentText" placeholder="Paste the comment here">      <button class="btn" onclick="generateReply()">Generate Reply</button>
+      <div class="result-box" id="replyResult"></div>
+    </div>
+
+    <!-- Tool 12: Poll Question Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">📊</div><div class="tool-title"><h3>Poll Question Generator</h3><p>Create engaging polls for your audience</p></div></div>
+      <input type="text" id="pollTopic" placeholder="Topic for poll">
+      <button class="btn" onclick="generatePoll()">Generate Poll</button>
+      <div class="result-box" id="pollResult"></div>
+    </div>
+
+    <!-- Tool 13: Business Name Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">💼</div><div class="tool-title"><h3>Business Name Generator</h3><p>Catchy business name ideas</p></div></div>
+      <input type="text" id="businessType" placeholder="Type of business">
+      <button class="btn" onclick="generateBusinessName()">Generate Names</button>
+      <div class="result-box" id="businessResult"></div>
+    </div>
+
+    <!-- Tool 14: Username Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">🔖</div><div class="tool-title"><h3>Username Generator</h3><p>Unique username ideas</p></div></div>
+      <input type="text" id="usernameKeyword" placeholder="Your keyword/name">
+      <button class="btn" onclick="generateUsername()">Generate Usernames</button>
+      <div class="result-box" id="usernameResult"></div>
+    </div>
+
+    <!-- Tool 15: SEO Keyword Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">🔍</div><div class="tool-title"><h3>SEO Keyword Generator</h3><p>Find trending keywords</p></div></div>
+      <input type="text" id="seoTopic" placeholder="Your topic/niche">
+      <button class="btn" onclick="generateSEOKeywords()">Generate Keywords</button>
+      <div class="result-box" id="seoResult"></div>
+    </div>
+
+    <!-- Tool 16: TikTok Hook Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">🎵</div><div class="tool-title"><h3>TikTok Hook Generator</h3><p>Viral TikTok hooks</p></div></div>
+      <input type="text" id="tiktokTopic" placeholder="Video topic">
+      <button class="btn" onclick="generateTikTokHook()">Generate Hooks</button>
+      <div class="result-box" id="tiktokResult"></div>
+    </div>
+
+    <!-- Tool 17: YouTube Description Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">📝</div><div class="tool-title"><h3>YouTube Description Generator</h3><p>SEO-optimized descriptions</p></div></div>
+      <input type="text" id="ytDescTopic" placeholder="Video topic">
+      <button class="btn" onclick="generateYTDescription()">Generate Description</button>
+      <div class="result-box" id="ytDescResult"></div>    </div>
+
+    <!-- Tool 18: Product Description Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">🛍️</div><div class="tool-title"><h3>Product Description Generator</h3><p>Sell more with words</p></div></div>
+      <input type="text" id="productName" placeholder="Product name">
+      <input type="text" id="productFeatures" placeholder="Key features">
+      <button class="btn" onclick="generateProductDesc()">Generate Description</button>
+      <div class="result-box" id="productResult"></div>
+    </div>
+
+    <!-- Tool 19: Quote Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">💭</div><div class="tool-title"><h3>Quote Generator</h3><p>Inspirational quotes</p></div></div>
+      <input type="text" id="quoteTopic" placeholder="Topic/theme">
+      <button class="btn" onclick="generateQuote()">Generate Quote</button>
+      <div class="result-box" id="quoteResult"></div>
+    </div>
+
+    <!-- Tool 20: AI Prompt Generator -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">🤖</div><div class="tool-title"><h3>AI Prompt Generator</h3><p>Better prompts for AI</p></div></div>
+      <input type="text" id="aiPromptTopic" placeholder="What do you want AI to do?">
+      <button class="btn" onclick="generateAIPrompt()">Generate Prompt</button>
+      <div class="result-box" id="aiPromptResult"></div>
+    </div>
+
+    <!-- Tool 21: Emoji Caption Tool -->
+    <div class="tool-section">
+      <div class="tool-header"><div class="tool-icon">😊</div><div class="tool-title"><h3>Emoji Caption Tool</h3><p>Fun emoji captions</p></div></div>
+      <input type="text" id="emojiTopic" placeholder="What's your post about?">
+      <button class="btn" onclick="generateEmojiCaption()">Generate Caption</button>
+      <div class="result-box" id="emojiResult"></div>
+    </div>
 
   </div>
+
   <footer style="text-align: center; padding: 30px; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 50px;">
     <p>© 2026 ToolVerse · All Rights Reserved</p>
   </footer>
@@ -304,74 +292,234 @@
 
     async function generateHook() {
       const topic = document.getElementById('hookTopic').value;
-      const platform = document.getElementById('hookPlatform').value;
-      const result = document.getElementById('hookResult');
-      
+      const platform = document.getElementById('hookPlatform').value;      const result = document.getElementById('hookResult');
       if (!topic) return alert('Enter a topic');
-      
-      result.style.display = 'block';
-      result.innerHTML = '<p>Generating...</p>';
-      
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
       try {
         const hooks = await fetchAI(`Generate 5 viral hooks for ${platform} about "${topic}". Make them attention-grabbing and scroll-stopping.`);
         result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${hooks}</div>`;
-      } catch (e) {
-        result.innerHTML = '<p style="color: #ef4444;">Error generating hooks</p>';
-      }
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating hooks</p>'; }
     }
 
     async function generateCaption() {
       const topic = document.getElementById('captionTopic').value;
       const tone = document.getElementById('captionTone').value;
       const result = document.getElementById('captionResult');
-      
       if (!topic) return alert('Enter a topic');
-      
-      result.style.display = 'block';
-      result.innerHTML = '<p>Generating...</p>';
-      
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
       try {
         const caption = await fetchAI(`Write a ${tone} Instagram caption about "${topic}". Include emojis and a call-to-action.`);
         result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${caption}</div>`;
-      } catch (e) {
-        result.innerHTML = '<p style="color: #ef4444;">Error generating caption</p>';
-      }
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating caption</p>'; }
     }
 
     async function generateHashtags() {
       const topic = document.getElementById('hashtagTopic').value;
       const result = document.getElementById('hashtagResult');
-            if (!topic) return alert('Enter a topic');
-      
-      result.style.display = 'block';
-      result.innerHTML = '<p>Generating...</p>';
-      
+      if (!topic) return alert('Enter a topic');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
       try {
         const hashtags = await fetchAI(`Generate 30 trending hashtags for "${topic}". Mix popular and niche hashtags.`);
-        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8; color: var(--yellow);">${hashtags}</div>`;
-      } catch (e) {
-        result.innerHTML = '<p style="color: #ef4444;">Error generating hashtags</p>';
-      }
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8; color: var(--primary);">${hashtags}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating hashtags</p>'; }
     }
 
     async function generateScript() {
       const topic = document.getElementById('scriptTopic').value;
       const length = document.getElementById('scriptLength').value;
       const result = document.getElementById('scriptResult');
-      
       if (!topic) return alert('Enter a topic');
-      
-      result.style.display = 'block';
-      result.innerHTML = '<p>Generating...</p>';
-      
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
       try {
         const script = await fetchAI(`Write a ${length} video script about "${topic}". Include: 1) Hook (first 3 seconds), 2) Main content, 3) Call to action.`);
         result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${script}</div>`;
-      } catch (e) {
-        result.innerHTML = '<p style="color: #ef4444;">Error generating script</p>';
-      }
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating script</p>'; }
+    }
+
+    async function generateTitles() {
+      const topic = document.getElementById('titleTopic').value;
+      const result = document.getElementById('titleResult');
+      if (!topic) return alert('Enter a topic');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {        const titles = await fetchAI(`Generate 10 click-worthy YouTube titles about "${topic}". Make them curiosity-driven and SEO-friendly.`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${titles}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating titles</p>'; }
+    }
+
+    async function generateStories() {
+      const niche = document.getElementById('storyNiche').value;
+      const result = document.getElementById('storyResult');
+      if (!niche) return alert('Enter your niche');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const stories = await fetchAI(`Generate 20 creative content story ideas for ${niche} niche. Make them engaging and shareable.`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${stories}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating ideas</p>'; }
+    }
+
+    async function generateFacebookPost() {
+      const topic = document.getElementById('fbTopic').value;
+      const result = document.getElementById('fbResult');
+      if (!topic) return alert('Enter a topic');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const post = await fetchAI(`Write an engaging Facebook post about "${topic}". Include emojis and a question to encourage comments.`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${post}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating post</p>'; }
+    }
+
+    async function generateCTA() {
+      const goal = document.getElementById('ctaGoal').value;
+      const result = document.getElementById('ctaResult');
+      if (!goal) return alert('Enter your goal');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const ctas = await fetchAI(`Generate 10 effective call-to-action phrases to get people to ${goal}. Make them natural and non-pushy.`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${ctas}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating CTAs</p>'; }
+    }
+
+    async function generateBio() {
+      const name = document.getElementById('bioName').value;
+      const profession = document.getElementById('bioProfession').value;
+      const result = document.getElementById('bioResult');
+      if (!name || !profession) return alert('Enter both name and profession');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const bio = await fetchAI(`Write 5 creative social media bio options for ${name}, a ${profession}. Keep them short, catchy, and professional.`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${bio}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating bio</p>'; }
+    }
+    async function generateThumbnailText() {
+      const topic = document.getElementById('thumbTopic').value;
+      const result = document.getElementById('thumbResult');
+      if (!topic) return alert('Enter a topic');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const ideas = await fetchAI(`Generate 10 short, punchy thumbnail text ideas for videos about "${topic}". Keep each under 5 words. Make them curiosity-driven.`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${ideas}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating ideas</p>'; }
+    }
+
+    async function generateReply() {
+      const comment = document.getElementById('commentText').value;
+      const result = document.getElementById('replyResult');
+      if (!comment) return alert('Enter the comment');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const reply = await fetchAI(`Write a friendly, engaging reply to this comment: "${comment}"`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${reply}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating reply</p>'; }
+    }
+
+    async function generatePoll() {
+      const topic = document.getElementById('pollTopic').value;
+      const result = document.getElementById('pollResult');
+      if (!topic) return alert('Enter a topic');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const poll = await fetchAI(`Create 5 engaging poll questions about "${topic}" with answer options.`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${poll}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating poll</p>'; }
+    }
+
+    async function generateBusinessName() {
+      const type = document.getElementById('businessType').value;
+      const result = document.getElementById('businessResult');
+      if (!type) return alert('Enter business type');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const names = await fetchAI(`Generate 10 catchy business names for a ${type} business.`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${names}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating names</p>'; }
+    }
+
+    async function generateUsername() {
+      const keyword = document.getElementById('usernameKeyword').value;
+      const result = document.getElementById('usernameResult');
+      if (!keyword) return alert('Enter a keyword');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {        const usernames = await fetchAI(`Generate 15 unique username ideas based on "${keyword}".`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${usernames}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating usernames</p>'; }
+    }
+
+    async function generateSEOKeywords() {
+      const topic = document.getElementById('seoTopic').value;
+      const result = document.getElementById('seoResult');
+      if (!topic) return alert('Enter a topic');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const keywords = await fetchAI(`Generate 20 SEO keywords for "${topic}".`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${keywords}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating keywords</p>'; }
+    }
+
+    async function generateTikTokHook() {
+      const topic = document.getElementById('tiktokTopic').value;
+      const result = document.getElementById('tiktokResult');
+      if (!topic) return alert('Enter a topic');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const hooks = await fetchAI(`Generate 5 viral TikTok hooks about "${topic}". First 3 seconds must grab attention.`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${hooks}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating hooks</p>'; }
+    }
+
+    async function generateYTDescription() {
+      const topic = document.getElementById('ytDescTopic').value;
+      const result = document.getElementById('ytDescResult');
+      if (!topic) return alert('Enter a topic');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const desc = await fetchAI(`Write an SEO-optimized YouTube description for a video about "${topic}". Include keywords and timestamps.`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${desc}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating description</p>'; }
+    }
+
+    async function generateProductDesc() {
+      const name = document.getElementById('productName').value;
+      const features = document.getElementById('productFeatures').value;
+      const result = document.getElementById('productResult');
+      if (!name) return alert('Enter product name');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const desc = await fetchAI(`Write a compelling product description for ${name}. Features: ${features}`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${desc}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating description</p>'; }
+    }
+    async function generateQuote() {
+      const topic = document.getElementById('quoteTopic').value;
+      const result = document.getElementById('quoteResult');
+      if (!topic) return alert('Enter a topic');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const quote = await fetchAI(`Generate an inspirational quote about "${topic}".`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${quote}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating quote</p>'; }
+    }
+
+    async function generateAIPrompt() {
+      const topic = document.getElementById('aiPromptTopic').value;
+      const result = document.getElementById('aiPromptResult');
+      if (!topic) return alert('Enter what you want');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const prompt = await fetchAI(`Write a detailed AI prompt to help with: ${topic}`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${prompt}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating prompt</p>'; }
+    }
+
+    async function generateEmojiCaption() {
+      const topic = document.getElementById('emojiTopic').value;
+      const result = document.getElementById('emojiResult');
+      if (!topic) return alert('Enter a topic');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const caption = await fetchAI(`Write a fun caption with emojis about "${topic}".`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${caption}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating caption</p>'; }
     }
   </script>
-
 </body>
 </html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Creator Toolkit - ToolVerse</title>
+  <script async="async" data-cfasync="false" src="//pl29819831.effectivecpmnetwork.com/40eca62ffa3dd47c9612d8d993c2924e/invoke.js"></script>
+  <style>
+    :root { --bg-main: #0a0a0a; --bg-card: #111111; --bg-input: #1a1a1a; --primary: #8B5CF6; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background: var(--bg-main); color: var(--text-main); min-height: 100vh; }
+    nav { background: var(--bg-card); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); }
+    .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-decoration: none; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+    .header p { color: var(--text-muted); }
+    .ad-container { margin: 30px auto; text-align: center; padding: 10px; background: var(--bg-card); border-radius: 10px; max-width: 728px; border: 1px solid var(--border); }
+    .ad-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
+    .ebook-sidebar { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); border: 2px solid var(--primary); border-radius: 15px; padding: 20px; margin: 30px 0; text-align: center; }
+    .ebook-sidebar h4 { color: var(--primary); margin-bottom: 10px; }
+    .ebook-sidebar p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
+    .ebook-sidebar a { display: inline-block; padding: 10px 25px; background: var(--primary); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 0.9rem; }
+    .tool-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 15px; padding: 30px; margin-bottom: 25px; }
+    .tool-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+    .tool-icon { font-size: 2rem; }
+    .tool-title h3 { color: var(--primary); margin-bottom: 5px; }
+    .tool-title p { color: var(--text-muted); font-size: 0.9rem; }
+    textarea, input, select { width: 100%; padding: 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px; color: var(--text-main); font-size: 16px; margin-bottom: 15px; }
+    textarea { min-height: 100px; resize: vertical; }
+    .btn { padding: 15px 30px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4); }
+    .result-box { margin-top: 20px; padding: 20px; background: var(--bg-input); border-left: 4px solid var(--primary); border-radius: 10px; display: none; }
+    .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 20px; }
+    .back-link:hover { color: var(--primary); }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .tool-section { padding: 20px; } .ad-container { max-width: 100%; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">← ToolVerse</a>
+    <div style="color: var(--primary); font-weight: bold;">Video Creator Toolkit</div>
+  </nav>
+
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    <div class="header">
+      <h1> Video Creator Toolkit</h1>
+      <p>Everything you need to create professional videos</p>
+    </div>
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
+    </div>
+
+    <div class="ebook-sidebar">
+      <h4>📸 AI Fashion Photography Kit</h4>
+      <p>Master 8K fashion imagery with AI. Only ₦2,000!</p>
+      <a href="https://selar.com/14711117ox" target="_blank">Get Now →</a>
+    </div>
+
+    <div class="tool-section">
+      <div class="tool-header">
+        <div class="tool-icon">🎙️</div>
+        <div class="tool-title"><h3>Voice-over Script Generator</h3><p>Write compelling voice-over scripts</p></div>
+      </div>
+      <input type="text" id="voTopic" placeholder="Video topic">
+      <select id="voTone">
+        <option value="Professional">Professional</option>
+        <option value="Conversational">Conversational</option>
+        <option value="Energetic">Energetic</option>
+      </select>
+      <button class="btn" onclick="generateVoiceover()">Generate Script</button>
+      <div class="result-box" id="voResult"></div>
+    </div>
+
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <!-- Add your second ad script here -->
+    </div>
+
+    <div class="tool-section">
+      <div class="tool-header">
+        <div class="tool-icon">🎣</div>
+        <div class="tool-title"><h3>Video Hook Generator</h3><p>Create hooks that keep viewers watching</p></div>
+      </div>
+      <input type="text" id="hookTopic" placeholder="Video topic">
+      <select id="hookPlatform">
+        <option value="TikTok">TikTok</option>
+        <option value="YouTube">YouTube</option>
+        <option value="Instagram">Instagram Reels</option>
+      </select>
+      <button class="btn" onclick="generateVideoHook()">Generate Hooks</button>
+      <div class="result-box" id="hookResult"></div>
+    </div>
+
+    <div class="tool-section">
+      <div class="tool-header">
+        <div class="tool-icon">📢</div>        <div class="tool-title"><h3>CTA Generator</h3><p>Effective calls-to-action for your videos</p></div>
+      </div>
+      <input type="text" id="ctaGoal" placeholder="What do you want viewers to do?">
+      <button class="btn" onclick="generateCTA()">Generate CTAs</button>
+      <div class="result-box" id="ctaResult"></div>
+    </div>
+
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <!-- Add your third ad script here -->
+    </div>
+  </div>
+
+  <footer style="text-align: center; padding: 30px; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 50px;">
+    <p>© 2026 ToolVerse · All Rights Reserved</p>
+  </footer>
+
+  <script>
+    async function fetchAI(prompt) {
+      const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}`);
+      return await res.text();
+    }
+    async function generateVoiceover() {
+      const topic = document.getElementById('voTopic').value;
+      const tone = document.getElementById('voTone').value;
+      const result = document.getElementById('voResult');
+      if (!topic) return alert('Enter a topic');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const script = await fetchAI(`Write a ${tone} voice-over script about "${topic}". Include intro, main points, and conclusion.`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${script}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating script</p>'; }
+    }
+    async function generateVideoHook() {
+      const topic = document.getElementById('hookTopic').value;
+      const platform = document.getElementById('hookPlatform').value;
+      const result = document.getElementById('hookResult');
+      if (!topic) return alert('Enter a topic');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {
+        const hooks = await fetchAI(`Generate 5 viral video hooks for ${platform} about "${topic}". First 3 seconds must grab attention.`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${hooks}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating hooks</p>'; }
+    }
+    async function generateCTA() {
+      const goal = document.getElementById('ctaGoal').value;
+      const result = document.getElementById('ctaResult');
+      if (!goal) return alert('Enter your goal');
+      result.style.display = 'block'; result.innerHTML = '<p>Generating...</p>';
+      try {        const ctas = await fetchAI(`Generate 10 effective call-to-action phrases to get viewers to ${goal}. Make them natural and non-pushy.`);
+        result.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${ctas}</div>`;
+      } catch (e) { result.innerHTML = '<p style="color: #ef4444;">Error generating CTAs</p>'; }
+    }
+  </script>
+</body>
+</html>

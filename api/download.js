@@ -6,6 +6,7 @@ export default async function handler(req, res) {
   }
 
   try {
+    // This runs on Vercel's server, so there are NO CORS restrictions!
     const response = await fetch(`https://ahm7xmakki.com/api/alldl?url=${encodeURIComponent(url)}`, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',

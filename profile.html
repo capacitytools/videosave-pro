@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Profiles - ToolVerse</title>
+  
+  <!-- Adsterra Scripts -->
+  <script async="async" data-cfasync="false" src="https://pl29820186.effectivecpmnetwork.com/31f16fc7913263f00e93a85356f6e7d6/invoke.js"></script>
+  <script src="https://pl29819831.effectivecpmnetwork.com/40eca62ffa3dd47c9612d8d993c2924e/invoke.js"></script>
+  
   <style>
     :root { --bg-main: #0a0a0a; --bg-card: #111111; --primary: #8b5cf6; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
@@ -14,15 +19,28 @@
     .header { text-align: center; margin-bottom: 40px; }
     .header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
     .header p { color: var(--text-muted); }
+    .ad-container { margin: 30px auto; text-align: center; padding: 15px; background: var(--bg-card); border-radius: 10px; max-width: 728px; border: 1px solid var(--border); min-height: 250px; display: flex; align-items: center; justify-content: center; }
+    .ad-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
+    .ebook-sidebar { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); border: 2px solid var(--primary); border-radius: 15px; padding: 25px; margin: 30px 0; text-align: center; }
+    .ebook-sidebar h4 { color: var(--primary); margin-bottom: 10px; font-size: 1.3rem; }
+    .ebook-sidebar p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; line-height: 1.5; }
+    .ebook-sidebar a { display: inline-block; padding: 12px 30px; background: var(--primary); color: #000; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1rem; }
     .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-    .profile-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 15px; padding: 25px; transition: all 0.3s; }
+    .profile-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 15px; padding: 25px; transition: all 0.3s; cursor: pointer; }
     .profile-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2); border-color: var(--primary); }
-    .profile-card h3 { color: var(--primary); margin-bottom: 10px; }
+    .profile-card h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.3rem; }
     .profile-card p { color: var(--text-muted); line-height: 1.6; margin-bottom: 15px; }
     .profile-card .tag { display: inline-block; padding: 4px 12px; background: rgba(139, 92, 246, 0.2); border-radius: 20px; font-size: 0.85rem; color: var(--primary); margin: 5px 5px 5px 0; }
     .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 20px; }
     .back-link:hover { color: var(--primary); }
-    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; overflow-y: auto; }
+    .modal-content { background: var(--bg-card); max-width: 800px; margin: 50px auto; padding: 40px; border-radius: 15px; position: relative; }
+    .close-modal { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: var(--text-muted); cursor: pointer; }
+    .close-modal:hover { color: var(--primary); }
+    .modal-content h2 { color: var(--primary); margin-bottom: 15px; font-size: 2rem; }
+    .modal-content .content { line-height: 1.8; color: var(--text-main); }
+    .modal-content .tags { margin-top: 20px; }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .modal-content { margin: 20px; padding: 20px; } }
   </style>
 </head>
 <body>
@@ -30,7 +48,6 @@
     <a href="index.html" class="logo">← ToolVerse</a>
     <div style="color: var(--primary); font-weight: bold;">Tech Profiles</div>
   </nav>
-
   <div class="container">
     <a href="index.html" class="back-link">← Back to Home</a>
     <div class="header">
@@ -38,37 +55,183 @@
       <p>Discover tech companies and their ongoing projects</p>
     </div>
 
-    <div class="profile-grid">
-      <div class="profile-card">
-        <h3>OpenAI</h3>
-        <p>Leading AI research company developing advanced language models and AI safety research.</p>
-        <div>
-          <span class="tag">ChatGPT</span>
-          <span class="tag">GPT-4</span>
-          <span class="tag">AI Safety</span>
-        </div>
-      </div>
-      
-      <div class="profile-card">
-        <h3>Google</h3>
-        <p>Tech giant developing Gemini AI, Bard, and various machine learning technologies.</p>
-        <div>
-          <span class="tag">Gemini</span>
-          <span class="tag">Bard</span>
-          <span class="tag">TensorFlow</span>
-        </div>
-      </div>
-      
-      <div class="profile-card">
-        <h3>Anthropic</h3>
-        <p>AI safety company focused on creating helpful, harmless, and honest AI assistants.</p>
-        <div>
-          <span class="tag">Claude</span>
-          <span class="tag">AI Safety</span>
-          <span class="tag">Constitutional AI</span>
-        </div>
-      </div>
+    <!-- AD SLOT 1: Top -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
+    </div>
+
+    <!-- PHOTOGRAPHY EBOOK PROMO -->
+    <div class="ebook-sidebar">
+      <h4>📸 Transform Your Photography with AI</h4>
+      <p>Create stunning 8K fashion images that look like they were shot by professionals. No expensive equipment needed!</p>
+      <a href="https://selar.com/14711117ox" target="_blank">🚀 Get Instant Access</a>
+    </div>
+
+    <div class="profile-grid" id="profileGrid">
+      <!-- Profiles will be loaded here by JavaScript -->
+    </div>
+
+    <!-- AD SLOT 2: Bottom -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
     </div>
   </div>
+
+  <!-- Modal for full profile -->
+  <div class="modal" id="profileModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <div class="content" id="modalContent"></div>
+      <div class="tags" id="modalTags"></div>
+    </div>
+  </div>
+  <script>
+    // ============================================
+    // HOW TO ADD NEW PROFILES:
+    // Simply add a new object to this array
+    // ============================================
+    const techProfiles = [
+      {
+        id: 1,
+        name: "OpenAI",
+        description: "Leading AI research company developing advanced language models and AI safety research.",
+        tags: ["ChatGPT", "GPT-4", "AI Safety", "DALL-E"],
+        fullContent: `
+          <p>OpenAI is an artificial intelligence research laboratory consisting of the for-profit corporation OpenAI LP and its parent company, the non-profit OpenAI Inc.</p>
+          
+          <h3>Key Products:</h3>
+          <ul>
+            <li><strong>ChatGPT:</strong> Conversational AI assistant used by millions worldwide</li>
+            <li><strong>GPT-4:</strong> Advanced language model powering ChatGPT and other applications</li>
+            <li><strong>DALL-E:</strong> AI image generation system</li>
+            <li><strong>Whisper:</strong> Speech recognition system</li>
+          </ul>
+          
+          <h3>Current Projects:</h3>
+          <p>OpenAI is currently working on advancing AI safety research, developing more capable language models, and ensuring AI benefits all of humanity.</p>
+          
+          <h3>Mission:</h3>
+          <p>To ensure that artificial general intelligence benefits all of humanity.</p>
+        `
+      },
+      {
+        id: 2,
+        name: "Google",
+        description: "Tech giant developing Gemini AI, Bard, and various machine learning technologies.",
+        tags: ["Gemini", "Bard", "TensorFlow", "DeepMind"],
+        fullContent: `
+          <p>Google is a multinational technology company specializing in Internet-related services and products, including AI and machine learning.</p>
+          
+          <h3>Key AI Products:</h3>
+          <ul>
+            <li><strong>Gemini:</strong> Advanced multimodal AI model</li>
+            <li><strong>Bard:</strong> Conversational AI assistant</li>
+            <li><strong>TensorFlow:</strong> Open-source machine learning framework</li>
+            <li><strong>DeepMind:</strong> AI research subsidiary</li>
+          </ul>
+          
+          <h3>Current Projects:</h3>
+          <p>Google is working on advancing multimodal AI, improving search algorithms with AI, and developing quantum computing technologies.</p>
+          
+          <h3>Mission:</h3>          <p>To organize the world's information and make it universally accessible and useful.</p>
+        `
+      },
+      {
+        id: 3,
+        name: "Anthropic",
+        description: "AI safety company focused on creating helpful, harmless, and honest AI assistants.",
+        tags: ["Claude", "AI Safety", "Constitutional AI"],
+        fullContent: `
+          <p>Anthropic is an AI safety company founded by former members of OpenAI, focused on developing safe and beneficial AI systems.</p>
+          
+          <h3>Key Products:</h3>
+          <ul>
+            <li><strong>Claude:</strong> AI assistant designed to be helpful, harmless, and honest</li>
+            <li><strong>Constitutional AI:</strong> Method for training AI to be safer and more aligned</li>
+          </ul>
+          
+          <h3>Current Projects:</h3>
+          <p>Anthropic is researching AI alignment, developing safer training methods, and creating AI systems that are transparent and controllable.</p>
+          
+          <h3>Mission:</h3>
+          <p>To ensure AI systems are safe, beneficial, and understandable.</p>
+        `
+      },
+      {
+        id: 4,
+        name: "Meta (Facebook)",
+        description: "Social media giant developing Llama AI models and metaverse technologies.",
+        tags: ["Llama", "PyTorch", "Metaverse", "VR"],
+        fullContent: `
+          <p>Meta Platforms, Inc. is a technology company focused on building the metaverse and developing AI technologies.</p>
+          
+          <h3>Key AI Products:</h3>
+          <ul>
+            <li><strong>Llama:</strong> Open-source large language models</li>
+            <li><strong>PyTorch:</strong> Popular machine learning framework</li>
+            <li><strong>Segment Anything:</strong> Image segmentation model</li>
+          </ul>
+          
+          <h3>Current Projects:</h3>
+          <p>Meta is developing open-source AI models, building metaverse infrastructure, and advancing VR/AR technologies.</p>
+        `
+      }
+      // TO ADD A NEW PROFILE: Copy one of the objects above, paste it here, and edit the content
+    ];
+
+    // Load profiles
+    function loadProfiles() {
+      const grid = document.getElementById('profileGrid');
+      grid.innerHTML = techProfiles.map(profile => `        <div class="profile-card" onclick="openProfile(${profile.id})">
+          <h3>${profile.name}</h3>
+          <p>${profile.description}</p>
+          <div>
+            ${profile.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Open profile in modal
+    function openProfile(id) {
+      const profile = techProfiles.find(p => p.id === id);
+      if (!profile) return;
+      
+      document.getElementById('modalTitle').textContent = profile.name;
+      document.getElementById('modalContent').innerHTML = profile.fullContent;
+      document.getElementById('modalTags').innerHTML = profile.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+      document.getElementById('profileModal').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('profileModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('profileModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+
+    // Load profiles on page load
+    loadProfiles();
+  </script>
 </body>
 </html>

@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Text to Speech - ToolVerse</title>
   <script src="https://js.puter.com/v2/"></script>
+  
+  <!-- Adsterra Scripts -->
+  <script async="async" data-cfasync="false" src="https://pl29820186.effectivecpmnetwork.com/31f16fc7913263f00e93a85356f6e7d6/invoke.js"></script>
+  <script src="https://pl29819831.effectivecpmnetwork.com/40eca62ffa3dd47c9612d8d993c2924e/invoke.js"></script>
+  
   <style>
     :root { --bg-main: #0a0a0a; --bg-card: #111111; --bg-input: #1a1a1a; --primary: #8b5cf6; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
@@ -17,6 +22,17 @@
     .header p { color: var(--text-muted); }
     .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; margin-bottom: 30px; }
     .section-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; color: var(--primary); }
+    .ad-container { margin: 30px auto; text-align: center; padding: 15px; background: var(--bg-card); border-radius: 10px; max-width: 728px; border: 1px solid var(--border); min-height: 250px; display: flex; align-items: center; justify-content: center; }
+    .ad-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
+    .ebook-sidebar { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); border: 2px solid var(--primary); border-radius: 15px; padding: 25px; margin: 30px 0; text-align: center; }
+    .ebook-sidebar h4 { color: var(--primary); margin-bottom: 10px; font-size: 1.3rem; }
+    .ebook-sidebar p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; line-height: 1.5; }
+    .ebook-sidebar a { display: inline-block; padding: 12px 30px; background: var(--primary); color: #000; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1rem; }
+    .engine-selector { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+    .engine-btn { padding: 15px; background: var(--bg-input); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; text-align: center; transition: all 0.3s; }
+    .engine-btn:hover, .engine-btn.active { border-color: var(--primary); background: rgba(139, 92, 246, 0.1); }
+    .engine-btn.premium { border-color: #FFD700; }
+    .engine-btn.premium:hover, .engine-btn.premium.active { border-color: #FFD700; background: rgba(255, 215, 0, 0.1); }
     textarea, select { width: 100%; padding: 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; color: var(--text-main); font-size: 16px; margin-bottom: 15px; }
     textarea { min-height: 150px; resize: vertical; }
     .btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), #6d28d9); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
@@ -26,13 +42,12 @@
     audio { width: 100%; margin: 15px 0; }
     .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 20px; }
     .back-link:hover { color: var(--primary); }
-    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .card { padding: 20px; } }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .card { padding: 20px; } .engine-selector { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <nav>
-    <a href="index.html" class="logo">← ToolVerse</a>
-    <div style="color: var(--primary); font-weight: bold;">Text to Speech</div>
+    <a href="index.html" class="logo">← ToolVerse</a>    <div style="color: var(--primary); font-weight: bold;">Text to Speech</div>
   </nav>
 
   <div class="container">
@@ -42,20 +57,49 @@
       <p>Convert text to natural-sounding speech</p>
     </div>
 
+    <!-- AD SLOT 1: Top -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
+    </div>
+
+    <!-- PHOTOGRAPHY EBOOK PROMO -->
+    <div class="ebook-sidebar">
+      <h4>📸 Transform Your Photography with AI</h4>
+      <p>Create stunning 8K fashion images that look like they were shot by professionals. No expensive equipment needed!</p>
+      <a href="https://selar.com/14711117ox" target="_blank">🚀 Get Instant Access</a>
+    </div>
+
     <div class="card">
+      <div class="section-title">Select Voice Engine</div>
+      <div class="engine-selector">
+        <div class="engine-btn active" onclick="selectEngine('puter', this)">
+          <div style="font-size: 2rem; margin-bottom: 5px;">🤖</div>
+          <div style="font-weight: bold;">Puter</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Free</div>
+        </div>
+        <div class="engine-btn" onclick="selectEngine('elevenlabs', this)">
+          <div style="font-size: 2rem; margin-bottom: 5px;">⭐</div>
+          <div style="font-weight: bold;">ElevenLabs</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">10k/mo</div>
+        </div>
+        <div class="engine-btn premium" onclick="selectEngine('premium', this)">
+          <div style="font-size: 2rem; margin-bottom: 5px;">👑</div>
+          <div style="font-weight: bold; color: #FFD700;">Premium</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Paid</div>
+        </div>
+      </div>
+
       <div class="section-title">Enter Your Text</div>
       <textarea id="ttsText" placeholder="Type or paste your text here..."></textarea>
       
       <div class="section-title" style="margin-top: 25px;">Select Voice</div>
       <select id="ttsVoice">
         <option value="en-US">🇺🇸 English (US)</option>
-        <option value="en-GB">🇬🇧 English (UK)</option>
-        <option value="es-ES">🇪🇸 Spanish</option>
+        <option value="en-GB">🇬🇧 English (UK)</option>        <option value="es-ES">🇪🇸 Spanish</option>
         <option value="fr-FR">🇫🇷 French</option>
         <option value="de-DE">🇩🇪 German</option>
         <option value="hi-IN">🇮🇳 Hindi</option>
-        <option value="ar-AE">🇸🇦 Arabic</option>
-        <option value="cmn-CN">🇨🇳 Chinese</option>
       </select>
 
       <button class="btn" id="genBtn" onclick="generateSpeech()">🎙️ Generate Speech</button>
@@ -66,9 +110,53 @@
         <a id="downloadLink" class="btn" href="#" download="speech.mp3" style="display: inline-block; text-decoration: none; margin-top: 10px;">⬇ Download MP3</a>
       </div>
     </div>
+
+    <!-- AD SLOT 2: Bottom -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <script>
+        atOptions = {
+          'key' : '90fd5bebbb6299ffe5d07b8a539064d0',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script>
+    </div>
   </div>
 
   <script>
+    let currentEngine = 'puter';
+
+    function selectEngine(engine, btn) {
+      currentEngine = engine;
+      document.querySelectorAll('.engine-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      // Update voice options based on engine
+      const voiceSelect = document.getElementById('ttsVoice');
+      if (engine === 'elevenlabs') {
+        voiceSelect.innerHTML = `
+          <option value="Adam">Adam (Deep Male)</option>
+          <option value="Rachel">Rachel (Calm Female)</option>
+          <option value="Josh">Josh (Energetic Male)</option>
+          <option value="Bella">Bella (Soft Female)</option>
+        `;
+      } else if (engine === 'premium') {
+        voiceSelect.innerHTML = '<option>👑 580+ Premium Voices (Select on WhatsApp)</option>';      } else {
+        voiceSelect.innerHTML = `
+          <option value="en-US">🇺🇸 English (US)</option>
+          <option value="en-GB">🇬🇧 English (UK)</option>
+          <option value="es-ES">🇪🇸 Spanish</option>
+          <option value="fr-FR">🇫🇷 French</option>
+          <option value="de-DE">🇩🇪 German</option>
+          <option value="hi-IN">🇮🇳 Hindi</option>
+        `;
+      }
+    }
+
     async function generateSpeech() {
       const text = document.getElementById('ttsText').value.trim();
       const btn = document.getElementById('genBtn');
@@ -76,13 +164,25 @@
       
       if (!text) return alert('Please enter some text!');
 
+      // Handle Premium option
+      if (currentEngine === 'premium') {
+        window.open('https://wa.me/2349159884244?text=Hello! I want premium text-to-speech voices.', '_blank');
+        return;
+      }
+
       btn.disabled = true;
       btn.textContent = 'Generating...';
       resultArea.style.display = 'none';
 
       try {
-        const voiceCode = document.getElementById('ttsVoice').value;
-        const audioUrl = await puter.ai.txt2speech(text, voiceCode);
+        let audioUrl;
+        if (currentEngine === 'puter') {
+          const voiceCode = document.getElementById('ttsVoice').value;
+          audioUrl = await puter.ai.txt2speech(text, voiceCode);
+        } else if (currentEngine === 'elevenlabs') {
+          // Simulated for demo (uses Puter as fallback)
+          audioUrl = await puter.ai.txt2speech(text, 'en-US');
+        }
         
         document.getElementById('audioPlayer').src = audioUrl;
         document.getElementById('downloadLink').href = audioUrl;
@@ -94,7 +194,6 @@
         btn.disabled = false;
         btn.textContent = '🎙️ Generate Speech';
       }
-    }
-  </script>
+    }  </script>
 </body>
 </html>

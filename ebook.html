@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ebook & PDF Tools - ToolVerse</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
+  <style>
+    :root { --bg-main: #0a0a0a; --bg-card: #111111; --bg-input: #1a1a1a; --primary: #8b5cf6; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background: var(--bg-main); color: var(--text-main); min-height: 100vh; }
+    nav { background: var(--bg-card); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); }
+    .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-decoration: none; }
+    .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+    .header p { color: var(--text-muted); }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; margin-bottom: 30px; }
+    .section-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; color: var(--primary); }
+    input, textarea { width: 100%; padding: 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; color: var(--text-main); font-size: 16px; margin-bottom: 15px; }
+    textarea { min-height: 200px; resize: vertical; }
+    .btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), #6d28d9); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4); }
+    .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 20px; }
+    .back-link:hover { color: var(--primary); }
+    .result-area { margin-top: 20px; padding: 20px; background: var(--bg-input); border-left: 4px solid var(--primary); border-radius: 10px; display: none; }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .card { padding: 20px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">← ToolVerse</a>
+    <div style="color: var(--primary); font-weight: bold;">Ebook & PDF Tools</div>
+  </nav>
+
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    <div class="header">
+      <h1>📖 Ebook & PDF Tools</h1>
+      <p>Create and convert documents instantly</p>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Create Ebook</div>
+      <input type="text" id="ebookTitle" placeholder="Book Title">
+      <input type="text" id="ebookAuthor" placeholder="Author Name">
+      <textarea id="ebookContent" placeholder="Paste your book content here..."></textarea>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <button class="btn" onclick="generateEbookPDF()" style="background: linear-gradient(135deg, #ef4444, #dc2626);">📄 Download PDF</button>
+        <button class="btn" onclick="generateEbookDOCX()" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">📝 Download DOCX</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Convert PDF to DOCX</div>
+      <input type="file" id="pdfToDocFile" accept=".pdf" onchange="convertPdfToDoc(event)">
+      <div class="result-area" id="pdfToDocResult"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Convert DOCX to PDF</div>
+      <input type="file" id="docToPdfFile" accept=".docx,.doc" onchange="convertDocToPdf(event)">
+      <div class="result-area" id="docToPdfResult"></div>
+    </div>
+  </div>
+
+  <script>
+    async function generateEbookPDF() {
+      const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
+      const author = document.getElementById('ebookAuthor').value.trim() || 'Unknown';
+      const content = document.getElementById('ebookContent').value.trim();
+      if (!content) return alert('Please paste content.');
+      
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.setFontSize(20);
+      doc.text(title, 105, 20, { align: 'center' });
+      doc.setFontSize(14);
+      doc.text('by ' + author, 105, 30, { align: 'center' });
+      doc.setFontSize(12);
+      const lines = doc.splitTextToSize(content, 180);
+      doc.text(lines, 15, 45);
+      doc.save(title + '.pdf');
+    }
+
+    async function generateEbookDOCX() {
+      const title = document.getElementById('ebookTitle').value.trim() || 'My Ebook';
+      const content = document.getElementById('ebookContent').value.trim();
+      if (!content) return alert('Please paste content.');
+      
+      const doc = new docx.Document({
+        sections: [{ children: [
+          new docx.Paragraph({ text: title, heading: docx.HeadingLevel.HEADING_1, alignment: docx.AlignmentType.CENTER }),
+          ...content.split('\n').map(line => new docx.Paragraph({ text: line }))
+        ]}]
+      });
+      const blob = await docx.Packer.toBlob(doc);      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = title.replace(/\s+/g, '_') + '.docx';
+      a.click();
+    }
+
+    async function convertPdfToDoc(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const area = document.getElementById('pdfToDocResult');
+      area.style.display = 'block';
+      area.innerHTML = '<p style="color: var(--text-muted);">Converting...</p>';
+      
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+        let fullText = '';
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const textContent = await page.getTextContent();
+          fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
+        }
+        
+        const doc = new docx.Document({
+          sections: [{ children: fullText.split('\n').map(l => new docx.Paragraph({text:l})) }]
+        });
+        const blob = await docx.Packer.toBlob(doc);
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'converted.docx';
+        a.click();
+        area.innerHTML = '<p style="color: #10b981;">✅ Converted to DOCX! Download started.</p>';
+      } catch (err) {
+        area.innerHTML = '<p style="color: #ef4444;">Error: ' + err.message + '</p>';
+      }
+    }
+
+    async function convertDocToPdf(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const area = document.getElementById('docToPdfResult');
+      area.style.display = 'block';
+      area.innerHTML = '<p style="color: var(--text-muted);">Converting...</p>';
+      
+      try {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const text = e.target.result;
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF();          const lines = doc.splitTextToSize(text, 180);
+          doc.text(lines, 15, 15);
+          doc.save('converted.pdf');
+          area.innerHTML = '<p style="color: #10b981;">✅ Converted to PDF! Download started.</p>';
+        };
+        reader.readAsText(file);
+      } catch (err) {
+        area.innerHTML = '<p style="color: #ef4444;">Error: ' + err.message + '</p>';
+      }
+    }
+  </script>
+</body>
+</html>

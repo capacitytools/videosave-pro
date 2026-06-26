@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToolVerse - Ultimate AI Toolkit Hub</title>
+  
+  <!-- Adsterra Header Script -->
+  <script async="async" data-cfasync="false" src="//pl29819831.effectivecpmnetwork.com/40eca62ffa3dd47c9612d8d993c2924e/invoke.js"></script>
+  
+  <style>
+    :root {
+      --bg-main: #0a0a0a;
+      --bg-card: #111111;
+      --yellow: #FFD700;
+      --orange: #FF6B00;
+      --purple: #8B5CF6;
+      --green: #00FF88;
+      --text-main: #ffffff;
+      --text-muted: #888888;
+      --border: #222222;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    
+    body {
+      background: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    nav {
+      background: var(--bg-card);
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--purple), var(--yellow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, #fff, var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+    }
+
+    /* Ad Containers - Professional Placement */
+    .ad-container {
+      margin: 30px auto;
+      text-align: center;
+      padding: 10px;
+      background: var(--bg-card);
+      border-radius: 10px;
+      max-width: 728px;
+      border: 1px solid var(--border);
+    }
+
+    .ad-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Ebook Promo Banner */
+    .ebook-promo {
+      background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+      border: 2px solid var(--yellow);
+      border-radius: 15px;
+      padding: 25px;      margin: 30px auto;
+      max-width: 800px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(255, 215, 0, 0.2);
+    }
+
+    .ebook-promo h3 {
+      color: var(--yellow);
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .ebook-promo p {
+      color: var(--text-muted);
+      margin-bottom: 15px;
+    }
+
+    .ebook-btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: var(--yellow);
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    .ebook-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+    }
+
+    .toolkits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+    }
+
+    .toolkit-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 35px 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: block;
+    }
+    .toolkit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    .toolkit-card.viral { border-color: var(--yellow); }
+    .toolkit-card.viral:hover { border-color: var(--yellow); box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
+    .toolkit-card.viral h2 { color: var(--yellow); }
+
+    .toolkit-card.image { border-color: var(--orange); }
+    .toolkit-card.image:hover { border-color: var(--orange); box-shadow: 0 0 30px rgba(255, 107, 0, 0.3); }
+    .toolkit-card.image h2 { color: var(--orange); }
+
+    .toolkit-card.video { border-color: var(--purple); }
+    .toolkit-card.video:hover { border-color: var(--purple); box-shadow: 0 0 30px rgba(139, 92, 246, 0.3); }
+    .toolkit-card.video h2 { color: var(--purple); }
+
+    .toolkit-card.prompts { border-color: var(--green); }
+    .toolkit-card.prompts:hover { border-color: var(--green); box-shadow: 0 0 30px rgba(0, 255, 136, 0.3); }
+    .toolkit-card.prompts h2 { color: var(--green); }
+
+    .toolkit-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .toolkit-card p {
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .toolkit-card .tool-count {
+      display: inline-block;
+      padding: 6px 15px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .quick-tools {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      margin-top: 40px;
+    }
+    .quick-tools h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--text-main);
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .quick-link {
+      display: block;
+      padding: 15px 20px;
+      background: var(--bg-main);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-main);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .quick-link:hover {
+      background: var(--purple);
+      border-color: var(--purple);
+      transform: translateX(5px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 50px;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .toolkit-card h2 { font-size: 1.4rem; }
+      .ad-container { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">ToolVerse</div>
+    <div style="color: var(--text-muted); font-size: 0.9rem;">Ultimate AI Toolkit Hub</div>
+  </nav>
+  <div class="container">
+    <div class="hero">
+      <h1>Welcome to ToolVerse</h1>
+      <p>Your complete suite of AI-powered content creation tools</p>
+    </div>
+
+    <!-- AD SLOT 1: Top Banner -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
+    </div>
+
+    <!-- PHOTOGRAPHY EBOOK PROMO -->
+    <div class="ebook-promo">
+      <h3>🔥 FEATURED: The AI Fashion Photography Kit</h3>
+      <p>Master 8K DSLR-quality fashion imagery with AI prompts. Limited time offer!</p>
+      <a href="https://selar.com/14711117ox" target="_blank" class="ebook-btn">📥 Get Now - ₦2,000</a>
+    </div>
+
+    <div class="toolkits-grid">
+      <a href="viral-content.html" class="toolkit-card viral">
+        <h2>🔥 AI Viral Content Toolkit</h2>
+        <p>Generate viral hooks, captions, hashtags, video scripts, and engaging social media content that gets results.</p>
+        <span class="tool-count">20+ Tools</span>
+      </a>
+
+      <a href="image-toolkit.html" class="toolkit-card image">
+        <h2>🎨 Social Media Image Toolkit</h2>
+        <p>Create perfectly sized images, remove backgrounds, add effects, and design professional graphics for all platforms.</p>
+        <span class="tool-count">15+ Tools</span>
+      </a>
+
+      <a href="video-creator.html" class="toolkit-card video">
+        <h2>🎬 Video Creator Toolkit</h2>
+        <p>Generate subtitles, scripts, hooks, thumbnails, and everything you need for professional video content.</p>
+        <span class="tool-count">12+ Tools</span>
+      </a>
+
+      <a href="prompt-library.html" class="toolkit-card prompts">
+        <h2>💚 Free AI Prompt Library</h2>
+        <p>Access curated prompts for ChatGPT, Gemini, Claude, Midjourney, Flux, and all major AI platforms.</p>
+        <span class="tool-count">8 AI Models</span>
+      </a>
+    </div>
+
+    <!-- AD SLOT 2: Middle Banner -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <!-- Add your second ad script here -->    </div>
+
+    <div class="quick-tools">
+      <h3>🚀 Quick Access Tools</h3>
+      <div class="quick-grid">
+        <a href="downloader.html" class="quick-link">📥 Universal Video Downloader</a>
+        <a href="tts.html" class="quick-link">🎙️ Text to Speech</a>
+        <a href="image-gen.html" class="quick-link">🎨 AI Image Generator</a>
+        <a href="ebook.html" class="quick-link">📖 Ebook & PDF Tools</a>
+        <a href="resume.html" class="quick-link">📝 Resume Builder</a>
+        <a href="meme.html" class="quick-link">😂 Meme Generator</a>
+      </div>
+    </div>
+
+    <!-- AD SLOT 3: Before Footer -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <!-- Add your third ad script here -->
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 ToolVerse · All Rights Reserved</p>
+    <p style="margin-top: 10px; font-size: 0.85rem;">
+      <a href="#" style="color: var(--text-muted);">Privacy Policy</a> · 
+      <a href="#" style="color: var(--text-muted);">Terms of Service</a> · 
+      <a href="https://wa.link/tzxsay" style="color: var(--purple);">Contact</a>
+    </p>
+  </footer>
+
+</body>
+</html>

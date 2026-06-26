@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Speech - ToolVerse</title>
+  <script src="https://js.puter.com/v2/"></script>
+  <style>
+    :root { --bg-main: #0a0a0a; --bg-card: #111111; --bg-input: #1a1a1a; --primary: #8b5cf6; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background: var(--bg-main); color: var(--text-main); min-height: 100vh; }
+    nav { background: var(--bg-card); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); }
+    .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-decoration: none; }
+    .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+    .header p { color: var(--text-muted); }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; margin-bottom: 30px; }
+    .section-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; color: var(--primary); }
+    textarea, select { width: 100%; padding: 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; color: var(--text-main); font-size: 16px; margin-bottom: 15px; }
+    textarea { min-height: 150px; resize: vertical; }
+    .btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), #6d28d9); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .result-area { margin-top: 20px; padding: 20px; background: var(--bg-input); border-left: 4px solid var(--primary); border-radius: 10px; display: none; }
+    audio { width: 100%; margin: 15px 0; }
+    .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 20px; }
+    .back-link:hover { color: var(--primary); }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .card { padding: 20px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">← ToolVerse</a>
+    <div style="color: var(--primary); font-weight: bold;">Text to Speech</div>
+  </nav>
+
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    <div class="header">
+      <h1>🎙️ Text to Speech</h1>
+      <p>Convert text to natural-sounding speech</p>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Enter Your Text</div>
+      <textarea id="ttsText" placeholder="Type or paste your text here..."></textarea>
+      
+      <div class="section-title" style="margin-top: 25px;">Select Voice</div>
+      <select id="ttsVoice">
+        <option value="en-US">🇺🇸 English (US)</option>
+        <option value="en-GB">🇬🇧 English (UK)</option>
+        <option value="es-ES">🇪🇸 Spanish</option>
+        <option value="fr-FR">🇫🇷 French</option>
+        <option value="de-DE">🇩🇪 German</option>
+        <option value="hi-IN">🇮🇳 Hindi</option>
+        <option value="ar-AE">🇸🇦 Arabic</option>
+        <option value="cmn-CN">🇨🇳 Chinese</option>
+      </select>
+
+      <button class="btn" id="genBtn" onclick="generateSpeech()">🎙️ Generate Speech</button>
+
+      <div class="result-area" id="resultArea">
+        <h3 style="color: var(--primary); margin-bottom: 10px;">✅ Audio Ready:</h3>
+        <audio id="audioPlayer" controls></audio>
+        <a id="downloadLink" class="btn" href="#" download="speech.mp3" style="display: inline-block; text-decoration: none; margin-top: 10px;">⬇ Download MP3</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function generateSpeech() {
+      const text = document.getElementById('ttsText').value.trim();
+      const btn = document.getElementById('genBtn');
+      const resultArea = document.getElementById('resultArea');
+      
+      if (!text) return alert('Please enter some text!');
+
+      btn.disabled = true;
+      btn.textContent = 'Generating...';
+      resultArea.style.display = 'none';
+
+      try {
+        const voiceCode = document.getElementById('ttsVoice').value;
+        const audioUrl = await puter.ai.txt2speech(text, voiceCode);
+        
+        document.getElementById('audioPlayer').src = audioUrl;
+        document.getElementById('downloadLink').href = audioUrl;
+        resultArea.style.display = 'block';
+        document.getElementById('audioPlayer').play();
+      } catch (error) {
+        alert('Error: ' + error.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🎙️ Generate Speech';
+      }
+    }
+  </script>
+</body>
+</html>

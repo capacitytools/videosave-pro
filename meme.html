@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meme Generator - ToolVerse</title>
+  <style>
+    :root { --bg-main: #0a0a0a; --bg-card: #111111; --bg-input: #1a1a1a; --primary: #8b5cf6; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background: var(--bg-main); color: var(--text-main); min-height: 100vh; }
+    nav { background: var(--bg-card); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); }
+    .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-decoration: none; }
+    .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+    .header p { color: var(--text-muted); }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; margin-bottom: 30px; }
+    .section-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; color: var(--primary); }
+    input { width: 100%; padding: 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; color: var(--text-main); font-size: 16px; margin-bottom: 15px; }
+    .btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), #6d28d9); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4); }
+    canvas { max-width: 100%; border-radius: 10px; background: #000; margin: 15px 0; }
+    .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 20px; }
+    .back-link:hover { color: var(--primary); }
+    @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .card { padding: 20px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">← ToolVerse</a>
+    <div style="color: var(--primary); font-weight: bold;">Meme Generator</div>
+  </nav>
+
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    <div class="header">
+      <h1>😂 Meme Generator</h1>
+      <p>Create viral memes instantly</p>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Upload Image</div>
+      <input type="file" id="memeFile" accept="image/*" onchange="loadMeme(event)">
+      
+      <canvas id="memeCanvas" width="600" height="600" style="display: none;"></canvas>
+      
+      <div id="memeControls" style="display: none;">
+        <input type="text" id="memeTop" placeholder="Top Text" oninput="drawMeme()">
+        <input type="text" id="memeBottom" placeholder="Bottom Text" oninput="drawMeme()">
+        <button class="btn" onclick="downloadMeme()">⬇ Download Meme</button>      </div>
+    </div>
+  </div>
+
+  <script>
+    let memeImg = null;
+
+    function loadMeme(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          memeImg = img;
+          const canvas = document.getElementById('memeCanvas');
+          canvas.style.display = 'block';
+          document.getElementById('memeControls').style.display = 'block';
+          drawMeme();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function drawMeme() {
+      if (!memeImg) return;
+      
+      const canvas = document.getElementById('memeCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Resize canvas to fit image
+      canvas.width = Math.min(memeImg.width, 600);
+      canvas.height = canvas.width * (memeImg.height / memeImg.width);
+      
+      ctx.drawImage(memeImg, 0, 0, canvas.width, canvas.height);
+      
+      // Add text
+      ctx.font = `bold ${canvas.width * 0.08}px Impact`;
+      ctx.fillStyle = 'white';
+      ctx.strokeStyle = 'black';
+      ctx.lineWidth = canvas.width * 0.005;
+      ctx.textAlign = 'center';
+      
+      const topText = document.getElementById('memeTop').value.toUpperCase();
+      const bottomText = document.getElementById('memeBottom').value.toUpperCase();
+      
+      if (topText) {
+        ctx.strokeText(topText, canvas.width / 2, canvas.height * 0.1);        ctx.fillText(topText, canvas.width / 2, canvas.height * 0.1);
+      }
+      
+      if (bottomText) {
+        ctx.strokeText(bottomText, canvas.width / 2, canvas.height * 0.9);
+        ctx.fillText(bottomText, canvas.width / 2, canvas.height * 0.9);
+      }
+    }
+
+    function downloadMeme() {
+      const canvas = document.getElementById('memeCanvas');
+      const a = document.createElement('a');
+      a.download = 'meme.png';
+      a.href = canvas.toDataURL();
+      a.click();
+    }
+  </script>
+</body>
+</html>
